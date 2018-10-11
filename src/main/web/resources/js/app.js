@@ -35,6 +35,12 @@ app.router = {
 								+footerUI()
 						);
 						console.log(' when done 로드성공');
+					    $('#nav_ul li').eq(2).find('a').click(e=>{
+                            e.preventDefault();
+                            $.getScript($.script()+'/jaekyung.js',()=>{
+                                   jaekyung.init();
+                            })
+                         });
 				})
 				.fail(x=>{console.log(' when fail 로드실패');})
 		}
