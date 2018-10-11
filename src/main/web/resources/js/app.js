@@ -45,6 +45,32 @@ app.router = {
 							app.permission.add();
 						});
 						console.log(' when done 로드성공');
+						$('#board_btn').click(e=>{
+                            e.preventDefault();
+                            $.getScript($.script()+'/danah.js', ()=>{
+                                danah.init($.context());
+                            });
+                        });
+						 $('#store_btn').click(e=>{
+		                    e.preventDefault();
+		                     $.getScript($.script()+'/jun.js',()=>{
+		                         jun.init();
+		                    });
+		                 });
+						 $('#statics_btn').click(e=>{
+	                        e.preventDefault();
+	                        $.getScript($.script()+'/jaekyung.js',()=>{
+	                            jaekyung.init();
+	                        });
+	                     });
+						 $('#login_btn').click(e=>{
+							e.preventDefault();
+							app.permission.login();
+						 });
+						 $('#join_btn').click(e=>{
+							e.preventDefault();
+							app.permission.add();
+						 });
 				})
 				.fail(x=>{console.log(' when fail 로드실패');})
 		}
@@ -61,7 +87,11 @@ app.permission=(()=>{
 	var add=()=>{
 		$('#footer').remove();
 		$('#content').empty();
+<<<<<<< HEAD
 		$.getScript($.script()+'/add2.js',
+=======
+		$.getScript($.script()+'/add.js',
+>>>>>>> refs/remotes/origin/master
 				()=>{
 					$('#content').html(addUI());
 				});
