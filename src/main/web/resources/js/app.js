@@ -34,12 +34,42 @@ app.router = {
 								+contentUI()
 								+footerUI()
 						);
+						$('#login_btn').click(e=>{
+							e.preventDefault();
+							alert('로그인버튼클릭');
+							app.permission.login();
+						});
+						$('#join_btn').click(e=>{
+							e.preventDefault();
+							alert('회원가입버튼클릭');
+							app.permission.add();
+						});
 						console.log(' when done 로드성공');
 				})
 				.fail(x=>{console.log(' when fail 로드실패');})
 		}
 };
-
+app.permission=(()=>{
+	var login=()=>{
+		$('#footer').remove();
+		$('#content').empty();
+		$.getScript($.script()+'/login.js',
+				()=>{
+					$('#content').html(loginUI());
+				})
+	};
+	var add=()=>{
+		$('#footer').remove();
+		$('#content').empty();
+		$.getScript($.script()+'/add2.js',
+				()=>{
+					$('#content').html(addUI());
+				});
+	}
+	
+	return{login:login,
+			add:add};
+})();
 app.main =(()=>{
 	var w, nav, footer, content, context, script, style,img;
 	var init =()=>{
