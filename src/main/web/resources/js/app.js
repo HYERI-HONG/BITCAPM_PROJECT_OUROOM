@@ -35,17 +35,66 @@ app.router = {
 								+footerUI()
 						);
 						console.log(' when done 로드성공');
+<<<<<<< HEAD
 					    $('#nav_ul li').eq(2).find('a').click(e=>{
                             e.preventDefault();
                             $.getScript($.script()+'/jaekyung.js',()=>{
                                    jaekyung.init();
                             })
                          });
+=======
+						$('#board_btn').click(e=>{
+                            e.preventDefault();
+                            $.getScript($.script()+'/danah.js', ()=>{
+                                danah.init($.context());
+                            });
+                        });
+						 $('#store_btn').click(e=>{
+		                    e.preventDefault();
+		                     $.getScript($.script()+'/jun.js',()=>{
+		                         jun.init();
+		                    });
+		                 });
+						 $('#statics_btn').click(e=>{
+	                        e.preventDefault();
+	                        $.getScript($.script()+'/jaekyung.js',()=>{
+	                            jaekyung.init();
+	                        });
+	                     });
+						 $('#login_btn').click(e=>{
+							e.preventDefault();
+							app.permission.login();
+						 });
+						 $('#join_btn').click(e=>{
+							e.preventDefault();
+							app.permission.add();
+						 });
+>>>>>>> refs/remotes/origin/master
 				})
 				.fail(x=>{console.log(' when fail 로드실패');})
 		}
 };
-
+app.permission=(()=>{
+	var login=()=>{
+		$('#footer').remove();
+		$('#content').empty();
+		$.getScript($.script()+'/login.js',
+				()=>{
+					$('#content').html(loginUI());
+				})
+	};
+	var add=()=>{
+		$('#footer').remove();
+		$('#content').empty();
+		$.getScript($.script()+'/add.js',
+				()=>{
+					$('#content').html(addUI());
+				});
+	}
+	
+	return{login:login,
+			add:add};
+})();
 app.main =(()=>{
 	var w, nav, footer, content, context, script, style,img;
 	var init =()=>{

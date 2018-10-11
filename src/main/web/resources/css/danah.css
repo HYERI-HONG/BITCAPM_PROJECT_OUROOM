@@ -1,0 +1,196 @@
+.d_search_btn{
+    right: 5px;
+    display: inline-block;
+	user-select: none;
+	border-radius: 100%;
+    margin: 0 1.5px -6px;
+    position: relative;
+    padding: 7px;
+    box-sizing: border-box;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.d_search_btn:hover{
+	background: #CC5200;
+}
+
+.d_search_btn_icon{
+	position: absolute;
+    top: 7px;
+    left: 7px;
+    transition: .1s opacity;
+    display: inline-block;
+    background-size: 400px;
+    width: 22px;
+    height: 22px;
+    background-position: top -121px left 0;
+    background-image: url(../img/danah/icon.png);
+    user-select: none;
+    cursor: pointer;
+}
+.d_search_btn_icon:hover{
+    background-position: top -121px left -52px;
+}
+
+.d_wirte_btn{
+    left: -5px;
+    display: inline-block;
+    user-select: none;
+	width: 74px;
+    height: 32px;
+    border: 1px solid #CC5200;
+    border-radius: 16px;
+    font-size: 15px;
+    color: #CC5200;
+    font-weight: bold;
+    text-align: center;
+    transition: .1s background, .1s color;
+    margin: 0 1.5px -6px;
+	position: relative;
+    padding: 7px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration:none
+}
+
+.d_wirte_btn:hover{
+    left: -5px;
+    display: inline-block;
+    user-select: none;
+	width: 74px;
+    height: 32px;
+    border: 1px solid #CC5200;
+   	background-color: #CC5200;
+    border-radius: 16px;
+    font-size: 15px;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    transition: .1s background, .1s color;
+    margin: 0 1.5px -6px;
+	position: relative;
+    padding: 7px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration:none
+}
+
+.d_filter_depth_1{
+	margin: 0;
+    padding: 0;
+    position: relative;
+    background-color: #fff;
+    border-bottom: 1px solid #ededed;
+    font-size: 15px;
+    text-align: center;
+    display: block;
+}
+
+.d_filter_container{
+	margin-right: auto;
+    margin-left: auto;
+    width: calc(100vw - 120px);
+    max-width: 100%;
+    box-sizing: border-box;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.d_item{
+	padding: 0 23px;
+	margin-left: -12px;
+    display: inline-block;
+    color: #424242;
+	margin: 0;
+	text-align: -webkit-match-parent;
+	list-style: none;
+}
+
+.d_filter_depth_1 .d_item_btn{
+	height: 98px;
+	color: inherit;
+    display: block;
+    box-sizing: border-box;
+    padding: 12px;
+    border: none;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+.d_item_btn:hover{
+	 color: #cc5200;
+}
+
+.d_search_key{
+	color: #424242;
+    font-size: 12px;
+    margin-bottom: 12px;
+    display: block;
+    text-align: left;
+    cursor: pointer;
+}
+
+.d_search_icon{
+	margin-left: 7px;
+    transform-origin: center 7px;
+    transition: transform .2s linear;
+    transform: rotate(0deg);
+    background-position-x: -40px;
+    background-position-y: -0px;
+    width: 12px;
+    height: 12px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    background-image: url(../img/danah/util.png);
+    background-size: 600px;
+    
+}
+
+.d_search_val{
+	display: block;
+    font-size: 18px;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.d_filter_depth_2{
+	width: 90%;
+    position: absolute;
+    background-color: hsla(0,0%,100%,.9);
+    border-bottom: 1px solid #ededed;
+    white-space: nowrap;
+    font-size: 15px;
+    overflow-y: visible;
+    overflow-x: auto;
+    text-align: center;
+    display: block;
+    line-height: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+.d_filter_depth_2 .d_item_btn{
+	margin: 25px 0;
+	color: inherit;
+    display: block;
+    box-sizing: border-box;
+    padding: 12px;
+    border: none;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    touch-action: manipulation;
+    text-decoration: none;
+}
+
+.post {
+    padding-top: 32px;
+}
