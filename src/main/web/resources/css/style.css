@@ -1,179 +1,66 @@
-
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR');
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic');
 /* font-family: 'Nanum Gothic', sans-serif; */
 body {
-	font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 /* input{
-	width: 100%;	
-	padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box; 
+    width: 100%;    
+    padding: 12px 20px;
+   margin: 8px 0;
+   box-sizing: border-box;
 } */
 
 #h_navigation{
-	text-align: center;
-	
+    text-align: center;
+    
 }
 
 #h_navigation_primary{
-	background-color : white;
-  	line-height:1;
-  	width:100%;
-  	border-bottom:1px solid #a6a6a6;
-  	padding-bottom: 1rem;
-  	padding-top: .25rem;
- 	align-items:center;
- 	z-index :502;
- 	position: fixed;
- 	
- 	
+    background-color : white;
+     line-height:1;
+     width:100%;
+     border-bottom:1px solid #a6a6a6;
+     padding-bottom: 1rem;
+     padding-top: .25rem;
+    align-items:center;
+    z-index :502;
+    position: fixed;
+    
+    
 }
 .h_nav_left{
-    display: inline-block;
-<<<<<<< HEAD
-    
-}
-
-#joinLoginForm{
-	background-color: #99ccff;
-    color: white;
-    font-size : 17px;
-    text-align: center;
-    display: inline-block;
-    
-}
-.bgcolorisYellow{background-color: #ffff00}
-#contentBoxTab{
-	margin: auto;
-	
-}
-
-.height22px{
-	height:22px;
-}
-.pageBox{
-		list-style: none;
-		padding: 0;
-		margin: 0;
-}
-.pageBox li{
-	display:inline;
-}
-
-#logoutButt{
-	background-color: #99ccff;
-    color: white;
-    font-size : 17px;
-    text-align: center;
-    display: inline-block;
-    
-}
-[class*=icon-page-login__]{
-	background-image: url("../img/logo.JPG");
-	background-size:  320px auto;
-    background-repeat: no-repeat;
-    display: inline-block;
-}
-
-
-#main2 {
-    margin-top: 60px;
-    margin-bottom: 60px;
-}
-.container_add{
-    margin-right: auto;
-    margin-left: auto;
-    box-sizing: border-box;
-    width: calc(100vw - 80px);
-    max-width: 100%;
-    box-sizing: border-box;}
-.icon {
-    background-repeat: no-repeat;
-    background-size: 400px;
-    display: inline-block;
-}
-
-.icon-sns-circle-md-kakao-talk {
-    width: 48px;
-    height: 48px;
-    background-position: top -68px left -78px;
-}
-.new_normal_user{
-	text-align: left;
-	
-}
-
-.signup-form__policy__policy-list {
-    border: solid 1px #dbdbdb;
-    padding: 15px;
-    box-sizing: border-box;
-}
-.signup-form__policy__check-all {
-    height: 22px;
-    line-height: 22px;
-    position: relative;
-    margin-bottom: 15px;
-}
-.signup-form__policy__check-all>.form-check {
-    position: absolute;
-    right: 15px;
-    top: 0;
-}
-.bold {
-    font-weight: bold;
-}
-.navigation-primary__container {
-    z-index: 502;
-    left: 0;
-    right: 0;
-    transition: top .1s;
-    background-color: white;
-    border-bottom: 1px solid #ededed;
-}
-#navigation {
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 0 auto;
-    -moz-box-flex: 0;
-    -moz-flex: 0 0 auto;
-    -ms-flex: 0 0 auto;
-    flex: 0 0 auto;
-=======
-    font-size: 18px;
->>>>>>> refs/remotes/origin/master
-    line-height: 1;
-    font-weight: bolder;
-    padding: 14px 8px 11px;
-    border: none;
-    background: none;
-    border-bottom: 2px solid transparent;
-    color: #757575;
-    cursor: pointer;
-    vertical-align: bottom;
-    margin-left :20px;
+   display: inline-block;
+   font-size: 18px;
+   line-height: 1;
+   font-weight: bolder;
+   padding: 14px 8px 11px;
+   border: none;
+   background: none;
+   border-bottom: 2px solid transparent;
+   color: #757575;
+   cursor: pointer;
+   vertical-align: bottom;
+   margin-left :20px;
 }
 .h_nav_right{
-    display: inline-block;
-    font-size: 15px;
-    line-height: 1;
-    font-family: 'Noto Sans Korean', sans-serif;
-    font-weight: bolder;
-    padding: 14px 8px 11px;
-    border: none;
-    background: none;
-    border-bottom: 2px solid transparent;
-    color: #757575;
-    cursor: pointer;
-    vertical-align: bottom;
-    margin-left :5px;
+   display: inline-block;
+   font-size: 15px;
+   line-height: 1;
+   font-family: 'Noto Sans Korean', sans-serif;
+   font-weight: bolder;
+   padding: 14px 8px 11px;
+   border: none;
+   background: none;
+   border-bottom: 2px solid transparent;
+   color: #757575;
+   cursor: pointer;
+   vertical-align: bottom;
+   margin-left :5px;
 }
 .h_nav_left:hover{
-	color : #cc5200;
-} 
-.h_nav_right:hover{
-	color : #cc5200;
+    color : #cc5200;
 }
-
-
-
+.h_nav_right:hover{
+    color : #cc5200;
+}

@@ -9,59 +9,6 @@ danah = (()=>{
 		setContentView();
 	};
 	let setContentView =()=>{
-<<<<<<< HEAD
-		($('.navigation-primary__actions').children(":first").attr("class")==="d_search_btn") ?
-		'' :
-		$('.navigation-primary__actions')
-		.prepend(
-			compo.button({c: 'd_search_btn', t: '검색'})
-			.append(compo.span({c: 'd_search_btn_icon'}))
-			.click(d=>{
-				d.preventDefault();
-				danah.util.search();
-			}),
-			compo.a({c: 'd_wirte_btn', i: 'wirte_btn', hr: '/board_upload', t: '글쓰기'})
-			.click(d=>{
-				d.preventDefault();
-				/*if($.fn.undeChk([$.cookie("userid")])){
-					alert('로그인이 필요한 서비스 입니다.');
-				}else{*/
-					danah.service.wirte();
-				//}
-			})
-		);
-		danah.service.list();
-	};
-	return{init: init};
-})();
-
-danah.service = (()=>{
-	let $context, $script, $style, $img, content;
-	$context = $.context();
-	$script = $.script();
-	$style = $.style();
-	$img = $.img();
-	content = $('#content');
-	
-	let list = d=>{
-		content.html(danah.util.filter());
-		compo.div({c: 'd_container', i: 'd_posts', ht: compo.div({c: 'd_row', s: 'margin-top:20px'})})
-		.appendTo(content);
-		for (let i = 0; i <= 4; i++) {
-			let $a = compo.article({c: 'd_post', hc: 'd_post_writer'});
-			$a.appendTo($('.d_row'));
-			$a.children(':first')
-			.append(
-				compo.a({c: 'd_post_writer_profile', hr:'#', ht: compo.img({s:$img+'/danah/profile.jpeg',a:'의 프로필 사진'})}),
-				compo.p({c: 'd_post_writer_about', ht: compo.a({hr:'#', ht: $('<strong/>').text('작성자')})})
-			);
-			$a.children(':last')
-			.append(
-				compo.div({c: 'd_post_img'})
-				.append(
-					// DB 이미지
-					compo.img({c: 'horizon', s: $img+'/post/1.jpeg'}),
-=======
 		($('#h_navigation_primary').hasClass("d_search_btn")) ?
 		'' :
 		$('#symbol')
@@ -113,7 +60,6 @@ danah.service = (()=>{
 				.append(
 					// DB 이미지
 					compo.img({c: 'horizon', s: $img+'/danah/post/1.jpeg'}),
->>>>>>> refs/remotes/origin/master
 					// 정보가 있을때 생성
 					compo.span({c: 'd_post_img_info', s: 'background-position: 0px 0px; width: 14px; height: 14px;'}),
 					// DB 조회수

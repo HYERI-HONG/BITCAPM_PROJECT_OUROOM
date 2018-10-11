@@ -3,7 +3,7 @@ function loginUI() {
     +'<h1 class="je_sign-in-form__header">'
     +'<a id="main_btn" class="je_sign-in-form__header__link" href="#">'
       +'<span style=" margin-left: auto; margin-right: auto;  display: block;">'
-<<<<<<< HEAD
+
     + ' <img class="je_manImg" src='+$.img()+'/logo1.png ></img></span>'
 +'</a>    </h1>'
 +'<form class="je_sign-in-form__form" id="new_user">'
@@ -23,7 +23,7 @@ function loginUI() {
     +'<p style="font-size:80%; color:gray;">SNS계정으로 간편 로그인/회원가입</p>'
 	+'<img class="manImg" src='+$.img()+'/kakao.png ></img></a>&nbsp&nbsp&nbsp'
 	+'<img class="manImg" src='+$.img()+'/naver.png ></img></a>'
-=======
+
     + ' <img class="je_manImg" src='+$.img()+'/jieun/logo1.png ></img></span>'
 +'</a>    </h1>'
 +'<form class="je_sign-in-form__form" id="new_user">'
@@ -43,7 +43,7 @@ function loginUI() {
     +'<p style="font-size:80%; color:gray;">SNS계정으로 간편 로그인/회원가입</p>'
 	+'<img class="manImg" src='+$.img()+'/jieun/kakao.png ></img></a>&nbsp&nbsp&nbsp'
 	+'<img class="manImg" src='+$.img()+'/jieun/naver.png ></img></a>'
->>>>>>> refs/remotes/origin/master
+
 +'       <a class="je_sign-in-form__sns__entry" href="/users/auth/kakao">'
         +'<span class="icon-page-login__c-3" aria-label="카카오계정으로 로그인"></span>'
 +'</a>          <a class="je_sign-in-form__sns__entry" href="/users/auth/naver">'

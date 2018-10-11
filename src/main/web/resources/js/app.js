@@ -71,6 +71,7 @@ app.router = {
 							e.preventDefault();
 							app.permission.add();
 						 });
+						 
 				})
 				.fail(x=>{console.log(' when fail 로드실패');})
 		}
@@ -87,15 +88,12 @@ app.permission=(()=>{
 	var add=()=>{
 		$('#footer').remove();
 		$('#content').empty();
-<<<<<<< HEAD
+
 		$.getScript($.script()+'/add2.js',
-=======
-		$.getScript($.script()+'/add.js',
->>>>>>> refs/remotes/origin/master
-				()=>{
-					$('#content').html(addUI());
-				});
-	}
+		$.getScript($.script()+'/add.js',()=>{
+		$('#content').html(addUI());}
+		)
+	)};
 	
 	return{login:login,
 			add:add};
