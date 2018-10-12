@@ -8,6 +8,8 @@ jun =(()=>{
 })();
 jun.main = {
 	store : ()=>{
+		/*$('#h_navigation_primary').removeClass('d_wirte_btn');
+    	$('#h_navigation_primary').removeClass('d_search_btn');*/
 		$('#content').empty();
 		$('<div/>').attr({id:'kj_div'}).addClass('container').appendTo($('#content'));
 		$('<div/>').attr({id:"kj_test_div1"}).appendTo($('#kj_div'))
@@ -31,7 +33,7 @@ jun.main = {
 			KJ.add();
 			
 		});
-		$('<div/>').attr({id:"kj_test2"}).addClass("container").appendTo($('#content'));
+		$('<div/>').attr({id:"kj_test2"}).appendTo($('#content'));
 		$('<div/>').attr({id:"kj_category_2"}).appendTo($('#kj_test2'));
 		
 		let category2=["침대","옷장","수납장","화장대"];

@@ -80,6 +80,22 @@ app.permission=(()=>{
 		$.getScript($.script()+'/add.js',
 				()=>{
 					$('#content').html(addUI());
+					
+				$('<label/>').addClass('je_bold').html("생년월일").attr({style:"padding-top:20px"}).appendTo($('#add_form_middle'));
+				
+				$('<div/>').attr({id:"bir_wrap",style:"diplay:table; width:100%, height:34px"}).appendTo($('#add_form_middle'));
+				
+				$('<div/>').addClass('bir_yy').attr({id:"bir_yy_d"}).appendTo($('#bir_wrap'));
+				$('<span/>').addClass('bir_box').attr({id:"bir_yy_s"}).appendTo($('#bir_yy_d'));
+				$('<input/>').addClass('bir_int').attr({placeholder:"년(4자)",type:"text",id:"yy"}).appendTo($('#bir_yy_s'));
+				
+				$('<div/>').attr({class:"bir_mm", id:"bir_mm_d"}).appendTo($('#bir_wrap'));
+				$('<span/>').addClass('bir_box').attr({id:"bir_mm_s"}).appendTo($('#bir_mm_d'));
+				
+				$('<div/>').attr({class:"bir_dd", id:"bir_dd_d"}).appendTo($('#bir_wrap'));
+				$('<span/>').addClass('bir_box').attr({id:"bir_dd_s"}).appendTo($('#bir_dd_d'));
+			
+				
 				});
 	}
 	

@@ -9,26 +9,21 @@ danah = (()=>{
 		setContentView();
 	};
 	let setContentView =()=>{
-		($('#h_navigation_primary').hasClass("d_search_btn")) ?
-		'' :
-		$('#symbol')
-		.before(
-			compo.button({c: 'd_search_btn', t: '검색'}).attr({style : "top:20px"})
-			.append(compo.span({c: 'd_search_btn_icon'}))
+		
+		$('#h_search_btn').attr({style : "visibility: visible;font-size:25px; margin-bottom:9px; vertical-align: bottom; margin-left:10px"})
 			.click(d=>{
 				d.preventDefault();
 				danah.util.search();
-			}),
-			compo.a({c: 'd_wirte_btn', i: 'wirte_btn', hr: '/board_upload', t: '글쓰기'}).attr({style : "top:15px"})
+			});
+		$('#h_wirte_btn').attr({style : "visibility: visible; top:12px"})
 			.click(d=>{
 				d.preventDefault();
-				/*if($.fn.undeChk([$.cookie("userid")])){
+				if($.fn.undeChk([$.cookie("userid")])){
 					alert('로그인이 필요한 서비스 입니다.');
-				}else{*/
+				}else{
 					danah.service.wirte();
-				//}
-			})
-		);
+				}
+		});
 		danah.service.list();
 	};
 	return{init: init};

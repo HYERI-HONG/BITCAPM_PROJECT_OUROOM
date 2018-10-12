@@ -1,6 +1,15 @@
-#je_font_2em{
-	font-size: 2em;
+hr.border-gray-light-more {
+    border-top: solid 1px #acacac;
 }
+
+#je_font_2em{
+	font-size: 1.5em;
+	 font-weight: bold;
+}
+.je_bold {
+    font-weight: bold;
+}
+
 .je_sign-in-form__action__entry:hover{
 	text-decoration: underline;
 }
@@ -19,7 +28,6 @@
     box-sizing: border-box;
     text-align: left;
 }
-
 .je_sign-in-form__form__input{
 	display: block;
     width: 100%;
@@ -67,23 +75,15 @@
 .je_sign-in-form__sns__list{
 	text-align: center;
 }
-/* input{
-	width: 100%;	
-	padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box; 
-} */
 #je_input_box{
 	width: 50%;
 }
-.je_bold {
-    font-weight: bold;
-}
+
 .p1{
 	font-size:13px;
     display: block;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
+    -webkit-margin-before: 0.25em;
+    -webkit-margin-after: 0.25em;
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
     color: gray;
