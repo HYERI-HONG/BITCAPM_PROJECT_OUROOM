@@ -8,7 +8,6 @@ app =(()=>{
 	};
 	return {init : init};
 })();
-
 app.router = {
 		init : x=>{
 			console.log('step2 : app.router.init 진입'+x);
