@@ -8,7 +8,6 @@ app =(()=>{
 	};
 	return {init : init};
 })();
-
 app.router = {
 		init : x=>{
 			console.log('step2 : app.router.init 진입'+x);
@@ -34,6 +33,7 @@ app.router = {
 								+contentUI()
 								+footerUI()
 						);
+						console.log(' when done 로드성공');
 						console.log(' when done 로드성공');
 					    
 						$('#board_btn').click(e=>{

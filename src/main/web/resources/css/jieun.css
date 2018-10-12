@@ -1,7 +1,6 @@
 hr.border-gray-light-more {
     border-top: solid 1px #acacac;
 }
-
 #je_font_2em{
 	font-size: 1.5em;
 	 font-weight: bold;
@@ -9,7 +8,6 @@ hr.border-gray-light-more {
 .je_bold {
     font-weight: bold;
 }
-
 .je_sign-in-form__action__entry:hover{
 	text-decoration: underline;
 }
@@ -67,6 +65,11 @@ hr.border-gray-light-more {
 .je_btn-priority:hover {
 	background-color: #ff8000;
 }
+#je_sharebtn{
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 4px;
+} 
 .je_manImg{
 	margin-left: auto;
 	 margin-right: auto; 
@@ -75,6 +78,16 @@ hr.border-gray-light-more {
 .je_sign-in-form__sns__list{
 	text-align: center;
 }
+
+.carousel-control        { width:  4%; }
+.carousel-control.left,.carousel-control.right {margin-left:15px;background-image:none;}
+.carousel-inner .item.right,.carousel-inner .item.left {transform: translateX(0);}
+.carousel-inner .item.left.active { transform: translateX(-100%);}
+.carousel-inner .item.right.active {transform: translateX(100%);}
+.carousel-inner .item.next {transform: translateX(100%)}
+.carousel-inner .item.prev {transform: translateX(-100%)}
+  
+
 #je_input_box{
 	width: 50%;
 }
