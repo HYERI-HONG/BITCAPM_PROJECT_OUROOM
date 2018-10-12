@@ -1,7 +1,6 @@
 hr.border-gray-light-more {
     border-top: solid 1px #acacac;
 }
-
 #je_font_2em{
 	font-size: 1.5em;
 	 font-weight: bold;
@@ -9,7 +8,6 @@ hr.border-gray-light-more {
 .je_bold {
     font-weight: bold;
 }
-
 .je_sign-in-form__action__entry:hover{
 	text-decoration: underline;
 }
@@ -80,33 +78,16 @@ hr.border-gray-light-more {
 .je_sign-in-form__sns__list{
 	text-align: center;
 }
-<<<<<<< HEAD
-=======
+
 .carousel-control        { width:  4%; }
 .carousel-control.left,.carousel-control.right {margin-left:15px;background-image:none;}
-
 .carousel-inner .item.right,.carousel-inner .item.left {transform: translateX(0);}
-
 .carousel-inner .item.left.active { transform: translateX(-100%);}
 .carousel-inner .item.right.active {transform: translateX(100%);}
 .carousel-inner .item.next {transform: translateX(100%)}
 .carousel-inner .item.prev {transform: translateX(-100%)}
   
-input{
-	width: 100%;	
-	padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box; 
-}
 
-/* input{
-	width: 100%;	
-	padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box; 
-} */
-
->>>>>>> refs/remotes/origin/jieun
 #je_input_box{
 	width: 50%;
 }

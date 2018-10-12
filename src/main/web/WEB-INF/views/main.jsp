@@ -11,9 +11,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="SHORTCUT ICON" href="${context}/resources/img/hyeri/favicon.ico" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
     <!-- danah -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="${context}/resources/css/danah.css" />
     <!-- jaekyung -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -22,12 +23,13 @@
     <link rel="stylesheet" href="${context}/resources/css/jieun.css" />
     <!-- jun -->
     <link rel="stylesheet" href="${context}/resources/css/jun.css" />
+    <script src="${context}/resources/js/jquery/popup.js"></script>
 </head>
 <body>
     <div id="wrapper">
     </div>
-      <script>
-            app.init('${context}');
-        </script>
+    <script>
+        app.init('${context}');
+    </script>
 </body>
 </html>

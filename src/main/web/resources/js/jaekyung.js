@@ -53,30 +53,30 @@ jaekyung.main={//메인페이지
             	  smmco.appendTo(smmc);
             	  smmco.attr({style:"display:flex"}).addClass("row").append(
             		$('<div />').attr({style:"border:1px solid;"}).addClass("col-sm-6").append(
-            			$('<img src="'+$.img()+'/1.PNG" />').addClass("img-responsive center-block")
+            			$('<img src="'+$.img()+'/jaekyung/1.PNG" />').addClass("img-responsive center-block")
             		),
             		$('<div />').addClass("col-sm-6").append(
             				$('<div />').attr({style:"border:1px solid;margin-bottom:15px ; "}).addClass("col-sm-12").append(
-            						$('<img src="'+$.img()+'/2.PNG" />').attr({style:"margin-bottom:15px"}).addClass("img-responsive center-block")
+            						$('<img src="'+$.img()+'/jaekyung/2.PNG" />').attr({style:"margin-bottom:15px"}).addClass("img-responsive center-block")
             				),
             				$('<div />').attr({style:"border:1px solid;"}).addClass("col-sm-12").append(
-            						$('<img src="'+$.img()+'/3.PNG" />').addClass("img-responsive center-block")
+            						$('<img src="'+$.img()+'/jaekyung/3.PNG" />').addClass("img-responsive center-block")
             				)
             		)
             	  );
             	  smmct.appendTo(smmc);
             	  smmct.attr({style:"display:flex"}).addClass("row margintop20__ryu").append(
             		$('<div />').attr({style:"border:1px solid; margin-right:15px"}).addClass("col-sm-6").append(
-            				$('<img src="'+$.img()+'/4.PNG" />').addClass("img-responsive center-block")
+            				$('<img src="'+$.img()+'/jaekyung/4.PNG" />').addClass("img-responsive center-block")
             		),
             		$('<div />').addClass("col-sm-3").append(
             				$('<div />').attr({style:"border:1px solid; "}).addClass("col-sm-12 ").append(
-            						$('<img src="'+$.img()+'/5.PNG" />').addClass("img-responsive center-block")
+            						$('<img src="'+$.img()+'/jaekyung/5.PNG" />').addClass("img-responsive center-block")
             				)
             		),
             		$('<div />').addClass("col-sm-3").append(
             				$('<div />').attr({style:"border:1px solid"}).addClass("col-sm-12").append(
-            						$('<img src="'+$.img()+'/6.PNG" />').addClass("img-responsive center-block")
+            						$('<img src="'+$.img()+'/jaekyung/6.PNG" />').addClass("img-responsive center-block")
             				)
             		)
             	  );
@@ -105,7 +105,7 @@ jaekyung.main={//메인페이지
             	  smmco.appendTo(smmc);
             	  smmco.addClass("row").append(
             			  $('<div />').attr({style:"border:1px solid"}).addClass("col-sm-12").append(
-            					$('<img src="'+$.img()+'/7.PNG" />').addClass("img-responsive center-block")	  
+            					$('<img src="'+$.img()+'/jaekyung/7.PNG" />').addClass("img-responsive center-block")	  
             			  )       			  
             	  );
             	  smmct.addClass("margintop20__ryu").appendTo(smmc);
@@ -150,20 +150,15 @@ jaekyung.main={//메인페이지
               ctgr2:()=>{
             	  
               },
-              ctgr3:()=>{
-            	  
+              ctgr3:()=>{  
               },
-              mbr:()=>{
-            	  
+              mbr:()=>{    	  
               },
               abba:()=>{
-            	  
               },
               ubt:()=>{
-            	  
               },
-              cbg:()=>{
-                    			
+              cbg:()=>{    			
               }
 }
 jaekyung.router={
