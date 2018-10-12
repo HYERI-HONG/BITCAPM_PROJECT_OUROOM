@@ -71,7 +71,6 @@ jun.main = {
 		for(let y=0; y<=3; y++){
 		let div1 =	$('<div/>').attr({class:"col-md-3"}).appendTo(div);
 		let div2 = $('<div/>').attr({class:"kj_item"}).appendTo(div1).click(e=>{
-			alert('jun상품디테일');
 			$.getScript($.script()+'/jieun.js', ()=>{jieun.detail();});
 });
 		$('<img/>').attr({src:$.img()+'/jun/1.JPG',class:"kj_item_img"}).appendTo(div2);

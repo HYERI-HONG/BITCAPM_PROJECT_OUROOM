@@ -4,7 +4,7 @@ function loginUI() {
     +'<a id="main_btn" class="je_sign-in-form__header__link" href="#">'
       +'<span style=" margin-left: auto; margin-right: auto;  display: block;">'
 
-    + ' <img class="je_manImg" src='+$.img()+'/logo1.png ></img></span>'
+    + ' <img class="je_manImg" src='+$.img()+'/jieun/logo1.png ></img></span>'
 +'</a>    </h1>'
 +'<form class="je_sign-in-form__form" id="new_user">'
   +'<input placeholder="이메일" autofocus="autofocus" class="je_sign-in-form__form__input form-control sign-in-form__form__email" type="text" name="user[email]" id="user_email">'
