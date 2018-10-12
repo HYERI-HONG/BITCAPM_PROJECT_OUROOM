@@ -15,7 +15,7 @@ jieun=(()=>{
 				$('#footer').remove();
 				content.empty();
 				
-				
+				//
 							
 				$('<button/>').attr({id:'je_sharebtn'}).appendTo(content);
 				$('#je_sharebtn').append(
