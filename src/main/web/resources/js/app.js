@@ -35,14 +35,7 @@ app.router = {
 								+footerUI()
 						);
 						console.log(' when done 로드성공');
-<<<<<<< HEAD
-					    $('#nav_ul li').eq(2).find('a').click(e=>{
-                            e.preventDefault();
-                            $.getScript($.script()+'/jaekyung.js',()=>{
-                                   jaekyung.init();
-                            })
-                         });
-=======
+					    
 						$('#board_btn').click(e=>{
                             e.preventDefault();
                             $.getScript($.script()+'/danah.js', ()=>{
@@ -69,7 +62,6 @@ app.router = {
 							e.preventDefault();
 							app.permission.add();
 						 });
->>>>>>> refs/remotes/origin/master
 				})
 				.fail(x=>{console.log(' when fail 로드실패');})
 		}
