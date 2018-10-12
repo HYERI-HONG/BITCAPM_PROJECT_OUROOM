@@ -35,6 +35,7 @@ app.router = {
 								+footerUI()
 						);
 						console.log(' when done 로드성공');
+						console.log(' when done 로드성공');
 					    
 						$('#board_btn').click(e=>{
                             e.preventDefault();
