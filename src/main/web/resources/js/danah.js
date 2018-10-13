@@ -1,7 +1,6 @@
 "use strict";
-var danah = danah || {};
 
-danah = (()=>{
+const danah = (()=>{
 	let init =()=>{
 		onCreate();
 	};
@@ -9,11 +8,12 @@ danah = (()=>{
 		setContentView();
 	};
 	let setContentView =()=>{
-		
+		danah.service.list();
 		$('#h_search_btn').attr({style : "visibility: visible;font-size:25px; margin-bottom:9px; vertical-align: bottom; margin-left:10px"})
 			.click(d=>{
 				d.preventDefault();
-				danah.util.search();
+				$('#content').html(danah.service.list());
+				$('#d_post_list').prepend(danah.util.search());
 			});
 		$('#h_wirte_btn').attr({style : "visibility: visible; top:12px"})
 			.click(d=>{
@@ -23,13 +23,13 @@ danah = (()=>{
 			}else{*/
 				danah.service.wirte();
 			//}
-		});
-		danah.service.list();
+		});	
+		danah.util.topbtn(content);
 	};
 	return{init: init};
 })();
 
-danah.service = (()=>{
+danah.service =(()=>{
 	let $context, $script, $style, $img, content;
 	$context = $.context();
 	$script = $.script();
@@ -37,11 +37,12 @@ danah.service = (()=>{
 	$img = $.img();
 	content = $('#content');
 	
-	let list = d=>{
+	let list =d=>{
 		content.html(danah.util.filter());
 		danah.compo.div({c: 'd_container', i: 'd_post_list', ht: danah.compo.div({c: 'd_row', s: 'margin-top:20px'})})
 		.appendTo(content);
 		for (let i = 0; i <= 20; i++) {
+			//서치결과 class name d_col_6  d_col_md_4 d_col_lg_3 d_post post_search
 			let a = danah.compo.article({c: 'd_col_12  d_col_md_4 d_col_lg_3 d_post', hc: 'd_post_writer'});
 			a.appendTo($('.d_row'));
 			a.children(':first')
@@ -55,8 +56,8 @@ danah.service = (()=>{
 				.append(
 					// DB 이미지 정보가 있으면 horizon, 없으면 vertical
 					danah.compo.img({c: 'horizon', sr: $img+'/danah/post/1.jpeg'}),
-					// 정보가 있을때 생성
-					danah.compo.span({c: 'd_post_img_info', s: 'background-position: 0px 0px; width: 14px; height: 14px;'}),
+					// 정보가 있을때 생성 search page 생성하지 않음
+					danah.compo.span({c: 'd_post_img_icon d_post_img_info', s: 'background-position: 0px 0px; width: 14px; height: 14px;'}),
 					// DB 조회수
 					danah.compo.span({c: 'd_post_img_view', ht: ['조회수 ', 80]}),
 					danah.compo.a({hr: '#', s: 'position: absolute; width: 100%; height: 100%;'})
@@ -82,27 +83,23 @@ danah.service = (()=>{
 				$('<figcaption/>').text('제목')
 			);
 		}
-		danah.util.topbtn().appendTo(content);
-		$(window).scroll(()=>{ 
-			$(this).scrollTop() > 200 ? $('.d_top_btn').fadeIn('2000') : $('.d_top_btn').fadeOut('500'); 
-		});
 	};
-	let wirte = d=>{
+	let wirte =d=>{
 		content.html('글을쓰자! 열심히');
 	};
-	let post = d=> {
+	let post =d=> {
 		content.html('디테일');
 	};
-	let edit = d=> {
+	let edit =d=> {
 		content.html('');
 	};
 	return {list: list, wirte: wirte, post: post, edit: edit};
 })();
 
 danah.util = {
-	filter: ()=>{
-		let d = danah.compo.div({c: 'd_filter_wrap'});
-		d.append(
+	filter: d=>{
+		let w = danah.compo.div({c: 'd_filter_wrap'});
+		w.append(
 			danah.compo.nav({c: 'd_filter d_filter_depth_1', u:'d_container'}),
 			danah.compo.nav({c: 'd_filter d_filter_depth_2 d_filter_hidden', u:'d_container'})
 		);
@@ -116,12 +113,12 @@ danah.util = {
 					danah.compo.span({c: 'd_filter_item_btn_search_val', t: v.v})
 				)
 			)
-			.appendTo(d.find('.d_container:first'))
+			.appendTo(w.find('.d_container:first'))
 			.click(a=>{
 				a.preventDefault();
 				let l = $('.d_filter_item');
 				let b = $('.d_filter_item_btn_search_icon');
-				let n = d.children(':last');
+				let n = w.children(':last');
 				if(l.eq(i).hasClass('d_filter_item_active')){
 					b.attr('style', 'margin-left:7px;transform-origin:center 7px;transition:transform .2s linear;transform:rotate(0deg);background-position-x:-40px;background-position-y:-0px;width:12px;height:12px');
 					l.removeClass('d_filter_item_active')
@@ -132,8 +129,8 @@ danah.util = {
 					l.removeClass('d_filter_item_active')
 					l.eq(i).addClass('d_filter_item_active');
 					n.removeClass('d_filter_hidden');
-					d.find('.d_container:last').html('');
-					d.find('.d_filter_container:last')
+					w.find('.d_container:last').html('');
+					w.find('.d_filter_container:last')
 					.append(
 						$.each((i==0 ?
 								['최신순', '인기순', '베스트']:
@@ -147,30 +144,34 @@ danah.util = {
 							.append(
 								danah.compo.a({c: 'd_filter_item_btn', t: this})
 							)
-							.appendTo(d.find('.d_container:last'));
+							.appendTo(w.find('.d_container:last'));
 						})
 					);
 				}
 			});
 		})
-		return d;
+		return w;
 	},
-	topbtn: ()=>{
-		let d = danah.compo.div({c: 'd_wiget_wrap'});
+	topbtn: d=>{
+		let w = danah.compo.div({c: 'd_wiget_wrap'});
 		danah.compo.a({c: 'd_top_btn'})
 		.append(danah.compo.i({c: 'fa fa-chevron-up'}))
-		.appendTo(d)
+		.appendTo(w.appendTo(d))
 		.click(a=>{
 			a.preventDefault();
 			$('html, body').animate({scrollTop:0}, '1000');
 		});
-		return d;
+		$(window).scroll(()=>{ 
+			$(this).scrollTop() > 200 ? $('.d_top_btn').fadeIn('2000') : $('.d_top_btn').fadeOut('500'); 
+		});
 	},
-	search: ()=>{
-		let a= '';
+	search: d=>{
+		let p = danah.compo.p({c: 'd_post_search'});
+		p.html(["'",'이케아',"'에 대한 검색 결과"])
+		.append(danah.compo.span({ht: ['20,077','개']}));
+		return p;
 	}
 };
-
 
 danah.compo = {
 	div: d=>{return $('<div/>').addClass(d.c).attr({id: d.i, style: d.s}).html(d.ht).text(d.t);},
