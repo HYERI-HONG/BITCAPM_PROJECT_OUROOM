@@ -18,7 +18,7 @@ const danah = (()=>{
 		$('#h_wirte_btn').attr({style : "visibility: visible; top:12px"})
 			.click(d=>{
 				d.preventDefault();
-				/*if($.fn.undeChk([$.cookie("userid")])){
+				/*if($.fn.danah_undeChk([$.cookie("userid")])){
 				alert('로그인이 필요한 서비스 입니다.');
 			}else{*/
 				danah.service.wirte();
