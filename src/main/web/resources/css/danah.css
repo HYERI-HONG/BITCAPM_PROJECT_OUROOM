@@ -33,6 +33,7 @@
     color: #CC5200
 }
 
+
 .d_post_search>a {
     font-size: 13px;
     text-decoration: underline
@@ -728,7 +729,9 @@ a.d_filter_item_btn {
     align-items: center;
     -ms-flex-pack: center;
     -moz-justify-content: center;
-    justify-content: center
+    justify-content: center;
+    text-decoration: none !important;
+    color: inherit !important;
 }
 
 .d_post_action_btn,
@@ -741,7 +744,8 @@ a.d_filter_item_btn {
     font-size: 12px;
     padding: 0;
     background: transparent;
-    color: #424242
+    color: #424242;
+    position: relative;
 }
 
 .d_post_action_btn--disabled,
