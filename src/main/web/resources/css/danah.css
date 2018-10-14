@@ -1,4 +1,4 @@
-/* 기능 */
+/* -------------- 기능 -------------- */
 .d_top_btn {
 	background-color: rgba(204, 82, 0, 0.6);
     color: #ffffff;
@@ -60,7 +60,7 @@
   color: #ffffff;
 }
 
-/* 필터 */
+/* -------------- 필터 -------------- */
 .d_container {
     margin-right: auto;
     margin-left: auto;
@@ -281,7 +281,7 @@ a.d_filter_item_btn {
     }
 }
 
-/* 리스트 */
+/* -------------- 리스트 -------------- */
 
 #d_post_list {
     padding-top: 20px;
