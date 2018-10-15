@@ -19,6 +19,7 @@ public class Pagination implements Proxy{
 
 	@Override
 	public void carraryOut(Object o) {
+		@SuppressWarnings("unchecked")
 		HashMap<String,Object> map = (HashMap<String, Object>) o;
 		this.pageNum = (int) map.get("pageNum");
 		this.totalRecode = (int) map.get("totalRecode");

@@ -30,6 +30,7 @@ public class BoardController {
 	
 	@GetMapping("/boards/list/{pageNo}")
 	public @ResponseBody Map<String, Object> list(@PathVariable String p) {
+		logger.info("boards/list 진입 .. {} "," 들어옴 ");
 		Util.log.accept("리스트");
 		Util.log.accept(p.toString());
 		Map<String,Object> map = null; 
