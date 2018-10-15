@@ -212,7 +212,7 @@ jun.main = {
 			    +'<div class="count_cost" style="display: block;">'
 			        +'<div class="input">'
 			            +'<div id="kj_cart_arrowdown" class="arrow down"></div>'
-			            +'<div class="input"><input id="kj_cart_input"type="number" value="1" name="carted_production[carted_options_attributes][0][count]" id="carted_production_carted_options_attributes_0_count"/></div>'
+			            +'<div class="input"><input id="kj_cart_input" min="1" type="number"  name="carted_production[carted_options_attributes][0][count]" id="carted_production_carted_options_attributes_0_count"/></div>'
 			            +'<div id="kj_cart_arrowup"class="arrow up"></div></div>'
 			            +'<div class="sum_cost">24,900원</div>'
 			    +'</div>'
@@ -228,8 +228,8 @@ jun.main = {
 			            +'<div class="cost" id="total_cost"><span class="cost">24,900</span><span class="unit">원</span></div>'
 			        +'</div>'
 			        +'<div id="kj_buttons">'
-			            +'<input type="submit" name="commit" value="확인" id="submit" data-disable-with="갱신">'
-			            +'<div id="close_edit">취소</div>'
+			            +'<input type="button" name="commit" value="취소" id="submit" data-disable-with="갱신">'
+			            +'<div id="close_edit">확인</div>'
 			        +'</div>'
 			+'</form></div></div>'
 			},
@@ -237,11 +237,18 @@ jun.main = {
 			overflowY:'auto',
 			removalDelay:'0',
 			type:'inline'});
+		
+		var count =1;
+		$('#kj_cart_input').val(count);
 		$('#kj_cart_arrowdown').click(e=>{
-			alert("다운");
+			if(count>1){
+			count--;
+			$('#kj_cart_input').val(count);
+			}
 		})
 		$('#kj_cart_arrowup').click(e=>{
-			alert("업");
+			count++;
+			$('#kj_cart_input').val(count);
 		})
 	
 		return false;
