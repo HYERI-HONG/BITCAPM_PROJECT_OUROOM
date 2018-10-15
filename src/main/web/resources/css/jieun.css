@@ -1,12 +1,5 @@
-hr.border-gray-light-more {
-    border-top: solid 1px #acacac;
-}
 #je_font_2em{
-	font-size: 1.5em;
-	 font-weight: bold;
-}
-.je_bold {
-    font-weight: bold;
+	font-size: 2em;
 }
 .je_sign-in-form__action__entry:hover{
 	text-decoration: underline;
@@ -26,6 +19,7 @@ hr.border-gray-light-more {
     box-sizing: border-box;
     text-align: left;
 }
+
 .je_sign-in-form__form__input{
 	display: block;
     width: 100%;
@@ -67,8 +61,13 @@ hr.border-gray-light-more {
 }
 #je_sharebtn{
 	background-color: white;
-	border: 1px solid black;
-	border-radius: 4px;
+	color : black;
+	border: 0.5px solid black;
+	border-radius: 10px;
+	position: relative;
+	margin-left: 10%;
+	
+	
 } 
 .je_manImg{
 	margin-left: auto;
@@ -79,25 +78,92 @@ hr.border-gray-light-more {
 	text-align: center;
 }
 
-.carousel-control        { width:  4%; }
-.carousel-control.left,.carousel-control.right {margin-left:15px;background-image:none;}
-.carousel-inner .item.right,.carousel-inner .item.left {transform: translateX(0);}
-.carousel-inner .item.left.active { transform: translateX(-100%);}
-.carousel-inner .item.right.active {transform: translateX(100%);}
-.carousel-inner .item.next {transform: translateX(100%)}
-.carousel-inner .item.prev {transform: translateX(-100%)}
-  
-
 #je_input_box{
 	width: 50%;
 }
-
+.je_bold {
+    font-weight: bold;
+}
 .p1{
 	font-size:13px;
     display: block;
-    -webkit-margin-before: 0.25em;
-    -webkit-margin-after: 0.25em;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
     color: gray;
+}
+.je_cover_info{
+	font-size: 10px;
+	color: gray;
+}
+#je_icon{	
+	color: gray;
+}
+.je_cover_info{
+	width : 50%;
+}
+.je_div_cover{
+	width: 50%;
+}
+/*1015 추가분*/
+
+.je_row{
+	width: 100%;
+	height : 400px;
+	padding-right: 5cm;
+	padding-left:5cm;
+	text-align: center;
+}
+.je_col0 {
+	width:40%;
+	float:left;
+}
+.je_col1{
+	width:40%;
+	float:right;
+}
+.je_cover_title{
+	font-size: 2em;
+	color: black;
+}
+.je_price_cover{
+	color: #cc5200;
+	font-size: 2em;
+}
+.je_origin_cost{
+	font-size: 0.5em;
+}
+.je_brand_more_btn{
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	height: 30%;
+	line-height: 30%;
+	text-decoration: none;
+	font-size: 12px;
+	border: 1px solid #F2F2F2;
+	background-color: #F2F2F2;
+}
+.je_homeicon{
+	width: 3%;
+}
+#je_line{
+	line-height: 3
+}
+.je_origin_cost{
+	text-decoration: line-through;
+	color: gray;
+}
+.je_dis_cost{
+	text-decoration: none;
+	color: black;
+}
+.je_discount{
+	float: left;
+	font-size: 1.5em;
+}
+.kakao_share .naver_share{
+	position: relative;
 }

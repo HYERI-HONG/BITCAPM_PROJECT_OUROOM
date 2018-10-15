@@ -71,16 +71,17 @@ jun.main = {
 		let div1 =	$('<div/>').attr({class:"col-md-3"}).appendTo(div);
 		let div2 = $('<div/>').attr({class:"kj_item"}).appendTo(div1);
 		$('<img/>').attr({src:$.img()+'/jun/1.JPG',class:"kj_item_img"}).appendTo(div2).click(e=>{
-			alert("사진 클릭");
+			//
 			$.getScript($.script()+'/jieun.js',()=>{
 				jieun.detail();
 			});
 		});
+		
 		//glyphicon glyphicon-heart 색깔
 		let div3=$('<div/>').attr({class:'kj_icon_div'}).appendTo(div2);
 		
 		$('<span/>').attr({style:"cursor:pointer"}).addClass('glyphicon glyphicon-shopping-cart').appendTo(div3).click(e=>{
-			jun.main.cart();
+			jun.main.modal();
 		});
 		$('<span/>').attr({style:"margin:5px;cursor:pointer"}).addClass('glyphicon glyphicon-heart-empty').appendTo(div3).click(e=>{
 			alert("좋아요");
@@ -93,7 +94,9 @@ jun.main = {
 		
 		}
 		
-	}		
+	}	
+		
+		
 	},
 	add: ()=>{
 		//모달 추가함
@@ -147,10 +150,9 @@ jun.main = {
 			}
 		});
 		return false;
-
+		
 		
 	},
-	/////장바구니 새로만듬 
 	cart:()=>{
 		
 		$('#content').empty();
@@ -166,7 +168,84 @@ jun.main = {
 		$('<div/>').attr({style:"font-size:15px;"}).html("무료 | 일반택배배송").appendTo($('#kj_cart_img_div'));
 		$('<button/>').attr({type:"button",id:""}).html("???").appendTo($('#kj_cart_img_div'));
 		$('<button/>').attr({type:"button"}).html("???").appendTo($('#kj_cart_img_div'));
+	
 		
+	},
+	modal:()=>{
+		$.magnificPopup.open({
+			closeBtnInside:true,
+			closeOnContentClick:false,
+			alignTop: true,
+			fixedBgPos:true,
+			fixedContentPos:false,
+			items:{src:	'<div id="kj_cart_option_modal"><div id="wrap_panel">'
+			    +'<div id="product_information">'
+			        +'<div class="image" style="background-image: url('+$.img()+'/jun/ex2.JPG)"></div>'
+			        +'<div class="information">'
+			            +'<div class="name">원목 접이식테이블 2colors</div>'
+			            +'<div class="delivery_info">무료(착불)| 일반택배배송'
+			            +'</div>'
+			        +'</div>'
+			    +'</div>'
+			    +'<form class="edit_carted_production" id="edit_carted_production_7034567" action="/carted_productions/7034567" accept-charset="UTF-8" data-remote="true"' +'method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="_method" value="patch">'
+			        +'<div id="option_panel">'
+			            +'<select id="product_option_depth1">'
+			                +'<option value="0">색상</option>'
+			                    +'<option value="화이트">'
+			                        +'화이트(24,900원)'
+			                    +'</option>'
+			                    +'<option value="블랙">'
+			                        +'블랙(24,900원)'
+			                    +'</option>'
+			            +'</select>'
+			                +'<input val="0" type="hidden" value="0" name="carted_production[pay_at]" id="carted_production_pay_at">'
+			        +'</div>'
+			        +'<div id="selected_options_panel">'
+			            +'<div class="options" id="selected_options">  '
+			                    +'<div class="option" data-value="278053">'
+			    +'<div class="common_information">'
+			        +'<input class="destroy" value="false" type="hidden" name="carted_production[carted_options_attributes][0][_destroy]" id="carted_production_carted_options_attributes_0__destroy">'
+			    +'</div>'
+			    +'<div class="cancel"></div>'
+			    +'<div class="name">화이트 </div>'
+			    +'<div class="count_cost" style="display: block;">'
+			        +'<div class="input">'
+			            +'<div id="kj_cart_arrowdown" class="arrow down"></div>'
+			            +'<div class="input"><input id="kj_cart_input"type="number" value="1" name="carted_production[carted_options_attributes][0][count]" id="carted_production_carted_options_attributes_0_count"/></div>'
+			            +'<div id="kj_cart_arrowup"class="arrow up"></div></div>'
+			            +'<div class="sum_cost">24,900원</div>'
+			    +'</div>'
+			+'</div>'
+			+'<input type="hidden" value="8765129" name="carted_production[carted_options_attributes][0][id]" id="carted_production_carted_options_attributes_0_id">'            +'</div>'
+			            +'<div id="assembly_option" style="display: none;">'
+			                +'<div class="name"></div>'
+			                +'<div class="sum_cost">0</div>'
+			            +'</div>'
+			        +'</div>'
+			        +'<div id="total_cost_panel">'
+			            +'<div class="title">주문금액</div>'
+			            +'<div class="cost" id="total_cost"><span class="cost">24,900</span><span class="unit">원</span></div>'
+			        +'</div>'
+			        +'<div id="kj_buttons">'
+			            +'<input type="submit" name="commit" value="확인" id="submit" data-disable-with="갱신">'
+			            +'<div id="close_edit">취소</div>'
+			        +'</div>'
+			+'</form></div></div>'
+			},
+			midClick:true,
+			overflowY:'auto',
+			removalDelay:'0',
+			type:'inline'});
+		$('#kj_cart_arrowdown').click(e=>{
+			alert("다운");
+		})
+		$('#kj_cart_arrowup').click(e=>{
+			alert("업");
+		})
+	
+		return false;
 		
 	}
-}
+	
+	
+	}

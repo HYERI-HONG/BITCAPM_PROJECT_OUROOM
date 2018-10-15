@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BoardController {
 	static final Logger logger = LoggerFactory.getLogger(BoardController.class); 
-	@Autowired Board b;
+	//@Autowired Board b;
 	//@Autowired BoardMapper bm;
 	//@Autowired Map<String, Object> m;
 	
@@ -30,6 +30,7 @@ public class BoardController {
 	
 	@GetMapping("/boards/list/{pageNo}")
 	public @ResponseBody Map<String, Object> list(@PathVariable String p) {
+		logger.info("boards/list 진입 .. {} "," 들어옴 ");
 		Util.log.accept("리스트");
 		Util.log.accept(p.toString());
 		Map<String,Object> map = null; 
@@ -41,7 +42,7 @@ public class BoardController {
 		Util.log.accept("정보");
 		Util.log.accept(p1.toString());
 		Util.log.accept(p2.toString());
-		return b;
+		return null;
 	}
 	
 	@PostMapping("/boards/edit")
