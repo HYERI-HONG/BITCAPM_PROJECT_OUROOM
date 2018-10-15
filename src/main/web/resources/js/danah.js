@@ -120,7 +120,7 @@ danah.s = (() => {
                 .append(
                     $('<header/>')
                     .append(
-                        danah.c.p({ c: 'category' })
+                        danah.c.p({ c: 'd_category' })
                         .append(
                             danah.c.span({ c: 'd_category_item', ht: '30평대' }),
                             danah.c.span({ c: 'd_category_item', ht: '모던스타일' })
@@ -162,7 +162,7 @@ danah.s = (() => {
                                 )
                             )
                             /* --------------- 다른게시물 추후 추가해야함!!! --------------- ,
-                            danah.c.section({ c: 'd_footer__other row' }) .append(danah.c.div({ c: 'col-5 col-md-3' }).append(danah.c.a({ c: 'd_footer__other__more', hr: '#' }).append(danah.c.span({ c: 'icon--page-mypage', s: 'margin-bottom: 10px; background-position: 0px -120px; width: 40px; height: 40px;', ht: ['더보기'] }))))
+                            danah.c.section({ c: 'd_footer__other d_row' }) .append(danah.c.div({ c: 'col-5 col-md-3' }).append(danah.c.a({ c: 'd_footer__other__more', hr: '#' }).append(danah.c.span({ c: 'icon--page-mypage', s: 'margin-bottom: 10px; background-position: 0px -120px; width: 40px; height: 40px;', ht: ['더보기'] }))))
                             ------------------------------------------------- */
                         ),
                         danah.c.hr({ c: 'd_section_divider' })
@@ -194,7 +194,7 @@ danah.s = (() => {
                                 }),
                                 danah.c.div({ c: 'd_comment_feed_form_actions' })
                                 .append(
-                                    danah.c.a({ c: 'd_comment_feed_form_submit', ht: danah.c.i({ c: 'fas fa-arrow-circle-right'}) })
+                                    danah.c.a({ c: 'd_comment_feed_form_submit',ht: danah.c.i({ c: 'fas fa-arrow-circle-right'}) }).attr('disabled')
                                 )
                             )
                         ),
@@ -296,7 +296,7 @@ danah.s = (() => {
                         danah.c.img({ sr: $i + '/danah/post/1.jpeg', s: 'width: 100%; display: block;' }),
                         danah.c.div({ c: 'd_post_img_tags' })
                     ),
-                    /* --------------- product list 추후 추가해야함!!! --------------- */
+                    /* --------------- product list 추후 추가해야함!!! --------------- 
                     danah.c.aside({ c: 'd_used_product d_used_product_scrollable d_used_product_scrollable_left_end' })
                     .append(
                         danah.c.div({ c: 'd_used_product_list' }),
@@ -307,11 +307,11 @@ danah.s = (() => {
                         ),
                         danah.c.button({ c: 'd_used_product_scrollable_btn', s: 'right: -30px;' })
                         .append(
-                            danah.c.span({ c: 'd_icon_page_post', s: 'background-position: 0px -160px; width: 44px; height: 44px;' }),
-                            danah.c.span({ c: 'd_icon_page_post', s: 'background-position: -160px -160px; width: 44px; height: 44px;' })
+                            danah.c.span({ c: 'd_icon_page_post', s: 'background-position: -80px -160px; width: 44px; height: 44px;' }),
+                            danah.c.span({ c: 'd_icon_page_post', s: 'background-position: -240px -160px; width: 44px; height: 44px;' })
                         )
                     ),
-                    /* ----------------------------------------------------------- */
+                    ----------------------------------------------------------- */
                     $('<figcaption/>')
                 )
                 .prependTo(p);
@@ -467,22 +467,23 @@ danah.u = {
             danah.c.li({ c: 'd_comment_feed_list_item' })
                 .append(
                     danah.c.article({ c: 'd_comment_feed_item' })
+                    .html('')
                     .append(
                         danah.c.p({ c: 'd_comment_feed_item_content' })
                         .append(
-                            danah.c.a({ hr: '#', c: 'd_comment_feed_item_content__author' })
+                            danah.c.a({ hr: '#', c: 'd_comment_feed_item_content_author' })
                             .append(
-                                danah.c.img({ c: 'd_comment_feed_item_content__author_image', sr: $i + '/danah/profile.jpeg' }),
-                                danah.c.span({ c: 'd_comment_feed_item_content__author_name', t: this.i })
+                                danah.c.img({ c: 'd_comment_feed_item_content_author_image', sr: $i + '/danah/profile.jpeg' }),
+                                danah.c.span({ c: 'd_comment_feed_item_content_author_name', t: this.i })
                             ),
                             danah.c.span({ c: 'd_comment_feed_item_content_content', t: this.c })
                         ),
                         $('<footer/>')
                         .addClass('d_comment_feed_item_footer')
                         .append(
-                    		$('<time/>').addClass('d_comment_feed_item__d_footer__time').append(this.d),
+                    		$('<time/>').addClass('d_comment_feed_item_footer_time').append(this.d),
                     		// 유저 정보 있을경우 $.type($.cookie("userid")) === 'undefined' ? '' : 
-                    		danah.c.button({c: 'comment-feed__item__footer__delete-btn'}).text('삭제')
+                    		danah.c.button({c: 'd_comment_feed_item_footer_delete_btn'}).text('삭제')
                             // like 검토중
                         )
                     )
@@ -491,7 +492,7 @@ danah.u = {
         return p;
     },
     p: d => {
-        const p = danah.c.ul({ c: 'list-paginator' });
+        const p = danah.c.ul({ c: 'd_list_paginator' });
         let startPage = 1;
         let endPage = 5;
         let pageNum = 1;
@@ -500,19 +501,19 @@ danah.u = {
         for (let i = startPage - 1; i <= endPage + 1; i++) {
             danah.c.li({})
                 .append(
-                    danah.c.a({
+                    danah.c.button({
                         c: (startPage - 1 == i) ?
-                            'list-paginator__prev' : (endPage + 1 == i) ?
-                            'list-paginator__next' : 'list-paginator__page',
-                        s: 'border: 1px solid #DCDCDC; border-radius: 5px; width: 26px; height: 26px; position: absolute; text-align: center; color: inherit;'
+                            'd_list_paginator_prev' : (endPage + 1 == i) ?
+                            'd_list_paginator_next' : 'd_list_paginator_page d_sm',
                     })
-                    .addClass((pageNum == i) ? 'selectd' : '')
-                    .removeClass((pageNum != i) ? 'selectd' : '')
-                    .html(
+                    .attr({style: ((startPage - 1 == i) || (endPage + 1 == i))? '': ''})
+                    .addClass(pageNum == i ? 'selectd' : '')
+                    .removeClass(pageNum != i ? 'selectd' : '')
+                    .append(
                         (startPage - 1 == i) && !existPre ?
-                        danah.c.i({ c: 'fas fa-chevron-left', s: 'font-size: 15px; color: rgba(204, 82, 0, 0.7);vertical-align: middle;' }) :
+                        danah.c.i({ c: 'fas fa-chevron-left'}) :
                         (endPage + 1 == i) && existNext ?
-                        danah.c.i({ c: 'fas fa-chevron-right', s: 'font-size: 15px; color: rgba(204, 82, 0, 0.7);vertical-align: middle;' }) :
+                        danah.c.i({ c: 'fas fa-chevron-right'}) :
                         i
                     )
                 )
