@@ -104,6 +104,11 @@ div .txtcw__ryu{
     font-size: 2em;
 }
 
+/*스크롤*/
+#ctnerb__st{
+	position: relative;
+}
+
 
 /* The switch - the box around the slider */
 .material-switch > input[type="checkbox"] {
