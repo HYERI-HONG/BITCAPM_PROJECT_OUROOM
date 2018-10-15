@@ -8,6 +8,13 @@ app =(()=>{
 	};
 	return {init : init};
 })();
+app.service ={
+	lobby : ()=>{
+		$('<main/>').addClass('main').attr({id:"main"}).appendTo($('#content'));
+		$('<section>').addClass('main_section_banner').attr({id:"main_section_banner"}).appendTo($('#main'));
+		
+	}
+};
 app.router = {
 		init : x=>{
 			console.log('step2 : app.router.init 진입'+x);
@@ -24,18 +31,23 @@ app.router = {
 			$.when(
 					$.getScript($.script()+'/nav.js'),
 					$.getScript($.script()+'/content.js'),
-					$.getScript($.script()+'/footer.js'),
+					/*$.getScript($.script()+'/footer.js'),*/
 					$.Deferred(y=>{
 						$(y.resolve);
 					})
 				).done(x=>{
 						$('#wrapper').html(navUI()
 								+contentUI()
-								+footerUI()
+								/*+footerUI()*/
 						);
 						console.log(' when done 로드성공');
-						console.log(' when done 로드성공');
-					    
+						app.service.lobby();
+						
+						$('#logo').click(e=>{
+							e.preventDefault();
+							app.router.home();
+							
+                        });
 						$('#board_btn').click(e=>{
 							e.preventDefault();
 							$('#h_search_btn').attr({ style: "visibility: visible;font-size:25px; margin-bottom:9px; vertical-align: bottom; margin-left:10px;" });
@@ -63,6 +75,12 @@ app.router = {
 						 $('#join_btn').click(e=>{
 							e.preventDefault();
 							app.permission.add();
+						 });
+						 $('#h_cart_btn').click(e=>{
+							$.getScript($.script()+'/jun.js',()=>{
+								e.preventDefault();
+								jun.main.cart();
+							});
 						 });
 				})
 				.fail(x=>{console.log(' when fail 로드실패');})
