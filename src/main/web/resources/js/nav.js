@@ -1,7 +1,7 @@
 function navUI() {
 	return'<div id="h_navigation" style="height:77px">' 
 	+'<div id="h_navigation_primary">'
-	+'<img src="'+$.img()+'/hyeri/logo.png">'
+	+'<img src="'+$.img()+'/hyeri/logo.png" id="logo">'
 	+'<span id="board_btn" class="h_nav_left">커뮤니티</span>'
 	+'<span id="store_btn" class="h_nav_left">스토어</span>'
 	+'<span id="statics_btn" class="h_nav_left" style="margin-right : 600px">통계</span>'

@@ -34,8 +34,12 @@ app.router = {
 								+footerUI()
 						);
 						console.log(' when done 로드성공');
-						console.log(' when done 로드성공');
 					    
+						$('#logo').click(e=>{
+							e.preventDefault();
+							app.router.home();
+							
+                        });
 						$('#board_btn').click(e=>{
 							e.preventDefault();
 							$('#h_search_btn').attr({ style: "visibility: visible;font-size:25px; margin-bottom:9px; vertical-align: bottom; margin-left:10px;" });
