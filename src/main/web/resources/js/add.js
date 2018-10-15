@@ -37,7 +37,7 @@ function addUI() {
 	                        +'<input class="form-control" required="required" type="text" id="nickname">'
 	+'                    </div>'
 	+'					</form></section>'
-	+'        <button id="join_form_btn" class="je_sign-in-form__form__submit btn je_btn-priority" type="submit" form="new_normal_user">'
+	+'        <button id="add_submit_btn" class="je_sign-in-form__form__submit btn je_btn-priority" type="submit" form="new_normal_user">'
 	+'            회원가입하기'
 	+'        </button>'
 	+'        <p id="has-account">이미 아이디가 있으신가요?&nbsp<a class="je_bold underline" href="/users/sign_in">로그인</a></p>'
