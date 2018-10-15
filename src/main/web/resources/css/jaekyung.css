@@ -49,6 +49,11 @@ div .txtcw__ryu{
 	border: none; 
 	border-top: solid .25rem;
 }
+.txthr35__ryu{
+	max-width: 35rem ;
+	border: none; 
+	border-top: solid .25rem;
+}
 .txthr40__ryu{
 	max-width: 40rem ;
 	border: none; 

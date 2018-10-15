@@ -46,7 +46,9 @@ jaekyung.main={//메인페이지
                      (jaekyung.main.vst()).appendTo(d);
                      (jaekyung.main.sba()).appendTo(d);
                      (jaekyung.main.ctgr1()).appendTo(d);
-                     (jaekyung.main.ctgrg()).appendTo(d);
+                     (jaekyung.main.mbr()).appendTo(d);
+                     (jaekyung.main.abba()).appendTo(d);
+                     (jaekyung.main.vbt()).appendTo(d);
                      return d;
               },
               ftr:()=>{
@@ -276,46 +278,153 @@ jaekyung.main={//메인페이지
             	  );
             	  return ctgr2;
               },
-              ctgrg:()=>{
-            	  let ctgrg = $('<div />');
-            	  let ctgrga = $('<div />');
-            	  let ctgrgh = $('<div />');
-            	  let ctgrgc = $('<div />');
-            	  let ctgrgco = $('<div />');
-            	  let ctgrgct = $('<div />');
-            	  ctgrg.attr({style:"background-color:rgba(204, 82, 0, 0.25)"});
-            	  ctgrga.addClass('container compogap__ryu').appendTo(ctgrg);
+              mbr:()=>{
+            	  let mbr = $('<div />');
+            	  let mbra = $('<div />');
+            	  let mbrh = $('<div />');
+            	  let mbrc = $('<div />');
+            	  let mbrco = $('<div />');
+            	  let mbrct = $('<div />');
+            	  mbr.attr({style:"background-color:rgba(204, 82, 0, 0.25)"});
+            	  mbra.addClass('container compogap__ryu').appendTo(mbr);
             	  $('<div />').append(	
-            			  ctgrgh.addClass("txtcw__ryu text-center").append(
-            					  $('<h1 />').append($('<strong>').html("카테고리 별 매출 통계")),
-            					  $('<hr />').addClass('txthr40__ryu'),
+            			  mbrh.addClass("txtcw__ryu text-center").append(
+            					  $('<h1 />').append($('<strong>').html("가입자 통계")),
+            					  $('<hr />').addClass('txthr20__ryu'),
             					  $('<span aria-hidden="true" />').addClass('glyphicon glyphicon-certificate')
             			  )
-            	  ).appendTo(ctgrga)
-            	  ctgrgc.appendTo(ctgrga);
-            	  ctgrgco.appendTo(ctgrgc);
-            	  ctgrgco.addClass("row-fluid");
+            	  ).appendTo(mbra)
+            	  mbrc.appendTo(mbra);
+            	  mbrco.addClass("row-fluid ").appendTo(mbrc);
             	  $('<div />').addClass('col-sm-6').append(
             			  $('<div />').attr({style:"border:1px solid"}).addClass('col-sm-12 bgcw__ryu').append(
             					  $('<img src="'+$.img()+'/jaekyung/11.PNG" />').addClass("img-responsive center-block ")
             			  )
-            	  ).appendTo(ctgrgco);
+            	  ).appendTo(mbrco);
             	  $('<div />').addClass('col-sm-6').append(
             			  $('<div />').attr({style:"border:1px solid"}).addClass('col-sm-12 bgcw__ryu').append(
             					  $('<img src="'+$.img()+'/jaekyung/12.PNG" />').addClass("img-responsive center-block ")
             			  )
-            	  ).appendTo(ctgrgco);
-            	              	  
-            	  return ctgrg;
-              },
-              mbr:()=>{
-            	  
+            	  ).appendTo(mbrco);
+            	  mbrct.appendTo(mbrc);
+            	  mbrct.addClass('row-fluid');
+            	  mbrct.addClass("margint20__ryu").appendTo(mbrc);
+            	  let r ={list:['순위','카테고리','총 매출액','총 판매량','매출 점유율']};
+            	  let rr =[{x1:'1',x2:'651234명',x3:'6548명',x4:'321명', x5:'16.3%'},{x1:'2',x2:'651234명',x3:'6548명',x4:'321명', x5:'16.3%'},{x1:'3',x2:'651234명',x3:'6548명',x4:'321명', x5:'16.3%'},{x1:'4',x2:'651234명',x3:'6548명',x4:'321명', x5:'16.3%'},{x1:'5',x2:'651234명',x3:'6548명',x4:'321명', x5:'16.3%'}];
+            	  let t = $('<table />');
+            	  let th = $('<thead />');
+            	  let tb = $('<tbody />');
+            	  let tr = $('<tr />');
+            	  let tp = $('<p />');
+            	  mbrct.addClass("row-fluid").append(
+            			  $('<div />').attr({style:" padding: 20px 40px 20px 40px"}).addClass("col-sm-12  btb1__ryu borderG__ryu margint20__ryu").append(
+            					  tp,
+            					  t.attr({style:"border-top:1px solid; border-bottom:1px solid"}).addClass("table table-striped table-hover borderG__ryu")
+            			  )
+            	  );
+            	  tp.append(
+            			  $('<label />').html('<strong>상세데이터 열기 &nbsp;&nbsp;</strong> <div class="material-switch pull-right"><input id="mbrDtSwitch" name="mbrDtSwitch" type="checkbox"/><label for="mbrDtSwitch" class="label-warning"></label></div>'
+        				  )
+            	  );
+            	  th.appendTo(t);
+            	  tr.appendTo(th);
+            	  $.each(r.list,(i,v)=>{
+	            		$('<th />').addClass("text-center").html(v).appendTo(tr) 
+            	  });
+            	  tb.appendTo(t);
+            	  $(rr).each(function(i){
+            		  $('<tr />').addClass("text-center").append(
+            				  $('<td />').attr('width','10%').html(this.x1),
+            				  $('<td />').attr('width','25%').html(this.x2),
+            				  $('<td />').attr('width','30%').html(this.x3),
+            				  $('<td />').attr('width','20%').html(this.x4),
+            				  $('<td />').attr('width','15%').html(this.x5)
+            		  ).appendTo(tb);
+            	  });
+            	  return mbr;
               },
               abba:()=>{
-            	  
+            	  let abba = $('<div />');
+            	  let abbaa = $('<div />');
+            	  let abbah = $('<div />');
+            	  let abbac = $('<div />');
+            	  let abbaco = $('<div />');
+            	  abba.attr({style:"background-color: #FFFFFF"});
+            	  abbaa.addClass("container compogap__ryu").appendTo(abba);
+            	  $('<div />').append(
+            			  abbah.addClass("text-center").append(
+                    			  $('<h1 />').append($('<strong>').attr({style:"color:#4d4d4d;"}).html("연령 대비 평균 구매액 통계")),
+                    			  $('<hr />').addClass('txthr45__ryu'),
+                    			  $('<span aria-hidden="true" />').attr({style:"color:#4d4d4d;"}).addClass('glyphicon glyphicon-certificate')
+                    	  )
+            	  ).appendTo(abbaa);
+            	  abbac.attr({style:"margin-top:40px"}).appendTo(abbaa);
+            	  abbaco.appendTo(abbac);
+            	  abbaco.addClass("row-fluid").append(
+            			  $('<div />').addClass("col-sm-12 btb1__ryu borderG__ryu").append(
+            					$('<img src="'+$.img()+'/jaekyung/13.PNG" />').addClass("img-responsive center-block margintb15__ryu")	  
+            			  )       			  
+            	  );
+            	  return abba;
               },
-              ubt:()=>{
-            	  
+              vbt:()=>{
+            	  let vbt = $('<div />');
+            	  let vbta = $('<div />');
+            	  let vbth = $('<div />');
+            	  let vbtc = $('<div />');
+            	  let vbtco = $('<div />');
+            	  let vbtct = $('<div />');
+            	  vbt.attr({style:"background-color:rgba(204, 82, 0, 0.25)"});
+            	  vbta.addClass('container compogap__ryu').appendTo(vbt);
+            	  $('<div />').append(	
+            			  vbth.addClass("txtcw__ryu text-center").append(
+            					  $('<h1 />').append($('<strong>').html("시간 별 방문자 통계")),
+            					  $('<hr />').addClass('txthr35__ryu'),
+            					  $('<span aria-hidden="true" />').addClass('glyphicon glyphicon-certificate')
+            			  )
+            	  ).appendTo(vbta)
+            	  vbtc.appendTo(vbta);
+            	  vbtco.addClass("row-fluid btb1__ryu").appendTo(vbtc);
+    			  $('<div />').attr({style:"border:1px solid"}).addClass('col-sm-12 bgcw__ryu').append(
+    					  $('<img src="'+$.img()+'/jaekyung/14.PNG" />').addClass("img-responsive center-block ")
+            	  ).appendTo(vbtco);
+            	  vbtct.appendTo(vbtc);
+            	  vbtct.addClass("margint20__ryu").appendTo(vbtc);
+            	  let r ={list:['시간','총 방문자',' 남성 방문자 ',' 여성 방문자 ','성비']};
+            	  let rr =[{x1:'0시',x2:'10029 명',x3:'3742 명',x4:'6387 명', x5:'37% : 63%'},{x1:'1시',x2:'651234명',x3:'6548명',x4:'321명', x5:'16.3%'},{x1:'2시',x2:'651234명',x3:'6548명',x4:'321명', x5:'16.3%'},{x1:'3시',x2:'651234명',x3:'6548명',x4:'321명', x5:'16.3%'},{x1:'4시',x2:'651234명',x3:'6548명',x4:'321명', x5:'16.3%'}];
+            	  let t = $('<table />');
+            	  let th = $('<thead />');
+            	  let tb = $('<tbody />');
+            	  let tr = $('<tr />');
+            	  let tp = $('<p />');
+            	  vbtct.addClass("row-fluid").append(
+            			  $('<div />').attr({style:" padding: 20px 40px 20px 40px"})
+            			  	.addClass("col-sm-12  btb1__ryu borderG__ryu margint20__ryu").append(
+            					  tp,
+            					  t.attr({style:"border-top:1px solid; border-bottom:1px solid"})
+            					  	.addClass("table table-striped table-hover borderG__ryu")
+            			  )
+            	  );
+            	  tp.append(
+            			  $('<label />').html('<strong>상세데이터 열기 &nbsp;&nbsp;</strong> <div class="material-switch pull-right"><input id="vbtDtSwitch" name="vbtDtSwitch" type="checkbox"/><label for="vbtDtSwitch" class="label-warning"></label></div>'
+        				  )
+            	  );
+            	  th.appendTo(t);
+            	  tr.appendTo(th);
+            	  $.each(r.list,(i,v)=>{
+	            		$('<th />').addClass("text-center").html(v).appendTo(tr) 
+            	  });
+            	  tb.appendTo(t);
+            	  $(rr).each(function(i){
+            		  $('<tr />').addClass("text-center").append(
+            				  $('<td />').attr('width','10%').html(this.x1),
+            				  $('<td />').attr('width','30%').html(this.x2),
+            				  $('<td />').attr('width','20%').html(this.x3),
+            				  $('<td />').attr('width','20%').html(this.x4),
+            				  $('<td />').attr('width','20%').html(this.x5)
+            		  ).appendTo(tb);
+            	  });
+            	  return vbt;
               },
               cbg:()=>{
                     			
