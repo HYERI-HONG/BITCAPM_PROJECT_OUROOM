@@ -8,6 +8,13 @@ app =(()=>{
 	};
 	return {init : init};
 })();
+app.service ={
+	lobby : ()=>{
+		$('<main/>').addClass('main').attr({id:"main"}).appendTo($('#content'));
+		$('<section>').addClass('main_section_banner').attr({id:""});
+		
+	}
+};
 app.router = {
 		init : x=>{
 			console.log('step2 : app.router.init 진입'+x);
@@ -24,17 +31,18 @@ app.router = {
 			$.when(
 					$.getScript($.script()+'/nav.js'),
 					$.getScript($.script()+'/content.js'),
-					$.getScript($.script()+'/footer.js'),
+					/*$.getScript($.script()+'/footer.js'),*/
 					$.Deferred(y=>{
 						$(y.resolve);
 					})
 				).done(x=>{
 						$('#wrapper').html(navUI()
 								+contentUI()
-								+footerUI()
+								/*+footerUI()*/
 						);
 						console.log(' when done 로드성공');
-					    
+						app.service.lobby();
+						
 						$('#logo').click(e=>{
 							e.preventDefault();
 							app.router.home();
