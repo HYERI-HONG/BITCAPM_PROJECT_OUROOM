@@ -172,6 +172,7 @@ jun.main = {
 	
 		
 	},
+	//12:03 
 	modal:()=>{
 		$.magnificPopup.open({
 			closeBtnInside:true,
