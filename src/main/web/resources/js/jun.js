@@ -150,10 +150,10 @@ jun.main = {
 			}
 		});
 		return false;
-		//...
+		
 		
 	},
-	/////장바구니 새로만듬 
+
 	cart:()=>{
 		
 		$('#content').empty();
