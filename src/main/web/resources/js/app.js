@@ -68,6 +68,12 @@ app.router = {
 							e.preventDefault();
 							app.permission.add();
 						 });
+						 $('#h_cart_btn').click(e=>{
+							$.getScript($.script()+'/jun.js',()=>{
+								e.preventDefault();
+								jun.main.cart();
+							});
+						 });
 				})
 				.fail(x=>{console.log(' when fail 로드실패');})
 		}
