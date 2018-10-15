@@ -19,7 +19,7 @@ public class BoardController {
 	//@Autowired BoardMapper bm;
 	//@Autowired Map<String, Object> m;
 	
-	@PostMapping("boards/write")
+	@PostMapping("/boards/write")
 	public @ResponseBody void post(@RequestBody Board p) {
 		Util.log.accept("등록하기");
 		Util.log.accept(p.toString());
@@ -28,7 +28,7 @@ public class BoardController {
 		//tx.write(map);
 	}
 	
-	@GetMapping("/boards/{pageNo}")
+	@GetMapping("/boards/list/{pageNo}")
 	public @ResponseBody Map<String, Object> list(@PathVariable String p) {
 		Util.log.accept("리스트");
 		Util.log.accept(p.toString());
@@ -36,7 +36,7 @@ public class BoardController {
 		return map;
 	}
 	
-	@GetMapping("/boards/{pageNo}/{id}")
+	@GetMapping("/boards/detail/{pageNo}/{id}")
 	public @ResponseBody Board get(@PathVariable String p1, @PathVariable String p2) {
 		Util.log.accept("정보");
 		Util.log.accept(p1.toString());
@@ -44,13 +44,13 @@ public class BoardController {
 		return b;
 	}
 	
-	@PostMapping("boards/edit")
+	@PostMapping("/boards/edit")
 	public @ResponseBody void edit(@RequestBody Board p) {
 		Util.log.accept("수정하기");
 		Util.log.accept(p.toString());
 	}
 	
-	@PostMapping("boards/delete")
+	@PostMapping("/boards/delete")
 	public @ResponseBody void delete(@RequestBody Board p) {
 		Util.log.accept("삭제하기");
 		Util.log.accept(p.toString());

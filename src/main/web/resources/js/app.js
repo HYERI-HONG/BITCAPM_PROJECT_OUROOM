@@ -37,7 +37,9 @@ app.router = {
 						console.log(' when done 로드성공');
 					    
 						$('#board_btn').click(e=>{
-                            e.preventDefault();
+							e.preventDefault();
+							$('#h_search_btn').attr({ style: "visibility: visible;font-size:25px; margin-bottom:9px; vertical-align: bottom; margin-left:10px;" });
+							$('#h_wirte_btn').attr({ style: "visibility: visible; top:12px; margin-left: -13.5px;" });
                             $.getScript($.script()+'/danah.js', ()=>{
                                 danah.init($.context());
                             });
