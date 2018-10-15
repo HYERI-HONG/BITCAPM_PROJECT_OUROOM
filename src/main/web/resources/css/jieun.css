@@ -61,8 +61,8 @@
 }
 #je_sharebtn{
 	background-color: white;
-	border: 1px solid black;
-	border-radius: 4px;
+	border: 0.5px solid black;
+	border-radius: 10px;
 } 
 .je_manImg{
 	margin-left: auto;
@@ -72,15 +72,17 @@
 .je_sign-in-form__sns__list{
 	text-align: center;
 }
-.carousel-control        { width:  4%; }
-.carousel-control.left,.carousel-control.right {margin-left:15px;background-image:none;}
+.je_carousel-control        { width:  4%; }
+.je_carousel-control.left,.je_carousel-control.right {margin-left:15px;background-image:none;}
 
-.carousel-inner .item.right,.carousel-inner .item.left {transform: translateX(0);}
+.je_carousel-inner .item.right,.je_carousel-inner .item.left {transform: translateX(0);}
 
-.carousel-inner .item.left.active { transform: translateX(-100%);}
-.carousel-inner .item.right.active {transform: translateX(100%);}
-.carousel-inner .item.next {transform: translateX(100%)}
-.carousel-inner .item.prev {transform: translateX(-100%)}
+.je_carousel-inner .je_item.left.active { transform: translateX(-50%);}
+.je_carousel-inner .je_item.right.active {transform: translateX(50%);}
+.je_carousel-inner .je_item.next {transform: translateX(100%)}
+.je_carousel-inner .je_item.prev {transform: translateX(-100%)}
+.je_view1{} 
+
   
 input{
 	width: 100%;	
@@ -88,13 +90,6 @@ input{
     margin: 8px 0;
     box-sizing: border-box; 
 }
-
-/* input{
-	width: 100%;	
-	padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box; 
-} */
 
 #je_input_box{
 	width: 50%;
@@ -110,4 +105,21 @@ input{
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
     color: gray;
+}
+.je_cover_info{
+	font-size: 10px;
+	color: gray;
+}
+#je_icon{
+	
+	color: gray;
+}
+.je_brand_more_btn{
+	width: 100%;
+}
+.je_cover_info{
+	width : 50%;
+}
+.je_div_cover{
+	width: 50%;
 }
