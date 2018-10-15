@@ -23,7 +23,7 @@ jaekyung.main={//메인페이지
                      let d=$('<div />');
                      let dd=$('<div />');
                      let u = $('<ul />');
-                     let ip = ["통계1","통계2","통계3","통계4","통계5"];
+                     let ip = ["요약","방문자","연령별","카테고리별","가입자","구매액","시간별방문자","성별"];
                      d.addClass("container");
                      navc.attr({id:"navc__st",style:"position: fixed; max-width:1140px"})
                      	.addClass("navbar navbar-default navbar-static-top  ").appendTo(d);
