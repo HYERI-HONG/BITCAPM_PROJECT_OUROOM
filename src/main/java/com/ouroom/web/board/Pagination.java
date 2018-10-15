@@ -14,8 +14,8 @@ public class Pagination implements Proxy{
 	totalPage, pageSize, 
 	pageNum, startPage, endPage,
 	startRow, endRow,
-	pre, next;
-	boolean existPre = false, existNext = false;
+	prev, next;
+	boolean existPrev = false, existNext = false;
 
 	@Override
 	public void carraryOut(Object o) {
@@ -31,9 +31,9 @@ public class Pagination implements Proxy{
 		this.endRow = (totalRecode < startRow + recodeSize - 1) 
 										? totalRecode 
 										: pageNum*(recodeSize);
-		this.existPre = (startPage != 1);
+		this.existPrev = (startPage != 1);
 		this.existNext = (endPage < totalPage && startPage != totalPage);
-		this.pre = pageNum > 6 ? 1 : startPage-5;
+		this.prev = pageNum > 6 ? 1 : startPage-5;
 		this.next= endPage+1;
 	}
 
