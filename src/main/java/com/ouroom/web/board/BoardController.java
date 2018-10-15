@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BoardController {
 	static final Logger logger = LoggerFactory.getLogger(BoardController.class); 
-	@Autowired Board b;
+	//@Autowired Board b;
 	//@Autowired BoardMapper bm;
 	//@Autowired Map<String, Object> m;
 	
@@ -42,7 +42,7 @@ public class BoardController {
 		Util.log.accept("정보");
 		Util.log.accept(p1.toString());
 		Util.log.accept(p2.toString());
-		return b;
+		return null;
 	}
 	
 	@PostMapping("/boards/edit")
