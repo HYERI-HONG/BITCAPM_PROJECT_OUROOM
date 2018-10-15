@@ -9,11 +9,23 @@
 	margin-top:15px;
 	margin-bottom:15px;
 }
+.mb0__ryu{
+	margin-bottom:0px ;
+}
+.mb15__ryu{
+	margin-bottom:15px;
+}
+.ml15__ryu{
+	margin-left:15px;
+}
 .compogap__ryu {
 	padding-top : 90px;
 	padding-bottom : 90px;
 }
 .pa0__ryu{
+	padding:0px!important;
+}
+.pr0__ryu{
 	padding:0px!important;
 }
 div .bgcw__ryu{

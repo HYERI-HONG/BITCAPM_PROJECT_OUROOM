@@ -77,8 +77,8 @@ jaekyung.main={//메인페이지
             		$('<div />').attr({style:"border:1px solid;"}).addClass("col-sm-6 bgcw__ryu").append(
             			$('<img src="'+$.img()+'/jaekyung/1.PNG" />').addClass("img-responsive center-block")
             		),
-            		$('<div />').addClass("col-sm-6 pr0__ryu").append(
-            				$('<div />').addClass("col-sm-12 ").append(
+            		$('<div />').addClass("col-sm-6 pr0__ryu ml15__ryu").append(
+            				$('<div />').addClass("col-sm-12 pr0__ryu ").append(
             				$('<div />').attr({style:"border:1px solid "}).addClass("col-sm-12 bgcw__ryu pa0__ryu").append(
             						$('<img src="'+$.img()+'/jaekyung/2.PNG" />').addClass("img-responsive center-block")
             				),
@@ -87,13 +87,13 @@ jaekyung.main={//메인페이지
             						$('<div />').addClass("col-sm-3 ").html("<h5>게시글 조회수</h5>")
             				)
             				),
-            				$('<div />').addClass("col-sm-12 bgcw__ryu").append(
+            				$('<div />').addClass("col-sm-12 pr0__ryu").append(
             				$('<div />').attr({style:"border:1px solid"}).addClass("col-sm-12 bgcw__ryu").append(
             						$('<img src="'+$.img()+'/jaekyung/3.PNG" />').addClass("img-responsive center-block")
             				),
-            				$('<div />').attr({style:"border:1px solid;margin-bottom:15px ;border-top:0px ;display:flex"}).addClass("col-sm-12 bgcw__ryu pa0__ryu").append(
+            				$('<div />').attr({style:"border:1px solid ;border-top:0px ;display:flex"}).addClass("col-sm-12 bgcw__ryu pa0__ryu mb0__ryu").append(
             						$('<div />').addClass("col-sm-2").append($('<span />').attr({style:"color:red"}).html("<h4><strong>TODAY</strong></h4>")),
-            						$('<div />').addClass("col-sm-3 ").html("<h5>신규 가입자</h5>")
+            						$('<div />').addClass("col-sm-3  ").html("<h5>신규 가입자</h5>")
             				))
             		)
             	  );
