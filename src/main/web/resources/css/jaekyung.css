@@ -1,74 +1,140 @@
-.margintop20__ryu {
+.margint20__ryu {
 	margin-top : 20px;
-}
-.paddingside0__ryu {
-	padding-right : 0px;
-	padding-left : 0px;
 }
 .marginside0__ryu {
 	margin-right : 0px;
 	margin-left : 0px;
 }
-.marginstatgap__ryu {
-	margin-top : 120px;
-	margin-bottom : 50px;
+.margintb15__ryu{
+	margin-top:15px;
+	margin-bottom:15px;
 }
+.compogap__ryu {
+	padding-top : 90px;
+	padding-bottom : 90px;
+}
+.pa0__ryu{
+	padding:0px!important;
+}
+div .bgcw__ryu{
+	background-color:white;
+	
+}
+div .txtcw__ryu{
+	color:white;
+}
+ .txthr10__ryu{
+	max-width: 10rem ;
+	border: none; 
+	border-top: solid .25rem;
+}
+
+ .txthr15__ryu{
+	max-width: 15rem ;
+	border: none; 
+	border-top: solid .25rem;
+}
+.txthr20__ryu{
+	max-width: 20rem ;
+	border: none; 
+	border-top: solid .25rem;
+}
+.txthr25__ryu{
+	max-width: 25rem ;
+	border: none; 
+	border-top: solid .25rem;
+}
+.txthr30__ryu{
+	max-width: 30rem ;
+	border: none; 
+	border-top: solid .25rem;
+	/* 조심하세요 형님 ;; */
+}
+.txthr35__ryu{
+	max-width: 35rem ;
+	border: none; 
+	border-top: solid .25rem;
+}
+.txthr40__ryu{
+	max-width: 40rem ;
+	border: none; 
+	border-top: solid .25rem;
+}
+.txthr45__ryu{
+	max-width: 45rem ;
+	border: none; 
+	border-top: solid .25rem;
+}
+.pr0__ryu{
+	padding-right:0px !important;
+}
+.borderG__ryu{
+	border-color:#8c8c8c !important;
+}
+/* 네비게이션 영역 */
+/* 전체틀  */
+
+.btb1__ryu {
+	border:none;
+	border-top:1px solid ;
+	border-bottom:1px solid ;
+}
+
+
+/*아이콘*/
+.glyphicon-certificate{
+	position: relative;
+    top: -1.12em;
+    display: inline-block;
+    padding: 0 .25em;
+    content: '\f005';
+    font-weight: 900;
+    font-size: 2em;
+}
+
 
 /* The switch - the box around the slider */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
+.material-switch > input[type="checkbox"] {
+    display: none;   
 }
 
-/* Hide default HTML checkbox */
-.switch input {display:none;}
-
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+.material-switch > label {
+    cursor: pointer;
+    height: 0px;
+    position: relative; 
+    width: 40px;  
 }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+.material-switch > label::before {
+    background: rgb(0, 0, 0);
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    content: '';
+    height: 16px;
+    margin-top: -8px;
+    position:absolute;
+    opacity: 0.3;
+    transition: all 0.4s ease-in-out;
+    width: 40px;
 }
-
-input:checked + .slider {
-  background-color: #2196F3;
+.material-switch > label::after {
+    background: rgb(255, 255, 255);
+    border-radius: 16px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    content: '';
+    height: 24px;
+    left: -4px;
+    margin-top: -8px;
+    position: absolute;
+    top: -4px;
+    transition: all 0.3s ease-in-out;
+    width: 24px;
 }
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+.material-switch > input[type="checkbox"]:checked + label::before {
+    background: inherit;
+    opacity: 0.5;
 }
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
+.material-switch > input[type="checkbox"]:checked + label::after {
+    background: inherit;
+    left: 20px;
 }
