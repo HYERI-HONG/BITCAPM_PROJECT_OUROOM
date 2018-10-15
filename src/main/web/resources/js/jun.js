@@ -154,7 +154,6 @@ jun.main = {
 		
 	},
 	/////장바구니 새로만듬 
-	//고생이많어
 	cart:()=>{
 		
 		$('#content').empty();
@@ -173,7 +172,6 @@ jun.main = {
 	
 		
 	},
-	//12:03 
 	modal:()=>{
 		$.magnificPopup.open({
 			closeBtnInside:true,
