@@ -49,6 +49,7 @@ jaekyung.main={//메인페이지
                      (jaekyung.main.mbr()).appendTo(d);
                      (jaekyung.main.abba()).appendTo(d);
                      (jaekyung.main.vbt()).appendTo(d);
+                     (jaekyung.main.cbg()).appendTo(d);
                      return d;
               },
               ftr:()=>{
@@ -77,20 +78,23 @@ jaekyung.main={//메인페이지
             			$('<img src="'+$.img()+'/jaekyung/1.PNG" />').addClass("img-responsive center-block")
             		),
             		$('<div />').addClass("col-sm-6 pr0__ryu").append(
+            				$('<div />').addClass("col-sm-12 ").append(
             				$('<div />').attr({style:"border:1px solid "}).addClass("col-sm-12 bgcw__ryu pa0__ryu").append(
             						$('<img src="'+$.img()+'/jaekyung/2.PNG" />').addClass("img-responsive center-block")
             				),
             				$('<div />').attr({style:"border:1px solid;margin-bottom:15px ;border-top:0px"}).addClass("col-sm-12 bgcw__ryu pa0__ryu").append(
             						$('<div />').addClass("col-sm-2").append($('<span />').attr({style:"color:red"}).html("<h4><strong>TODAY</strong></h4>")),
             						$('<div />').addClass("col-sm-3 ").html("<h5>게시글 조회수</h5>")
+            				)
             				),
+            				$('<div />').addClass("col-sm-12 bgcw__ryu").append(
             				$('<div />').attr({style:"border:1px solid"}).addClass("col-sm-12 bgcw__ryu").append(
             						$('<img src="'+$.img()+'/jaekyung/3.PNG" />').addClass("img-responsive center-block")
             				),
             				$('<div />').attr({style:"border:1px solid;margin-bottom:15px ;border-top:0px ;display:flex"}).addClass("col-sm-12 bgcw__ryu pa0__ryu").append(
             						$('<div />').addClass("col-sm-2").append($('<span />').attr({style:"color:red"}).html("<h4><strong>TODAY</strong></h4>")),
             						$('<div />').addClass("col-sm-3 ").html("<h5>신규 가입자</h5>")
-            				)
+            				))
             		)
             	  );
             	  smmct.appendTo(smmc);
@@ -295,7 +299,7 @@ jaekyung.main={//메인페이지
             			  )
             	  ).appendTo(mbra)
             	  mbrc.appendTo(mbra);
-            	  mbrco.addClass("row-fluid ").appendTo(mbrc);
+            	  mbrco.attr({style:"display:flex"}).addClass("row-fluid ").appendTo(mbrc);
             	  $('<div />').addClass('col-sm-6').append(
             			  $('<div />').attr({style:"border:1px solid"}).addClass('col-sm-12 bgcw__ryu').append(
             					  $('<img src="'+$.img()+'/jaekyung/11.PNG" />').addClass("img-responsive center-block ")
@@ -427,7 +431,31 @@ jaekyung.main={//메인페이지
             	  return vbt;
               },
               cbg:()=>{
-                    			
+            	  let cbg = $('<div />');
+            	  let cbga = $('<div />');
+            	  let cbgh = $('<div />');
+            	  let cbgc = $('<div />');
+            	  let cbgco = $('<div />');
+            	  cbg.attr({style:"background-color: #FFFFFF"});
+            	  cbga.addClass("container compogap__ryu").appendTo(cbg);
+            	  $('<div />').append(
+            			  cbgh.addClass("text-center").append(
+                    			  $('<h1 />').append($('<strong>').attr({style:"color:#4d4d4d;"}).html("성별 카테고리 통계")),
+                    			  $('<hr />').addClass('txthr35__ryu'),
+                    			  $('<span aria-hidden="true" />').attr({style:"color:#4d4d4d;"}).addClass('glyphicon glyphicon-certificate')
+                    	  )
+            	  ).appendTo(cbga);
+            	  cbgc.attr({style:"margin-top:40px"}).appendTo(cbga);
+            	  cbgco.appendTo(cbgc);
+            	  cbgco.addClass("row-fluid");
+    			  $('<div />').addClass("col-sm-7 btb1__ryu borderG__ryu").append(
+    					$('<img src="'+$.img()+'/jaekyung/13.PNG" />').addClass("img-responsive center-block margintb15__ryu")	  
+    			  ).appendTo(cbgco);
+    			  $('<div />').addClass("col-sm-4 col-sm-offset-1 btb1__ryu borderG__ryu").append(
+    					  $('<img src="'+$.img()+'/jaekyung/13.PNG" />').addClass("img-responsive center-block margintb15__ryu")	  
+    			  ).appendTo(cbgco);
+    			  
+            	  return cbg;
               }
 }
 jaekyung.router={
