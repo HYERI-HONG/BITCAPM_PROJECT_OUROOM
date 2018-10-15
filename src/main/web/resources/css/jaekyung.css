@@ -9,10 +9,28 @@
 	margin-right : 0px;
 	margin-left : 0px;
 }
-.marginstatgap__ryu {
-	margin-top : 120px;
-	margin-bottom : 50px;
+.compogap__ryu {
+	padding-top : 90px;
+	padding-bottom : 90px;
 }
+div .bgcw__ryu{
+	background-color:white;
+	
+}
+div .txtcw__ryu{
+	color:white;
+	text-align: center;
+}
+
+ .txthr__ryu{
+	max-width: 15rem ;
+	border: none; 
+	border-top: solid .25rem;
+}
+
+
+
+
 
 
 
@@ -74,3 +92,4 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
