@@ -11,7 +11,7 @@ app =(()=>{
 app.service ={
 	lobby : ()=>{
 		$('<main/>').addClass('main').attr({id:"main"}).appendTo($('#content'));
-		$('<section>').addClass('main_section_banner').attr({id:""});
+		$('<section>').addClass('main_section_banner').attr({id:"main_section_banner"}).appendTo($('#main'));
 		
 	}
 };
