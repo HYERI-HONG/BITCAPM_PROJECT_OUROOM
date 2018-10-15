@@ -1,5 +1,12 @@
+hr.border-gray-light-more {
+    border-top: solid 1px #acacac;
+}
 #je_font_2em{
-	font-size: 2em;
+	font-size: 1.5em;
+	 font-weight: bold;
+}
+.je_bold {
+    font-weight: bold;
 }
 .je_sign-in-form__action__entry:hover{
 	text-decoration: underline;
@@ -19,7 +26,6 @@
     box-sizing: border-box;
     text-align: left;
 }
-
 .je_sign-in-form__form__input{
 	display: block;
     width: 100%;
@@ -59,6 +65,11 @@
 .je_btn-priority:hover {
 	background-color: #ff8000;
 }
+#je_sharebtn{
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 4px;
+} 
 .je_manImg{
 	margin-left: auto;
 	 margin-right: auto; 
@@ -67,23 +78,25 @@
 .je_sign-in-form__sns__list{
 	text-align: center;
 }
-/* input{
-	width: 100%;	
-	padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box; 
-} */
+
+.carousel-control        { width:  4%; }
+.carousel-control.left,.carousel-control.right {margin-left:15px;background-image:none;}
+.carousel-inner .item.right,.carousel-inner .item.left {transform: translateX(0);}
+.carousel-inner .item.left.active { transform: translateX(-100%);}
+.carousel-inner .item.right.active {transform: translateX(100%);}
+.carousel-inner .item.next {transform: translateX(100%)}
+.carousel-inner .item.prev {transform: translateX(-100%)}
+  
+
 #je_input_box{
 	width: 50%;
 }
-.je_bold {
-    font-weight: bold;
-}
+
 .p1{
 	font-size:13px;
     display: block;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
+    -webkit-margin-before: 0.25em;
+    -webkit-margin-after: 0.25em;
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
     color: gray;
