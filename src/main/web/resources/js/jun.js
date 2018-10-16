@@ -77,20 +77,20 @@ jun.main = {
 			});
 		});
 		
-		//glyphicon glyphicon-heart 색깔
+		//glyphicon glyphicon-shopping-cart 색깔
 		let div3=$('<div/>').attr({class:'kj_icon_div'}).appendTo(div2);
 		
-		$('<span/>').attr({style:"cursor:pointer"}).addClass('glyphicon glyphicon-shopping-cart').appendTo(div3).click(e=>{
+		$('<span/>').attr({style:"cursor:pointer"}).addClass('glyphicon glyphicon-shopping-cart kj_cart_icon').appendTo(div3).click(e=>{
 			jun.main.modal();
 		});
-		$('<span/>').attr({style:"margin:5px;cursor:pointer"}).addClass('glyphicon glyphicon-heart-empty').appendTo(div3).click(e=>{
+		$('<span/>').attr({style:"margin:5px;cursor:pointer"}).addClass('glyphicon glyphicon-heart-empty kj_like_icon').appendTo(div3).click(e=>{
 			alert("좋아요");
 		});
-		
+		//<i class="far fa-cart-arrow-down"></i>
 		let div4=$('<div/>').attr("style","margin:5px").appendTo(div2);
-		$('<div/>').html(" 상품명:").appendTo(div4);
-		$('<div/>').html(" 가격:").appendTo(div4);
-		$('<div/>').html(" 20000원[20%]").appendTo(div4);
+		$('<div/>').attr({class:"kj_stroe_item_p"}).html(" 상품명:").appendTo(div4);
+		$('<div/>').attr({class:"kj_stroe_item_p"}).html(" 20000원[20%]").appendTo(div4);
+		$('<div/>').attr({class:"kj_stroe_item_p"}).html(" 무료배송 ").appendTo(div4);
 		
 		}
 		
@@ -99,13 +99,13 @@ jun.main = {
 		
 	},
 	add: ()=>{
-		//모달 추가함
 		$.magnificPopup.open({
 			closeBtnInside:true,
 			closeOnContentClick:false,
 			alignTop: true,
 			fixedBgPos:true,
 			fixedContentPos:false,
+			closeOnBgClick:false,
 			items:{src:	'<div class="white-popup">'
 				+'<div id="kj_create_img_div" class="col-md-5" id="">'
 				+'<img id="kj_create_img" src="'+$.img()+'/jun/ex1.JPG"/><br>'
@@ -157,17 +157,61 @@ jun.main = {
 		
 		$('#content').empty();
 		$('<div/>').attr({id:"kj_cart_div",class:"container"}).appendTo($('#content'));
-		$('<h2/>').html('장바구니').appendTo($('#kj_cart_div'));
-		$('<div/>').attr({id:"kj_cart_item_div"}).appendTo($('#kj_cart_div'));
-		$('<div/>').attr({id:"kj_cart_img_div",class:"col-md-7", style:"border: 1px solid black;"}).appendTo($('#kj_cart_item_div'));
-		$('<div/>').attr({id:"kj_cart_img_div2",class:"col-md-5", style:"border: 1px solid black;"}).appendTo($('#kj_cart_item_div'));
-		$('<div/>').attr({id:"kj_cart_div3"}).appendTo($('#kj_cart_item_div'));
-		$('<button/>').attr({type:"button"}).html("???").appendTo($('#kj_cart_div3'));
-		$('<div/>').attr({id:"kj_tr_img",style:"background-image:url('"+$.img()+"/kj/ex1.JPG');"}).appendTo($('#kj_cart_img_div'));
-		$('<div/>').attr({id:"kj_cart_title"}).html("화이트&블랙 선반행거").appendTo($('#kj_cart_img_div'));
-		$('<div/>').attr({style:"font-size:15px;"}).html("무료 | 일반택배배송").appendTo($('#kj_cart_img_div'));
-		$('<button/>').attr({type:"button",id:""}).html("???").appendTo($('#kj_cart_img_div'));
-		$('<button/>').attr({type:"button"}).html("???").appendTo($('#kj_cart_img_div'));
+		
+	
+		//////왼쪽
+		let arr=[{title:"리브 에밀리 인조가죽 소파",v:1,p:33000}
+				,{title:"시스템 서랍장",v:2,p:21000},
+				 {title:"벤트우드 스툴 ",v:3,p:11900},{title:"벤트우드 스툴 ",v:3,p:11900}]
+		let div1=$('<div/>').attr({class:"col-md-8"}).appendTo($('#kj_cart_div'));
+		$('<h3>').attr({style:"text-align:left;margin-left:25px"}).html('장바구니').appendTo(div1);
+		$.each(arr,(x,y)=>{
+			
+			let div3=$('<div/>').attr({class:"col-md-12",style:"padding:0px;margin-top:30px;"}).appendTo(div1);
+			let div4=$('<div/>').attr({class:"col-md-6",style:"padding:0px"}).appendTo(div3);
+			let div5=$('<div/>').attr({class:"col-md-6 kj_cart_l_border"}).appendTo(div3);
+			let div_c=$('<div/>').attr({class:"col-md-12 kj_cart_l_border"}).appendTo(div4);
+			let div_img=$('<div/>').attr({class:"col-md-4"}).appendTo(div_c);
+			$('<img/>').attr({src:$.img()+"/jun/ex2.JPG"}).appendTo(div_img);
+			let div_cont=$('<div/>').attr({class:"col-md-8",style:"padding:2px;text-align:left"}).appendTo(div_c);
+			$('<div/>').attr({id:"kj_cart_l_title"}).html(y.title).appendTo(div_cont);
+			$('<div/>').attr({id:"kj_cart_l_ship"}).html('무료|일반택배배송').appendTo(div_cont);
+			$('<button/>').attr({class:'kj_cart_btn'}).html("옵션변경").appendTo(div_cont).click(()=>{
+				jun.main.modal();
+			});
+			$('<button/>').attr({class:'kj_cart_btn'}).html("삭제").appendTo(div_cont).click(()=>{
+				confirm("삭제하시겠습니까?");
+			});
+			$('<br>').appendTo(div_cont);
+			$('<button/>').attr({class:'kj_cart_btn2'}).html("바로구매").appendTo(div_cont);
+			
+			let div_c2=$('<div/>').attr({id:"kj_cart_l_div4",class:"col-md-12"}).appendTo(div5);
+			$('<div/>').attr({id:"kj_cart_l_title2", class:"col-md-6 kj_cart_l_t2"}).html(y.title).appendTo(div_c2);
+			$('<div/>').attr({id:"kj_cart_l_v",class:"col-md-3 kj_cart_l_t2"}).html(y.v+"개").appendTo(div_c2);
+			$('<div/>').attr({id:"kj_cart_l_p",class:"col-md-3 kj_cart_l_t2"}).html(y.p+"원").appendTo(div_c2);
+			let div_c3=$('<div/>').attr({class:"col-md-12 kj_cart_l_div3"}).appendTo(div5);
+			$('<div/>').attr({class:"col-md-6 kj_cart_l_c2"}).html("주문금액").appendTo(div_c3);
+			$('<div/>').attr({id:"kj_cart_l_sum",class:"col-md-6 kj_cart_l_c2"}).html(y.v*y.p+"원").appendTo(div_c3);
+			$('<div/>').attr({id:"kj_cart_l_ship2",class:"col-md-12",style:""}).html('무료배송').appendTo(div1);
+		})
+		
+		//////오른쪽
+		let div2=$('<div/>').attr({class:"col-md-2",id:"kj_cart_r_div",}).appendTo($('#kj_cart_div'));
+		let div_r_1=$('<div/>').attr({class:"col-md-12 kj_cart_r_div2"}).appendTo(div2);
+		$('<div/>').attr({class:"col-md-6 kj_cart_r_titles"}).html('총 상품금액').appendTo(div_r_1);
+		$('<div/>').attr({class:"col-md-6 kj_cart_r_conts"}).html('70,000원').appendTo(div_r_1);
+		let div_r_2=$('<div/>').attr({class:"col-md-12 kj_cart_r_div2"}).appendTo(div2);
+		$('<div/>').attr({class:"col-md-6 kj_cart_r_titles"}).html('배송비').appendTo(div_r_2);
+		$('<div/>').attr({class:"col-md-6 kj_cart_r_conts"}).html('0원').appendTo(div_r_2);
+		let div_r_3=$('<div/>').attr({class:"col-md-12 kj_cart_r_div2"}).appendTo(div2);
+		$('<div/>').attr({class:"col-md-6 kj_cart_r_titles"}).html('총 할인금액').appendTo(div_r_3);
+		$('<div/>').attr({class:"col-md-6 kj_cart_r_conts"}).html('-33,100원').appendTo(div_r_3);
+		let div_r_4=$('<div/>').attr({class:"col-md-12 kj_cart_r_div2"}).appendTo(div2);
+		$('<div/>').attr({class:"col-md-6 kj_cart_r_titles"}).html('총 결제금액').appendTo(div_r_4);
+		$('<div/>').attr({class:"col-md-6 kj_cart_r_conts"}).html('36,900원').appendTo(div_r_4);
+		let div_r_5=$('<div/>').attr({class:"col-md-12 kj_cart_r_div2"}).appendTo(div2);
+		$('<button/>').attr({id:"kj_cart_r_buy_btn"}).html("전체 구매").appendTo(div_r_5);
+		
 	
 		
 	},
@@ -178,6 +222,7 @@ jun.main = {
 			alignTop: true,
 			fixedBgPos:true,
 			fixedContentPos:false,
+			closeOnBgClick:false,
 			items:{src:	'<div id="kj_cart_option_modal"><div id="wrap_panel">'
 			    +'<div id="product_information">'
 			        +'<div class="image" style="background-image: url('+$.img()+'/jun/ex2.JPG)"></div>'
@@ -211,7 +256,7 @@ jun.main = {
 			    +'<div class="count_cost" style="display: block;">'
 			        +'<div class="input">'
 			            +'<div id="kj_cart_arrowdown" class="arrow down"></div>'
-			            +'<div class="input"><input id="kj_cart_input"type="number" value="1" name="carted_production[carted_options_attributes][0][count]" id="carted_production_carted_options_attributes_0_count"/></div>'
+			            +'<div class="input"><input id="kj_cart_input" type="number" name="carted_production[carted_options_attributes][0][count]" id="carted_production_carted_options_attributes_0_count"/></div>'
 			            +'<div id="kj_cart_arrowup"class="arrow up"></div></div>'
 			            +'<div class="sum_cost">24,900원</div>'
 			    +'</div>'
@@ -227,8 +272,8 @@ jun.main = {
 			            +'<div class="cost" id="total_cost"><span class="cost">24,900</span><span class="unit">원</span></div>'
 			        +'</div>'
 			        +'<div id="kj_buttons">'
-			            +'<input type="submit" name="commit" value="확인" id="submit" data-disable-with="갱신">'
-			            +'<div id="close_edit">취소</div>'
+			            +'<input type="button" value="취소" id="kj_cart_close" >'
+			            +'<div id="kj_cart_add">확인</div>'
 			        +'</div>'
 			+'</form></div></div>'
 			},
@@ -236,12 +281,29 @@ jun.main = {
 			overflowY:'auto',
 			removalDelay:'0',
 			type:'inline'});
+		
+		var count=1;
+		$('#kj_cart_input').val(count);
+		
 		$('#kj_cart_arrowdown').click(e=>{
-			alert("다운");
-		})
+			if(count>1){
+			count--;
+			$('#kj_cart_input').val(count);
+			}
+		});
 		$('#kj_cart_arrowup').click(e=>{
-			alert("업");
-		})
+			count++;
+			$('#kj_cart_input').val(count);
+		});
+		
+		$('#kj_cart_add').click(e=>{
+			jun.main.cart();
+			$.magnificPopup.close();
+		});
+		$('#kj_cart_close').click(()=>{
+			$.magnificPopup.close();
+		});
+		
 	
 		return false;
 		
