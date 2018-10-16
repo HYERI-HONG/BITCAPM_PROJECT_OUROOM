@@ -514,7 +514,6 @@ jaekyung.main={//메인페이지
                        $('<div />').addClass("col-sm-4 col-sm-offset-1 btb1__ryu borderG__ryu").append(
                                     $('<img src="'+$.img()+'/jaekyung/13.PNG" />').addClass("img-responsive center-block margintb15__ryu")   
                        ).appendTo(cbgco);
-                      
                 return cbg;
               }
 }
