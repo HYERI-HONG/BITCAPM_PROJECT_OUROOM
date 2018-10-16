@@ -103,7 +103,15 @@ div .txtcw__ryu{
     font-weight: 900;
     font-size: 2em;
 }
+/*스크롤업다운*/
+div .div-nav-up{
+	transition: top 0.8s ease-in-out;
 
+출처: http://webdir.tistory.com/481 [WEBDIR]
+}
+.nav-down{
+	    margin-top: 77px;
+}
 /*스크롤*/
 #ctnerb__st{
 	position: relative;

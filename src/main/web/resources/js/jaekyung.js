@@ -14,28 +14,28 @@ jaekyung.main={//메인페이지
                      let ctnerb__st=$('<div />').attr({id:"ctnerb__st"});
                      let ctnerf__st=$('<div />').attr({id:"ctnerf__st"});
                      ctner__st.appendTo('#content').append(
-                            ctnerh__st.attr({style:"height:50px"}),
                             ctnerb__st,
                             ctnerf__st
                      );
+                     ctnerh__st.appendTo('#h_navigation');
                      (jaekyung.main.nav()).appendTo(ctnerh__st);
                      (jaekyung.main.ctner()).appendTo(ctnerb__st);
                      (jaekyung.main.ftr()).appendTo(ctnerf__st);
               },
               nav:()=>{
+            	  	 let d=$('<div />');
                      let navc =$('<nav />');
-                     let d=$('<div />');
                      let dd=$('<div />');
                      let u = $('<ul />');
                      let ip = [{lst:'요약',id:'smmryu'},{lst:'방문자',id:'vstryu'},{lst:'연령별',id:'sbaryu'},{lst:'카테고리별',id:'ctgr1ryu'},{lst:'가입자',id:'mbrryu'},{lst:'구매액',id:'abbaryu'},{lst:'시간별방문자',id:'vbtryu'},{lst:'성별',id:'cbgryu'}];
                      d.addClass("container");
                      navc.attr({id:"navc__st",style:"position: fixed; max-width:1140px"})
-                           .addClass("navbar navbar-default navbar-static-top  ").appendTo(d);
+                           .addClass("navbar navbar-default nav-down navbar-static-top div-nav-up").appendTo(d);
                      dd.appendTo(navc);
                      //active 추가할거
                      $('<div />').addClass('navbar-header').append(
-                            $('<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" />'),
-                            $('<a/>').addClass('navbar-brand').attr({href:"#"}).html($('<img src="'+$.img()+'/jaekyung/logo.png"/>'))
+                            $('<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" />')
+                           //, $('<a/>').addClass('navbar-brand').attr({href:"#"}).html($('<img src="'+$.img()+'/jaekyung/logo.png"/>'))
                      ).appendTo(dd);
                      u.attr({id:"ididid"}).addClass("nav nav-pills nav-justified ").appendTo(dd);
                    
@@ -66,7 +66,34 @@ jaekyung.main={//메인페이지
                             }
                             findPosition();
                     	});
-                     
+                     var didScroll;
+                     var lastScrollTop = 0;
+                     var delta = 5;
+                     var navbarHeight = $('body').outerHeight();
+                     $(window).scroll(e=>{
+                    	 didScroll = true;
+                     });
+                     setInterval(()=>{
+                    	 if (didScroll) { 
+                    		 hasScrolled(); 
+                    		 didScroll = false; 
+                    		 } 
+                     }, 250);
+                     function hasScrolled(){
+                    	 var st = $(document).scrollTop(); 
+	                     if(Math.abs(lastScrollTop - st) <= delta){ return;}
+	                     if (st > lastScrollTop && st > navbarHeight){ 
+	                    	 console.log('DOWN');
+	                    	 $('#navc__st').removeClass('nav-down navbar-static-top');
+	                     } else { 
+	                    	 if(st + $(window).height() < $(document).height()) { 
+	                    		 console.log('UP');
+	                    		 $('#navc__st').addClass('nav-down navbar-static-top'); 
+	                    		 } 
+	                    	 } 
+	                     lastScrollTop = st; 
+	                     }
+
                      return d;
               },
               ctner:()=>{
