@@ -8,7 +8,55 @@ app =(()=>{
 	};
 	return {init : init};
 })();
-
+app.service ={
+	lobby :()=>{
+		
+		$('<div/>').addClass('main').attr({id:"main"}).appendTo($('#content'));
+		
+		/*-------------------banner--------------------*/
+		$('<div/>').addClass('section_banner').attr({id:"section_banner"}).appendTo($('#main'));
+		$('<div/>').addClass('carousel slide').attr({id:'carousel-example-generic','data-ride':'carousel'}).appendTo($('#section_banner'));
+		
+		($('<ol/>').addClass('carousel-indicators').append(
+					$('<li/>').attr({'data-target':'#carousel-example-generic', 'data-slide-to':'0'}).addClass('active'),
+					$('<li/>').attr({'data-target':'#carousel-example-generic', 'data-slide-to':'1'}),
+					$('<li/>').attr({'data-target':'#carousel-example-generic', 'data-slide-to':'2'}),
+					$('<li/>').attr({'data-target':'#carousel-example-generic', 'data-slide-to':'3'}),
+					$('<li/>').attr({'data-target':'#carousel-example-generic', 'data-slide-to':'4'})
+		)).appendTo($('#carousel-example-generic'));
+		
+		($('<div/>').addClass('carousel-inner').attr({role:'listbox'}).append(
+				$('<div/>').addClass('item active').append(
+						$('<img/>').attr({src:$.img()+'/hyeri/banner1.jpg'})),
+				$('<div/>').addClass('item').append(
+						$('<img/>').attr({src:$.img()+'/hyeri/banner2.jpg'})),
+				$('<div/>').addClass('item').append(
+						$('<img/>').attr({src:$.img()+'/hyeri/banner3.jpg'})),
+				$('<div/>').addClass('item').append(
+						$('<img/>').attr({src:$.img()+'/hyeri/banner4.jpg'})),
+				$('<div/>').addClass('item').append(
+						$('<img/>').attr({src:$.img()+'/hyeri/banner5.jpg'}))
+		)).appendTo($('#carousel-example-generic'));
+		
+		($('<a/>').addClass('left carousel-control')
+		.attr({href:'#carousel-example-generic', role:'button','data-slide':'prev'}).append(
+				$('<span/>').addClass('glyphicon glyphicon-chevron-left').attr({'aria-hidden':'true'}),
+				$('<span/>').addClass('sr-only').text('Previous')
+		)).appendTo($('#carousel-example-generic'));
+		
+		($('<a/>').addClass('right carousel-control')
+		.attr({href:'#carousel-example-generic', role:'button','data-slide':'next'}).append(
+				$('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({'aria-hidden':'true'}),
+				$('<span/>').addClass('sr-only').text('Next')
+		)).appendTo($('#carousel-example-generic'));
+	
+		$('.carousel').carousel({
+			  interval: 2000,
+			  pause:'hover'
+		});
+		
+	}
+};
 app.router = {
 		init : x=>{
 			console.log('step2 : app.router.init 진입'+x);
@@ -25,21 +73,142 @@ app.router = {
 			$.when(
 					$.getScript($.script()+'/nav.js'),
 					$.getScript($.script()+'/content.js'),
-					$.getScript($.script()+'/footer.js'),
+					/*$.getScript($.script()+'/footer.js'),*/
 					$.Deferred(y=>{
 						$(y.resolve);
 					})
 				).done(x=>{
 						$('#wrapper').html(navUI()
 								+contentUI()
-								+footerUI()
+								/*+footerUI()*/
 						);
 						console.log(' when done 로드성공');
+						app.service.lobby();
+						
+						$('#logo').click(e=>{
+							e.preventDefault();
+							app.router.home();
+							
+                        });
+						$('#board_btn').click(e=>{
+							e.preventDefault();
+							$('#h_search_btn').attr({ style: "visibility: visible;font-size:25px; margin-bottom:9px; vertical-align: bottom; margin-left:10px;" });
+							$('#h_wirte_btn').attr({ style: "visibility: visible; top:12px; margin-left: -13.5px;" });
+                            $.getScript($.script()+'/danah.js', ()=>{
+                                danah.init($.context());
+                            });
+                        });
+						 $('#store_btn').click(e=>{
+		                    e.preventDefault();
+		                     $.getScript($.script()+'/jun.js',()=>{
+		                         jun.init();
+		                    });
+		                 });
+						 $('#statics_btn').click(e=>{
+	                        e.preventDefault();
+	                        $.getScript($.script()+'/jaekyung.js',()=>{
+	                            jaekyung.init();
+	                        });
+	                     });
+						 $('#login_btn').click(e=>{
+							e.preventDefault();
+							app.permission.login();
+						 });
+						 $('#join_btn').click(e=>{
+							e.preventDefault();
+							app.permission.add();
+						 });
+						 $('#h_cart_btn').click(e=>{
+							$.getScript($.script()+'/jun.js',()=>{
+								e.preventDefault();
+								jun.main.cart();
+							});
+						 });
 				})
 				.fail(x=>{console.log(' when fail 로드실패');})
 		}
 };
-
+app.permission=(()=>{
+	var login=()=>{
+		$('#footer').remove();
+		$('#content').empty();
+		$.getScript($.script()+'/login.js',
+				()=>{
+					$('#content').html(loginUI());
+				})
+	};
+	var add=()=>{
+		$('#footer').remove();
+		$('#content').empty();
+		$.getScript($.script()+'/add.js',
+				()=>{
+				$('#content').html(addUI());
+					
+				/*생년월일*/
+				$('<label/>').addClass('je_bold').html("생년월일").attr({style:"padding-top:20px"}).appendTo($('#add_form_middle'));
+				$('<div/>').attr({id:"bir_wrap",style:"diplay:table; width:100%, height:34px"}).appendTo($('#add_form_middle'));
+				
+				$('<div/>').addClass('bir_yy').attr({id:"bir_yy_d"}).appendTo($('#bir_wrap'));
+				$('<span/>').addClass('bir_box').attr({id:"bir_yy_s"}).appendTo($('#bir_yy_d'));
+				$('<input/>').addClass('bir_int').attr({placeholder:"년(4자)",type:"text",id:"bir_year"}).appendTo($('#bir_yy_s'));
+				
+				$('<div/>').attr({class:"bir_mm", id:"bir_mm_d"}).appendTo($('#bir_wrap'));
+				$('<span/>').addClass('bir_box').attr({id:"bir_mm_s"}).appendTo($('#bir_mm_d'));
+				$('<select/>').addClass('bir_sel').attr({id:"bir_month",title:"월"}).appendTo($('#bir_mm_s'));
+				$('<option/>').html('월').appendTo($('#bir_month'));
+				for(let i=1;i<13;i++){
+					$('<option/>').attr({value:i+''}).html(i+'월').appendTo($('#bir_month'));
+				}
+				
+				$('<div/>').attr({class:"bir_dd", id:"bir_dd_d"}).appendTo($('#bir_wrap'));
+				$('<span/>').addClass('bir_box').attr({id:"bir_dd_s"}).appendTo($('#bir_dd_d'));
+				$('<input/>').addClass('bir_int').attr({placeholder:"일",type:"text",id:"bir_day"}).appendTo($('#bir_dd_s'));
+			
+				/*성별*/
+				$('<label/>').addClass('je_bold').html("성별").attr({style:"padding-top:20px"}).appendTo($('#add_form_middle'));
+				$('<div/>').attr({id:"gender_wrap"}).appendTo($('#add_form_middle'));
+				$('<select/>').addClass('gen_sel').attr({id:"gender",title:"성별"}).appendTo($('#gender_wrap'));
+				$('<option/>').html('성별').appendTo($('#gender'));
+				$('<option/>').html('여자').attr({value:"2"}).appendTo($('#gender'));
+				$('<option/>').html('남자').attr({value:"1"}).appendTo($('#gender'));
+			
+				
+				/*add_submit_btn/has-account*/
+				/* $('#add_submit_btn').click(e=>{
+						e.preventDefault();
+						$.ajax({
+							url : $.context()+'/member/add',
+							method : 'POST',
+							contentType : 'application/json',
+							data : JSON.stringify({
+								pre_email : $('#pre_email').val(),
+								post_email : $('#post_email').val(),
+								nickname : $('#nickname').val(),
+								password : $('#pass').val(),
+								pass_confirm : $('#pass_confirm').val(),
+								gender : $('#ssn').val(),
+								bir_year : $('.teamid:checked').val(),
+								bir_month : $('.teamid:checked').val(),
+								bir_day : $('.teamid:checked').val()
+							}),
+							success : d=>{
+							},
+							error : (m1,m2,m3)=>{
+								alert("error발생");
+							}
+						});
+						
+				});*/
+				 $('#has-account').click(e=>{
+						e.preventDefault();
+				});
+				
+		});
+	}
+	
+	return{login:login,
+			add:add};
+})();
 app.main =(()=>{
 	var w, nav, footer, content, context, script, style,img;
 	var init =()=>{
