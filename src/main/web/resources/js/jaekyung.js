@@ -14,10 +14,10 @@ jaekyung.main={//메인페이지
                      let ctnerb__st=$('<div />').attr({id:"ctnerb__st"});
                      let ctnerf__st=$('<div />').attr({id:"ctnerf__st"});
                      ctner__st.appendTo('#content').append(
+                    		 ctnerh__st,
                             ctnerb__st,
                             ctnerf__st
                      );
-                     ctnerh__st.appendTo('#h_navigation');
                      (jaekyung.main.nav()).appendTo(ctnerh__st);
                      (jaekyung.main.ctner()).appendTo(ctnerb__st);
                      (jaekyung.main.ftr()).appendTo(ctnerf__st);
@@ -30,7 +30,7 @@ jaekyung.main={//메인페이지
                      let ip = [{lst:'요약',id:'smmryu'},{lst:'방문자',id:'vstryu'},{lst:'연령별',id:'sbaryu'},{lst:'카테고리별',id:'ctgr1ryu'},{lst:'가입자',id:'mbrryu'},{lst:'구매액',id:'abbaryu'},{lst:'시간별방문자',id:'vbtryu'},{lst:'성별',id:'cbgryu'}];
                      d.addClass("container");
                      navc.attr({id:"navc__st",style:"position: fixed; max-width:1140px"})
-                           .addClass("navbar navbar-default nav-down navbar-static-top div-nav-up").appendTo(d);
+                           .addClass("navbar navbar-default").appendTo(d);
                      dd.appendTo(navc);
                      //active 추가할거
                      $('<div />').addClass('navbar-header').append(
@@ -45,7 +45,7 @@ jaekyung.main={//메인페이지
                      
                      $(()=>{
                     	    var link = $('li.scrollS__ryu a');
-                    	    link.on('click',function(e){
+                    	    link.on('click',function(e){ //.click(e=>{}) 의 비jquery 방식
                     	        var target = $($(this).attr('href')); 
                     	        $('html, body').animate({
                     	            scrollTop: target.offset().top
@@ -57,8 +57,8 @@ jaekyung.main={//메인페이지
                                 findPosition();
                             });
                             function findPosition(){
-                                $('div').each(function(){
-                                    if( ($(this).offset().top - $(window).scrollTop() ) < 20){
+                                $('div .woruddlrkshfogksekghdghdghd').each(function(){
+                                    if( ($(this).offset().top - $(window).scrollTop() ) <40){
                                         $('li.scrollS__ryu').removeClass('active');
                                         $('#ididid').find('[data-scroll="'+ $(this).attr('id') +'"]').addClass('active');
                                     }
@@ -66,10 +66,11 @@ jaekyung.main={//메인페이지
                             }
                             findPosition();
                     	});
-                     var didScroll;
-                     var lastScrollTop = 0;
-                     var delta = 5;
-                     var navbarHeight = $('body').outerHeight();
+                     
+                     let didScroll;
+                     let lastScrollTop = 0;
+                     let delta = 5;
+                     let navbarHeight = $('body').outerHeight();
                      $(window).scroll(e=>{
                     	 didScroll = true;
                      });
@@ -78,21 +79,16 @@ jaekyung.main={//메인페이지
                     		 hasScrolled(); 
                     		 didScroll = false; 
                     		 } 
-                     }, 250);
+                     }, 200);
                      function hasScrolled(){
-                    	 var st = $(document).scrollTop(); 
-	                     if(Math.abs(lastScrollTop - st) <= delta){ return;}
-	                     if (st > lastScrollTop && st > navbarHeight){ 
-	                    	 console.log('DOWN');
-	                    	 $('#navc__st').removeClass('nav-down navbar-static-top');
-	                     } else { 
-	                    	 if(st + $(window).height() < $(document).height()) { 
-	                    		 console.log('UP');
-	                    		 $('#navc__st').addClass('nav-down navbar-static-top'); 
-	                    		 } 
-	                    	 } 
-	                     lastScrollTop = st; 
-	                     }
+		            	 var st = $(document).scrollTop(); 
+		                 if(Math.abs(lastScrollTop - st) <= delta) return;
+		                 (st > lastScrollTop && st > navbarHeight)?
+		                		 $('#navc__st').addClass('nav-up').removeClass('nav-down') :
+		                			 (st + $(window).height() < $(document).height())?
+		                					 $('#navc__st').removeClass('nav-up').addClass(' nav-down'):"";
+		                 lastScrollTop = st; 
+                     }
 
                      return d;
               },
@@ -121,12 +117,12 @@ jaekyung.main={//메인페이지
                 let smmco = $('<div />');
                 let smmct = $('<div />');
                 smm.attr({style:"background-color: rgba(204, 82, 0, 0.25);"});
-                $('<div />').attr({id:"smmryu",style:" position:relative; top:-50px"}).appendTo(smm);
+                $('<div />').attr({id:"smmryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").addClass("woruddlrkshfogksekghdghdghd").appendTo(smm);
                 smma.addClass("container compogap__ryu").appendTo(smm);
                 smmh.attr({id:"smmryu"}).addClass("txtcw_ryu text-center txtcw__ryu").append(
                              $('<h1 />').append($('<strong>').html("요약")),
                              $('<hr />').addClass('txthr10__ryu'),
-                             $('<span aria-hidden="true" />').addClass('glyphicon glyphicon-certificate')
+                             $('<span aria-hidden="true" />').attr({style:"height:40px; width:40px"}).addClass('glyphicon glyphicon-certificate')
                 ).appendTo(smma);
                 smmc.attr({style:"margin-top:40px;"}).appendTo(smma);
                 smmco.appendTo(smmc);
@@ -180,7 +176,7 @@ jaekyung.main={//메인페이지
                 let vstco = $('<div />');
                 let vstct = $('<div />');
                 vst.attr({style:"background-color: #FFFFFF"});
-                $('<div />').attr({id:"vstryu",style:" position:relative; top:-50px"}).appendTo(vst);
+                $('<div />').attr({id:"vstryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").appendTo(vst);
                 vsta.addClass("container compogap__ryu").appendTo(vst);
                 $('<div />').append(
                              vsth.addClass("txtcw_ryu text-center").append(
@@ -240,7 +236,7 @@ jaekyung.main={//메인페이지
                 let sbaco = $('<div />');
                 let sbact = $('<div />');
                 sba.attr({style:"background-color: rgba(204, 82, 0, 0.25);"});
-                $('<div />').attr({id:"sbaryu",style:" position:relative; top:-50px"}).appendTo(sba);
+                $('<div />').attr({id:"sbaryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").appendTo(sba);
                 sbaa.addClass("container compogap__ryu").appendTo(sba);
                 $('<div />').append(
                               sbah.attr({id:"sbaryu"}).addClass(" text-center txtcw__ryu").append(
@@ -299,7 +295,7 @@ jaekyung.main={//메인페이지
                 let ctgr1c = $('<div />');
                 let ctgr1co = $('<div />');
                 ctgr1.attr({style:"background-color: #FFFFFF"});
-                $('<div />').attr({id:"ctgr1ryu",style:" position:relative; top:-50px"}).appendTo(ctgr1);
+                $('<div />').attr({id:"ctgr1ryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").appendTo(ctgr1);
                 ctgr1a.addClass("container compogap__ryu").appendTo(ctgr1);
                 $('<div />').append(
                              ctgr1h.attr({id:"ctgr1ryu"}).addClass("text-center").append(
@@ -350,7 +346,7 @@ jaekyung.main={//메인페이지
                 let mbrco = $('<div />');
                 let mbrct = $('<div />');
                 mbr.attr({style:"background-color:rgba(204, 82, 0, 0.25)"});
-                $('<div />').attr({id:"mbrryu",style:" position:relative; top:-50px"}).appendTo(mbr);
+                $('<div />').attr({id:"mbrryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").appendTo(mbr);
                 mbra.addClass('container compogap__ryu').appendTo(mbr);
                 $('<div />').append(     
                              mbrh.attr({id:"mbrryu"}).addClass("txtcw__ryu text-center").append(
@@ -415,7 +411,7 @@ jaekyung.main={//메인페이지
                 let abbac = $('<div />');
                 let abbaco = $('<div />');
                 abba.attr({style:"background-color: #FFFFFF"});
-                $('<div />').attr({id:"abbaryu",style:" position:relative; top:-50px"}).appendTo(abba);
+                $('<div />').attr({id:"abbaryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").appendTo(abba);
                 abbaa.addClass("container compogap__ryu").appendTo(abba);
                 $('<div />').append(
                              abbah.attr({id:"abbaryu"}).addClass("text-center").append(
@@ -441,7 +437,7 @@ jaekyung.main={//메인페이지
                 let vbtco = $('<div />');
                 let vbtct = $('<div />');
                 vbt.attr({style:"background-color:rgba(204, 82, 0, 0.25)"});
-                $('<div />').attr({id:"vbtryu",style:" position:relative; top:-50px"}).appendTo(vbt);
+                $('<div />').attr({id:"vbtryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").appendTo(vbt);
                 vbta.addClass('container compogap__ryu').appendTo(vbt);
                 $('<div />').append(     
                              vbth.addClass("txtcw__ryu text-center").append(
@@ -500,7 +496,7 @@ jaekyung.main={//메인페이지
                 let cbgc = $('<div />');
                 let cbgco = $('<div />');
                 cbg.attr({style:"background-color: #FFFFFF"});
-                $('<div />').attr({id:"cbgryu",style:" position:relative; top:-50px"}).appendTo(cbg);
+                $('<div />').attr({id:"cbgryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").appendTo(cbg);
                 cbga.addClass("container compogap__ryu").appendTo(cbg);
                 $('<div />').append(
                              cbgh.attr({id:"cbgryu"}).addClass("text-center").append(

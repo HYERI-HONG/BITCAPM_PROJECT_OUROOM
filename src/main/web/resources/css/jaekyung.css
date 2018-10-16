@@ -103,20 +103,27 @@ div .txtcw__ryu{
     font-weight: 900;
     font-size: 2em;
 }
-/*스크롤업다운*/
-div .div-nav-up{
-	transition: top 0.8s ease-in-out;
-
-출처: http://webdir.tistory.com/481 [WEBDIR]
+.glyphicon{
+	color:rgba(204,82,0,08) !important;
+    line-height: 0.98 !important;
+}
+/*스크롤감추기*/
+#navc__st {
+	z-index:2;
+}
+.nav-up{
+	    margin-top: -50px;
+	    transition: margin-top 0.45s ease-in-out;
 }
 .nav-down{
-	    margin-top: 77px;
+	    margin-top: 0px;
+	    transition: margin-top 0.45s ease-in-out;
 }
+
 /*스크롤*/
 #ctnerb__st{
 	position: relative;
 }
-
 
 /* The switch - the box around the slider */
 .material-switch > input[type="checkbox"] {
