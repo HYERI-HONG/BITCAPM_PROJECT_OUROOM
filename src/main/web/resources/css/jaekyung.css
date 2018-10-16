@@ -104,7 +104,7 @@ div .txtcw__ryu{
     font-size: 2em;
 }
 .glyphicon{
-	color:rgba(204,82,0,08) !important;
+	/* color:rgba(204,82,0,08) !important; */
     line-height: 0.98 !important;
 }
 /*스크롤감추기*/
