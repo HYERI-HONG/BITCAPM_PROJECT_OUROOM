@@ -64,9 +64,7 @@
 	color : black;
 	border: 0.5px solid black;
 	border-radius: 10px;
-<<<<<<< HEAD
 	text-align: left !important;
-
 	
 } 
 .je_manImg{
@@ -104,6 +102,7 @@
 	width : 50%;
 }
 .je_div_cover{
+	margin-top:50px;
 	width: 50%;
 }
 /*1015 추가분*/
@@ -113,14 +112,13 @@
 	height : 400px;
 	padding-right: 5cm;
 	padding-left:5cm;
-/* 	text-align: center; */
 }
 .je_col0 {
-	width:40%;
+	width:45%;
 	float:left;
 }
 .je_col1{
-	width:40%;
+	width:45%;
 	float:right;
 	
 }
@@ -133,7 +131,9 @@
 }
 .je_price_cover{
 	color: #cc5200;
-	font-size: 2em;
+	font-size: 2.5em;
+	width: 430px;
+	height: 80px;
 }
 .je_origin_cost{
 	font-size: 0.5em;
@@ -149,140 +149,86 @@
 	font-size: 12px;
 	border: 1px solid #F2F2F2;
 	background-color: #F2F2F2;
+	margin-top: 10px;
+    margin-bottom: 10px;
 }
 .je_homeicon{
 	width: 3%;
 }
-#je_line{
-	line-height: 3
-}
+
 .je_origin_cost{
 	text-decoration: line-through;
+	margin-left:40px;
 	color: gray;
 }
 .je_dis_cost{
 	text-decoration: none;
+	margin-left: 0px;
+	margin-top: 10px;
 	color: black;
 }
 .je_discount{
 	float: left;
 	font-size: 1.5em;
+	margin-top: 0px;
+	margin-bottom: 20px;
+    width: 120px;
+    height: 50px;
+    margin-top: 20px;
 }
 .kakao_share {
 	margin-right: 20px;
     margin-left: 20px;
 }
 .naver_share{
-    margin-left: 20px;
+    margin-right: 20px;
 }
 #je_selectbtn{
 	width: 100%;
+	height: 50px;
 }
 #je_view1{
 	width: 100%;
 	height: 100%;
-=======
-	position: relative;
-	margin-left: 10%;
-	
-	
-} 
-.je_manImg{
-	margin-left: auto;
-	 margin-right: auto; 
-	 display: block;
 }
-.je_sign-in-form__sns__list{
-	text-align: center;
-}
-
-#je_input_box{
-	width: 50%;
-}
-.je_bold {
-    font-weight: bold;
-}
-.p1{
-	font-size:13px;
-    display: block;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    color: gray;
-}
-.je_cover_info{
-	font-size: 10px;
-	color: gray;
-}
-#je_icon{	
-	color: gray;
-}
-.je_cover_info{
-	width : 50%;
-}
-.je_div_cover{
-	width: 50%;
-}
-/*1015 추가분*/
-
-.je_row{
-	width: 100%;
-	height : 400px;
-	padding-right: 5cm;
-	padding-left:5cm;
-	text-align: center;
-}
-.je_col0 {
-	width:40%;
-	float:left;
-}
-.je_col1{
-	width:40%;
-	float:right;
-}
-.je_cover_title{
-	font-size: 2em;
-	color: black;
-}
+/* .je_div_cover_info{
+	line-height:2;
+} */
 .je_price_cover{
-	color: #cc5200;
-	font-size: 2em;
+	line-height:1; !important;
 }
-.je_origin_cost{
-	font-size: 0.5em;
-}
-.je_brand_more_btn{
-	width: 100%;
-	display: inline-block;
-	text-align: center;
-	vertical-align: middle;
-	height: 30%;
-	line-height: 30%;
-	text-decoration: none;
-	font-size: 12px;
-	border: 1px solid #F2F2F2;
-	background-color: #F2F2F2;
-}
-.je_homeicon{
-	width: 3%;
-}
-#je_line{
-	line-height: 3
-}
-.je_origin_cost{
-	text-decoration: line-through;
+.je_line{
 	color: gray;
+	size: 0.5em;
+	noshade;
 }
-.je_dis_cost{
-	text-decoration: none;
-	color: black;
+#je_won{
+	font-size: 30px;
+	margin-right: 2px;	
 }
-.je_discount{
-	float: left;
-	font-size: 1.5em;
+#je_get_basket{
+	border-radius: 4px;
+	border: 1px solid #cc5200;
+	background-color: white;
+	text-align: center;
+	color: #cc5200;
+	margin-right: 10px;
+	width: 250px;
+    height: 50px;
+    
 }
-.kakao_share .naver_share{
-	position: relative;
->>>>>>> refs/remotes/origin/master
+#je_buy{
+	border-radius: 4px;
+	border: 1px solid #cc5200;
+	background-color: #cc5200;
+	text-align: center;
+	color: white;
+	margin-right : 10px;
+	width: 250px;
+    height: 50px;
 }
+#je_buttons{
+	margin-top: 30px;
+	text-align: center;
+}
+
