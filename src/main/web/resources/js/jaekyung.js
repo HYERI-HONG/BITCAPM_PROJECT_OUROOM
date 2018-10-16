@@ -6,7 +6,7 @@ jaekyung =(()=>{
        };
        return {init:init};
 })();
-jaekyung.main={//메인페이지
+jaekyung.main={//메인페이지//변경
               mp:()=>{
                      $('#content').empty();     
                      let ctner__st=$('<div />').attr({id:"ctner__st"});
