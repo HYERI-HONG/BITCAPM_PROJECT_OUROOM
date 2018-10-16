@@ -15,7 +15,6 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request,Model model) {	
-		logger.info("진입 .. {} "," 들어옴 ");
 		model.addAttribute("context",request.getContextPath());
 		return "main";
 	}
