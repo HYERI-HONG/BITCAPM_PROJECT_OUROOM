@@ -64,9 +64,7 @@
 	color : black;
 	border: 0.5px solid black;
 	border-radius: 10px;
-	position: relative;
-	margin-left: 10%;
-	
+	text-align: left !important;
 	
 } 
 .je_manImg{
@@ -104,6 +102,7 @@
 	width : 50%;
 }
 .je_div_cover{
+	margin-top:50px;
 	width: 50%;
 }
 /*1015 추가분*/
@@ -113,15 +112,18 @@
 	height : 400px;
 	padding-right: 5cm;
 	padding-left:5cm;
-	text-align: center;
 }
 .je_col0 {
-	width:40%;
+	width:45%;
 	float:left;
 }
 .je_col1{
-	width:40%;
+	width:45%;
 	float:right;
+	
+}
+.je_total_share{
+	text-align: left !important;
 }
 .je_cover_title{
 	font-size: 2em;
@@ -129,7 +131,9 @@
 }
 .je_price_cover{
 	color: #cc5200;
-	font-size: 2em;
+	font-size: 2.5em;
+	width: 430px;
+	height: 80px;
 }
 .je_origin_cost{
 	font-size: 0.5em;
@@ -145,25 +149,86 @@
 	font-size: 12px;
 	border: 1px solid #F2F2F2;
 	background-color: #F2F2F2;
+	margin-top: 10px;
+    margin-bottom: 10px;
 }
 .je_homeicon{
 	width: 3%;
 }
-#je_line{
-	line-height: 3
-}
+
 .je_origin_cost{
 	text-decoration: line-through;
+	margin-left:40px;
 	color: gray;
 }
 .je_dis_cost{
 	text-decoration: none;
+	margin-left: 0px;
+	margin-top: 10px;
 	color: black;
 }
 .je_discount{
 	float: left;
 	font-size: 1.5em;
+	margin-top: 0px;
+	margin-bottom: 20px;
+    width: 120px;
+    height: 50px;
+    margin-top: 20px;
 }
-.kakao_share .naver_share{
-	position: relative;
+.kakao_share {
+	margin-right: 20px;
+    margin-left: 20px;
 }
+.naver_share{
+    margin-right: 20px;
+}
+#je_selectbtn{
+	width: 100%;
+	height: 50px;
+}
+#je_view1{
+	width: 100%;
+	height: 100%;
+}
+/* .je_div_cover_info{
+	line-height:2;
+} */
+.je_price_cover{
+	line-height:1; !important;
+}
+.je_line{
+	color: gray;
+	size: 0.5em;
+	noshade;
+}
+#je_won{
+	font-size: 30px;
+	margin-right: 2px;	
+}
+#je_get_basket{
+	border-radius: 4px;
+	border: 1px solid #cc5200;
+	background-color: white;
+	text-align: center;
+	color: #cc5200;
+	margin-right: 10px;
+	width: 250px;
+    height: 50px;
+    
+}
+#je_buy{
+	border-radius: 4px;
+	border: 1px solid #cc5200;
+	background-color: #cc5200;
+	text-align: center;
+	color: white;
+	margin-right : 10px;
+	width: 250px;
+    height: 50px;
+}
+#je_buttons{
+	margin-top: 30px;
+	text-align: center;
+}
+
