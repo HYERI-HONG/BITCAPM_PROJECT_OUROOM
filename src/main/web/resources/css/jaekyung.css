@@ -103,10 +103,10 @@ div .txtcw__ryu{
     font-weight: 900;
     font-size: 2em;
 }
-.glyphicon{
-	color:rgba(204,82,0,08) !important;
+/* .glyphicon{
+	color:rgba(204,82,0,08) !important; 
     line-height: 0.98 !important;
-}
+} */
 /*스크롤감추기*/
 #navc__st {
 	z-index:2;
