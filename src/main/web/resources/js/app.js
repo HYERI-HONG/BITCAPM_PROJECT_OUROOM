@@ -9,9 +9,51 @@ app =(()=>{
 	return {init : init};
 })();
 app.service ={
-	lobby : ()=>{
-		$('<main/>').addClass('main').attr({id:"main"}).appendTo($('#content'));
-		$('<section>').addClass('main_section_banner').attr({id:"main_section_banner"}).appendTo($('#main'));
+	lobby :()=>{
+		
+		$('<div/>').addClass('main').attr({id:"main"}).appendTo($('#content'));
+		
+		/*-------------------banner--------------------*/
+		$('<div/>').addClass('section_banner').attr({id:"section_banner"}).appendTo($('#main'));
+		$('<div/>').addClass('carousel slide').attr({id:'carousel-example-generic','data-ride':'carousel'}).appendTo($('#section_banner'));
+		
+		($('<ol/>').addClass('carousel-indicators').append(
+					$('<li/>').attr({'data-target':'#carousel-example-generic', 'data-slide-to':'0'}).addClass('active'),
+					$('<li/>').attr({'data-target':'#carousel-example-generic', 'data-slide-to':'1'}),
+					$('<li/>').attr({'data-target':'#carousel-example-generic', 'data-slide-to':'2'}),
+					$('<li/>').attr({'data-target':'#carousel-example-generic', 'data-slide-to':'3'}),
+					$('<li/>').attr({'data-target':'#carousel-example-generic', 'data-slide-to':'4'})
+		)).appendTo($('#carousel-example-generic'));
+		
+		($('<div/>').addClass('carousel-inner').attr({role:'listbox'}).append(
+				$('<div/>').addClass('item active').append(
+						$('<img/>').attr({src:$.img()+'/hyeri/banner1.jpg'})),
+				$('<div/>').addClass('item').append(
+						$('<img/>').attr({src:$.img()+'/hyeri/banner2.jpg'})),
+				$('<div/>').addClass('item').append(
+						$('<img/>').attr({src:$.img()+'/hyeri/banner3.jpg'})),
+				$('<div/>').addClass('item').append(
+						$('<img/>').attr({src:$.img()+'/hyeri/banner4.jpg'})),
+				$('<div/>').addClass('item').append(
+						$('<img/>').attr({src:$.img()+'/hyeri/banner5.jpg'}))
+		)).appendTo($('#carousel-example-generic'));
+		
+		($('<a/>').addClass('left carousel-control')
+		.attr({href:'#carousel-example-generic', role:'button','data-slide':'prev'}).append(
+				$('<span/>').addClass('glyphicon glyphicon-chevron-left').attr({'aria-hidden':'true'}),
+				$('<span/>').addClass('sr-only').text('Previous')
+		)).appendTo($('#carousel-example-generic'));
+		
+		($('<a/>').addClass('right carousel-control')
+		.attr({href:'#carousel-example-generic', role:'button','data-slide':'next'}).append(
+				$('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({'aria-hidden':'true'}),
+				$('<span/>').addClass('sr-only').text('Next')
+		)).appendTo($('#carousel-example-generic'));
+	
+		$('.carousel').carousel({
+			  interval: 2000,
+			  pause:'hover'
+		});
 		
 	}
 };

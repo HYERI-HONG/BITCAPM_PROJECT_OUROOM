@@ -9,11 +9,23 @@
 	margin-top:15px;
 	margin-bottom:15px;
 }
+.mb0__ryu{
+	margin-bottom:0px ;
+}
+.mb15__ryu{
+	margin-bottom:15px;
+}
+.ml15__ryu{
+	margin-left:15px;
+}
 .compogap__ryu {
 	padding-top : 90px;
 	padding-bottom : 90px;
 }
 .pa0__ryu{
+	padding:0px!important;
+}
+.pr0__ryu{
 	padding:0px!important;
 }
 div .bgcw__ryu{
@@ -91,7 +103,27 @@ div .txtcw__ryu{
     font-weight: 900;
     font-size: 2em;
 }
+.glyphicon{
+	color:rgba(204,82,0,08) !important;
+    line-height: 0.98 !important;
+}
+/*스크롤감추기*/
+#navc__st {
+	z-index:2;
+}
+.nav-up{
+	    margin-top: -50px;
+	    transition: margin-top 0.45s ease-in-out;
+}
+.nav-down{
+	    margin-top: 0px;
+	    transition: margin-top 0.45s ease-in-out;
+}
 
+/*스크롤*/
+#ctnerb__st{
+	position: relative;
+}
 
 /* The switch - the box around the slider */
 .material-switch > input[type="checkbox"] {
