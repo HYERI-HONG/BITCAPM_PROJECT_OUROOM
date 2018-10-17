@@ -83,6 +83,15 @@ div .txtcw__ryu{
 .borderG__ryu{
 	border-color:#8c8c8c !important;
 }
+/* 글자 음영 */
+.ganjitxt__ryu{
+	text-shadow: 2px 2px 2px gray;
+}
+.ganjitxt_4d4d4d__ryu{
+	text-shadow: 2px 2px 2px gray;
+	color:#4d4d4d;
+}
+
 /* 네비게이션 영역 */
 /* 전체틀  */
 
@@ -103,10 +112,19 @@ div .txtcw__ryu{
     font-weight: 900;
     font-size: 2em;
 }
+<<<<<<< HEAD
 /* .glyphicon{
+=======
+.glyalone__ryu{
+>>>>>>> refs/remotes/origin/jakyung
 	color:rgba(204,82,0,08) !important; 
     line-height: 0.98 !important;
+<<<<<<< HEAD
 } */
+=======
+}
+
+>>>>>>> refs/remotes/origin/jakyung
 /*스크롤감추기*/
 #navc__st {
 	z-index:2;
@@ -124,7 +142,9 @@ div .txtcw__ryu{
 #ctnerb__st{
 	position: relative;
 }
-
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
+	background-color:rgba(204,82,0,0.85) !important;
+}
 /* The switch - the box around the slider */
 .material-switch > input[type="checkbox"] {
     display: none;   
