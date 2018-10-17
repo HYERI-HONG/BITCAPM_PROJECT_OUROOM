@@ -2312,3 +2312,163 @@ a.d_filter_item_btn {
 }
 
 /* -------------- 글쓰기 -------------- */
+form {
+    overflow: hidden
+}
+
+. {
+    max-width: 800px;
+    width: 100%;
+    margin: 30px auto 140px;
+    padding-bottom: 20px;
+    background-color: #ffffff;
+    color: #424242;
+    border-radius: 4px;
+    box-sizing: border-box;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+    overflow: hidden
+}
+
+@media only screen and (max-width: 767px) {
+    .d_form_fields,
+    .d_post_write {
+        max-width: 360px;
+        margin-top: 10px
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .d_form_fields,
+    .d_post_write {
+        max-width: 614px
+    }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1279px) {
+    .d_form_fields,
+    .d_post_write {
+        max-width: 800px
+    }
+}
+
+.d_form_fields #d_upload_image {
+    height: 400px;
+    background-color: #dcdcdc;
+    transition: all 0.1s ease-in
+}
+
+@media only screen and (max-width: 767px) {
+    .d_form_fields #d_upload_image {
+        height: 240px
+    }
+}
+
+.d_form_fields #d_upload_image>#d_upload_panel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+    cursor: pointer
+}
+
+.d_form_fields #d_upload_image>#d_upload_panel.change {
+    background-color: rgba(0, 0, 0, 0.4)
+}
+
+.d_form_fields #d_upload_image>#d_upload_panel>.d_icon {
+    margin: 175px auto 5px;
+    width: 35px;
+    height: 35px;
+    background-image: url(https://d1nyaccf3kuclt.cloudfront.net/assets/icon_map/icon-etc.png);
+    background-repeat: no-repeat;
+    background-size: 400px;
+    background-position: top -446px left -91px
+}
+
+@media only screen and (max-width: 767px) {
+    .d_form_fields #d_upload_image>#d_upload_panel>.d_icon {
+        margin: 95px auto 10px
+    }
+}
+
+.d_form_fields #d_upload_image>#d_upload_panel>.d_progress {
+    font-size: 15px;
+    color: #ffffff
+}
+
+.d_form_fields #d_upload_image #d_real_image {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    max-width: 100%;
+    max-height: 600px
+}
+
+@media only screen and (max-width: 767px) {
+    .d_form_fields #d_upload_image #d_real_image {
+        max-height: 240px
+    }
+}
+
+.d_form_fields #d_upload_image #d_post_uploader {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer
+}
+
+.d_form_fields #d_upload_image.dragged {
+    background-color: #35c5f0;
+    opacity: 0.5
+}
+
+.d_form_fields>.url {
+    display: block;
+    margin: 15px 20px 20px;
+    border: none;
+    outline: none;
+    width: 300px;
+    height: 15px;
+    line-height: 15px;
+    font-size: 13px
+}
+
+.d_form_fields>select {
+    display: block;
+    float: left;
+    margin: 0 0 20px 20px;
+    padding: 0 15px;
+    border: 1px solid #dcdcdc;
+    width: 240px;
+    height: 40px;
+    line-height: 40px;
+    background-image: url(../img/danah/select.png);
+    background-color: #ffffff;
+    background-repeat: no-repeat;
+    background-position: calc(100% - 15px);
+    background-size: 15px
+}
+
+.d_form_fields>.d_description {
+    display: block;
+    margin: 20px;
+    outline: none;
+    border: none;
+    clear: both;
+    font-size: 15px;
+    line-height: 28px
+}
+
+.d_form_fields>.d_description:empty:not(:focus):before {
+    content: attr(data-ph);
+    color: #939598
+}
+
+.d_form_fields>.d_keywords {
+    margin: 0 20px
+}
