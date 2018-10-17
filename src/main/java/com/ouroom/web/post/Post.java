@@ -1,4 +1,4 @@
-package com.ouroom.web.board;
+package com.ouroom.web.post;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
