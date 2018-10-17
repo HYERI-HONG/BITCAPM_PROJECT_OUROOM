@@ -1,4 +1,4 @@
-package com.ouroom.web.board;
+package com.ouroom.web.post;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Component
 @Data @Lazy
-public class Board {
+public class Post {
 	private int BOARD_SEQ;
 	private String BOARD_TITLE;
 	private String BOARD_CONTENT;

@@ -32,6 +32,10 @@ danah.s = (() => {
         $('#h_wirte_btn')
             .click(d => {
                 d.preventDefault();
+                
+				//.attr({'style': $(this).attr('style')==='right: 0px; bottom: 100%; transition: opacity 0.3s ease 0s, transform 0.3s ease 0s, visibility 0s ease 0.3s; opacity: 0; transform: translateY(-16px); visibility: hidden;' ? 
+				//	'right: 0px; bottom: 100%;' : 
+				//	'right: 0px; bottom: 100%; transition: opacity 0.3s ease 0s, transform 0.3s ease 0s, visibility 0s ease 0.3s; opacity: 0; transform: translateY(-16px); visibility: hidden;'});
                 /*if($.type($.cookie("userid"))==='undefined'){
             alert('로그인이 필요한 서비스 입니다.');
             $.getScript($.script()+'/app.js',()=>{
@@ -50,9 +54,9 @@ danah.s = (() => {
             fixedBgPos: true,
             fixedContentPos: false,
             items: {
-                src: danah.c.div({c: 'd_post_write', id: 'd_post_write', s: 'position: relative; background: #ffffff; padding: 20px; width: 650px; margin-top: 3%; margin-left: auto; margin-right: auto;' })
+                src: danah.c.div({c: 'd_post_write', id: 'd_post_write' })
                     .append(
-                        danah.c.form({ c: 'new_post', i: 'upload_card_form', et: 'multipart' })
+                        danah.c.form({ c: 'new_post', i: 'upload_post_form', et: 'multipart' })
                         .append(
                             danah.c.div({ c: 'd_form_fields' })
                             .append(
@@ -69,13 +73,13 @@ danah.s = (() => {
                                     .append(
                                         danah.c.div({ c: 'd_icon' }),
                                         danah.c.div({ c: 'd_progress', t: '사진 업로드' })
-                                    ),
-                                    danah.c.input({ i: 'd_post_uploader', n: 'image', ty: 'file' })
+                                    )
+                                    //danah.c.input({ i: 'd_post_uploader', n: 'image', ty: 'file' })
                                     //danah.c.input({ i: 'card_image_url', n: 'card[image_url', ty: 'hidden' })
                                 ),
                                 danah.c.div({ c: 'd_description enable_enter', i: 'd_post_title_editor' })
                                 .attr({ contenteditable: 'true', 'data-ph': '제목을 입력해 주세요' }),
-                                danah.c.select({ c: 'ui-changed-selector', i: 'd_post_space', n: 'd_card_space', s: 'color: rgb(189, 189, 189);' })
+                                danah.c.select({ c: 'ui-changed-selector', i: 'd_post_space', n: 'd_post_space', s: 'color: rgb(189, 189, 189);' })
                                 .append(
                                     danah.c.option({v: '', t: '공간 선택(필수)'}),
                                     danah.c.option({v: '0', t: '원룸'}),
@@ -85,7 +89,7 @@ danah.s = (() => {
                                     danah.c.option({v: '4', t: '욕실'}),
                                     danah.c.option({v: '5', t: '베란다'})
                                 ),
-                                danah.c.select({ c: 'ui-changed-selector', i: 'd_post_size', n: 'd_card_size', s: 'color: rgb(189, 189, 189);' })
+                                danah.c.select({ c: 'ui-changed-selector', i: 'd_post_size', n: 'd_post_size', s: 'color: rgb(189, 189, 189);' })
                                 .append(
                                     danah.c.option({v: '', t: '평수 선택(필수)'}),
                                     danah.c.option({v: '0', t: '10평미만'}),
@@ -105,11 +109,32 @@ danah.s = (() => {
                                     	.attr({ 'contenteditable': 'true', 'placeholder': '태그입력' })
                                     )
                                 ),
-                                danah.c.div({ c: 'mobile' })
-                            ),
-                            danah.c.div({ c: 'ui-floating-menu' })
-                            .append(
-                                danah.c.input({ c: 'button', ty: 'submit', n: 'commit', v: '사진 올리기', i: 'submit' }).attr({ 'data-disable-with': '사진 올리기' })
+                                danah.c.input({ c: 'button', ty: 'submit', n: 'commit', v: '사진 올리기', i: 'submit', s: 'bottom: 0; width: 100%; height: 70px; overflow: hidden; z-index: 500; background-color: rgba(22,22,22,0.8); box-sizing: border-box;color: #ffffff;' })
+                                .attr({ 'data-disable-with': '사진 올리기' })
+                                .click(n=>{
+                                	if($.fn.danahNullChk(['1','2'])
+                					){
+                						alert('필수 입력값이 입력되지 않았습니다.');
+                					}else{
+                						$.ajax({
+                	    					url : $ctx + '/posts/write',
+                	    					method : 'POST',
+                	    					contentType : 'application/json',
+                	    					data : JSON.stringify({
+                	    									userid : '',
+                	    									teamid : ''
+                	    					}),
+                	    					success : x =>{
+                	    						alert('성공');
+                	    					},
+                	    					error : (m1, m2, m3)=>{
+                	    						alert('에러발생1'+m1);
+                	    						alert('에러발생2'+m2);
+                	    						alert('에러발생3'+m3);
+                	    					}
+                	    				});
+                					}
+                                })
                             )
                         )
                     )
@@ -125,7 +150,7 @@ danah.s = (() => {
         ctt.html(danah.u.f());
         danah.c.div({ c: 'd_container', i: 'd_post_list', ht: danah.c.div({ c: 'd_row', s: 'margin-top:20px' }) })
             .appendTo(ctt);
-        Danah_L();
+        DanahL();
         danah.u.tb(ctt);
         //});
     };
@@ -156,12 +181,19 @@ danah.s = (() => {
                             .append(
                                 danah.c.img({ sr: $i + '/danah/post/1.jpeg', s: 'width: 100%; display: block;' }),
                                 danah.c.div({ c: 'd_post_img_tags' })
-                                /* 자기 게시글일 경우,
-                                danah.c.div({c: 'd_post_img_btn_manage'})
+                                // 자기 게시글일 경우
+                                ,danah.c.div({c: 'd_post_img_btn_manage'})
                                 .append(
-                                	danah.c.a({t: '태그관리'}),
+                                	danah.c.a({t: '태그관리'})
+                                	.click(n=>{
+                                		alert('태그관리');
+                                	}),
                                 	danah.c.a({t: '수정하기'})
-                                )*/
+                                	.click(n=>{
+                                		alert('수정하기');
+                                		danah.s.e();
+                                	})
+                                )
                             ),
                             /* --------------- product list 추후 추가해야함!!! --------------- 
                             danah.c.aside({ c: 'd_used_product d_used_product_scrollable d_used_product_scrollable_left_end' })
@@ -285,13 +317,20 @@ danah.s = (() => {
                                         .append(
                                         	danah.c.button({c: 'd_sidebar_action_btn_mine'})
                                         	.append(
-                                        		danah.c.span({c: 'd_icon_page_card', s: 'vertical-align: middle; background-position: -120px 0px; width: 24px; height: 24px;'})
+                                        		danah.c.span({c: 'd_icon_page_post', s: 'vertical-align: middle; background-position: -120px 0px; width: 24px; height: 24px;'})
                                         	),
                                         	danah.c.div({c: 'd_sidebar_action_menu d_dismiss'})
                                         	.append(
-                                        		danah.c.button({c: 'd_sidebar_action_menu d_dismiss', t: '삭제'})
+                                        		danah.c.button({}).text('삭제')
+                                        		.click(n=>{
+                                        			danah.s.r();
+                                        		})
                                         	)
                                         )
+                                        .click(n=>{
+                                        	let o = $('.d_mine'); 
+                                        	o.children(':last').hasClass('d_dismiss') ? o.children(':last').removeClass('d_dismiss') : o.children(':last').addClass('d_dismiss');
+                                        })
                                     ),
                                     danah.c.section({ c: 'd_sidebar_writer d_writer_info' })
                                     .append(
@@ -421,7 +460,30 @@ danah.s = (() => {
             type: 'inline'
         });
     };
-    return { m: m, w: w, l: l, d: d, e: e };
+    let r = d => {
+    	if(confirm('삭제하시겠습니까?')){
+			alert('삭제완료');
+			console.log(this.bno);
+			$.ajax({
+				url : $ctx + '/posts/remove',
+				method : 'POST',
+				contentType : 'application/json',
+				data : JSON.stringify({boardNo : '',
+										userid : ''}),
+				success : x => {
+					alert('성공');
+				},
+				error : (m1, m2, m3)=>{
+					alert('에러발생1'+m1);
+					alert('에러발생2'+m2);
+					alert('에러발생3'+m3);
+				}
+			});
+		}else{
+			alert('취소완료');
+		}
+    };
+    return { m: m, w: w, l: l, d: d, e: e, r: r };
 })();
 
 danah.u = {
@@ -442,21 +504,21 @@ danah.u = {
                     )
                 )
                 .appendTo(p.find('.d_container:first'))
-                .click(a => {
+                .click(n => {
                     a.preventDefault();
                     const l = $('.d_filter_item');
                     const b = $('.d_filter_item_btn_search_icon');
-                    const n = p.children(':last');
+                    const na = p.children(':last');
                     if (l.eq(i).hasClass('d_filter_item_active')) {
                         b.attr('style', 'margin-left:7px;transform-origin:center 7px;transition:transform .2s linear;transform:rotate(0deg);background-position-x:-40px;background-position-y:-0px;width:12px;height:12px');
                         l.removeClass('d_filter_item_active')
-                        n.addClass('d_filter_hidden');
+                        na.addClass('d_filter_hidden');
                     } else {
                         b.attr('style', 'margin-left:7px;transform-origin:center 7px;transition:transform .2s linear;transform:rotate(0deg);background-position-x:-40px;background-position-y:-0px;width:12px;height:12px');
                         b.eq(i).attr('style', 'margin-left: 7px; transform-origin: center 7px 0px; transition: transform 0.2s linear 0s; transform: rotate(-180deg); background-position: -40px 0px; width: 12px; height: 12px;');
                         l.removeClass('d_filter_item_active')
                         l.eq(i).addClass('d_filter_item_active');
-                        n.removeClass('d_filter_hidden');
+                        na.removeClass('d_filter_hidden');
                         p.find('.d_container:last').html('');
                         $.each((i == 0 ? ['최신순', '인기순', '베스트'] :
                             i == 1 ? ['모든공간', '원룸', '거실', '침실', '주방', '욕실', '베란다'] :
@@ -475,7 +537,7 @@ danah.u = {
     },
     tb: d => {
         const p = danah.c.div({ c: 'd_wiget_wrap' });
-        danah.c.a({ c: 'd_top_btn' })
+        danah.c.a({ c: 'd_top_btn', i: 'd_top_btn' })
             .append(danah.c.i({ c: 'fa fa-chevron-up' }))
             .appendTo(p.appendTo(d))
             .click(a => {
@@ -618,18 +680,18 @@ danah.c = {
     aside: d => { return $('<aside/>').addClass(d.c); },
     section: d => { return $('<section/>').addClass(d.c).html(d.ht); },
     form: d => { return $('<form/>').addClass(d.c).attr({id: d.i, enctype: d.et})},
-    input: d => { return $('<input/>').addClass(d.c).attr({ id: d.i, name: d.n, type: d.ty, value: d.v, placeholder: d.ph }); },
+    input: d => { return $('<input/>').addClass(d.c).attr({ id: d.i, name: d.n, type: d.ty, value: d.v, placeholder: d.ph, style: d.s }); },
     select: d => { return $('<select/>').addClass(d.c).attr({ n: d.n, id: d.i, style: d.s }); },
     option: d => { return $('<option/>').addClass(d.c).attr({ n: d.n, style: d.s, value: d.v}).text(d.t); }
 };
 
-$.prototype.danah_unllChk = d => {
+$.prototype.danahNullChk = d => {
     let flag = false;
     $.each(d, function() { if (this === '') flag = true; })
     return flag;
 };
 
-function Danah_L(d) {
+function DanahL(d) {
     const p = $('.d_row');
     const $i = $.img();
     for (let i = 0; i <= 20; i++) {
@@ -653,7 +715,7 @@ function Danah_L(d) {
                     )
                     .click(n => {
                         n.preventDefault();
-                        danah.s.d('게시글seq')
+                        danah.s.d('게시글seq');
                     }),
                     danah.c.aside({ c: 'd_post_action' })
                     .append(

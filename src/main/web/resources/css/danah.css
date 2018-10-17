@@ -2017,7 +2017,7 @@ a.d_filter_item_btn {
     flex: 1
 }
 
-.d_sidebar_action>div.mine {
+.d_sidebar_action>div.d_mine {
     -moz-flex: 0 0 24px;
     -ms-flex: 0 0 24px;
     flex: 0 0 24px
@@ -2097,7 +2097,7 @@ a.d_filter_item_btn {
 .d_sidebar_action_menu>button {
     width: 100px;
     height: 30px;
-    text-align: left;
+    text-align: center;
     border: none;
     background: transparent;
     padding: 0 10px;
@@ -2328,6 +2328,16 @@ form {
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
     overflow: hidden
 }
+.d_post_write {
+	position: relative; 
+	background: #ffffff; 
+	padding: 35px; 
+	width: 650px; 
+	margin-top: 1.5%; 
+	margin-left: auto; 
+	margin-right: auto;
+}
+
 
 @media only screen and (max-width: 767px) {
     .d_form_fields,
@@ -2364,7 +2374,7 @@ form {
 }
 
 .d_form_fields #d_upload_image>#d_upload_panel {
-    position: absolute;
+    position: inherit;
     width: 100%;
     height: 100%;
     overflow: hidden;
