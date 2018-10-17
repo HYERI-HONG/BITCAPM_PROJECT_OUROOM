@@ -6,6 +6,9 @@ jaekyung =(()=>{
        };
        return {init:init};
 })();
+jaekyung.main.nav=(()=>{
+	
+})();
 jaekyung.main={//메인페이지//변경
               mp:()=>{
                      $('#content').empty();     
@@ -115,7 +118,7 @@ jaekyung.main={//메인페이지//변경
                 let smmco = $('<div />');
                 let smmct = $('<div />');
                 smm.attr({style:"background-color: rgba(204, 82, 0, 0.25);"});
-                $('<div />').attr({id:"smmryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").addClass("woruddlrkshfogksekghdghdghd").appendTo(smm);
+                $('<div />').attr({id:"smmryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").appendTo(smm);
                 smma.addClass("container compogap__ryu").appendTo(smm);
                 smmh.attr({id:"smmryu"}).addClass("txtcw_ryu text-center txtcw__ryu").append(
                              $('<h1 />').append($('<strong>').addClass("ganjitxt__ryu").html("요약")),
