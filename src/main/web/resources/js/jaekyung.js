@@ -6,6 +6,9 @@ jaekyung =(()=>{
        };
        return {init:init};
 })();
+jaekyung.main.nav=(()=>{
+	
+})();
 jaekyung.main={//메인페이지//변경
               mp:()=>{
                      $('#content').empty();     
@@ -40,36 +43,34 @@ jaekyung.main={//메인페이지//변경
                      u.attr({id:"ididid"}).addClass("nav nav-pills nav-justified ").appendTo(dd);
                    
                      $(ip).each(function(i){
-                           $('<li role="presentation" data-scroll="'+this.id+'"/>').attr({style:"padding-top:7px"}).addClass("scrollS__ryu").append($('<a href="#'+this.id+'"/>').html(this.lst)).appendTo(u);
+                           $('<li role="presentation" data-scroll="'+this.id+'"/>').attr({style:"padding-top:7px"}).addClass("scrollS__ryu").append($('<a href="#'+this.id+'"/>').attr({style:"color:#262626"}).html(this.lst)).appendTo(u);
                      });
                      
                      $(()=>{
-                    	    var link = $('li.scrollS__ryu a');
-                    	    link.on('click',function(e){ //.click(e=>{}) 의 비jquery 방식
-                    	        var target = $($(this).attr('href')); 
-                    	        $('html, body').animate({
-                    	            scrollTop: target.offset().top
-                    	        },800);
-                    	        $(this).addClass('active');
-                    	        e.preventDefault();
-                    	    });
-                    	    $(window).on('scroll',function(){
-                                findPosition();
-                            });
-                            function findPosition(){
-                                $('div .woruddlrkshfogksekghdghdghd').each(function(){
-                                    if( ($(this).offset().top - $(window).scrollTop() ) <40){
-                                        $('li.scrollS__ryu').removeClass('active');
-                                        $('#ididid').find('[data-scroll="'+ $(this).attr('id') +'"]').addClass('active');
-                                    }
-                                });
-                            }
+                	    var link = $('li.scrollS__ryu a');
+                	    link.on('click',function(e){ //.click(e=>{}) 의 비jquery 방식
+                	        var target = $($(this).attr('href')); 
+                	        $('html, body').animate({
+                	            scrollTop: target.offset().top
+                	        },800);
+                	        $(this).addClass('active');
+                	        e.preventDefault();
+                	    });
+                	    $(window).scroll(()=>{
                             findPosition();
-                    	});
+                        });
+                        function findPosition(){
+                            $('div .woruddlrkshfogksekghdghdghd').each(function(){
+                                if( ($(this).offset().top - $(window).scrollTop() ) <40){
+                                    $('li.scrollS__ryu').removeClass('active');
+                                    $('#ididid').find('[data-scroll="'+ $(this).attr('id') +'"]').addClass('active');
+                                }
+                            });
+                        }
+                        findPosition();
+                     });
                      
-                     let didScroll;
-                     let lastScrollTop = 0;
-                     let delta = 5;
+                     let didScroll,lastScrollTop = 0,delta = 5;
                      let navbarHeight = $('body').outerHeight();
                      $(window).scroll(e=>{
                     	 didScroll = true;
@@ -117,51 +118,51 @@ jaekyung.main={//메인페이지//변경
                 let smmco = $('<div />');
                 let smmct = $('<div />');
                 smm.attr({style:"background-color: rgba(204, 82, 0, 0.25);"});
-                $('<div />').attr({id:"smmryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").addClass("woruddlrkshfogksekghdghdghd").appendTo(smm);
+                $('<div />').attr({id:"smmryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").appendTo(smm);
                 smma.addClass("container compogap__ryu").appendTo(smm);
                 smmh.attr({id:"smmryu"}).addClass("txtcw_ryu text-center txtcw__ryu").append(
-                             $('<h1 />').append($('<strong>').html("요약")),
+                             $('<h1 />').append($('<strong>').addClass("ganjitxt__ryu").html("요약")),
                              $('<hr />').addClass('txthr10__ryu'),
-                             $('<span aria-hidden="true" />').attr({style:"height:40px; width:40px"}).addClass('glyphicon glyphicon-certificate')
+                             $('<span aria-hidden="true" />').attr({style:"height:40px; width:40px"}).addClass('glyphicon glyphicon-certificate glyalone__ryu')
                 ).appendTo(smma);
                 smmc.attr({style:"margin-top:40px;"}).appendTo(smma);
                 smmco.appendTo(smmc);
                 smmco.attr({style:"display:flex"}).addClass("row-fluid").append(
-                     $('<div />').attr({style:"border:1px solid;"}).addClass("col-sm-6 bgcw__ryu").append(
+                     $('<div />').attr({style:"border:1px solid;"}).addClass("col-lg-6 col-md-12 bgcw__ryu").append(
                            $('<img src="'+$.img()+'/jaekyung/1.PNG" />').addClass("img-responsive center-block")
                      ),
-                     $('<div />').addClass("col-sm-6 pr0__ryu ml15__ryu").append(
-                                  $('<div />').addClass("col-sm-12 pr0__ryu ").append(
-                                  $('<div />').attr({style:"border:1px solid "}).addClass("col-sm-12 bgcw__ryu pa0__ryu").append(
+                     $('<div />').addClass("col-lg-6 col-sm-12 pr0__ryu ml15__ryu").append(
+                                  $('<div />').addClass("col-md-12 pr0__ryu ").append(
+                                  $('<div />').attr({style:"border:1px solid "}).addClass("col-md-12 bgcw__ryu pa0__ryu").append(
                                                 $('<img src="'+$.img()+'/jaekyung/2.PNG" />').addClass("img-responsive center-block")
                                   ),
-                                  $('<div />').attr({style:"border:1px solid;margin-bottom:15px ;border-top:0px"}).addClass("col-sm-12 bgcw__ryu pa0__ryu").append(
-                                                $('<div />').addClass("col-sm-2").append($('<span />').attr({style:"color:red"}).html("<h4><strong>TODAY</strong></h4>")),
-                                                $('<div />').addClass("col-sm-3 ").html("<h5>게시글 조회수</h5>")
+                                  $('<div />').attr({style:"border:1px solid;margin-bottom:15px ;border-top:0px; display:flex"}).addClass("col-md-12 bgcw__ryu pa0__ryu").append(
+                                                $('<div />').addClass("col-md-2").append($('<span />').attr({style:"color:red"}).html("<h4><strong>TODAY</strong></h4>")),
+                                                $('<div />').addClass("col-md-3 ").html("<h5>게시글 조회수</h5>")
                                   )
                                   ),
-                                  $('<div />').addClass("col-sm-12 pr0__ryu").append(
-                                  $('<div />').attr({style:"border:1px solid"}).addClass("col-sm-12 bgcw__ryu").append(
+                                  $('<div />').addClass("col-md-12 pr0__ryu").append(
+                                  $('<div />').attr({style:"border:1px solid"}).addClass("col-md-12 bgcw__ryu").append(
                                                 $('<img src="'+$.img()+'/jaekyung/3.PNG" />').addClass("img-responsive center-block")
                                   ),
-                                  $('<div />').attr({style:"border:1px solid ;border-top:0px ;display:flex"}).addClass("col-sm-12 bgcw__ryu pa0__ryu mb0__ryu").append(
-                                                $('<div />').addClass("col-sm-2").append($('<span />').attr({style:"color:red"}).html("<h4><strong>TODAY</strong></h4>")),
-                                                $('<div />').addClass("col-sm-3  ").html("<h5>신규 가입자</h5>")
+                                  $('<div />').attr({style:"border:1px solid ;border-top:0px ;display:flex"}).addClass("col-md-12 bgcw__ryu pa0__ryu mb0__ryu").append(
+                                                $('<div />').addClass("col-md-2").append($('<span />').attr({style:"color:red"}).html("<h4><strong>TODAY</strong></h4>")),
+                                                $('<div />').addClass("col-md-3  ").html("<h5>신규 가입자</h5>")
                                   ))
                      )
                 );
                 smmct.appendTo(smmc);
                 smmct.attr({style:"display:flex"}).addClass("row-fluid margint20__ryu").append(
-                     $('<div />').attr({style:"border:1px solid; margin-right:15px"}).addClass("col-sm-6 bgcw__ryu").append(
+                     $('<div />').attr({style:"border:1px solid; margin-right:15px"}).addClass("col-md-6 bgcw__ryu").append(
                                   $('<img src="'+$.img()+'/jaekyung/4.PNG" />').addClass("img-responsive center-block")
                      ),
-                     $('<div />').addClass("col-sm-3").append(
-                                  $('<div />').attr({style:"border:1px solid; "}).addClass("col-sm-12 bgcw__ryu").append(
+                     $('<div />').addClass("col-md-3").append(
+                                  $('<div />').attr({style:"border:1px solid; "}).addClass("col-md-12 bgcw__ryu").append(
                                                 $('<img src="'+$.img()+'/jaekyung/5.PNG" />').addClass("img-responsive center-block")
                                   )
                      ),
-                     $('<div />').addClass("col-sm-3 pr0__ryu").append(
-                                  $('<div />').attr({style:"border:1px solid"}).addClass("col-sm-12 bgcw__ryu").append(
+                     $('<div />').addClass("col-md-3 pr0__ryu").append(
+                                  $('<div />').attr({style:"border:1px solid"}).addClass("col-md-12 bgcw__ryu").append(
                                                 $('<img src="'+$.img()+'/jaekyung/6.PNG" />').addClass("img-responsive center-block")
                                   )
                      )
@@ -180,15 +181,15 @@ jaekyung.main={//메인페이지//변경
                 vsta.addClass("container compogap__ryu").appendTo(vst);
                 $('<div />').append(
                              vsth.addClass("txtcw_ryu text-center").append(
-                                    $('<h1 />').append($('<strong>').attr({style:"color:#4d4d4d;"}).html("방문자통계")),
+                                    $('<h1 />').append($('<strong>').addClass("ganjitxt_4d4d4d__ryu").html("방문자통계")),
                                     $('<hr />').addClass('txthr20__ryu'),
-                                    $('<span aria-hidden="true" />').attr({style:"color:#4d4d4d;"}).addClass('glyphicon glyphicon-certificate')
+                                    $('<span aria-hidden="true" />').attr({style:"color:#4d4d4d;"}).addClass('glyphicon glyphicon-certificate glyalone__ryu')
                        )
                 ).appendTo(vsta);
                 vstc.attr({style:"margin-top:40px"}).appendTo(vsta);
                 vstco.appendTo(vstc);
                 vstco.addClass("row-fluid").append(
-                             $('<div />').addClass("col-sm-12 btb1__ryu borderG__ryu").append(
+                             $('<div />').addClass("col-md-12 btb1__ryu borderG__ryu").append(
                                          $('<img src="'+$.img()+'/jaekyung/7.PNG" />').addClass("img-responsive center-block margintb15__ryu")   
                              )                         
                 );
@@ -201,21 +202,37 @@ jaekyung.main={//메인페이지//변경
                 let tr = $('<tr />');
                 let tp = $('<p />');
                 vstct.addClass("row-fluid").append(
-                             $('<div />').attr({style:" padding: 20px 40px 20px 40px ;border-top:0px "}).addClass("col-sm-12  btb1__ryu borderG__ryu").append(
+                             $('<div />').attr({style:" padding: 20px 40px 20px 40px ;border-top:0px "}).addClass("col-md-12  btb1__ryu borderG__ryu").append(
                                            tp,
                                            t.attr({style:"border-top:1px solid; border-bottom:1px solid"}).addClass("table table-striped table-hover borderG__ryu")
                              )
                 );
+                let l =$('<label />');
                 tp.append(
-                             $('<label />').html('<strong>상세데이터 열기 &nbsp;&nbsp;</strong> <div class="material-switch pull-right"><input id="vstDtSwitch" name="vstDtSwitch" type="checkbox"/><label for="vstDtSwitch" class="label-warning"></label></div>'
-                                    )
+                		l
+                         .html('<strong>상세데이터 열기 &nbsp;&nbsp;</strong>'
+                 			+' <div class="material-switch pull-right">'
+                 			+'<input id="vstDtSwitch" name="vstDtSwitch" value="1" type="checkbox" checked="checked"/>'
+                 			+'<label for="vstDtSwitch" class="label-warning"></label></div>'
+                                )
                 );
-                th.appendTo(t);
+                tb.appendTo(t);
+            	th.appendTo(t);
+                $(l).change (e=>{
+                	if($('#vstDtSwitch').val()==="1"){
+                		t.empty();
+                		$('#vstDtSwitch').prop('value',"2");
+                	}else{
+                    	tb.appendTo(t);
+                    	th.appendTo(t);
+                    	$('#vstDtSwitch').prop('value',"1");
+                	}
+                });
                 tr.appendTo(th);
                 $.each(r.list,(i,v)=>{
                             $('<th />').addClass("text-center").html(v).appendTo(tr)
                 });
-                tb.appendTo(t);
+                
                 $(rr).each(function(i){
                        $('<tr />').attr({style:"text-align:center"}).append(
                                     $('<td />').attr('width','10%').html(this.x1),
@@ -240,17 +257,17 @@ jaekyung.main={//메인페이지//변경
                 sbaa.addClass("container compogap__ryu").appendTo(sba);
                 $('<div />').append(
                               sbah.attr({id:"sbaryu"}).addClass(" text-center txtcw__ryu").append(
-                                    $('<h1 />').append($('<strong>').html("연령 별 매출 통계")),
+                                    $('<h1 />').append($('<strong>').addClass("ganjitxt__ryu").html("연령 별 매출 통계")),
                                     $('<hr />').addClass('txthr30__ryu'),
-                                    $('<span aria-hidden="true" />').addClass('glyphicon glyphicon-certificate')
+                                    $('<span aria-hidden="true" />').addClass('glyphicon glyphicon-certificate glyalone__ryu')
                        )
                 ).appendTo(sbaa);
                 sbac.attr({style:"margin-top:40px"}).appendTo(sbaa);
                 sbaco.appendTo(sbac);
                 sbaco.addClass("row-fluid").append(
-                             $('<div />').addClass("col-sm-12 btb1__ryu borderG__ryu").append(
-                                           $('<div />').attr({style:"padding-right:0px"}).addClass("col-sm-10").append($('<img />').attr('src',$.img()+'/jaekyung/8.PNG').attr({style:"margin-right:0px"}).addClass("img-responsive center-block margintb15__ryu")),
-                                           $('<div />').attr({style:"padding-left:0px; margin-top:75px"}).addClass("col-sm-2").append($('<div />').append($('<img />').attr('src',$.img()+'/jaekyung/9.PNG').addClass('img-responsive center-block margintb15__ryu')))
+                             $('<div />').addClass("col-md-12 btb1__ryu borderG__ryu").append(
+                                           $('<div />').attr({style:"padding-right:0px"}).addClass("col-md-10").append($('<img />').attr('src',$.img()+'/jaekyung/8.PNG').attr({style:"margin-right:0px"}).addClass("img-responsive center-block margintb15__ryu")),
+                                           $('<div />').attr({style:"padding-left:0px; margin-top:75px"}).addClass("col-md-2").append($('<div />').append($('<img />').attr('src',$.img()+'/jaekyung/9.PNG').addClass('img-responsive center-block margintb15__ryu')))
                                                  
                              )                         
                 );
@@ -263,17 +280,32 @@ jaekyung.main={//메인페이지//변경
                 let tr = $('<tr />');
                 let tp = $('<p />');
                 sbact.addClass("row-fluid").append(
-                             $('<div />').attr({style:" padding: 20px 40px 20px 40px ;border-top:0px "}).addClass("col-sm-12  btb1__ryu borderG__ryu").append(
+                             $('<div />').attr({style:" padding: 20px 40px 20px 40px ;border-top:0px "}).addClass("col-md-12  btb1__ryu borderG__ryu").append(
                                            tp,
                                            t.attr({style:"border-top:1px solid; border-bottom:1px solid"}).addClass("table table-striped table-hover borderG__ryu")
                              )
                 );
+                let l =$('<label />');
                 tp.append(
-                             $('<label />').html('<strong>상세데이터 열기 &nbsp;&nbsp;</strong> <div class="material-switch pull-right"><input id="sbaDtSwitch" name="sbaDtSwitch" type="checkbox"/><label for="sbaDtSwitch" class="label-warning"></label></div>'
-                                    )
+                		l
+                         .html('<strong>상세데이터 열기 &nbsp;&nbsp;</strong>'
+                 			+' <div class="material-switch pull-right">'
+                 			+'<input id="sbaDtSwitch" name="sbaDtSwitch" value="1" type="checkbox" checked="checked"/>'
+                 			+'<label for="sbaDtSwitch" class="label-warning"></label></div>'
+                                )
                 );
-                th.appendTo(t);
-                tr.appendTo(th);
+                tb.appendTo(t);
+            	th.appendTo(t);
+                $(l).change (e=>{
+                	if($('#sbaDtSwitch').val()==="1"){
+                		t.empty();
+                		$('#sbaDtSwitch').prop('value',"2");
+                	}else{
+                    	tb.appendTo(t);
+                    	th.appendTo(t);
+                    	$('#sbaDtSwitch').prop('value',"1");
+                	}
+                });
                 $.each(r.list,(i,v)=>{
                             $('<th />').addClass("text-center").html(v).appendTo(tr)
                 });
@@ -299,16 +331,16 @@ jaekyung.main={//메인페이지//변경
                 ctgr1a.addClass("container compogap__ryu").appendTo(ctgr1);
                 $('<div />').append(
                              ctgr1h.attr({id:"ctgr1ryu"}).addClass("text-center").append(
-                                    $('<h1 />').append($('<strong>').attr({style:"color:#4d4d4d;"}).html("1차 카테고리 별 매출 통계")),
+                                    $('<h1 />').append($('<strong>').addClass("ganjitxt_4d4d4d__ryu").html("1차 카테고리 별 매출 통계")),
                                     $('<hr />').addClass('txthr45__ryu'),
-                                    $('<span aria-hidden="true" />').attr({style:"color:#4d4d4d;"}).addClass('glyphicon glyphicon-certificate')
+                                    $('<span aria-hidden="true" />').attr({style:"color:#4d4d4d;"}).addClass('glyphicon glyphicon-certificate glyalone__ryu')
                        ).appendTo(ctgr1a)
                             
                 ).appendTo(ctgr1a);
                 ctgr1c.attr({style:"margin-top:40px"}).appendTo(ctgr1a);
                 ctgr1co.appendTo(ctgr1c);
                 ctgr1co.addClass("row-fluid").append(
-                             $('<div />').addClass("col-sm-12 btb1__ryu borderG__ryu").append(
+                             $('<div />').addClass("col-md-12 btb1__ryu borderG__ryu").append(
                                          $('<img src="'+$.img()+'/jaekyung/10.PNG" />').addClass("img-responsive center-block margintb15__ryu")   
                              )                         
                 );
@@ -326,13 +358,13 @@ jaekyung.main={//메인페이지//변경
                              ctgr2h.addClass("text-center").append(
                                     $('<h1 />').append($('<strong>').attr({style:"color:#4d4d4d;"}).html("2차 카테고리 별 매출 통계")),
                                     $('<hr />').addClass('txthr45__ryu'),
-                                    $('<span aria-hidden="true" />').attr({style:"color:#4d4d4d;"}).addClass('glyphicon glyphicon-certificate')
+                                    $('<span aria-hidden="true" />').attr({style:"color:#4d4d4d;"}).addClass('glyphicon glyphicon-certificate glyalone__ryu')
                        )
                 ).appendTo(ctgr2a);
                 ctgr2c.attr({style:"margin-top:40px"}).appendTo(ctgr2a);
                 ctgr2co.appendTo(ctgr2c);
                 ctgr2co.addClass("row-fluid").append(
-                             $('<div />').addClass("col-sm-12 btb1__ryu borderG__ryu").append(
+                             $('<div />').addClass("col-md-12 btb1__ryu borderG__ryu").append(
                                          $('<img src="'+$.img()+'/jaekyung/10.PNG" />').addClass("img-responsive center-block margintb15__ryu")   
                              )                         
                 );
@@ -350,20 +382,20 @@ jaekyung.main={//메인페이지//변경
                 mbra.addClass('container compogap__ryu').appendTo(mbr);
                 $('<div />').append(     
                              mbrh.attr({id:"mbrryu"}).addClass("txtcw__ryu text-center").append(
-                                           $('<h1 />').append($('<strong>').html("가입자 통계")),
+                                           $('<h1 />').append($('<strong>').addClass("ganjitxt__ryu").html("가입자 통계")),
                                            $('<hr />').addClass('txthr20__ryu'),
-                                           $('<span aria-hidden="true" />').addClass('glyphicon glyphicon-certificate')
+                                           $('<span aria-hidden="true" />').addClass('glyphicon glyphicon-certificate glyalone__ryu')
                              )
                 ).appendTo(mbra)
                 mbrc.appendTo(mbra);
                 mbrco.attr({style:"display:flex"}).addClass("row-fluid ").appendTo(mbrc);
-                $('<div />').addClass('col-sm-6').append(
-                             $('<div />').attr({style:"border:1px solid"}).addClass('col-sm-12 bgcw__ryu').append(
+                $('<div />').addClass('col-md-6').append(
+                             $('<div />').attr({style:"border:1px solid"}).addClass('col-md-12 bgcw__ryu').append(
                                            $('<img src="'+$.img()+'/jaekyung/11.PNG" />').addClass("img-responsive center-block ")
                              )
                 ).appendTo(mbrco);
-                $('<div />').addClass('col-sm-6').append(
-                             $('<div />').attr({style:"border:1px solid"}).addClass('col-sm-12 bgcw__ryu').append(
+                $('<div />').addClass('col-md-6').append(
+                             $('<div />').attr({style:"border:1px solid"}).addClass('col-md-12 bgcw__ryu').append(
                                            $('<img src="'+$.img()+'/jaekyung/12.PNG" />').addClass("img-responsive center-block ")
                              )
                 ).appendTo(mbrco);
@@ -378,17 +410,32 @@ jaekyung.main={//메인페이지//변경
                 let tr = $('<tr />');
                 let tp = $('<p />');
                 mbrct.addClass("row-fluid").append(
-                             $('<div />').attr({style:" padding: 20px 40px 20px 40px"}).addClass("col-sm-12  btb1__ryu borderG__ryu margint20__ryu").append(
+                             $('<div />').attr({style:" padding: 20px 40px 20px 40px"}).addClass("col-md-12  btb1__ryu borderG__ryu margint20__ryu").append(
                                            tp,
                                            t.attr({style:"border-top:1px solid; border-bottom:1px solid"}).addClass("table table-striped table-hover borderG__ryu")
                              )
                 );
+                let l =$('<label />');
                 tp.append(
-                             $('<label />').html('<strong>상세데이터 열기 &nbsp;&nbsp;</strong> <div class="material-switch pull-right"><input id="mbrDtSwitch" name="mbrDtSwitch" type="checkbox"/><label for="mbrDtSwitch" class="label-warning"></label></div>'
-                                    )
+                		l
+                         .html('<strong>상세데이터 열기 &nbsp;&nbsp;</strong>'
+                 			+' <div class="material-switch pull-right">'
+                 			+'<input id="mbrDtSwitch" name="mbrDtSwitch" value="1" type="checkbox" checked="checked"/>'
+                 			+'<label for="mbrDtSwitch" class="label-warning"></label></div>'
+                                )
                 );
-                th.appendTo(t);
-                tr.appendTo(th);
+                tb.appendTo(t);
+            	th.appendTo(t);
+                $(l).change (e=>{
+                	if($('#mbrDtSwitch').val()==="1"){
+                		t.empty();
+                		$('#mbrDtSwitch').prop('value',"2");
+                	}else{
+                    	tb.appendTo(t);
+                    	th.appendTo(t);
+                    	$('#mbrDtSwitch').prop('value',"1");
+                	}
+                });
                 $.each(r.list,(i,v)=>{
                             $('<th />').addClass("text-center").html(v).appendTo(tr)
                 });
@@ -415,15 +462,15 @@ jaekyung.main={//메인페이지//변경
                 abbaa.addClass("container compogap__ryu").appendTo(abba);
                 $('<div />').append(
                              abbah.attr({id:"abbaryu"}).addClass("text-center").append(
-                                    $('<h1 />').append($('<strong>').attr({style:"color:#4d4d4d;"}).html("연령 대비 평균 구매액 통계")),
+                                    $('<h1 />').append($('<strong>').addClass("ganjitxt_4d4d4d__ryu").html("연령 대비 평균 구매액 통계")),
                                     $('<hr />').addClass('txthr45__ryu'),
-                                    $('<span aria-hidden="true" />').attr({style:"color:#4d4d4d;"}).addClass('glyphicon glyphicon-certificate')
+                                    $('<span aria-hidden="true" />').attr({style:"color:#4d4d4d;"}).addClass('glyphicon glyphicon-certificate glyalone__ryu')
                        )
                 ).appendTo(abbaa);
                 abbac.attr({style:"margin-top:40px"}).appendTo(abbaa);
                 abbaco.appendTo(abbac);
                 abbaco.addClass("row-fluid").append(
-                             $('<div />').addClass("col-sm-12 btb1__ryu borderG__ryu").append(
+                             $('<div />').addClass("col-md-12 btb1__ryu borderG__ryu").append(
                                          $('<img src="'+$.img()+'/jaekyung/13.PNG" />').addClass("img-responsive center-block margintb15__ryu")   
                              )                         
                 );
@@ -441,14 +488,14 @@ jaekyung.main={//메인페이지//변경
                 vbta.addClass('container compogap__ryu').appendTo(vbt);
                 $('<div />').append(     
                              vbth.addClass("txtcw__ryu text-center").append(
-                                           $('<h1 />').append($('<strong>').html("시간 별 방문자 통계")),
+                                           $('<h1 />').append($('<strong>').addClass("ganjitxt__ryu").html("시간 별 방문자 통계")),
                                            $('<hr />').addClass('txthr35__ryu'),
-                                           $('<span aria-hidden="true" />').addClass('glyphicon glyphicon-certificate')
+                                           $('<span aria-hidden="true" />').addClass('glyphicon glyphicon-certificate glyalone__ryu glyalone__ryu')
                              )
                 ).appendTo(vbta)
                 vbtc.appendTo(vbta);
                 vbtco.addClass("row-fluid btb1__ryu").appendTo(vbtc);
-                       $('<div />').attr({style:"border:1px solid"}).addClass('col-sm-12 bgcw__ryu').append(
+                       $('<div />').attr({style:"border:1px solid"}).addClass('col-md-12 bgcw__ryu').append(
                                     $('<img src="'+$.img()+'/jaekyung/14.PNG" />').addClass("img-responsive center-block ")
                 ).appendTo(vbtco);
                 vbtct.appendTo(vbtc);
@@ -462,18 +509,33 @@ jaekyung.main={//메인페이지//변경
                 let tp = $('<p />');
                 vbtct.addClass("row-fluid").append(
                              $('<div />').attr({style:" padding: 20px 40px 20px 40px"})
-                                  .addClass("col-sm-12  btb1__ryu borderG__ryu margint20__ryu").append(
+                                  .addClass("col-md-12  btb1__ryu borderG__ryu margint20__ryu").append(
                                            tp,
                                            t.attr({style:"border-top:1px solid; border-bottom:1px solid"})
                                                 .addClass("table table-striped table-hover borderG__ryu")
                              )
                 );
+                let l =$('<label />');
                 tp.append(
-                             $('<label />').html('<strong>상세데이터 열기 &nbsp;&nbsp;</strong> <div class="material-switch pull-right"><input id="vbtDtSwitch" name="vbtDtSwitch" type="checkbox"/><label for="vbtDtSwitch" class="label-warning"></label></div>'
-                                    )
+                		l
+                         .html('<strong>상세데이터 열기 &nbsp;&nbsp;</strong>'
+                 			+' <div class="material-switch pull-right">'
+                 			+'<input id="vbtDtSwitch" name="vbtDtSwitch" value="1" type="checkbox" checked="checked"/>'
+                 			+'<label for="vbtDtSwitch" class="label-warning"></label></div>'
+                                )
                 );
-                th.appendTo(t);
-                tr.appendTo(th);
+                tb.appendTo(t);
+            	th.appendTo(t);
+                $(l).change (e=>{
+                	if($('#vbtDtSwitch').val()==="1"){
+                		t.empty();
+                		$('#vbtDtSwitch').prop('value',"2");
+                	}else{
+                    	tb.appendTo(t);
+                    	th.appendTo(t);
+                    	$('#vbtDtSwitch').prop('value',"1");
+                	}
+                });
                 $.each(r.list,(i,v)=>{
                             $('<th />').addClass("text-center").html(v).appendTo(tr)
                 });
@@ -500,18 +562,18 @@ jaekyung.main={//메인페이지//변경
                 cbga.addClass("container compogap__ryu").appendTo(cbg);
                 $('<div />').append(
                              cbgh.attr({id:"cbgryu"}).addClass("text-center").append(
-                                    $('<h1 />').append($('<strong>').attr({style:"color:#4d4d4d;"}).html("성별 카테고리 통계")),
+                                    $('<h1 />').append($('<strong>').addClass("ganjitxt_4d4d4d__ryu").html("성별 카테고리 통계")),
                                     $('<hr />').addClass('txthr35__ryu'),
-                                    $('<span aria-hidden="true" />').attr({style:"color:#4d4d4d;"}).addClass('glyphicon glyphicon-certificate')
+                                    $('<span aria-hidden="true" />').addClass('glyphicon glyphicon-certificate glyalone__ryu')
                        )
                 ).appendTo(cbga);
                 cbgc.attr({style:"margin-top:40px"}).appendTo(cbga);
                 cbgco.appendTo(cbgc);
                 cbgco.addClass("row-fluid");
-                       $('<div />').addClass("col-sm-7 btb1__ryu borderG__ryu").append(
+                       $('<div />').addClass("col-md-7 btb1__ryu borderG__ryu").append(
                                   $('<img src="'+$.img()+'/jaekyung/13.PNG" />').addClass("img-responsive center-block margintb15__ryu")   
                        ).appendTo(cbgco);
-                       $('<div />').addClass("col-sm-4 col-sm-offset-1 btb1__ryu borderG__ryu").append(
+                       $('<div />').addClass("col-md-4 col-md-offset-1 btb1__ryu borderG__ryu").append(
                                     $('<img src="'+$.img()+'/jaekyung/13.PNG" />').addClass("img-responsive center-block margintb15__ryu")   
                        ).appendTo(cbgco);
                 return cbg;

@@ -665,7 +665,7 @@ a.d_filter_item_btn {
 }
 
 .d_post_img>img {
-    transition: opacity .3s ease;
+    transition:.3s;
     position: absolute;
     width: 100%;
     display: block;
