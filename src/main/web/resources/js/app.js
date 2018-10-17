@@ -88,7 +88,7 @@ app.service ={
 		$('<div/>').addClass('section').attr({id:"section_community"}).appendTo($('#main'));
 		$('<div/>').addClass('section').attr({id:"section_category"}).appendTo($('#main'));
 		$('<div/>').addClass('section').attr({id:"section_store"}).appendTo($('#main'));
-		
+		// 변경변경
 		
 	}
 };
