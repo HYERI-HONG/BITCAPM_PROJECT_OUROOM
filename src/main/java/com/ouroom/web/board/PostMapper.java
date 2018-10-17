@@ -6,11 +6,11 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BoardMapper {
-	public void post(Board b);
+public interface PostMapper {
+	public void inseart(Post p);
 	public List<?> list(Map<?, ?> p);
-	public Board get(Board p);
+	public Post retrieve(Post p);
 	public Integer count(Map<?, ?> p);
-	public void update(Board p);
-	public void delete(Board p);
+	public void update(Post p);
+	public void delete(Post p);
 }

@@ -93,8 +93,9 @@
   margin-top: -0.8em;
   left: 8px;
   right: 8px;
-  z-index: 1044; }
-  .mfp-preloader a {
+  z-index: 1044; 
+}
+.mfp-preloader a {
     color: #CCC; }
     .mfp-preloader a:hover {
       color: #FFF; }
@@ -716,14 +717,7 @@ img.mfp-img {
     color: #ffffff;
     line-height: 48px;
     text-align: center;
-    position: fixed;
-<<<<<<< HEAD
-=======
-
-
->>>>>>> refs/remotes/origin/jun
-    
-    
+    position: fixed;   
 }
 #selected_options_panel>.options>.option>.count_cost>.input {
     float: left;

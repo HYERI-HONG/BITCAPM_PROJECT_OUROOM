@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class BoardController {
-	static final Logger logger = LoggerFactory.getLogger(BoardController.class); 
-	//@Autowired Board b;
-	//@Autowired BoardMapper bm;
+public class PostController {
+	static final Logger logger = LoggerFactory.getLogger(PostController.class); 
+	//@Autowired post b;
+	//@Autowired postMapper bm;
 	//@Autowired Map<String, Object> m;
 	
-	@PostMapping("/boards/write")
-	public @ResponseBody void post(@RequestBody Board p) {
+	@PostMapping("/posts/write")
+	public @ResponseBody void write(@RequestBody Post p) {
 		Util.log.accept("등록하기");
 		Util.log.accept(p.toString());
 		//map.clear();
@@ -28,31 +28,31 @@ public class BoardController {
 		//tx.write(map);
 	}
 	
-	@GetMapping("/boards/list/{pageNo}")
+	@GetMapping("/posts/list/{pageNo}")
 	public @ResponseBody Map<String, Object> list(@PathVariable String p) {
-		logger.info("boards/list 진입 .. {} "," 들어옴 ");
+		logger.info("posts/list 진입 .. {} "," 들어옴 ");
 		Util.log.accept("리스트");
 		Util.log.accept(p.toString());
 		Map<String,Object> map = null; 
 		return map;
 	}
 	
-	@GetMapping("/boards/detail/{pageNo}/{id}")
-	public @ResponseBody Board get(@PathVariable String p1, @PathVariable String p2) {
+	@GetMapping("/posts/detail/{pageNo}/{id}")
+	public @ResponseBody Post get(@PathVariable String p1, @PathVariable String p2) {
 		Util.log.accept("정보");
 		Util.log.accept(p1.toString());
 		Util.log.accept(p2.toString());
 		return null;
 	}
 	
-	@PostMapping("/boards/edit")
-	public @ResponseBody void edit(@RequestBody Board p) {
+	@PostMapping("/posts/edit")
+	public @ResponseBody void edit(@RequestBody Post p) {
 		Util.log.accept("수정하기");
 		Util.log.accept(p.toString());
 	}
 	
-	@PostMapping("/boards/delete")
-	public @ResponseBody void delete(@RequestBody Board p) {
+	@PostMapping("/posts/remove")
+	public @ResponseBody void delete(@RequestBody Post p) {
 		Util.log.accept("삭제하기");
 		Util.log.accept(p.toString());
 	}

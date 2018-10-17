@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Component
 @Data @Lazy
-public class Board {
+public class Post {
 	private int BOARD_SEQ;
 	private String BOARD_TITLE;
 	private String BOARD_CONTENT;
