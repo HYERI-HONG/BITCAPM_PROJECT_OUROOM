@@ -1,6 +1,5 @@
 "use strict";
 var jun = jun || {};
-//ㅠㅠ
 jun =(()=>{
        var init=()=>{
               jun.main.store();
