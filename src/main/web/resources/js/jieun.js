@@ -9,6 +9,7 @@ jieun=(()=>{
 		img = $.img();
 		w=$('#wrapper');
 		content=$('#content');
+		nav=$('<div id="je_selling_helper_wrap"/>').append($('<div id="je_selling-helper" class="navbar navbar-default"/>')).appendTo(w);
 
 		var detail=()=>{
 			 
@@ -19,6 +20,8 @@ jieun=(()=>{
 				let section2 =$('<section/>').addClass('je_row1').appendTo(content);
 				let je_div_cover = $('<div/>').addClass('je_div_cover');
 				let je_div_cover_info = $('<div/>').addClass('je_div_cover_info');
+				
+				
 				let arr = ['a','b'];
 				$.each(arr,function(i,j){
 					let col = $('<div>').addClass('je_col'+i).appendTo(section).appendTo(content);
@@ -122,7 +125,8 @@ jieun=(()=>{
 				$('<div id="je_total_1" class="col-md-9"/>').appendTo($('#je_total_div'));
 				$('<div id="je_total_2" class="col-md-3"/>').appendTo($('#je_total_div'));
 				
-				$('<div id="je_selling_helper_wrap" class="sticky-top"/>').append($('<div id="je_selling-helper" class="navbar navbar-default"/>')).appendTo(section2);
+
+				nav.appendTo(section2);
 				$('#je_selling_helper_wrap').appendTo($('#je_total_1'));
 				let section3 = $('<section id="je_col-2"/>').append($('<nav id="je_product_tab" />')).appendTo($('#je_selling_helper'));
 				let ul = $('<ul class="nav nav-tabs nav-justified"/>').appendTo($('.navbar'));
