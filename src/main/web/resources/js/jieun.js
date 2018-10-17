@@ -16,6 +16,7 @@ jieun=(()=>{
 				content.empty();
 				
 				let section =$('<section/>').addClass('je_row').appendTo(content);
+				let section2 =$('<section/>').addClass('je_row1').appendTo(content);
 				let je_div_cover = $('<div/>').addClass('je_div_cover');
 				let je_div_cover_info = $('<div/>').addClass('je_div_cover_info');
 				let arr = ['a','b'];
@@ -79,8 +80,8 @@ jieun=(()=>{
 				$('<button/>').attr({id:'je_sharebtn',class:'btn btn-primary btn-lg'}).appendTo(je_div_cover_info);
 				$('#je_sharebtn').append(
 						$('<span/>').addClass('glyphicon glyphicon-share').attr("aria-hidden","true"),
-						$('<span/>').addClass('je_action__btn').text('공유'),
-						$('<span/>').addClass('je_action__btn1').text('1.03K')
+						$('<span style="font-size: 13px; margin-right:6px; margin-left:6px"/>').addClass('je_action__btn').text('공유'),
+						$('<span style="font-size: 13px; margin-right:3px"/>').addClass('je_action__btn1').text('1.03K')
 						
 				);				
 
@@ -92,15 +93,7 @@ jieun=(()=>{
 						)).appendTo(je_div_cover_info);
 				
 
-				
-				let strong = $('<strong/>').text('레이디가구');
-				let h6 = $('<h6/>').text('같은 브랜드 더 보기');
-				let abrand = $('<a/>').addClass('je_brand_more_btn').attr({href:"https://ohou.se/productions/feed?order=buy&query=%EB%A0%88%EC%9D%B4%EB%94%94%EA%B0%80%EA%B5%AC&selling=true"}).appendTo(p).appendTo(je_div_cover_info);
-				let home_icon = $('<span/>').addClass('glyphicon glyphicon-home je_homeicon').attr('aria-hidden','true').appendTo(abrand);
-				home_icon.appendTo('.je_brand_more_btn');
-				strong.appendTo('.je_brand_more_btn');
-			    h6.appendTo(strong);
-			    span4.appendTo(h6);			    
+	    
 				
 				$('<select/>').attr({id:'je_selectbtn'}).append(
 					$('<option/>').attr("value","0").text('사이즈'),
@@ -115,17 +108,79 @@ jieun=(()=>{
 				$('<span id="je_temp"/>').text('주문금액').appendTo($('.je_total_price'));
 				//($('<span/>').addClass('je_text_black').html('<strong id="je_won">0</strong>원')).appendTo($('.je_total_price'));
 				//$('<strong id="je_won"/>').addClass('je_text-heading').appendTo($('.je_text_black'));
-				$('#je_temp').html($('<label style="margin-right: 450px">주문금액</label><span style="width:20px,margin-right:100px"><strong id="je_won">0</strong>원</span>'));
+				$('#je_temp').html('<label style="margin-right: 400px">주문금액</label><span style="width:20px,margin-right:100px"><strong id="je_won">0</strong>원</span>');
 				
 				
-				let buttons=$('<div id="je_buttons"/>')
+				let buttons=$('<div id="je_buttons" style="margin-top: 20px"/>')
 				buttons.appendTo(je_div_cover_info);
 				$('<button id="je_get_basket"/>').text('장바구니 담기').appendTo(buttons);
 				$('<button id="je_buy"/>').text('구매하기').appendTo(buttons);
 
+				//
+				
+				$('<div id="je_total_div"/>').appendTo(section2);
+				$('<div id="je_total_1" class="col-md-9"/>').appendTo($('#je_total_div'));
+				$('<div id="je_total_2" class="col-md-3"/>').appendTo($('#je_total_div'));
+				
+				$('<div id="je_selling_helper_wrap" class="sticky-top"/>').append($('<div id="je_selling-helper" class="navbar navbar-default"/>')).appendTo(section2);
+				$('#je_selling_helper_wrap').appendTo($('#je_total_1'));
+				let section3 = $('<section id="je_col-2"/>').append($('<nav id="je_product_tab" />')).appendTo($('#je_selling_helper'));
+				let ul = $('<ul class="nav nav-tabs nav-justified"/>').appendTo($('.navbar'));
+				$('<li class="col2 active"/>').attr({'data-target':'product-info',role:'presentation'}).text('상품정보').appendTo(ul);
+				$('<li class="col2" id="je_count"/>').attr({'data-target':'product-review',role:'presentation'}).text('리뷰').appendTo(ul);
+				$('#je_count').append($('<span/>').text('(233)'));
+				$('<li class="col2"/>').attr({'data-target':'product-shipping',role:'presentation'}).html('<span class="lg">배송/교환/환불</span>').appendTo(ul);
 
 				
-			
+				let total_wrap = $('<div id="je_total_wrap" style="padding:70px 30px"/>').appendTo($('#je_total_1'));
+				
+				($('<section id="je_notice"/>').append(
+						$('<img class="je_notice_img"/>').attr({src:img+'/jieun/notice_1.jpg'}),
+						$('<p id="je_product_notice"/>').html('<p>구매 후<strong>15영업일 이내 발송</strong>되는 상품입니다.</p>'),
+						$('<img class="je_notice_img"/>').attr({src:img+'/jieun/notice_2.jpg'}))).appendTo(total_wrap);
+
+				$('<section id="je_detail">').appendTo(total_wrap);
+				($('<div id="je_detail_contents" class="je_detail_hidden"/>').append($('<div style="margin: 0px; padding: 0px; width: 100%; text-align: center;"/>'))).appendTo($('#je_detail'));
+				//<!-------------------- 오하임 전체공지------------------>
+				//<!-------------------- 레이디가구 전체공지--------------->
+				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/gong.jpg'}));
+				$('<div>').html('&nbsp');
+				$('<div>').html('&nbsp');
+				$('<div>').html('&nbsp');
+				//<!--------------------업체별(가드너) 공지 ST--------->
+				//<!---------------------상세 START---------------------------->
+				
+				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/gong2.jpg'}));
+				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/gong3.jpg'}));
+				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/gong4.gif'}));
+				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/gong5.jpg'}));
+				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/faq.jpg'}));
+				$('<div>').html('&nbsp');
+				$('<div>').html('&nbsp');
+				$('<div>').html('&nbsp');
+				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/faq.jpg'}));
+				//<!-------------------배송정보 START----------------------------->
+				$('<div>').html('&nbsp');
+				$('<div>').html('&nbsp');
+				$('<div>').html('&nbsp');
+				for(let i =1;i<9;i++){
+				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/배송'+i+'.jpg'}));}
+
+				//<!-------------------배송정보 END----------------------------->
+				$('<section id="je_info_noti">').appendTo(total_wrap);
+				($('<tbody id=/>').appendTo($('<table class="line-height-normal" cellspacing="0">'))).appendTo($('#je_info_noti'));
+				
+				
+				/*
+				let section4=$('<section id="je_selling_option style="height: calc(100vh - 131px);"/>').html('<h4 style="font-weight:bold">옵션선택</h4>');
+				let option_div = $('<div class="je_pd_selling_option"/>').appendTo(section4);
+				($('<select/>').attr({id:'je_selectbtn'}).append(
+						$('<option/>').attr("value","0").text('사이즈'),
+						$('<option/>').attr("value","01 몬스터 필로우탑 30T 침대 매트리스 싱글(S)").text('01 몬스터 필로우탑 30T 침대 매트리스 싱글(S)(119,000원)'),
+						$('<option/>').attr("value","02 몬스터 필로우탑 30T 침대 매트리스 슈퍼싱글(SS)").text('02 몬스터 필로우탑 30T 침대 매트리스 슈퍼싱글(SS)(149,000원)'),
+						$('<option/>').attr("value","03 몬스터 필로우탑 30T 침대 매트리스 퀸(Q)").text('03 몬스터 필로우탑 30T 침대 매트리스 퀸(Q)(179,000원)')					
+					)).appendTo(option_div);
+				$('<input class=/>')*/
 				}
 
 			return{detail:detail};
