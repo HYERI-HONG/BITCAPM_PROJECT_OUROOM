@@ -93,9 +93,8 @@
   margin-top: -0.8em;
   left: 8px;
   right: 8px;
-  z-index: 1044; 
-}
-.mfp-preloader a {
+  z-index: 1044; }
+  .mfp-preloader a {
     color: #CCC; }
     .mfp-preloader a:hover {
       color: #FFF; }
@@ -619,10 +618,7 @@ img.mfp-img {
     padding: 10px 0 0;
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/jun
 /*////////////////////////////////////  */
 #product_information {
     padding: 10px 10px 20px;
@@ -717,7 +713,9 @@ img.mfp-img {
     color: #ffffff;
     line-height: 48px;
     text-align: center;
-    position: fixed;   
+    position: fixed;
+    
+    
 }
 #selected_options_panel>.options>.option>.count_cost>.input {
     float: left;
