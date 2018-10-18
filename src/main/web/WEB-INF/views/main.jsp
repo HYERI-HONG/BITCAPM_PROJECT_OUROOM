@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="SHORTCUT ICON" href="${context}/resources/img/hyeri/favicon.ico" />
-
+	
+	
     <!-- danah -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js" integrity="sha256-oTyWrNiP6Qftu4vs2g0RPCKr3g1a6QTlITNgoebxRc4=" crossorigin="anonymous"></script>
@@ -22,6 +23,7 @@
     <link rel="stylesheet" href="${context}/resources/css/jaekyung.css" />
     <!-- jieun -->
     <link rel="stylesheet" href="${context}/resources/css/jieun.css" />
+    
     <!-- jun -->
     <link rel="stylesheet" href="${context}/resources/css/jun.css" />
     <script src="${context}/resources/js/jquery/popup.js"></script>

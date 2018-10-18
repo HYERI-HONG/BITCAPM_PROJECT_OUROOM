@@ -9,7 +9,6 @@ jieun=(()=>{
 		img = $.img();
 		w=$('#wrapper');
 		content=$('#content');
-		nav=$('<div id="je_selling_helper_wrap"/>').append($('<div id="je_selling-helper" class="navbar navbar-default"/>')).appendTo(w);
 
 		var detail=()=>{
 			 
@@ -17,11 +16,33 @@ jieun=(()=>{
 				content.empty();
 				
 				let section =$('<section/>').addClass('je_row').appendTo(content);
-				let section2 =$('<section/>').addClass('je_row1').appendTo(content);
+				
+				$('<div id="je_selling_helper_wrap" class="col-md-9" style="width: 100%;" />').append($('<div id="je_selling-helper" class=" navbar navbar-default" />')).appendTo(w);
+				$('<section id="je_col-2"/>').append($('<nav id="je_product_tab"  />')).appendTo($('#je_selling_helper'));
+				let ul = $('<ul class="nav nav-tabs nav-justified"/>').appendTo($('.navbar'));
+				$('<li class="col2 active"/>').attr({'data-target':'product-info',role:'presentation'}).text('상품정보').appendTo(ul);
+				$('<li class="col2" id="je_count"/>').attr({'data-target':'product-review',role:'presentation'}).text('리뷰').appendTo(ul);
+				$('#je_count').append($('<span/>').text('(233)'));
+				$('<li class="col2"/>').attr({'data-target':'product-shipping',role:'presentation'}).html('<span class="lg">배송/교환/환불</span>').appendTo(ul);
+				$('<li class="col2 "/>').attr({'data-target':'product-blank',role:'presentation'}).appendTo(ul);
+				$( document ).ready( function() {
+			        var jbOffset = $( '#je_selling_helper_wrap').offset();
+			        var conOffset = content.offset();
+			        $( window ).scroll( function() {
+			          if ( conOffset.bottom == jbOffset.top ) {
+			            $( '#je_selling_helper_wrap' ).addClass( 'jbFixed' );
+			          }
+			          else {
+			            $( '#je_selling_helper_wrap' ).removeClass( 'jbFixed' );
+			          }
+			        });
+			      } );
+				
+								
+				let section2 =$('<section "/>').addClass('je_row1').appendTo(w);
+				
 				let je_div_cover = $('<div/>').addClass('je_div_cover');
 				let je_div_cover_info = $('<div/>').addClass('je_div_cover_info');
-				
-				
 				let arr = ['a','b'];
 				$.each(arr,function(i,j){
 					let col = $('<div>').addClass('je_col'+i).appendTo(section).appendTo(content);
@@ -118,6 +139,11 @@ jieun=(()=>{
 				buttons.appendTo(je_div_cover_info);
 				$('<button id="je_get_basket"/>').text('장바구니 담기').appendTo(buttons);
 				$('<button id="je_buy"/>').text('구매하기').appendTo(buttons);
+				
+
+				
+			
+
 
 				//
 				
@@ -125,15 +151,6 @@ jieun=(()=>{
 				$('<div id="je_total_1" class="col-md-9"/>').appendTo($('#je_total_div'));
 				$('<div id="je_total_2" class="col-md-3"/>').appendTo($('#je_total_div'));
 				
-
-				nav.appendTo(section2);
-				$('#je_selling_helper_wrap').appendTo($('#je_total_1'));
-				let section3 = $('<section id="je_col-2"/>').append($('<nav id="je_product_tab" />')).appendTo($('#je_selling_helper'));
-				let ul = $('<ul class="nav nav-tabs nav-justified"/>').appendTo($('.navbar'));
-				$('<li class="col2 active"/>').attr({'data-target':'product-info',role:'presentation'}).text('상품정보').appendTo(ul);
-				$('<li class="col2" id="je_count"/>').attr({'data-target':'product-review',role:'presentation'}).text('리뷰').appendTo(ul);
-				$('#je_count').append($('<span/>').text('(233)'));
-				$('<li class="col2"/>').attr({'data-target':'product-shipping',role:'presentation'}).html('<span class="lg">배송/교환/환불</span>').appendTo(ul);
 
 				
 				let total_wrap = $('<div id="je_total_wrap" style="padding:70px 30px"/>').appendTo($('#je_total_1'));
@@ -148,32 +165,57 @@ jieun=(()=>{
 				//<!-------------------- 오하임 전체공지------------------>
 				//<!-------------------- 레이디가구 전체공지--------------->
 				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/gong.jpg'}));
-				$('<div>').html('&nbsp');
-				$('<div>').html('&nbsp');
-				$('<div>').html('&nbsp');
+				$('<div/>').html('&nbsp');
+				$('<div/>').html('&nbsp');
+				$('<div/>').html('&nbsp');
 				//<!--------------------업체별(가드너) 공지 ST--------->
 				//<!---------------------상세 START---------------------------->
 				
 				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/gong2.jpg'}));
-				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/gong3.jpg'}));
-				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/gong4.gif'}));
-				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/gong5.jpg'}));
-				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/faq.jpg'}));
-				$('<div>').html('&nbsp');
-				$('<div>').html('&nbsp');
-				$('<div>').html('&nbsp');
+				
+				$('<br/>');
+				$('<br/>');
 				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/faq.jpg'}));
 				//<!-------------------배송정보 START----------------------------->
-				$('<div>').html('&nbsp');
-				$('<div>').html('&nbsp');
-				$('<div>').html('&nbsp');
-				for(let i =1;i<9;i++){
-				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/배송'+i+'.jpg'}));}
+				$('<br/>');
+				$('<br/>');
+				
+				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/배송1.jpg'}));
 
 				//<!-------------------배송정보 END----------------------------->
-				$('<section id="je_info_noti">').appendTo(total_wrap);
-				($('<tbody id=/>').appendTo($('<table class="line-height-normal" cellspacing="0">'))).appendTo($('#je_info_noti'));
 				
+				//product-info-noti
+				$('<section id="je_info_noti">').appendTo(total_wrap);
+				($('<tbody id="je_tbody"/>').appendTo($('<table class="line-height-normal" cellspacing="0">'))).appendTo($('#je_info_noti'));
+				
+				
+				//review
+				$('<section id="product-review">').appendTo(total_wrap);
+				
+				//shipping
+				let section4 =$('<section/>');
+				$('<section id="product-shipping">').appendTo(total_wrap);
+				section4.appendTo($('#product-shipping'));
+				section4.append($('<h4 class="bold text-black"/>').text('배송 관련 안내'));
+				section4.append($('<table class="line-height-normal"/>'));
+				$('#line-height-normal').append($('<tbody/>')).append('<tr/>').append('<td/>');
+				let section5 =$('<section/>');
+				section5.appendTo($('#product-shipping'));
+				section5.append($('<h4 class="bold text-black"/>').text('교환 및 환불'));
+				section5.append($('<table  class="line-height-normal" cellspacing="0"/>'));
+				$('#line-height-normal').append($('<tbody/>')).append('<tr/>').append('<td/>');
+				let refund=$('<section class= "text-caption-2 je_refund"/>');
+				$('<p class="text-body-2 bold"/>').text('반품/교환 사유에 따른 요청 가능 기간').appendTo(refund);
+				$('<p class="text-gray-light"/>').text('반품 시 먼저 판매자와 연락하셔서 반품사유, 택배사, 배송비, 반품지 주소 등을  협의하신 후 반품상품을 발송해 주시기 바랍니다.').appendTo(refund);
+				$('<ol class="line-height-normal"/>').appendTo(refund);
+				$('.line-height-normal').append($('<li/>').html('<span>1</span>구매자 단순 변심은 상품 수령 후 7일 이내 <small>(구매자 반품 배송비 부담)</small>'));
+				$('.line-height-normal').append($('<li/>').html('<span>2</span>표시/광고와 상이, 상품하자의 경우 상품 수령 후 3개월 이내 혹은 표시/광고와 다른 사실을 안 날로부터 30일 이내.<br/>둘 중 하나 경과 시 반품/교환 불가 <small>판매자 반품 배송비 부담)</small>'));
+				let refund2 = $('<section class="text-caption-2 je_refund"/>');
+				refund2.append($('<p class="text-body-2 bold"/>').text('반품/교환 불가능 사유'));
+				refund2.append($('<p class="text-gray-light"/>').text('아래와 같은 경우 반품/교환이 불가능합니다.'));
+				refund2.append($('<ol class="line-height-normal">').append($('<li>').html('<span>1</span> 반품요청기간이 지난 경우')));
+				$('.line-height-normal').append($('<li/>').html('<span>2</span>구매자의 책임 있는 사유로 상품 등이 멸실 또는 훼손된 경우 <small>(단, 상품의 내용을 확인하기 위하여 포장 등을 훼손한 경우는 제외)</small>'));
+				//
 				
 				/*
 				let section4=$('<section id="je_selling_option style="height: calc(100vh - 131px);"/>').html('<h4 style="font-weight:bold">옵션선택</h4>');

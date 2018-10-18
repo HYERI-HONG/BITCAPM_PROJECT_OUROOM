@@ -5,7 +5,7 @@ jaekyung =(()=>{
               jaekyung.router.init();
        };
        return {init:init};
-})();
+})(); 
 jaekyung.main={//메인페이지//변경
               mp:()=>{
                      $('#content').empty();     
