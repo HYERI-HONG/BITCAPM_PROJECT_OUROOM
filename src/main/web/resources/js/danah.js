@@ -481,7 +481,7 @@ danah.u = {
                 )
                 .appendTo(p.find('.d_container:first'))
                 .click(n => {
-                    a.preventDefault();
+                    n.preventDefault();
                     const j = $('.d_filter_item');
                     const e = $('.d_filter_item_btn_search_icon');
                     const o = p.children(':last');
@@ -500,7 +500,7 @@ danah.u = {
                             i == 1 ? ['모든공간', '원룸', '거실', '침실', '주방', '욕실', '베란다'] :
                             i == 2 ? ['모든평수', '10평미만', '10평대', '20평대', '30평대', '40평대 이상'] : ['모두', '정보있는사진만']), function() {
                             danah.c.li({ c: 'd_filter_item' })
-                                .addClass(l.eq(i).find('.d_filter_item_btn_search_val').text() === this ? 'd_filter_item_active' : '')
+                                .addClass(j.eq(i).find('.d_filter_item_btn_search_val').text() === this ? 'd_filter_item_active' : '')
                                 .append(
                                     danah.c.a({ c: 'd_filter_item_btn', t: this })
                                 )
@@ -767,7 +767,7 @@ function DanahT(d) {
                         danah.c.input({ i: 'd_post_image_url', ty: 'hidden', n: 'image_url' })
                         //danah.c.input({ i: 'card_image_url', n: 'card[image_url', ty: 'hidden' })
                     ),
-                    danah.c.div({ c: 'd_description enable_enter', i: 'd_post_title_editor' })
+                    danah.c.div({ c: 'd_description enable_enter', i: 'd_post_title' })
                     .attr({ contenteditable: 'true', 'data-ph': '제목을 입력해 주세요' }),
                     danah.c.select({ c: 'ui-changed-selector', i: 'd_post_space', n: 'd_post_space', s: 'color: rgb(189, 189, 189);' })
                     .append(
@@ -788,7 +788,7 @@ function DanahT(d) {
                         danah.c.option({ v: '3', t: '30평대' }),
                         danah.c.option({ v: '4', t: '40평대 이상' })
                     ),
-                    danah.c.div({ c: 'd_description enable_enter', i: 'd_post_description_editor' })
+                    danah.c.div({ c: 'd_description enable_enter', i: 'd_post_description' })
                     .attr({ 'contenteditable': 'true', 'data-ph': '이미지에 대한 설명을 입력해 주세요' })
                     .append(['']),
                     danah.c.input({ i: 'd_post_description', n: 'd_post_description', ty: 'hidden' }),
@@ -799,12 +799,13 @@ function DanahT(d) {
                             danah.c.div({ i: 'd_add_keyword' })
                             .attr({ 'contenteditable': 'true', 'placeholder': '태그입력' })
                             .keydown(function(a) {
-                            	a.preventDefault();
                                 if (a.keyCode == 13) {
+                                	a.preventDefault();
                                     danah.c.div({ c: 'd_keyword', t: $(this).text() })
                                         .insertBefore($(this));
                                     $(this).text('');
                                 } else if (a.keyCode == 8) {
+                                	a.preventDefault();
                                     $(this).prev().remove();
                                 }
                             })
@@ -813,10 +814,15 @@ function DanahT(d) {
                     danah.c.input({ c: 'd_submit_button', ty: 'submit', n: 'commit', v: '사진 올리기', i: 'submit' })
                     .attr({ 'data-disable-with': '사진 올리기' })
                     .click(n => {
-                        alert('1');
-                        alert('2');
-                        alert('3');
-                        alert('4');
+                        alert('1'+$('#d_post_title').val());
+                        alert('2'+$('#d_post_space').val());
+                        alert('3'+$('#d_post_size').val());
+                        alert('4'+$('#d_post_description').val());
+                        alert('4'+$('#d_post_description').val());
+                        let a ='';
+						$('[name="subject"]:checked').each(function() {
+							a += $(this).val() + ",";
+						});
                         if ($.fn.danahNullChk(['1', '2'])) {
                             alert('필수 입력값이 입력되지 않았습니다.');
                         } else {
