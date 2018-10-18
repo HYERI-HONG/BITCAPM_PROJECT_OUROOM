@@ -24,7 +24,7 @@ public class Pagination implements Proxy{
 		HashMap<String,Object> map = (HashMap<String, Object>) o;
 		this.pageNum = (int) map.get("pageNum");
 		this.totalRecode = (int) map.get("totalRecode");
-		this.recodeSize = 12;
+		this.recodeSize = (int) map.get("recodeSize");
 		this.totalPage = (totalRecode-1)/recodeSize+1;
 		this.pageSize = 5;
 		this.startPage = 1 + (int) (Math.ceil((pageNum-1)/pageSize)) * pageSize;

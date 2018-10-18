@@ -6,9 +6,7 @@ jaekyung =(()=>{
        };
        return {init:init};
 })();
-jaekyung.main.nav=(()=>{
-	
-})();
+
 jaekyung.main={//메인페이지//변경
               mp:()=>{
                      $('#content').empty();     

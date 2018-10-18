@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 public class PostController {
@@ -20,13 +21,18 @@ public class PostController {
 	//@Autowired Map<String, Object> m;
 	
 	@PostMapping("/posts/write")
-	public @ResponseBody void write(@RequestBody Post p) {
+	public @ResponseBody void write(@RequestBody MultipartFile file, @RequestBody Post p) {
 		Util.log.accept("등록하기");
-		Util.log.accept(p.toString());
+		Util.log.accept(file.getOriginalFilename());
 		//map.clear();
 		//map.put("brd", param);
 		//tx.write(map);
 	}
+	
+//	@PostMapping("/posts/upload")
+//	public @ResponseBody void uplaod(@RequestBody MultipartFile file) {
+//		Util.log.accept(file.getOriginalFilename());
+//	}z
 	
 	@GetMapping("/posts/list/{pageNo}")
 	public @ResponseBody Map<String, Object> list(@PathVariable String p) {
@@ -37,7 +43,7 @@ public class PostController {
 		return map;
 	}
 	
-	@GetMapping("/posts/detail/{pageNo}/{id}")
+	@GetMapping("/posts/detail/{postNo}/{id}")
 	public @ResponseBody Post get(@PathVariable String p1, @PathVariable String p2) {
 		Util.log.accept("정보");
 		Util.log.accept(p1.toString());
@@ -45,10 +51,10 @@ public class PostController {
 		return null;
 	}
 	
-	@PostMapping("/posts/edit")
-	public @ResponseBody void edit(@RequestBody Post p) {
+	@PostMapping("/posts/{postNo}/edit")
+	public @ResponseBody void edit(@PathVariable String p1, @RequestBody Post p2) {
 		Util.log.accept("수정하기");
-		Util.log.accept(p.toString());
+		Util.log.accept(p2.toString());
 	}
 	
 	@PostMapping("/posts/remove")
@@ -56,4 +62,5 @@ public class PostController {
 		Util.log.accept("삭제하기");
 		Util.log.accept(p.toString());
 	}
+	
 }
