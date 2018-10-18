@@ -30,14 +30,10 @@
 					<property name="prefix" value="/WEB-INF/views/" />
 					<property name="suffix" value=".jsp" />	
 				</bean>
-				<!--  -->
 			</list>
 		</property>
 	</bean>
 	
-	<!--  -->
-				
-	<!--  -->
 	<context:component-scan base-package="com.ouroom.web" />
 	
 	<context:property-placeholder location="classpath:config/database.properties"/>
@@ -56,18 +52,23 @@
 	<constructor-arg ref="sqlSessionFactoryBean" />
 	</bean>	
 	
-	<!--  <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<!-- 
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
       <property name="dataSource" ref="dataSource"/>
-   </bean> 
-     -->
-   <!-- 
-   <bean id="uploadPath" class="java.lang.String">
-	<constructor-arg value="C:\\Users\\1027\\Documents\\workspace-sts-3.9.5.RELEASE\\gms\\src\\main\\webapp\\resources\\img"/>
-   </bean> -->
-   <!-- <bean id="multipartResolver"
-   class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
-   
- 	 -->
+        </bean>
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"></constructor-arg>
+    </bean>
+    <mybatis-spring:scan base-package="com.spring5.web"/>
+    <bean id="uploadPath" class="java.lang.String">
+            <constructor-arg value="C\:\\Users\\1027\\ouroom\\ouroom\\src\\main\\webapp\\resources\\img">
+            </constructor-arg>
+    </bean>
+    -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+                   <property name="maxUploadSize" value="10000000" />
+                   <property name="defaultEncoding" value="utf-8"></property>
+         </bean>
 
 	
 	<tx:annotation-driven/>

@@ -1,6 +1,6 @@
 "use strict";
 var app = app || {};
-
+//지금 여기
 app =(()=>{
 	var init =x=>{
 		console.log('step1 : app.init 진입'+x);
@@ -88,7 +88,6 @@ app.service ={
 		$('<div/>').addClass('section').attr({id:"section_community"}).appendTo($('#main'));
 		$('<div/>').addClass('section').attr({id:"section_category"}).appendTo($('#main'));
 		$('<div/>').addClass('section').attr({id:"section_store"}).appendTo($('#main'));
-		// 변경변경
 		
 	}
 };
