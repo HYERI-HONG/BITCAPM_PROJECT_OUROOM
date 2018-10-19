@@ -27,7 +27,7 @@ danah.s = (() => {
         $('#h_search_btn')
             .click(d => {
                 d.preventDefault();
-                danah.u.se();
+                //danah.u.se();
             });
         $('#h_wirte_btn')
             .click(d => {
@@ -44,30 +44,6 @@ danah.s = (() => {
     };
     let w = d => {
         DanahT({ f: 'w' });
-        $('#submit')
-            .click(n => {
-                if ($.fn.danahNullChk(['1', '2'])) {
-                    alert('필수 입력값이 입력되지 않았습니다.');
-                } else {
-                    $.ajax({
-                        url: $ctx + '/posts/write',
-                        method: 'POST',
-                        contentType: 'application/json',
-                        data: JSON.stringify({
-                            userid: '',
-                            teamid: ''
-                        }),
-                        success: x => {
-                            alert('성공');
-                        },
-                        error: (m1, m2, m3) => {
-                            alert('에러발생1' + m1);
-                            alert('에러발생2' + m2);
-                            alert('에러발생3' + m3);
-                        }
-                    });
-                }
-            });
     };
     let l = d => {
         //$.getJSON($ctx + '/boards/list/' + d, a => {
@@ -85,7 +61,7 @@ danah.s = (() => {
                 j++;
             }
         });
-        DanahTB(ctt);
+        danah.u.tb(ctt);
         //});
     };
     let d = d => {
@@ -380,30 +356,6 @@ danah.s = (() => {
     };
     let e = d => {
         DanahT({ f: 'e' });
-        $('#submit')
-            .click(n => {
-                if ($.fn.danahNullChk(['1', '2'])) {
-                    alert('필수 입력값이 입력되지 않았습니다.');
-                } else {
-                    $.ajax({
-                        url: $ctx + '/posts/edit',
-                        method: 'POST',
-                        contentType: 'application/json',
-                        data: JSON.stringify({
-                            userid: '',
-                            teamid: ''
-                        }),
-                        success: x => {
-                            alert('성공');
-                        },
-                        error: (m1, m2, m3) => {
-                            alert('에러발생1' + m1);
-                            alert('에러발생2' + m2);
-                            alert('에러발생3' + m3);
-                        }
-                    });
-                }
-            });
     };
     let r = d => {
         if (confirm('삭제하시겠습니까?')) {
@@ -463,6 +415,19 @@ danah.s = (() => {
 })();
 
 danah.u = {
+	tb: d => {
+		const p = danah.c.div({ c: 'd_wiget_wrap' });
+	    danah.c.a({ c: 'd_top_btn', i: 'd_top_btn' })
+	        .append(danah.c.i({ c: 'fa fa-chevron-up' }))
+	        .appendTo(p.appendTo(d))
+	        .click(a => {
+	            a.preventDefault();
+	            $('html, body').animate({ scrollTop: 0 }, '1000');
+	        });
+	    $(window).scroll(() => {
+	        $(this).scrollTop() > 200 ? $('.d_top_btn').fadeIn('2000') : $('.d_top_btn').fadeOut('500');
+	    });
+	},
     f: d => {
         const p = danah.c.div({ c: 'd_filter_wrap' });
         p.append(
@@ -519,6 +484,27 @@ danah.u = {
             .html(["'", '이케아', "'에 대한 검색 결과"])
             .append(danah.c.span({ ht: ['20,077', '개'] }))
             .prependTo($('#d_post_list'));
+    },
+    pv: d => {
+    	let j = new FileReader();
+        let e = new FormData();
+        e.append('file', d.j == 'c' ? d.e.files[0] : d.e);
+        $.ajax({
+            url:$.context()+'/posts/upload',
+            type:'POST',
+            data:e,
+            async:false,
+            cache:false,
+            contentType:false,
+            processData:false
+        }).done(function(a){
+        	$.type(d.o.attr('src')) === 'undefined' ? $('#d_upload_panel').addClass('change') : '';
+            $('#d_progress').text('사진 바꾸기');
+            j.onload = a => {
+                d.o.attr('src', a.target.result);
+            }
+            j.readAsDataURL(d.j == 'c' ? d.e.files[0] : d.e);
+        });
     },
     h: d => {
         const p = danah.c.ul({ c: 'd_keyword' });
@@ -660,7 +646,7 @@ danah.u = {
 };
 
 danah.c = {
-    div: d => { return $('<div/>').addClass(d.c).attr({ id: d.i, style: d.s }).html(d.ht).text(d.t); },
+    div: d => { return $('<div/>').addClass(d.c).attr({ id: d.i, style: d.s, name: d.n }).html(d.ht).text(d.t); },
     h1: d => { return $('<h1/>').addClass(d.c).html(d.ht) },
     hr: d => { return $('<hr/>').addClass(d.c); },
     a: d => { return $('<a/>').addClass(d.c).attr({ href: d.hr, id: d.i, style: d.s, target: d.tg, rel: d.r }).html(d.ht).text(d.t); },
@@ -681,11 +667,24 @@ danah.c = {
     option: d => { return $('<option/>').addClass(d.c).attr({ n: d.n, style: d.s, value: d.v }).text(d.t); }
 };
 
-$.prototype.danahNullChk = d => {
+$.prototype.danahValChk = d => {
     let flag = false;
-    $.each(d, function() { if (this === '') flag = true; })
+    $.each(d, function() { 
+    	if (this === '' || this == 0) flag = true; 
+    })
     return flag;
 };
+
+$.prototype.danahExtChk = d => {
+    if (d != '') {
+        var ext = d.split('.').pop().toLowerCase();
+        if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+            alert('gif,png,jpg,jpeg 파일만 업로드 할수 있습니다.');
+            return;
+        }
+    }
+}
+
 
 function DanahL(d) {
     const p = $('#d_row');
@@ -735,8 +734,11 @@ function DanahL(d) {
 }
 
 function DanahT(d) {
-    console.log(d);
-    let j;
+    let j, e, o, g;
+    j = d.f;
+    e = '';
+    o = d.p;
+    
     $.magnificPopup.open({
         showCloseBtn: false,
         closeBtnInside: false,
@@ -754,44 +756,52 @@ function DanahT(d) {
                         danah.c.div({ i: 'd_upload_panel' })
                         .append(
                             danah.c.div({ c: 'd_icon' }),
-                            danah.c.div({ c: 'd_progress', t: '사진 업로드' })
+                            danah.c.div({ c: 'd_progress', i: 'd_progress',t: '사진 업로드' })
                         ),
                         danah.c.input({ i: 'd_post_uploader', n: 'image', ty: 'file' })
-                        .change(function() {
-                            DanahS({ f: 'c', o: this, c: $('#d_real_image') });
+                        .change(function(a) {
+                            //파일명 가져오기 테스트 후 확장자 검토 기능 추가 안되면 name
+                            alert(this.files[0].val());
+                            alert()
+                        	danah.u.pv({ j: 'c', e:  this, o: $('#d_real_image') });
+                        })
+                        .on('dragenter dragover', a => {
+                            a.preventDefault();
+                            //필요여부 검토중
                         })
                         .on('drop', a => {
-                            a.preventDefault();
-                            DanahS({ f: 'd', o: a.originalEvent.dataTransfer.files[0], c: $('#d_real_image') });
+                            //파일명 가져오기 테스트 후 확장자 검토 기능 추가
+                            alert(a.originalEvent.dataTransfer.files[0].val());
+                            danah.u.pv({ j: 'd', e: a.originalEvent.dataTransfer.files[0], o: $('#d_real_image') });
                         }),
                         danah.c.input({ i: 'd_post_image_url', ty: 'hidden', n: 'image_url' })
-                        //danah.c.input({ i: 'card_image_url', n: 'card[image_url', ty: 'hidden' })
                     ),
                     danah.c.div({ c: 'd_description enable_enter', i: 'd_post_title' })
-                    .attr({ contenteditable: 'true', 'data-ph': '제목을 입력해 주세요' }),
+                    .attr({ contenteditable: 'true', 'data-ph': '제목을 입력해 주세요' })
+                    .keydown(a=> {
+                    	if (a.keyCode == 13) a.preventDefault();
+                    }),
                     danah.c.select({ c: 'ui-changed-selector', i: 'd_post_space', n: 'd_post_space', s: 'color: rgb(189, 189, 189);' })
                     .append(
                         danah.c.option({ v: '', t: '공간 선택(필수)' }),
-                        danah.c.option({ v: '0', t: '원룸' }),
-                        danah.c.option({ v: '1', t: '거실' }),
-                        danah.c.option({ v: '2', t: '침실' }),
-                        danah.c.option({ v: '3', t: '주방' }),
-                        danah.c.option({ v: '4', t: '욕실' }),
-                        danah.c.option({ v: '5', t: '베란다' })
+                        danah.c.option({ v: '원룸', t: '원룸' }),
+                        danah.c.option({ v: '거실', t: '거실' }),
+                        danah.c.option({ v: '침실', t: '침실' }),
+                        danah.c.option({ v: '주방', t: '주방' }),
+                        danah.c.option({ v: '욕실', t: '욕실' }),
+                        danah.c.option({ v: '베란다', t: '베란다' })
                     ),
                     danah.c.select({ c: 'ui-changed-selector', i: 'd_post_size', n: 'd_post_size', s: 'color: rgb(189, 189, 189);' })
                     .append(
                         danah.c.option({ v: '', t: '평수 선택(필수)' }),
-                        danah.c.option({ v: '0', t: '10평미만' }),
-                        danah.c.option({ v: '1', t: '10평대' }),
-                        danah.c.option({ v: '2', t: '20평대' }),
-                        danah.c.option({ v: '3', t: '30평대' }),
-                        danah.c.option({ v: '4', t: '40평대 이상' })
+                        danah.c.option({ v: '10평미만', t: '10평미만' }),
+                        danah.c.option({ v: '10평대', t: '10평대' }),
+                        danah.c.option({ v: '20평대', t: '20평대' }),
+                        danah.c.option({ v: '30평대', t: '30평대' }),
+                        danah.c.option({ v: '40평대 이상', t: '40평대 이상' })
                     ),
                     danah.c.div({ c: 'd_description enable_enter', i: 'd_post_description' })
-                    .attr({ 'contenteditable': 'true', 'data-ph': '이미지에 대한 설명을 입력해 주세요' })
-                    .append(['']),
-                    danah.c.input({ i: 'd_post_description', n: 'd_post_description', ty: 'hidden' }),
+                    .attr({ 'contenteditable': 'true', 'data-ph': '이미지에 대한 설명을 입력해 주세요' }),
                     danah.c.div({ c: 'd_keywords' })
                     .append(
                         danah.c.div({ c: 'ui-keyword-field', i: 'd_keywords_view' })
@@ -801,46 +811,40 @@ function DanahT(d) {
                             .keydown(function(a) {
                                 if (a.keyCode == 13) {
                                 	a.preventDefault();
-                                    danah.c.div({ c: 'd_keyword', t: $(this).text() })
+                                    danah.c.div({ c: 'd_keyword', n: 'd_keyword', t: $(this).text() })
                                         .insertBefore($(this));
                                     $(this).text('');
                                 } else if (a.keyCode == 8) {
-                                	a.preventDefault();
-                                    $(this).prev().remove();
+                                	$(this).text().length<1 ? $(this).prev().remove() : '';
                                 }
                             })
                         )
                     ),
                     danah.c.input({ c: 'd_submit_button', ty: 'submit', n: 'commit', v: '사진 올리기', i: 'submit' })
                     .attr({ 'data-disable-with': '사진 올리기' })
-                    .click(n => {
-                        alert('1'+$('#d_post_title').val());
-                        alert('2'+$('#d_post_space').val());
-                        alert('3'+$('#d_post_size').val());
-                        alert('4'+$('#d_post_description').val());
-                        alert('4'+$('#d_post_description').val());
-                        let a ='';
-						$('[name="subject"]:checked').each(function() {
-							a += $(this).val() + ",";
+                    .click(a => {
+                    	alert($('#d_post_description').text());
+                    	a.preventDefault();
+						$('.d_keyword').each(function() {
+							e += $(this).val() + ",";
 						});
-                        if ($.fn.danahNullChk(['1', '2'])) {
+                        if ($('#d_upload_panel').hasClass('change') && $.fn.danahValChk([$('#d_post_title').text(), $('#d_post_space').val(), $('#d_post_size').val(), $('#d_post_description').text()])) {
                             alert('필수 입력값이 입력되지 않았습니다.');
                         } else {
                             $.ajax({
-                                url: $ctx + '/posts/' + d.pageNo + 'edit',
-                                method: 'POST',
-                                contentType: 'application/json',
-                                data: JSON.stringify({
-                                    userid: '',
-                                    teamid: ''
-                                }),
-                                success: x => {
-                                    alert('성공');
-                                },
-                                error: (m1, m2, m3) => {
-                                    alert('에러발생1' + m1);
-                                    alert('에러발생2' + m2);
-                                    alert('에러발생3' + m3);
+                                url: $.context() + '/posts/' + (j === 'w' ? 'write' : d.pageNo + '/edit') ,
+                                method : 'POST',
+								contentType : 'application/json',
+								data : JSON.stringify({title : $('#d_post_title').text(),
+														room_type : $('#d_post_space').val(), 
+														room_size : $('#d_post_size').val(),
+														content : $('#d_post_description').text(),
+														keyword : e}
+								),
+                                success: n => {
+                                	alert()
+                                	$('.mfp-close').trigger('click');
+                                    danah.s.d({});
                                 }
                             });
                         }
@@ -853,38 +857,4 @@ function DanahT(d) {
         removalDelay: '0',
         type: 'inline'
     });
-}
-
-function DanahTB(d) {
-    const p = danah.c.div({ c: 'd_wiget_wrap' });
-    danah.c.a({ c: 'd_top_btn', i: 'd_top_btn' })
-        .append(danah.c.i({ c: 'fa fa-chevron-up' }))
-        .appendTo(p.appendTo(d))
-        .click(a => {
-            a.preventDefault();
-            $('html, body').animate({ scrollTop: 0 }, '1000');
-        });
-    $(window).scroll(() => {
-        $(this).scrollTop() > 200 ? $('.d_top_btn').fadeIn('2000') : $('.d_top_btn').fadeOut('500');
-    });
-}
-
-function DanahS(d) {
-    let j = new FileReader();
-    let formData = new FormData();
-    $.type(d.c.attr('src')) === 'undefined' ? $('#d_upload_panel').addClass('change') : '';
-    $('#d_upload_panel').text('사진 바꾸기');
-    if (d.f == 'c') {
-        formData.append('file', d.o.files[0]);
-        j.onload = a => {
-            d.c.attr('src', a.target.result);
-        }
-        j.readAsDataURL(d.o.files[0]);
-    } else {
-        formData.append('file', d.o);
-        j.onload = a => {
-            d.c.attr('src', a.target.result);
-        }
-        j.readAsDataURL(d.o);
-    }
 }

@@ -19,20 +19,16 @@ public class PostController {
 	//@Autowired post b;
 	//@Autowired postMapper bm;
 	//@Autowired Map<String, Object> m;
+	//@Autowired MultipartFile f;
 	
 	@PostMapping("/posts/write")
-	public @ResponseBody void write(@RequestBody MultipartFile file, @RequestBody Post p) {
+	public @ResponseBody void write(@RequestBody Map p) {
 		Util.log.accept("등록하기");
-		Util.log.accept(file.getOriginalFilename());
+		Util.log.accept(p.toString());
 		//map.clear();
 		//map.put("brd", param);
 		//tx.write(map);
 	}
-	
-//	@PostMapping("/posts/upload")
-//	public @ResponseBody void uplaod(@RequestBody MultipartFile file) {
-//		Util.log.accept(file.getOriginalFilename());
-//	}z
 	
 	@GetMapping("/posts/list/{pageNo}")
 	public @ResponseBody Map<String, Object> list(@PathVariable String p) {
@@ -61,6 +57,15 @@ public class PostController {
 	public @ResponseBody void delete(@RequestBody Post p) {
 		Util.log.accept("삭제하기");
 		Util.log.accept(p.toString());
+	}
+	
+	@PostMapping("/posts/upload")
+	public @ResponseBody void uplaod(@RequestBody MultipartFile file) {
+		Util.log.accept(file.getOriginalFilename());
+		
+		//String savedName = uploadFile(file.getOriginalFilename(), file.getBytes());
+		
+		
 	}
 	
 }

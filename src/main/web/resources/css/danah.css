@@ -2418,6 +2418,7 @@ form {
 }
 
 .d_form_fields #d_upload_image #d_real_image {
+	height: -webkit-fill-available;
     display: block;
     position: absolute;
     top: 0;
