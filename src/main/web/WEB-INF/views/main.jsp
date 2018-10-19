@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="${context}/resources/css/jaekyung.css" />
     <!-- jieun -->
     <link rel="stylesheet" href="${context}/resources/css/jieun.css" />
-    
+
     <!-- jun -->
     <link rel="stylesheet" href="${context}/resources/css/jun.css" />
     <script src="${context}/resources/js/jquery/popup.js"></script>

@@ -11,35 +11,60 @@ jieun=(()=>{
 		content=$('#content');
 
 		var detail=()=>{
-			 
+			 	let wrap_con=$('<div id="wrap_content"/>').appendTo(w);
+			 	content.appendTo(wrap_con);
 				$('#footer').remove();
 				content.empty();
 				
 				let section =$('<section/>').addClass('je_row').appendTo(content);
-				
-				$('<div id="je_selling_helper_wrap" class="col-md-9" style="width: 100%;" />').append($('<div id="je_selling-helper" class=" navbar navbar-default" />')).appendTo(w);
-				$('<section id="je_col-2"/>').append($('<nav id="je_product_tab"  />')).appendTo($('#je_selling_helper'));
+	
+				$('<div id="je_selling_helper_wrap" class="col-md-9" style="width: 100%;height: 55px;" />').append($('<div id="je_selling-helper" style="margin-bottom: 0px;" class=" navbar navbar-default" />')).appendTo(wrap_con);
+				/*$('<section id="je_col-2"/>').append($('<nav id="je_product_tab"  />')).appendTo($('#je_selling_helper'));*/
 				let ul = $('<ul class="nav nav-tabs nav-justified"/>').appendTo($('.navbar'));
-				$('<li class="col2 active"/>').attr({'data-target':'product-info',role:'presentation'}).text('상품정보').appendTo(ul);
-				$('<li class="col2" id="je_count"/>').attr({'data-target':'product-review',role:'presentation'}).text('리뷰').appendTo(ul);
+				$('<li class="col2 active"/>').attr({id:'b_product-info','data-target':'product-info',role:'presentation'}).text('상품정보').appendTo(ul);
+				$('#b_product-info').click(e=>{
+					e.preventDefault();
+					$(window).scrollTop($('#je_notice').offset().top);
+				});
+				$('<li class="col2" id="je_count"/>').attr({id:'b_product-review','data-target':'product-review',role:'presentation'}).text('리뷰').appendTo(ul);
 				$('#je_count').append($('<span/>').text('(233)'));
-				$('<li class="col2"/>').attr({'data-target':'product-shipping',role:'presentation'}).html('<span class="lg">배송/교환/환불</span>').appendTo(ul);
+				$('#b_product-review').click(e=>{
+					e.preventDefault();
+					$(window).scrollTop($('#product-review').offset().top);
+				});
+				$('<li class="col2"/>').attr({id:'b_product-shipping','data-target':'product-shipping',role:'presentation'}).html('<span class="lg">배송/교환/환불</span>').appendTo(ul);
+				$('#b_product-shipping').click(e=>{
+					e.preventDefault();
+					$(window).scrollTop($('#product-shipping').offset().top);
+				});
 				$('<li class="col2 "/>').attr({'data-target':'product-blank',role:'presentation'}).appendTo(ul);
-				$( document ).ready( function() {
-			        var jbOffset = $( '#je_selling_helper_wrap').offset();
-			        var conOffset = content.offset();
-			        $( window ).scroll( function() {
-			          if ( conOffset.bottom == jbOffset.top ) {
-			            $( '#je_selling_helper_wrap' ).addClass( 'jbFixed' );
-			          }
-			          else {
-			            $( '#je_selling_helper_wrap' ).removeClass( 'jbFixed' );
-			          }
-			        });
-			      } );
-				
-								
-				let section2 =$('<section "/>').addClass('je_row1').appendTo(w);
+	
+				$(document).ready(function() {
+					// grab the initial top offset of the navigation 
+				   	var stickyNavTop = $('#je_selling_helper_wrap').offset().top;
+				   	
+				   	// our function that decides weather the navigation bar should have "fixed" css position or not.
+				   	var stickyNav = function(){
+					    var scrollTop = $(window).scrollTop(); // our current vertical position from the top
+					         
+					    // if we've scrolled more than the navigation, change its position to fixed to stick to top,
+					    // otherwise change it back to relative
+					    if (scrollTop > stickyNavTop) { 
+					        $('#je_selling_helper_wrap').addClass('sticky');
+					    } else {
+					        $('#je_selling_helper_wrap').removeClass('sticky'); 
+					    }
+					};
+					$('.sticky').appendTo($('#h_navigation'));
+
+					stickyNav();
+					// and run it again every time you scroll
+					$(window).scroll(function() {
+						stickyNav();
+					});
+				});
+		
+				let section2 =$('<section "/>').addClass('je_row1').appendTo(wrap_con);
 				
 				let je_div_cover = $('<div/>').addClass('je_div_cover');
 				let je_div_cover_info = $('<div/>').addClass('je_div_cover_info');
@@ -155,7 +180,7 @@ jieun=(()=>{
 				
 				let total_wrap = $('<div id="je_total_wrap" style="padding:70px 30px"/>').appendTo($('#je_total_1'));
 				
-				($('<section id="je_notice"/>').append(
+				($('<section id="je_notice" style="padding-top: 50px;"/>').append(
 						$('<img class="je_notice_img"/>').attr({src:img+'/jieun/notice_1.jpg'}),
 						$('<p id="je_product_notice"/>').html('<p>구매 후<strong>15영업일 이내 발송</strong>되는 상품입니다.</p>'),
 						$('<img class="je_notice_img"/>').attr({src:img+'/jieun/notice_2.jpg'}))).appendTo(total_wrap);
