@@ -1,6 +1,5 @@
 "use strict";
 var app = app || {};
-//지금 여기
 app =(()=>{
 	var init =x=>{
 		console.log('step1 : app.init 진입'+x);
