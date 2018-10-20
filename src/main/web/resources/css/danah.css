@@ -1819,6 +1819,7 @@ a.d_filter_item_btn {
 }
 
 .d_list_paginator {
+	margin-bottom: 40px;
     text-align: center;
     padding: 0;
 }
@@ -2400,7 +2401,7 @@ form {
     margin: 175px auto 5px;
     width: 35px;
     height: 35px;
-    background-image: url(https://d1nyaccf3kuclt.cloudfront.net/assets/icon_map/icon-etc.png);
+    background-image: url(../img/danah/icon.png);
     background-repeat: no-repeat;
     background-size: 400px;
     background-position: top -446px left -91px
