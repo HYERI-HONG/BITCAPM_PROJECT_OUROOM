@@ -9,7 +9,7 @@ jieun=(()=>{
 		img = $.img();
 		w=$('#wrapper');
 		content=$('#content');
-
+//
 		var detail=()=>{
 			
 			/*$.ajax({
