@@ -1,6 +1,6 @@
 "use strict";
 var jieun = jieun || {};
-//변경변경
+
 jieun=(()=>{
 	var w,nav,footer,content,context,script,style,img;
 		context = $.context();
