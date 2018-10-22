@@ -1,6 +1,5 @@
 package com.ouroom.web.post;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;

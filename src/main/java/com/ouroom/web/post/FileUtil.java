@@ -2,6 +2,8 @@ package com.ouroom.web.post;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.UUID;
 import java.util.function.BiConsumer;
@@ -29,19 +31,17 @@ public class FileUtil {
 	
 	public Function<String, String> calcPath = p -> {
 		String y,m,d;
-	    y = File.separator+new SimpleDateFormat("yyyy").format(new Date());
-	    m = y + File.separator+new SimpleDateFormat("MM").format(new Date());
-	    d = m + File.separator+new SimpleDateFormat("dd").format(new Date());
+		LocalDateTime ldt = LocalDateTime.now();
+	    y = File.separator+ldt.format(DateTimeFormatter.ofPattern("yyyy"));
+	    m = y + File.separator+ldt.format(DateTimeFormatter.ofPattern("MM"));
+	    d = m + File.separator+ldt.format(DateTimeFormatter.ofPattern("dd"));
 	    String[] a = {y,m,d};
 	    makeDir.accept(p, a);
 		return d;
 	};
 	
 	
-	public BiConsumer<MultipartFile, byte[]> file = (f, b) -> {
-		this.f = f;
-		sf = b;
-	};	
+	public BiConsumer<MultipartFile, byte[]> file = (f, b) -> { this.f = f; sf = b; };	
 	
 	public Function<String, String> upload = p -> {
 		sn = UUID.randomUUID().toString() + "_" + f.getOriginalFilename();

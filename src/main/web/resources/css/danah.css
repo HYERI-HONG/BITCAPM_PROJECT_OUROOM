@@ -14,6 +14,36 @@
     z-index: 99999;
 }
 
+.d_top_btn:hover {
+  background-color: rgba(204, 82, 0, 1);
+  color: #ffffff;
+}
+
+.d_search_tooltip {
+	right: 40%;
+    left: 40%;
+    top: 1.5em;
+	position: fixed;
+    z-index: 1;
+    background: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .3);
+    transition: visibility 0s 0s, opacity .3s linear, transform .3s ease;
+}
+
+.d_search_tooltip>input {
+	padding: 0;
+    font-size: 15px;
+    height: 20px;
+    text-align: left;
+    border: none;
+    background: transparent;
+    padding: 0 10px;
+    border-radius: 2px;
+    
+}
+
 .d_post_search {
     margin-top: 40px;
     font-weight: 700;
@@ -33,7 +63,6 @@
     color: #CC5200
 }
 
-
 .d_post_search>a {
     font-size: 13px;
     text-decoration: underline
@@ -52,12 +81,6 @@
         right: 0;
         bottom: 0
     }
-}
-
-
-.d_top_btn:hover {
-  background-color: rgba(204, 82, 0, 1);
-  color: #ffffff;
 }
 
 /* -------------- 필터 -------------- */
@@ -1780,7 +1803,8 @@ a.d_filter_item_btn {
     font-weight: 400
 }
 
-.d_comment_feed_item_footer>.d_comment_feed_item_footer_delete_btn{
+.d_comment_feed_item_footer>.d_comment_feed_item_footer_delete_btn {
+    text-decoration: none;
     font-weight: 400;
     color: #bdbdbd
 }
@@ -1816,6 +1840,22 @@ a.d_filter_item_btn {
 
 .d_comment_feed_item_placeholder .d_comment_feed_item_footer_placeholder:after {
     display: none
+}
+
+.d_comments_form_input_content_text {
+    display: block;
+    width: 100%;
+    min-height: 1.4em;
+    border: none;
+    background: none;
+    color: #424242;
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+    line-height: 1.4;
+    resize: none;
+    overflow: hidden;
+    word-wrap: break-word;
 }
 
 .d_list_paginator {
@@ -2544,4 +2584,156 @@ form {
     content: '#';
     margin-right: 5px;
     color: #d8d8d8;
+}
+
+/* -------------- 태그등록 -------------- */
+
+.d_post.d_add_tags #d_add_tags {
+    max-width: 1280px;
+    padding: 0.1em;
+    position: relative;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.d_post.d_add_tags #d_add_tags>form {
+    background-color: #ffffff;
+    -webkit-flex: 0 1 800px;
+    flex: 0 1 800px;
+}
+
+.d_post.d_add_tags #d_add_tags>form>.d_buttons {
+    border: 1px solid #eeeeee;
+    padding: 12px;
+    overflow: hidden;
+}
+
+.d_post.d_add_tags #d_add_tags>form>.d_buttons>div.d_title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #424242;
+    margin-bottom: 12px;
+}
+
+.d_post.d_add_tags #d_add_tags>form>.d_buttons>div.d_title>span {
+    font-size: 16px;
+    margin-top: 4px;
+    color: #CC5200;
+    margin-left: 6px;
+    font-weight: normal;
+}
+
+.d_post.d_add_tags #d_add_tags>form>.d_buttons>input {
+    background-color: #CC5200;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
+    margin: 0;
+    padding: 3px 6px;
+    float: right;
+    cursor: pointer;
+    border-radius: 2px;
+    border: 1px solid #CC5200;
+    margin-left: 5px;
+}
+
+.d_post.d_add_tags #d_add_tags>form>.d_buttons>a>div#d_cancel {
+    background-color: transparent;
+    border: 1px solid #dcdcdc;
+    color: #bdbdbd;
+    font-size: 14px;
+    margin: 0;
+    padding: 3px 6px;
+    float: right;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+.d_post.d_add_tags #d_add_tags>form>#d_image_panel {
+    position: relative;
+}
+
+.d_post.d_add_tags #d_add_tags>form>#d_image_panel>img {
+    width: 100%;
+    height: -webkit-fill-available;
+}
+
+.d_post.d_add_tags #d_add_tags>form>#d_image_panel>.d_tags_form {
+    position: absolute;
+}
+
+.d_post.d_add_tags #d_add_tags>form>#d_image_panel>.d_tags_form>.d_tag_icon.d_gray {
+    width: 30px;
+    height: 30px;
+    background-image: url(../img/danah/icon.png);
+    background-repeat: no-repeat;
+    background-size: 400px;
+    background-position: top -61px left -60px;
+}
+.d_post.d_add_tags #d_add_tags>form>#d_image_panel>.d_tags_form>.d_tag_icon {
+    width: 30px;
+    height: 30px;
+    background-image: url(../img/danah/icon.png);
+    background-repeat: no-repeat;
+    background-size: 400px;
+    background-position: top -61px left 0;
+    cursor: pointer;
+}
+
+.d_post.d_add_tags #d_add_tags>form>#d_image_panel>.d_tags_form>.d_tag_information {
+    display: none;
+    position: relative;
+    width: 200px;
+    padding: 9px;
+    background: rgba(255,255,255,0.7);
+    border: 2px solid #f1f2f2;
+    top: -17px;
+    left: 17px;
+    z-index: 1000;
+}
+
+.d_post.d_add_tags #d_add_tags>form>#d_image_panel>.d_tags_form>.d_tag_information>.d_user_field {
+    width: 100%;
+}
+
+.d_post.d_add_tags #d_add_tags>form>#d_image_panel>.d_tags_form>.d_tag_information>.d_user_field>textarea {
+    padding: 6px;
+    border: 1px solid #dcddde;
+    width: 100%;
+    height: 63px;
+    font-size: 12px;
+    line-height: 18px;
+    resize: none;
+    box-sizing: border-box;
+}
+
+.d_post.d_add_tags #d_add_tags>form>#d_image_panel>.d_tags_form>.d_tag_information>.d_buttons {
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.d_post.d_add_tags #d_add_tags>form>#d_image_panel>.d_tags_form>.d_tag_information>.d_buttons>div.d_confirm {
+    float: left;
+    background-color: rgba(90,200,251,0.7);
+}
+.d_post.d_add_tags #d_add_tags>form>#d_image_panel>.d_tags_form>.d_tag_information>.d_buttons>div {
+    padding: 6px 12px;
+    color: white;
+    border-radius: 2px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.d_post.d_add_tags #d_add_tags>form>#d_image_panel>.d_tags_form>.d_tag_information>.d_buttons>div.d_destroy {
+    float: right;
+    background-color: rgba(147,149,152,0.7);
+}
+.d_post.d_add_tags #d_add_tags>form>#d_image_panel>.d_tags_form>.d_tag_information>.d_buttons>div {
+    padding: 6px 12px;
+    color: white;
+    border-radius: 2px;
+    font-size: 14px;
+    cursor: pointer;
 }
