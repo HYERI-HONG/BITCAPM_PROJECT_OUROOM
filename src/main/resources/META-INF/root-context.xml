@@ -56,15 +56,16 @@
 	<constructor-arg ref="sqlSessionFactoryBean" />
 	</bean>	
 	
-	<!-- 
+	
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
       <property name="dataSource" ref="dataSource"/>
 	</bean>
-    <bean id="uploadPath" class="java.lang.String">
+	<!--     
+	<bean id="uploadPath" class="java.lang.String">
 	    <constructor-arg value="/Users/danah/BitProject/ouroom/src/main/web/resources/img/danah/post">
 	    </constructor-arg>
-    </bean>
-    -->
+    </bean> -->
+    
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
    		<property name="maxUploadSize" value="10000000" />
    		<property name="defaultEncoding" value="utf-8"></property>
