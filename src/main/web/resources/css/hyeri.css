@@ -97,19 +97,19 @@
 }
 
 /*--------------------- main css------------------------- */
-.main{
+.h_main{
 	weight:90%;
 	margin :20px 13%;
 	background-color:white;
 	
 }
 
-.section{
+.h_section{
 	margin-top:40px;
 	background-color:#CC5200;
 	
 }
-.scale img{
+.h_scale img{
     -webkit-transform:scale(1);
     -moz-transform:scale(1);
     -ms-transform:scale(1); 
@@ -122,7 +122,7 @@
     transition:.3s;
 } 
 
-.scale:hover img{
+.h_scale:hover img{
     -webkit-transform:scale(1.2);
     -moz-transform:scale(1.2);
     -ms-transform:scale(1.2);   
@@ -137,6 +137,9 @@
 } 
 
 /*--------------------- add css------------------------- */
+.h_border{
+	border:dotted 0.03em #8c8c8c;
+}
 .bir_yy, .bir_mm, .bir_dd{
 	display: table-cell;
     table-layout: fixed;

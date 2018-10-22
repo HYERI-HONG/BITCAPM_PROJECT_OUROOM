@@ -2,25 +2,24 @@
 var app = app || {};
 app =(()=>{
 	var init =x=>{
-		app.router.init(x);
+		console.log('Welcome To 니방내방!!');
+		$.getScript(x+'/resources/js/router.js',
+				()=>{
+					$.extend(new Session(x)); 
+					app.router.main();
+		})
 	};
 	return {init : init};
 })();
-
 app.router = {
-		init : x=>{
-			$.getScript(x+'/resources/js/router.js',
-				()=>{
-						$.extend(new Session(x)); 
-						app.main.init();
-			})
-		},
-		home : x=>{
+		main : x=>{
 			$.when(
 					$.getScript($.script()+'/nav.js'),
 					$.getScript($.script()+'/content.js'),
-					$.getScript($.script()+'/hyeri.js'),
 					/*$.getScript($.script()+'/footer.js'),*/
+					$.getScript($.script()+'/hyeri.js'),
+					$.getScript($.script()+'/jun.js'),
+					$.getScript($.script()+'/jaekyung.js'),
 					$.Deferred(y=>{
 						$(y.resolve);
 					})
@@ -33,7 +32,7 @@ app.router = {
 	                  
 						$('#logo').click(e=>{
 							e.preventDefault();
-							app.router.home();
+							app.router.main();
                         });
 						 $('#login_btn').click(e=>{
 							e.preventDefault();
@@ -47,51 +46,25 @@ app.router = {
 							e.preventDefault();
 							$('#h_search_btn').attr({ style: "visibility: visible;font-size:25px; margin-bottom:9px; vertical-align: bottom; margin-left:10px;" });
 							$('#h_wirte_btn').attr({ style: "visibility: visible; top:12px; margin-left: -13.5px;" });
-                            $.getScript($.script()+'/danah.js', ()=>{
+							$.getScript($.script()+'/danah.js', ()=>{
                                 danah.init($.context());
                             });
                         });
 						 $('#store_btn').click(e=>{
 		                    e.preventDefault();
-		                     $.getScript($.script()+'/jun.js',()=>{
-		                         jun.init();
-		                    });
+		                    jun.init(); 
 		                 });
 						 $('#h_cart_btn').click(e=>{
-								$.getScript($.script()+'/jun.js',()=>{
-									e.preventDefault();
-									jun.main.cart();
-								});
-							 });
+							e.preventDefault();
+							jun.main.cart();	
+						 });
 						 $('#statics_btn').click(e=>{
 	                        e.preventDefault();
-	                        $.getScript($.script()+'/jaekyung.js',()=>{
-	                            jaekyung.init();
-	                        });
+	                        jaekyung.init();
 	                     });
-						
-						
 				})
-				.fail(x=>{console.log(' when fail 로드실패');})
 		}
 };
-app.main =(()=>{
-	var w, nav, footer, content, context, script, style,img;
-	var init =()=>{
-		context = $.context();
-		script = $.script();
-		style = $.style();
-		img = $.img();
-		w=$('#wrapper');
-		onCreate();
-	};
-	var onCreate =()=>{
-		setContentView();
-	};
-	var setContentView =()=>{
-		app.router.home();
-	};
-	return {init : init};
-})();
+
 
 
