@@ -1,6 +1,6 @@
 "use strict";
 var jieun = jieun || {};
-
+//변경변경
 jieun=(()=>{
 	var w,nav,footer,content,context,script,style,img;
 		context = $.context();
@@ -21,15 +21,14 @@ jieun=(()=>{
 				error:(m1,m2,m3)=>{alert('에러났다!');}
 			})
 			*/
-			
-			 	let wrap_con=$('<div id="wrap_content"/>').appendTo(w);
-			 	content.appendTo(wrap_con);
+
+			 	content.appendTo(w);
 				$('#footer').remove();
 				content.empty();
 				
 				let section =$('<section/>').addClass('je_row').appendTo(content);
 	
-				$('<div id="je_selling_helper_wrap" class="col-md-9" style="width: 100%;height: 55px;" />').append($('<div id="je_selling-helper" style="margin-bottom: 0px;" class=" navbar navbar-default" />')).appendTo(wrap_con);
+				$('<div id="je_selling_helper_wrap" class="col-md-9" style="width: 100%;height: 55px;" />').append($('<div id="je_selling-helper" style="margin-bottom: 0px;" class=" navbar navbar-default" />')).appendTo(content);
 				/*$('<section id="je_col-2"/>').append($('<nav id="je_product_tab"  />')).appendTo($('#je_selling_helper'));*/
 				let ul = $('<ul class="nav nav-tabs nav-justified"/>').appendTo($('.navbar'));
 				$('<li class="col2 active"/>').attr({id:'b_product-info','data-target':'product-info',role:'presentation'}).text('상품정보').appendTo(ul);
@@ -66,7 +65,7 @@ jieun=(()=>{
 					        $('#je_selling_helper_wrap').removeClass('sticky'); 
 					    }
 					};
-					$('.sticky').appendTo($('#h_navigation'));
+/*					$('.sticky').appendTo($('#h_navigation'));*/
 
 					stickyNav();
 					// and run it again every time you scroll
@@ -75,7 +74,7 @@ jieun=(()=>{
 					});
 				});
 		
-				let section2 =$('<section "/>').addClass('je_row1').appendTo(wrap_con);
+				let section2 =$('<section "/>').addClass('je_row1').appendTo(content);
 				
 				let je_div_cover = $('<div/>').addClass('je_div_cover');
 				let je_div_cover_info = $('<div/>').addClass('je_div_cover_info');
@@ -229,8 +228,8 @@ jieun=(()=>{
 					        $('#t_order_cart').removeClass('sticky'); 
 					    }
 					};
-					$('.sticky').appendTo($('#h_navigation'));
-
+/*					$('.sticky').appendTo($('#h_navigation'));
+*/
 					stickyNav();
 					// and run it again every time you scroll
 					$(window).scroll(function() {
@@ -248,7 +247,7 @@ jieun=(()=>{
 						$('<img class="je_notice_img"/>').attr({src:img+'/jieun/notice_2.jpg'}))).appendTo(total_wrap);
 
 				
-				
+				//
 				$('<section id="je_detail">').appendTo(total_wrap);
 				($('<div id="je_detail_contents" class="je_detail_hidden"/>').append($('<div style="margin: 0px; padding: 0px; width: 100%; text-align: center;"/>'))).appendTo($('#je_detail'));
 				//<!-------------------- 오하임 전체공지------------------>
