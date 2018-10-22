@@ -11,6 +11,17 @@ jieun=(()=>{
 		content=$('#content');
 
 		var detail=()=>{
+			
+			/*$.ajax({
+				url:context+'/BrdDetail/detail',
+				method:'post',
+				contentType:'application/json',
+				data:d,
+				success:d=>{alert('진입성공!')},
+				error:(m1,m2,m3)=>{alert('에러났다!');}
+			})
+			*/
+			
 			 	let wrap_con=$('<div id="wrap_content"/>').appendTo(w);
 			 	content.appendTo(wrap_con);
 				$('#footer').remove();
@@ -24,7 +35,7 @@ jieun=(()=>{
 				$('<li class="col2 active"/>').attr({id:'b_product-info','data-target':'product-info',role:'presentation'}).text('상품정보').appendTo(ul);
 				$('#b_product-info').click(e=>{
 					e.preventDefault();
-					$(window).scrollTop($('#je_notice').offset().top);
+					$(window).scrollTop($('#je_total_wrap').offset().top);
 				});
 				$('<li class="col2" id="je_count"/>').attr({id:'b_product-review','data-target':'product-review',role:'presentation'}).text('리뷰').appendTo(ul);
 				$('#je_count').append($('<span/>').text('(233)'));
@@ -77,7 +88,7 @@ jieun=(()=>{
 				});
 				$('<img/>').attr({src:img+'/jieun/침대1.jpg',id:'je_view1'}).appendTo(je_div_cover).appendTo($('.je_col0'));
 				
-				let p = $('<p style="margin-top: 50px"/>').addClass('je_info1').appendTo(je_div_cover_info);
+				let p = $('<p style="margin-top: 50px; color:#8080805c"/>').addClass('je_info1').appendTo(je_div_cover_info);
 				let a1=$('<a/>').attr({href:"https://ohou.se/store"}).text('오늘의 집 스토어');
 				let span1 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
 				let span2 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
@@ -154,7 +165,7 @@ jieun=(()=>{
 				$('<hr/>').attr({class:'je_line'}).appendTo(je_div_cover_info);
 			
 				$('<p style="font-size: 13px"/>').addClass('je_total_price').appendTo(je_div_cover_info);
-				$('<span id="je_temp"/>').text('주문금액').appendTo($('.je_total_price'));
+				$('<span id="je_temp"/>').appendTo($('.je_total_price'));
 				//($('<span/>').addClass('je_text_black').html('<strong id="je_won">0</strong>원')).appendTo($('.je_total_price'));
 				//$('<strong id="je_won"/>').addClass('je_text-heading').appendTo($('.je_text_black'));
 				$('#je_temp').html('<label style="margin-right: 400px">주문금액</label><span style="width:20px,margin-right:100px"><strong id="je_won">0</strong>원</span>');
@@ -166,25 +177,78 @@ jieun=(()=>{
 				$('<button id="je_buy"/>').text('구매하기').appendTo(buttons);
 				
 
-				
-			
-
-
 				//
 				
 				$('<div id="je_total_div"/>').appendTo(section2);
-				$('<div id="je_total_1" class="col-md-9"/>').appendTo($('#je_total_div'));
-				$('<div id="je_total_2" class="col-md-3"/>').appendTo($('#je_total_div'));
+				$('<div id="je_total_1" class="col-md-8"/>').appendTo($('#je_total_div'));
+				$('<div id="je_total_2" class="col-md-4" style="margin-top: 50px; margin-top: 0px;" />').appendTo($('#je_total_div'));
+				
+				let t_order_cart=$('<section class="col-md-10" id="t_order_cart" style="left: 1000px; width: 330px; top: 180px;"/>').appendTo($('#je_total_2'));
+				
+				$('<div id="je_order_cart"/>').html('<div style="font-weight:bold; font-size:15px;  ">옵션선택</div>').appendTo($('#t_order_cart'));
+				let cart_btn=$('<section style="height: 80px; margin-bottom: 40px" />').html('<div id="je_cart_btn">').appendTo($('#t_order_cart'));
+				$('<select id="je_selectbtn2" class="col-md-12" style="height: 50px; margin-top: 30px"/>').append(
+						$('<option/>').attr("value","0").text('사이즈'),
+						$('<option/>').attr("value","01 몬스터 필로우탑 30T 침대 매트리스 싱글(S)").text('01 몬스터 필로우탑 30T 침대 매트리스 싱글(S)(119,000원)'),
+						$('<option/>').attr("value","02 몬스터 필로우탑 30T 침대 매트리스 슈퍼싱글(SS)").text('02 몬스터 필로우탑 30T 침대 매트리스 슈퍼싱글(SS)(149,000원)'),
+						$('<option/>').attr("value","03 몬스터 필로우탑 30T 침대 매트리스 퀸(Q)").text('03 몬스터 필로우탑 30T 침대 매트리스 퀸(Q)(179,000원)')					
+					).appendTo(cart_btn);
+				
+			
+				
+				let selected_opt=$('<section class="selected-options text-caption-1" style=" border: 0.5px solid #80808038; background-color: whitesmoke; padding: 5px; margin-bottom: 30px; height: 261px;">').html('<div class="item" data-index="1" style="border-bottom: solid 1px #ededed; height: 51px;">'
+																								+ '<p class="name" style="font-size: 12px;">01 몬스터 필로우탑 30T 침대 매트리스 싱글(S)<span class="glyphicon glyphicon-remove" role="button" aria-hidden="false" style="margin-left:15px"></p>'
+																								+ '<div class="detail"><div class="amount">'
+																								+ '<span class="glyphicon glyphicon-minus" role="button" style="margin-right: 10px;"></span>'
+																								+ '<input type="number" value="1"  style=" border: 0px solid; background-color: whitesmoke; width:30px; text-align:center;"></input>'
+																								+ '<span class="glyphicon glyphicon-plus" role="button" style="margin-left: 10px;"></span></div><p class="bold col-md-12" style="font-weight:bold; left: 200px; width: 33%; padding-left: 0px; bottom: 20px;"><span class="amount">119,000</span>원</p></div></div>');
+				
+				selected_opt.appendTo($('#t_order_cart'));
+				
+				$('<div id="je_temp2"/>').html('<label style="margin-right: 180px; font-size: 10px">주문금액</label><span style="width:20px,margin-right:120px"><strong id="je_won">0</strong>원</span>').appendTo($('#t_order_cart'));
+				
+				let buttons2=$('<div id="je_buttons2" style="margin-top: 20px; text-align: center"/>')
+				buttons2.appendTo($('#t_order_cart'));
+				$('<button id="je_get_basket" style="width: 130px"/>').text('장바구니 담기').appendTo(buttons2);
+				$('<button id="je_buy" style="width: 130px; margin-right:0px"/>').text('구매하기').appendTo(buttons2);
+				///
+				
+				$(document).ready(function() {
+					// grab the initial top offset of the navigation 
+				   	var stickyNavTop = $('#je_selling_helper_wrap').offset().top;
+				   	
+				   	// our function that decides weather the navigation bar should have "fixed" css position or not.
+				   	var stickyNav = function(){
+					    var scrollTop = $(window).scrollTop(); // our current vertical position from the top
+					         
+					    // if we've scrolled more than the navigation, change its position to fixed to stick to top,
+					    // otherwise change it back to relative
+					    if (scrollTop > stickyNavTop) { 
+					        $('#t_order_cart').addClass('sticky');
+					    } else {
+					        $('#t_order_cart').removeClass('sticky'); 
+					    }
+					};
+					$('.sticky').appendTo($('#h_navigation'));
+
+					stickyNav();
+					// and run it again every time you scroll
+					$(window).scroll(function() {
+						stickyNav();
+					});
+				});
 				
 
-				
-				let total_wrap = $('<div id="je_total_wrap" style="padding:70px 30px"/>').appendTo($('#je_total_1'));
+				////
+				let total_wrap = $('<div id="je_total_wrap" />').appendTo($('#je_total_1'));
 				
 				($('<section id="je_notice" style="padding-top: 50px;"/>').append(
 						$('<img class="je_notice_img"/>').attr({src:img+'/jieun/notice_1.jpg'}),
 						$('<p id="je_product_notice"/>').html('<p>구매 후<strong>15영업일 이내 발송</strong>되는 상품입니다.</p>'),
 						$('<img class="je_notice_img"/>').attr({src:img+'/jieun/notice_2.jpg'}))).appendTo(total_wrap);
 
+				
+				
 				$('<section id="je_detail">').appendTo(total_wrap);
 				($('<div id="je_detail_contents" class="je_detail_hidden"/>').append($('<div style="margin: 0px; padding: 0px; width: 100%; text-align: center;"/>'))).appendTo($('#je_detail'));
 				//<!-------------------- 오하임 전체공지------------------>
@@ -216,7 +280,11 @@ jieun=(()=>{
 				
 				//review
 				$('<section id="product-review">').appendTo(total_wrap);
+				$('#product-review').html('리뷰가 들어가야되는 자리이니다. 넘보지 마새오.');
 				
+				
+				$('<br/>');
+				$('<br/>');
 				//shipping
 				let section4 =$('<section/>');
 				$('<section id="product-shipping">').appendTo(total_wrap);

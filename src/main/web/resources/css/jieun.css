@@ -197,7 +197,7 @@
 	text-align: center;
 	color: #cc5200;
 	margin-right: 10px;
-	width: 250px;
+	width: 240px;
     height: 50px;
     
 }
@@ -208,7 +208,7 @@
 	text-align: center;
 	color: white;
 	margin-right : 10px;
-	width: 250px;
+	width: 240px;
     height: 50px;
 }
 #je_buttons{
@@ -232,18 +232,17 @@
 }
 
 #content{
-	height: 650px;
+	height: 700px;
 }
 #je_selling_helper_wrap{
 
 	padding-right: 5cm;
 	padding-left:5cm;
-/* 	position: -webkit-sticky; */
 	z-index: 3;
 }
  .sticky{
 	position: fixed;
-	top: 77px;
+ 	top: 77px; 
 }  
 .je_row{
 	width: 100%;
@@ -257,6 +256,10 @@
 	padding-left:5cm;
 	z-index: 2;
 }
-/* .navbar {
-	top: 77px;
-      } */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+  
+}
+#t_order_cart{}

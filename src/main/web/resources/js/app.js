@@ -207,31 +207,25 @@ app.permission=(()=>{
 			
 				
 				/*add_submit_btn/has-account*/
-				/* $('#add_submit_btn').click(e=>{
+				$('#add_submit_btn').click(e=>{
 						e.preventDefault();
+						alert("버튼 클릭");
 						$.ajax({
 							url : $.context()+'/member/add',
 							method : 'POST',
 							contentType : 'application/json',
 							data : JSON.stringify({
-								pre_email : $('#pre_email').val(),
-								post_email : $('#post_email').val(),
-								nickname : $('#nickname').val(),
-								password : $('#pass').val(),
-								pass_confirm : $('#pass_confirm').val(),
-								gender : $('#ssn').val(),
-								bir_year : $('.teamid:checked').val(),
-								bir_month : $('.teamid:checked').val(),
-								bir_day : $('.teamid:checked').val()
+								test : $('#nickname').val()
 							}),
 							success : d=>{
+								
 							},
 							error : (m1,m2,m3)=>{
 								alert("error발생");
 							}
 						});
 						
-				});*/
+				});
 				 $('#has-account').click(e=>{
 						e.preventDefault();
 				});
