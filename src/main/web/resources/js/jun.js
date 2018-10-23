@@ -1,5 +1,6 @@
 "use strict";
 var jun = jun || {};
+//ㅠㅠ
 jun =(()=>{
        var init=()=>{
               jun.main.store();
@@ -17,7 +18,9 @@ jun.main = {
 		
 		$('<div/>').attr({id:"kj_category_div"}).appendTo($('#content'));
 		
-		
+		$.getScript($.script()+'/danah.js',()=>{
+			danah.u.tb($('#content'));
+		});
 		$.each(category,(x,j)=>{
 			
 			$('<span/>').attr({class:"kj_category_1"}).html(j).appendTo($('#kj_category_div')).click(e=>{
@@ -30,7 +33,7 @@ jun.main = {
 			jun.main.add();
 			
 		});
-		$('<div/>').attr({id:"kj_test2"}).addClass("container").appendTo($('#content'));
+		$('<div/>').attr({id:"kj_test2"}).appendTo($('#content'));
 		$('<div/>').attr({id:"kj_category_2"}).appendTo($('#kj_test2'));
 		
 		let category2=["침대","옷장","수납장","화장대"];
@@ -61,40 +64,47 @@ jun.main = {
 		})
 		
 		$('<div/>').attr({id:"kj_item_list",class:"container"}).appendTo($('#content'));
-		
-		
-	for(let i=0; i<=1; i++){
-		
-		let div = $('<div/>').attr({class:"row"}).appendTo($('#kj_item_list'));
-		
-		for(let y=0; y<=3; y++){
-		let div1 =	$('<div/>').attr({class:"col-md-3"}).appendTo(div);
-		let div2 = $('<div/>').attr({class:"kj_item"}).appendTo(div1);
-		$('<img/>').attr({src:$.img()+'/jun/1.JPG',class:"kj_item_img"}).appendTo(div2).click(e=>{
-			//
-			$.getScript($.script()+'/jieun.js',()=>{
-				jieun.detail();
-			});
+
+		$.getJSON($.context()+'/Items',jund=>{
+			$.each(jund.list,(i,j)=>{
+				
+					let div1 =	$('<div/>').attr({class:"col-md-3"}).appendTo($('#kj_item_list'));
+					let div2 = $('<div/>').attr({class:"kj_item"}).appendTo(div1);
+					let div_img=$('<div/>').attr({class:"kj_img_div"}).appendTo(div2);
+					
+					$('<img/>').attr({src:$.img()+'/jun/'+j.category+'/'+j.photo+'.jpg',class:"kj_item_img"}).appendTo(div_img).click(e=>{
+						
+						$.getScript($.script()+'/jieun.js',()=>{
+							jieun.detail();
+						});
+					});
+					
+					//glyphicon glyphicon-shopping-cart 색깔
+					let div3=$('<div/>').attr({class:'kj_icon_div'}).appendTo(div2);
+					
+					$('<span/>').attr({style:"cursor:pointer"}).addClass('glyphicon glyphicon-shopping-cart kj_cart_icon').appendTo(div3).click(e=>{
+						jun.main.modal(j);
+					});
+					$('<span/>').attr({style:"margin:5px;cursor:pointer"}).addClass('glyphicon glyphicon-heart-empty kj_like_icon').appendTo(div3).click(e=>{
+						alert("좋아요");
+					});
+					//<i class="far fa-cart-arrow-down"></i>
+					let div4=$('<div/>').attr("style","margin:5px").appendTo(div2);
+					$('<div/>').attr({class:"kj_stroe_item_p"}).html(j.title).appendTo(div4);
+					let a1 = parseInt(j.price);
+					let a2 = j.discount.substring(0,3);
+					let p = a1-(a1*a2);
+					
+					$('<div/>').attr({class:"kj_stroe_item_p"}).html(Math.round(p/100)*100+"원").appendTo(div4);
+					if(j.delivery==='0'){
+						$('<div/>').attr({class:"kj_stroe_item_p"}).html(" 무료배송 ").appendTo(div4);
+					}else{
+						$('<div/>').attr({class:"kj_stroe_item_p"}).html(j.delivery+"원").appendTo(div4);
+					}
+					
+				})
 		});
-		
-		//glyphicon glyphicon-shopping-cart 색깔
-		let div3=$('<div/>').attr({class:'kj_icon_div'}).appendTo(div2);
-		
-		$('<span/>').attr({style:"cursor:pointer"}).addClass('glyphicon glyphicon-shopping-cart kj_cart_icon').appendTo(div3).click(e=>{
-			jun.main.modal();
-		});
-		$('<span/>').attr({style:"margin:5px;cursor:pointer"}).addClass('glyphicon glyphicon-heart-empty kj_like_icon').appendTo(div3).click(e=>{
-			alert("좋아요");
-		});
-		//<i class="far fa-cart-arrow-down"></i>
-		let div4=$('<div/>').attr("style","margin:5px").appendTo(div2);
-		$('<div/>').attr({class:"kj_stroe_item_p"}).html(" 상품명:").appendTo(div4);
-		$('<div/>').attr({class:"kj_stroe_item_p"}).html(" 20000원[20%]").appendTo(div4);
-		$('<div/>').attr({class:"kj_stroe_item_p"}).html(" 무료배송 ").appendTo(div4);
-		
-		}
-		
-	}	
+
 		
 		
 	},
@@ -113,20 +123,16 @@ jun.main = {
 				  +'<span class="glyphicon glyphicon-upload" aria-hidden="true"></span> 업로드'
 				  +'</button></div>'
 				+'<div class="col-md-6" id="kj_create_img_div2" style="text-align: left;">'
-				+'<select id="kj_create_select">'
-				+'<option>카테고리</option>'
-			+'</select>'
-			+'<select id="kj_create_select2">'
-				+'<option>카테고리</option>'
-			+'</select><br>'
-					+'<label>상품이름</label><input type="text" id="kj_create_title" class="kj_create_input" size=26 placeholder="상품이름"><br>'
-					+'<label>&nbsp&nbsp&nbsp가격&nbsp&nbsp&nbsp&nbsp</label><input type="text" size=26 id="kj_money" class="kj_create_input" placeholder="가격"><br>'
-					+'<label>&nbsp&nbsp&nbsp수량&nbsp&nbsp&nbsp&nbsp</label><input type="text" size=26 id="kj_money" class="kj_create_input" placeholder="수량"><br>'
-					+'<label>&nbsp&nbsp할인율&nbsp&nbsp</label><input type="text" id="kj_dr" size=26 class="kj_create_input" placeholder="할인율"><br>'
-					+'<label>&nbsp&nbsp&nbsp옵션&nbsp&nbsp&nbsp</label><span id="kj_option_plus" class="glyphicon glyphicon-plus" aria-hidden="true"/>'
-					+'<span id="kj_option_minus" class="glyphicon glyphicon-minus" aria-hidden="true" style="margin-left:5px;"/><br><div id="kj_option_div">'
-					+'<input type="text" id="kj_item_option_input_1" class="kj_create_input" size=34 placeholder="옵션"></div>'
-					+'</div><div id="kj_create_img_div3 style="border:1px solid black;""><input type="text" id="kj_item_title" class="kj_create_input" size=80 placeholder="제목">'
+				+'<table id="kj_item_add_table"><tr><td class="kj_td">카테고리</td><td><select id="kj_add_option1"><option>카테고리</option></select>'
+				+'<select id="kj_add_option2"><option>카테고리</option></select></td></tr>'
+				+'<tr><td class="kj_td">상품명</td><td><input type="text" class="w3-input"></td></tr>'
+				+'<tr><td class="kj_td">상품가격</td><td><input type="text"></td></tr>'
+				+'<tr><td class="kj_td">할인율</td><td><input type="text"></td></tr>'
+				+'<tr><td class="kj_td">배달비</td><td><input type="text"></td></tr>'
+				+'<tr><td class="kj_td">옵션 <span id="kj_option_plus" class="glyphicon glyphicon-plus"/>'
+				+'<span id="kj_option_minus" class="glyphicon glyphicon-minus"/></td><td id="kj_add_test"><input id="kj_item_option_input_1" type="text"></td></tr>'
+				+'</table>'
+					+'</div><div id="kj_create_img_div3"><input type="text" id="kj_item_title" class="kj_create_input" size=80 placeholder="제목">'
 					+'<textarea rows="6" cols="81" id="kj_item_ta" class="kj_create_input" placeholder="내용"/></div>'
 					+'<button type="button" id="kj_item_upload_borad_btn" class="kj_item_board_btn">업로드</button>'
 					+'<button type="button" id="kj_item_sub_btn" class="kj_item_board_btn">글쓰기</button>'
@@ -138,13 +144,16 @@ jun.main = {
 			type:'inline'});
 		var count = 1;
 		$('#kj_option_plus').on('click',function(){
-			if(count<4){
+			if(count<5){
 				count++;
-			$('<input/>').attr({type:"text",id:"kj_item_option_input_"+count,
-				class:"kj_create_input",size:34,placeholder:"옵션"}).appendTo($('#kj_option_div'));
+			/*let tr =$('<tr/>').attr({id:"kj_tr_"+count}).appendTo('#kj_item_add_table');
+			$('<td/>').attr({class:"kj_td"}).appendTo(tr);
+			let td = $('<td/>').appendTo(tr);*/
+			$('<input/>').attr({type:"text",id:"kj_item_option_input_"+count,}).appendTo($('#kj_add_test'));
 			}});
 		$('#kj_option_minus').on('click',function(){
 			if(count>1){
+			$('#kj_tr_'+count).remove();
 			$('#kj_item_option_input_'+count).remove();
 			count--;
 			}
@@ -215,7 +224,7 @@ jun.main = {
 	
 		
 	},
-	modal:()=>{
+	modal:x=>{
 		$.magnificPopup.open({
 			closeBtnInside:true,
 			closeOnContentClick:false,
@@ -225,10 +234,10 @@ jun.main = {
 			closeOnBgClick:false,
 			items:{src:	'<div id="kj_cart_option_modal"><div id="wrap_panel">'
 			    +'<div id="product_information">'
-			        +'<div class="image" style="background-image: url('+$.img()+'/jun/ex2.JPG)"></div>'
+			        +'<div class="image" style="background-image: url('+$.img()+'/jun/'+x.category+'/'+x.photo+'.jpg)"></div>'
 			        +'<div class="information">'
-			            +'<div class="name">원목 접이식테이블 2colors</div>'
-			            +'<div class="delivery_info">무료(착불)| 일반택배배송'
+			            +'<div class="name">'+x.title+'</div>'
+			            +'<div id="kj_delivery" class="delivery_info">'
 			            +'</div>'
 			        +'</div>'
 			    +'</div>'
@@ -236,12 +245,6 @@ jun.main = {
 			        +'<div id="option_panel">'
 			            +'<select id="product_option_depth1">'
 			                +'<option value="0">색상</option>'
-			                    +'<option value="화이트">'
-			                        +'화이트(24,900원)'
-			                    +'</option>'
-			                    +'<option value="블랙">'
-			                        +'블랙(24,900원)'
-			                    +'</option>'
 			            +'</select>'
 			                +'<input val="0" type="hidden" value="0" name="carted_production[pay_at]" id="carted_production_pay_at">'
 			        +'</div>'
@@ -282,6 +285,12 @@ jun.main = {
 			removalDelay:'0',
 			type:'inline'});
 		
+		//kj_delivery
+		if(x.delivery==='0'){
+		$('#kj_delivery').html("무료 | 일반 택배 배송 ");
+		}else{
+			$('#kj_delivery').html(x.delivery+"원  | 일반 택배 배송");
+		}
 		var count=1;
 		$('#kj_cart_input').val(count);
 		

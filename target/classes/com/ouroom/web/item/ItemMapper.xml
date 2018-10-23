@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ouroom.web.item.ItemMapper">
+
+<select id="list" resultType="com.ouroom.web.item.Item">
+		<!-- select * from item where seq>82 order by seq desc; -->
+		select * from item i join category2 c where i.CATEGORY2_SEQ = c.SEQ and i.seq>82 order by i.seq desc;
+	</select>
+	
+	<select id="count" resultType="int">
+	select count(*) from item where seq>82 order by seq desc;
+	</select>
+</mapper>

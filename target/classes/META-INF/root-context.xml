@@ -62,7 +62,6 @@
 	    <constructor-arg value="${file.uploadPath}">
 	    </constructor-arg>
     </bean> 
-	 
    	<tx:annotation-driven/>
 	<mybatis-spring:scan base-package="com.ouroom.web"/>
 </beans>
