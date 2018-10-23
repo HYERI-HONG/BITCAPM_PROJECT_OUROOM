@@ -73,7 +73,7 @@ jun.main = {
 		$('<img/>').attr({src:$.img()+'/jun/1.JPG',class:"kj_item_img"}).appendTo(div2).click(e=>{
 			//
 			$.getScript($.script()+'/jieun.js',()=>{
-				jieun.detail();
+				jieun.detail('11');
 			});
 		});
 		

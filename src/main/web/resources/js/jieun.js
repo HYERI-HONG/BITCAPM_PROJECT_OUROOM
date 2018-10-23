@@ -10,17 +10,18 @@ jieun=(()=>{
 		w=$('#wrapper');
 		content=$('#content');
 
-		var detail=()=>{
+		var detail=x=>{
 			
-			/*$.ajax({
-				url:context+'/BrdDetail/detail',
+/*			$.getJson({
+				url:context+'/BrdDetail/detail/'+x,
 				method:'post',
 				contentType:'application/json',
-				data:d,
+				data:x,
 				success:d=>{alert('진입성공!')},
 				error:(m1,m2,m3)=>{alert('에러났다!');}
-			})
-			*/
+			});*/
+			$.getJSON(context+'/BrdDetail/detail/'+x,d=>{
+
 
 			 	content.appendTo(w);
 				$('#footer').remove();
@@ -88,15 +89,15 @@ jieun=(()=>{
 				$('<img/>').attr({src:img+'/jieun/침대1.jpg',id:'je_view1'}).appendTo(je_div_cover).appendTo($('.je_col0'));
 				
 				let p = $('<p style="margin-top: 50px; color:#8080805c"/>').addClass('je_info1').appendTo(je_div_cover_info);
-				let a1=$('<a/>').attr({href:"https://ohou.se/store"}).text('오늘의 집 스토어');
+				let a1=$('<a id="gray_a"/>').attr({href:"https://ohou.se/store"}).text('오늘의 집 스토어');
 				let span1 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
 				let span2 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
 				let span3 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
 				let span4 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
-				let a2 = $('<a/>').attr({href:"https://ohou.se/store/category?category=0&order=popular"}).text('가구');
-				let a3 = $('<a/>').attr({href:"https://ohou.se/store/category?category=0&order=popular"}).text('침실 가구');
-				let a4 = $('<a/>').attr({href:"https://ohou.se/store/category?category=0&order=popular"}).text('매트리스');
-				let a5 = $('<a/>').attr({href:"https://ohou.se/store/category?category=0&order=popular"}).text('스프링매트리스');
+				let a2 = $('<a id="gray_a"/>').attr({href:"https://ohou.se/store/category?category=0&order=popular"}).text('가구');
+				let a3 = $('<a id="gray_a"/>').attr({href:"https://ohou.se/store/category?category=0&order=popular"}).text('침실 가구');
+				let a4 = $('<a id="gray_a"/>').attr({href:"https://ohou.se/store/category?category=0&order=popular"}).text('매트리스');
+				let a5 = $('<a id="gray_a"/>').attr({href:"https://ohou.se/store/category?category=0&order=popular"}).text('스프링매트리스');
 				
 				a1.appendTo(p); 
 				span1.appendTo(p);
@@ -110,24 +111,26 @@ jieun=(()=>{
 				p.appendTo(je_div_cover_info);
 				
 				let p1=$('<p/>').addClass('je_cover_title');
-				p1.text('[최저가] 고밀도 필로우탑 하이브리드 매트리스(S/SS/Q/K)').appendTo(je_div_cover_info);
-
-				let a6 = $('<a/>').addClass('je_review').attr({href:"https://ohou.se/productions/54844/selling#product-review"});
+				p1.text(d.title).appendTo(je_div_cover_info);
+				$('.je_cover_title').html();
+				
+				let a6 = $('<a style="color:#cc5200"/>').addClass('je_review').attr({href:"https://ohou.se/productions/54844/selling#product-review"});
 				let review = $('<span/>').addClass('je_star_review').attr({id:'je_line'});
 				let star = $('<span/>').attr({class:'glyphicon glyphicon-star','aria-hidden':true});
-					star.appendTo(review).appendTo(a6);
-					star.appendTo(review).appendTo(a6);
-					star.appendTo(review).appendTo(a6);
-					star.appendTo(review).appendTo(a6);
-					star.appendTo(review).appendTo(a6).text('226개의 리뷰');
+					star.appendTo(a6);star.appendTo(a6);star.appendTo(a6);
+/*					star.appendTo(review).appendTo(a6);
+*/
+					a6.append(star);
+					star.appendTo(a6);
+					star.appendTo(review).appendTo(a6).html('226개의 리뷰<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>');
 					$('<br/>').appendTo(a6);
 					a6.appendTo(je_div_cover_info);
 				
 				let p_price=$('<p/>').addClass('je_price_cover');
 
-				$('<b/>').html('61%').attr({id:'je_line',class:'je_discount'}).appendTo(p_price);
+				$('<b style="margin-top: 10px; margin-right :10px"/>').html(d.disc+'%').attr({id:'je_line',class:'je_discount'}).appendTo(p_price);
 				
-				let origin = $('<h6/>').addClass('je_origin_cost').text('299,000');
+				let origin = $('<h6/>').addClass('je_origin_cost').text(d.price);
 				let ins = $('<ins/>').addClass('je_dis_cost').text('119,000원');
 				/*$('<br/>').appendTo(origin);*/
 				
@@ -319,6 +322,10 @@ jieun=(()=>{
 						$('<option/>').attr("value","03 몬스터 필로우탑 30T 침대 매트리스 퀸(Q)").text('03 몬스터 필로우탑 30T 침대 매트리스 퀸(Q)(179,000원)')					
 					)).appendTo(option_div);
 				$('<input class=/>')*/
+			
+			});
+		
+
 				}
 
 			return{detail:detail};
