@@ -747,6 +747,7 @@ a.d_filter_item_btn {
     }
 }
 
+.d_post_action_btn,
 .d_post_action_like {
     display: -moz-flex;
     display: -ms-flexbox;

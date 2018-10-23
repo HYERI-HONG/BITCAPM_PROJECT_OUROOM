@@ -1,10 +1,8 @@
 package com.ouroom.web.post;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -40,7 +38,6 @@ public class FileUtil {
 		return d;
 	};
 	
-	
 	public BiConsumer<MultipartFile, byte[]> file = (f, b) -> { this.f = f; sf = b; };	
 	
 	public Function<String, String> upload = p -> {
@@ -49,8 +46,8 @@ public class FileUtil {
 		try { FileCopyUtils.copy(sf, new File(p + sp, sn)); } 
 		catch (Exception e) { e.printStackTrace(); }
 		return sn;
-		//FileCopyUtils.copy(f.getBytes(), new File(uploadPath + sp, sn)); 데이터, 경로, 이111
-		//file.transferTo(new File(u.uploadPath+file.getOriginalFilename())); 파일, 경로
+		//FileCopyUtils.copy(f.getBytes(), new File(uploadPath + sp, sn));
+		//file.transferTo(new File(u.uploadPath+file.getOriginalFilename()));
 	};
 	
 	public Consumer<String> delete = p -> new File(p).delete();

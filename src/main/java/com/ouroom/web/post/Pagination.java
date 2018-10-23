@@ -7,35 +7,33 @@ import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
-@Component
-@Data @Lazy
+@Component @Data @Lazy
 public class Pagination implements Proxy{
-	int totalRecode, recodeSize, 
+	private int totalRecode, recodeSize, 
 	totalPage, pageSize, 
-	pageNum, startPage, endPage,
-	startRow, endRow,
+	pageNo, startPage, endPage,
+	beginRow, endRow,
 	prev, next;
-	boolean existPrev = false, existNext = false;
+	private boolean existPrev = false, existNext = false;
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void carraryOut(Object o) {
-		
 		HashMap<String,Object> map = (HashMap<String, Object>) o;
-		this.pageNum = (int) map.get("pageNum");
+		this.pageNo = (int) map.get("pageNo");
 		this.totalRecode = (int) map.get("totalRecode");
 		this.recodeSize = (int) map.get("recodeSize");
 		this.totalPage = (totalRecode-1)/recodeSize+1;
 		this.pageSize = 5;
-		this.startPage = 1 + (int) (Math.ceil((pageNum-1)/pageSize)) * pageSize;
+		this.startPage = 1 + (int) (Math.ceil((pageNo-1)/pageSize)) * pageSize;
 		this.endPage = (totalPage < startPage + pageSize  - 1) ? totalPage : (startPage + pageSize -1);
-		this.startRow = 1 + ((pageNum-1) * recodeSize);
-		this.endRow = (totalRecode < startRow + recodeSize - 1) 
+		this.beginRow = 1 + ((pageNo-1) * recodeSize);
+		this.endRow = (totalRecode < beginRow + recodeSize - 1) 
 										? totalRecode 
-										: pageNum*(recodeSize);
+										: pageNo*(recodeSize);
 		this.existPrev = (startPage != 1);
 		this.existNext = (endPage < totalPage && startPage != totalPage);
-		this.prev = pageNum > 6 ? 1 : startPage-5;
+		this.prev = startPage<6 ? 1 : startPage-5;
 		this.next= endPage+1;
 	}
 
