@@ -74,7 +74,7 @@ jieun=(()=>{
 						stickyNav();
 					});
 				});
-		
+		//
 				let section2 =$('<section "/>').addClass('je_row1').appendTo(content);
 				
 				let je_div_cover = $('<div/>').addClass('je_div_cover');
