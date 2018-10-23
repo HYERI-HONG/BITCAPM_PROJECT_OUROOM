@@ -171,6 +171,13 @@ hyeri.page={
 		$('<option/>').html('성별').appendTo($('#gender'));
 		$('<option/>').html('여자').attr({value:"2"}).appendTo($('#gender'));
 		$('<option/>').html('남자').attr({value:"1"}).appendTo($('#gender'));
+		
+		/*이미지 업로드*/
+		/*$('<label/>').addClass('je_bold').html("프로필 사진 업로드").attr({style:"padding-top:20px"}).appendTo($('#add_form_middle'));
+		$('<input/>').attr({type:"file",name:'add_profile',id:'add_profile'}).appendTo($('#add_form_middle'))
+		.change(function(a){
+			alert();
+		})
 			
 		$('#add_submit_btn').click(e=>{
 				e.preventDefault();
@@ -191,7 +198,7 @@ hyeri.page={
 		});
 		$('#has-account').click(e=>{
 			e.preventDefault();
-		});
+		});*/
     },
     l:()=>{
     	$('#footer').remove();
