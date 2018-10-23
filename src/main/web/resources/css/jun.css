@@ -384,10 +384,10 @@ img.mfp-img {
 	 text-align: center;
 }
 #kj_select{
-	border:2px double #d9d9d9;
-	background: transparent;
-	height: 40px;
-	color: white;
+	border: 2px double white;
+    background: transparent;
+    height: 40px;
+    color: white;
 	
 }
 #kj_test_div1{
@@ -434,6 +434,9 @@ img.mfp-img {
     transform:scale(1);
 	
 }
+  .kj_col_md{
+	padding: 5px;
+}  
 .kj_icon_div{
 	text-align: right;
 	font-size: 25px;
@@ -628,7 +631,6 @@ img.mfp-img {
     position: relative;
     background: #FFF;
    	width:350px;
-   	height:380px;
     margin: 40px auto;
     padding: 10px 0 0;
 }
@@ -664,7 +666,7 @@ img.mfp-img {
     background-position: top -264px left -149px;
 }
 #kj_option_plus{
-	margin-left: 24px;
+	margin-left: 20px;
 	margin-right: 6px;
 }
 #kj_add_option1{
@@ -755,7 +757,7 @@ img.mfp-img {
     overflow: hidden;
 }
 #total_cost_panel {
-    padding: 20px 20px 68px;
+    padding: 20px 20px 20px;
     overflow: hidden;
 }
 #kj_buttons {

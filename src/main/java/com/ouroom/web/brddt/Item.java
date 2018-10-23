@@ -1,4 +1,5 @@
-package com.ouroom.web.item;
+package com.ouroom.web.brddt;
+
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,6 @@ import lombok.Data;
 @Data
 @Lazy
 public class Item {
-	String seq,title,price,delivery,discount,photo,sale_cnt,stroe_cnt,category2_seq,category,options;
+	String seq,sum,title,price,delivery,discount,photo,sale_cnt,stroe_cnt,category2_seq,category;
 
 }

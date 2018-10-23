@@ -96,7 +96,7 @@
 	font-size: 10px;
 	color: gray;
 }
-#je_icon{	
+#je_icon #gray_a{	
 	color: gray;
 }
 .je_cover_info{
@@ -106,7 +106,7 @@
 	margin-top:50px;
 	width: 50%;
 }
-/*1015 異붽�遺�*/
+/*1015 변경*/
 
 
 
@@ -176,15 +176,17 @@
 	width: 100%;
 	height: 100%;
 }
-/* .je_div_cover_info{
-	line-height:2;
-} */
+#gray_a{
+	color: gray;
+}
+
 .je_price_cover{
 	line-height:1; !important;
 }
 .je_line{
 	color: gray;
 	size: 0.5em;
+	
 	noshade;
 }
 #je_won{

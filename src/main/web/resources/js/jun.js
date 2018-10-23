@@ -12,7 +12,7 @@ jun.main = {
 		$('#content').empty();
 		$('<div/>').attr({id:'kj_div'}).addClass('container').appendTo($('#content'));
 		$('<div/>').attr({id:"kj_test_div1"}).appendTo($('#kj_div'))
-		$('<h1/>').attr({id:"kj_title",style:"color:#d9d9d9;font-weight: bold"}).html("Search Whatever You Want...").appendTo($('#kj_test_div1'));
+		$('<h1/>').attr({id:"kj_title",style:"color:white;text-shadow:2px 2px 1px #595959;font-weight: bold"}).html("Search Whatever You Want...").appendTo($('#kj_test_div1'));
 		$('<input/>').attr({id:'kj_select',placeholder:" 검색",size:"40"}).appendTo($('#kj_test_div1'));
 		let category =["전체 ","침실","드레스룸","거실","아이방","학생방","서재"];
 		
@@ -65,45 +65,20 @@ jun.main = {
 		
 		$('<div/>').attr({id:"kj_item_list",class:"container"}).appendTo($('#content'));
 
-		$.getJSON($.context()+'/Items',jund=>{
-			$.each(jund.list,(i,j)=>{
-				
-					let div1 =	$('<div/>').attr({class:"col-md-3"}).appendTo($('#kj_item_list'));
-					let div2 = $('<div/>').attr({class:"kj_item"}).appendTo(div1);
-					let div_img=$('<div/>').attr({class:"kj_img_div"}).appendTo(div2);
-					
-					$('<img/>').attr({src:$.img()+'/jun/'+j.category+'/'+j.photo+'.jpg',class:"kj_item_img"}).appendTo(div_img).click(e=>{
-						
-						$.getScript($.script()+'/jieun.js',()=>{
-							jieun.detail();
-						});
-					});
-					
-					//glyphicon glyphicon-shopping-cart 색깔
-					let div3=$('<div/>').attr({class:'kj_icon_div'}).appendTo(div2);
-					
-					$('<span/>').attr({style:"cursor:pointer"}).addClass('glyphicon glyphicon-shopping-cart kj_cart_icon').appendTo(div3).click(e=>{
-						jun.main.modal(j);
-					});
-					$('<span/>').attr({style:"margin:5px;cursor:pointer"}).addClass('glyphicon glyphicon-heart-empty kj_like_icon').appendTo(div3).click(e=>{
-						alert("좋아요");
-					});
-					//<i class="far fa-cart-arrow-down"></i>
-					let div4=$('<div/>').attr("style","margin:5px").appendTo(div2);
-					$('<div/>').attr({class:"kj_stroe_item_p"}).html(j.title).appendTo(div4);
-					let a1 = parseInt(j.price);
-					let a2 = j.discount.substring(0,3);
-					let p = a1-(a1*a2);
-					
-					$('<div/>').attr({class:"kj_stroe_item_p"}).html(Math.round(p/100)*100+"원").appendTo(div4);
-					if(j.delivery==='0'){
-						$('<div/>').attr({class:"kj_stroe_item_p"}).html(" 무료배송 ").appendTo(div4);
-					}else{
-						$('<div/>').attr({class:"kj_stroe_item_p"}).html(j.delivery+"원").appendTo(div4);
-					}
-					
-				})
+		for(let i=0; i<3; i++){
+			jun.main.itemList(i);
+		}
+	
+		var p_c=3;
+		
+		$(window).scroll(function() {
+		    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+		    	jun.main.itemList(p_c);
+		    	p_c++;
+		      
+		    }
 		});
+	
 
 		
 		
@@ -250,19 +225,6 @@ jun.main = {
 			        +'</div>'
 			        +'<div id="selected_options_panel">'
 			            +'<div class="options" id="selected_options">  '
-			                    +'<div class="option" data-value="278053">'
-			    +'<div class="common_information">'
-			        +'<input class="destroy" value="false" type="hidden" name="carted_production[carted_options_attributes][0][_destroy]" id="carted_production_carted_options_attributes_0__destroy">'
-			    +'</div>'
-			    +'<div class="cancel"></div>'
-			    +'<div class="name">화이트 </div>'
-			    +'<div class="count_cost" style="display: block;">'
-			        +'<div class="input">'
-			            +'<div id="kj_cart_arrowdown" class="arrow down"></div>'
-			            +'<div class="input"><input id="kj_cart_input" type="number" name="carted_production[carted_options_attributes][0][count]" id="carted_production_carted_options_attributes_0_count"/></div>'
-			            +'<div id="kj_cart_arrowup"class="arrow up"></div></div>'
-			            +'<div class="sum_cost">24,900원</div>'
-			    +'</div>'
 			+'</div>'
 			+'<input type="hidden" value="8765129" name="carted_production[carted_options_attributes][0][id]" id="carted_production_carted_options_attributes_0_id">'            +'</div>'
 			            +'<div id="assembly_option" style="display: none;">'
@@ -272,7 +234,7 @@ jun.main = {
 			        +'</div>'
 			        +'<div id="total_cost_panel">'
 			            +'<div class="title">주문금액</div>'
-			            +'<div class="cost" id="total_cost"><span class="cost">24,900</span><span class="unit">원</span></div>'
+			            +'<div class="cost" id="total_cost"><span id="kj_cart_pri" class="cost">24,900</span><span class="unit">원</span></div>'
 			        +'</div>'
 			        +'<div id="kj_buttons">'
 			            +'<input type="button" value="취소" id="kj_cart_close" >'
@@ -291,16 +253,76 @@ jun.main = {
 		}else{
 			$('#kj_delivery').html(x.delivery+"원  | 일반 택배 배송");
 		}
+		
+		$.getJSON($.context()+'/itemOption/'+x.seq,jun2=>{
+			$.each(jun2,(i,j)=>{
+				$('<option/>').val(j.options).html(j.options).appendTo($('#product_option_depth1'));
+			})
+			let c = 1;
+			jQuery($('#product_option_depth1')).change(function(){
+				/*
+				 +'<div class="option" data-value="278053">'
+			    +'<div class="cancel"></div>'
+			    +'<div class="name">화이트 </div>'
+			    +'<div class="count_cost" style="display: block;">'
+			        +'<div class="input">'
+			            +'<div id="kj_cart_arrowdown" class="arrow down"></div>'
+			            +'<div class="input"><input id="kj_cart_input" type="number" name="carted_production[carted_options_attributes][0][count]" id="carted_production_carted_options_attributes_0_count"/></div>'
+			            +'<div id="kj_cart_arrowup"class="arrow up"></div></div>'
+			            +'<div class="sum_cost">24,900원</div>'
+			    +'</div>'
+			+'</div>'
+				 * */
+				
+				let c2= c;
+				let count=1;
+				let div1=$('<div/>').addClass('option').appendTo($('#selected_options'));
+				$('<div/>').addClass('cancel').appendTo(div1);
+				$('<div/>').addClass('name').html($('#product_option_depth1 option:selected').val()).appendTo(div1);
+				let div2=$('<div/>').attr({class:'count_cost',style:'display: block;'}).appendTo(div1);
+				let div3=$('<div/>').addClass('input').appendTo(div2);
+				$('<div/>').attr({id:'kj_cart_arrowdown_'+c2,class:'arrow down'}).appendTo(div3).click(()=>{
+					if(count>1){
+					count--;
+					$('#kj_cart_input_'+c2).val(count)
+					}
+				});
+				let div4=$('<div/>').addClass('input').appendTo(div3);
+				$('<input/>').attr({id:'kj_cart_input_'+c2,type:'number',}).val(count).appendTo(div4);
+				$('<div/>').attr({id:'kj_cart_arrowup_'+c2,class:'arrow up'}).appendTo(div3).click(()=>{
+					count++;
+					$('#kj_cart_input_'+c2).val(count)
+				});
+				let a1 = parseInt(jun2[0].price);
+				let a2 = jun2[0].discount.substring(0,3);
+				let p = a1-(a1*a2);
+				let pp=Math.round(p/100)*100;
+				c++;
+				//$('<div/>').addClass('sum_cost').html(pp).appendTo(div2);
+				
+				
+				
+				
+			})
+			
+			//kj_cart_pri
+			$('#kj_cart_pri').html()
+			
+		});
+		
+		
 		var count=1;
 		$('#kj_cart_input').val(count);
 		
-		$('#kj_cart_arrowdown').click(e=>{
+		$('.kj_cart_arrowdown').click(e=>{
 			if(count>1){
+				alert('마이너스')
 			count--;
 			$('#kj_cart_input').val(count);
 			}
 		});
-		$('#kj_cart_arrowup').click(e=>{
+		$('.kj_cart_arrowup').click(e=>{
+			alert('플러스')
 			count++;
 			$('#kj_cart_input').val(count);
 		});
@@ -315,6 +337,52 @@ jun.main = {
 		
 	
 		return false;
+		
+	},
+	itemList:n=>{
+		
+    	let div_row = $('<div/>').addClass('row').appendTo($('#kj_item_list'))
+    	$.getJSON($.context()+'/Items/'+n,jund=>{
+			
+			$.each(jund.list,(i,j)=>{
+					
+					//var div1 =	$('<div/>').attr({class:"col-md-3 kj_col_md"}).appendTo($('#kj_item_list'));
+				
+					var div1 =	$('<div/>').attr({class:"col-md-3 kj_col_md"}).appendTo(div_row);
+				
+					let div2 = $('<div/>').attr({class:"kj_item"}).appendTo(div1);
+					let div_img=$('<div/>').attr({class:"kj_img_div"}).appendTo(div2);
+					
+					$('<img/>').attr({src:$.img()+'/jun/'+j.category+'/'+j.photo+'.jpg',class:"kj_item_img"}).appendTo(div_img).click(e=>{
+						
+						$.getScript($.script()+'/jieun.js',()=>{
+							jieun.detail();
+						});
+					});
+					
+					let div3=$('<div/>').attr({class:'kj_icon_div'}).appendTo(div2);
+					
+					$('<span/>').attr({style:"cursor:pointer"}).addClass('glyphicon glyphicon-shopping-cart kj_cart_icon').appendTo(div3).click(e=>{
+						jun.main.modal(j);
+					});
+					$('<span/>').attr({style:"margin:5px;cursor:pointer"}).addClass('glyphicon glyphicon-heart-empty kj_like_icon').appendTo(div3).click(e=>{
+						alert("좋아요");
+					});
+					//<i class="far fa-cart-arrow-down"></i>
+					let div4=$('<div/>').attr("style","margin:5px").appendTo(div2);
+					$('<div/>').attr({class:"kj_stroe_item_p",style:"font-weight:bold"}).html(j.title).appendTo(div4);
+				
+					
+					$('<div/>').attr({class:"kj_stroe_item_p"}).html("원").appendTo(div4);
+					if(j.delivery==='0'){
+						$('<div/>').attr({class:"kj_stroe_item_p"}).html(" 무료배송 ").appendTo(div4);
+					}else{
+						$('<div/>').attr({class:"kj_stroe_item_p"}).html(j.delivery+"원").appendTo(div4);
+					}
+					
+				})
+		});
+   
 		
 	}
 	

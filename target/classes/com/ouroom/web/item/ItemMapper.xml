@@ -5,11 +5,25 @@
 <mapper namespace="com.ouroom.web.item.ItemMapper">
 
 <select id="list" resultType="com.ouroom.web.item.Item">
-		<!-- select * from item where seq>82 order by seq desc; -->
-		select * from item i join category2 c where i.CATEGORY2_SEQ = c.SEQ and i.seq>82 order by i.seq desc;
+		<!-- select * from item i join category2 c where i.CATEGORY2_SEQ = c.SEQ and i.seq>82 order by i.seq desc; -->
+		SELECT *
+       FROM (
+           SELECT
+               ROW_NUMBER() OVER(ORDER BY A.SEQ DESC) AS NUM,
+               A.*,c.category
+           FROM
+               item A join category2 c WHERE A.category2_seq=c.seq
+       )B
+       WHERE B.NUM BETWEEN  #{sp} AND #{ep}
+       ORDER BY B.NUM;
+		
 	</select>
 	
 	<select id="count" resultType="int">
 	select count(*) from item where seq>82 order by seq desc;
+	</select>
+	
+	<select id="read" resultType="com.ouroom.web.item.Item">
+	select * from item i join item_option io where i.seq = io.ITEM_SEQ and i.seq = #{seq};
 	</select>
 </mapper>
