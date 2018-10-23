@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.ouroom.web.brddt.BrdDetailMapper">
-<select id="item_seq" resultType="com.ouroom.web.brddt.Item">
+<select id="item_seq" resultType="com.ouroom.web.item.Item">
 	SELECT 
 	TITLE,PRICE,DELIVERY,DISCOUNT,PHOTO,SALE_CNT,STORE_CNT
 	FROM ITEM

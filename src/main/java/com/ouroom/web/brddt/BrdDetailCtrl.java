@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ouroom.web.item.Item;
+
 
 
 @RestController
@@ -31,14 +33,14 @@ public class BrdDetailCtrl {
 		System.out.println("결과  :: "+seq);
 		Map<String, Object> imap = new HashMap<>();
 		item=brddtmapper.item_seq(seq);
-		System.out.println("넘어온 값 :: "+ item.title);
-		imap.put("title", item.title);
-		imap.put("price", item.price);
-		imap.put("deli", item.delivery);
-		imap.put("disc", Double.parseDouble(item.discount)*100);
-		imap.put("pho", item.photo);
-		imap.put("sale", item.sale_cnt);
-		imap.put("store", item.stroe_cnt);
+		System.out.println("넘어온 값 :: "+ item.getTitle());
+		imap.put("title", item.getTitle());
+		imap.put("price", item.getPrice());
+		imap.put("deli", item.getDelivery());
+		imap.put("disc",0);
+		imap.put("pho", item.getPhoto());
+		imap.put("sale", item.getSale_cnt());
+		imap.put("store", item.getStroe_cnt());
 		
 		return imap;
 	}

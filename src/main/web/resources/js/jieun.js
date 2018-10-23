@@ -11,7 +11,7 @@ jieun=(()=>{
 		content=$('#content');
 
 		var detail=x=>{
-			
+			alert(x)
 /*			$.getJson({
 				url:context+'/BrdDetail/detail/'+x,
 				method:'post',
