@@ -10,5 +10,8 @@ public interface ItemMapper {
 	public int count();
 	public List<Item> read(String s);
 	public List<Item> list(Map<?,?> m);
+	public List<Item> listSelect(Map<?,?> m);
+	public List<Item> c1();
+	public List<Item> c2(String seq);
 	
 }
