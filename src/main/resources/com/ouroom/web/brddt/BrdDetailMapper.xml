@@ -6,8 +6,17 @@
 <mapper namespace="com.ouroom.web.brddt.BrdDetailMapper">
 <select id="item_seq" resultType="com.ouroom.web.item.Item">
 	SELECT 
-	TITLE,PRICE,DELIVERY,DISCOUNT,PHOTO,SALE_CNT,STORE_CNT
+	TITLE,PRICE,DELIVERY,DISCOUNT,PHOTO,SALE_CNT,STORE_CNT,SUM
 	FROM ITEM
 	WHERE SEQ LIKE #{seq};
+</select>
+<!-- <select id="category2_seq" resultType="">
+	SELECT * FROM ITEM I JOIN CATEGORY2 C 
+	WHERE I.CATEGORY2_SEQ = C.SEQ
+	AND I.SEQ LIKE #{seq};
+</select> -->
+<select id="item_opt" resultType="com.ouroom.web.item.Item">
+	SELECT OPTIONS FROM item_option
+	WHERE ITEM_SEQ LIKE #{seq};
 </select>
 </mapper>

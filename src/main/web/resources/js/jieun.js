@@ -1,6 +1,6 @@
 "use strict";
 var jieun = jieun || {};
-//변경변경
+
 jieun=(()=>{
 	var w,nav,footer,content,context,script,style,img;
 		context = $.context();
@@ -11,25 +11,16 @@ jieun=(()=>{
 		content=$('#content');
 
 		var detail=x=>{
-			alert(x)
-/*			$.getJson({
-				url:context+'/BrdDetail/detail/'+x,
-				method:'post',
-				contentType:'application/json',
-				data:x,
-				success:d=>{alert('진입성공!')},
-				error:(m1,m2,m3)=>{alert('에러났다!');}
-			});*/
-			$.getJSON(context+'/BrdDetail/detail/'+x,d=>{
 
+			$.getJSON(context+'/BrdDetail/detail/'+x.seq,d=>{
 
 			 	content.appendTo(w);
 				$('#footer').remove();
 				content.empty();
 				
-				let section =$('<section/>').addClass('je_row').appendTo(content);
+				let section =$('<section />').addClass('je_row').appendTo(content);
 	
-				$('<div id="je_selling_helper_wrap" class="col-md-9" style="width: 100%;height: 55px;" />').append($('<div id="je_selling-helper" style="margin-bottom: 0px;" class=" navbar navbar-default" />')).appendTo(content);
+				$('<div id="je_selling_helper_wrap" class="col-md-9" style="width: 100%; height: 55px;"/>').append($('<div id="je_selling-helper" style="margin-bottom: 0px;" class=" navbar navbar-default" />')).appendTo(content);
 				/*$('<section id="je_col-2"/>').append($('<nav id="je_product_tab"  />')).appendTo($('#je_selling_helper'));*/
 				let ul = $('<ul class="nav nav-tabs nav-justified"/>').appendTo($('.navbar'));
 				$('<li class="col2 active"/>').attr({id:'b_product-info','data-target':'product-info',role:'presentation'}).text('상품정보').appendTo(ul);
@@ -86,7 +77,7 @@ jieun=(()=>{
 					$('.je_col0').append(je_div_cover);
 					$('.je_col1').append(je_div_cover_info);					
 				});
-				$('<img/>').attr({src:img+'/jieun/침대1.jpg',id:'je_view1'}).appendTo(je_div_cover).appendTo($('.je_col0'));
+				$('<img/>').attr({src:$.img()+'/jun/'+x.category+'/'+x.photo+'.jpg',id:'je_view1'}).appendTo(je_div_cover).appendTo($('.je_col0'));
 				
 				let p = $('<p style="margin-top: 50px; color:#8080805c"/>').addClass('je_info1').appendTo(je_div_cover_info);
 				let a1=$('<a id="gray_a"/>').attr({href:"https://ohou.se/store"}).text('오늘의 집 스토어');
@@ -118,8 +109,7 @@ jieun=(()=>{
 				let review = $('<span/>').addClass('je_star_review').attr({id:'je_line'});
 				let star = $('<span/>').attr({class:'glyphicon glyphicon-star','aria-hidden':true});
 					star.appendTo(a6);star.appendTo(a6);star.appendTo(a6);
-/*					star.appendTo(review).appendTo(a6);
-*/
+
 					a6.append(star);
 					star.appendTo(a6);
 					star.appendTo(review).appendTo(a6).html('226개의 리뷰<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>');
@@ -131,8 +121,7 @@ jieun=(()=>{
 				$('<b style="margin-top: 10px; margin-right :10px"/>').html(d.disc+'%').attr({id:'je_line',class:'je_discount'}).appendTo(p_price);
 				
 				let origin = $('<h6/>').addClass('je_origin_cost').text(d.price);
-				let ins = $('<ins/>').addClass('je_dis_cost').text('119,000원');
-				/*$('<br/>').appendTo(origin);*/
+				let ins = $('<ins/>').addClass('je_dis_cost').text(d.sum+'원');
 				
 				origin.appendTo(p_price);
 				ins.appendTo(p_price);
@@ -155,25 +144,50 @@ jieun=(()=>{
 						)).appendTo(je_div_cover_info);
 				
 
-	    
+		    	$('<select id="je_selectbtn"/>').appendTo(je_div_cover_info);
+		    	$('<option/>').attr("value","0").html('옵션').appendTo($('#je_selectbtn'));
+		    	$('<section id="item_sec" style="overflow:auto; background-color:whitesmoke; margin-top:20px; height: 160px;"/>').appendTo(je_div_cover_info);
+				$.each(d.options,(i,j)=>{
+			    	$('<option/>').attr("value",j.options).html(j.options).appendTo($('#je_selectbtn'));
+			    	
+			    	var selected_opt1=$('#item_sec').append($('<div class="item " data-index="1" style="border-bottom: solid 1px #ededed; margin-top: 10px;  padding-left: 10px;">').html(
+							 '<p class="name" style="font-size: 12px;">'+j.options+'<span class="glyphicon glyphicon-remove" role="button" aria-hidden="false" style="margin-left:15px; margin-left: 430px; "></p>'
+							+ '<div class="detail"><div class="amount">'
+							+ '<span class="minus glyphicon glyphicon-minus" role="button" style="margin-right: 10px;"></span>'
+							+ '<input id="num_val" type="number" value="1"  style=" border: 0px solid; width:30px; text-align:center; background-color:whitesmoke;"></input>'
+							+ '<span class="plus glyphicon glyphicon-plus" role="button" style="margin-left: 10px; margin-right: 350px;"></span><p class="bold" style="font-weight:bold; padding-left: 0px; display: inline;"><span class="amount">'+d.sum+'</span>원</p></div></div></div>'));
+					
+			    	
+		    	});		  
+				let count=1;
+				$('.minus').click(e=>{
+					e.preventDefault();
+					alert('- 버튼을 눌렀습니당');
+					if(count>1){
+						count--;
+						$('#num_val').val(count)
+						}
+				});
 				
-				$('<select/>').attr({id:'je_selectbtn'}).append(
-					$('<option/>').attr("value","0").text('사이즈'),
-					$('<option/>').attr("value","01 몬스터 필로우탑 30T 침대 매트리스 싱글(S)").text('01 몬스터 필로우탑 30T 침대 매트리스 싱글(S)(119,000원)'),
-					$('<option/>').attr("value","02 몬스터 필로우탑 30T 침대 매트리스 슈퍼싱글(SS)").text('02 몬스터 필로우탑 30T 침대 매트리스 슈퍼싱글(SS)(149,000원)'),
-					$('<option/>').attr("value","03 몬스터 필로우탑 30T 침대 매트리스 퀸(Q)").text('03 몬스터 필로우탑 30T 침대 매트리스 퀸(Q)(179,000원)')					
-				).appendTo(je_div_cover_info);
-				
+				$('.plus').click(e=>{
+					e.preventDefault();
+					alert('+ 버튼을 눌렀습니당');					
+						count++;
+						$('#num_val').val(count)
+						
+				});
+
+					
+		    	
+		    					
 				$('<hr/>').attr({class:'je_line'}).appendTo(je_div_cover_info);
 			
-				$('<p style="font-size: 13px"/>').addClass('je_total_price').appendTo(je_div_cover_info);
+				$('<p style="font-size: 13px" class="je_total_price"/>').appendTo(je_div_cover_info);
 				$('<span id="je_temp"/>').appendTo($('.je_total_price'));
-				//($('<span/>').addClass('je_text_black').html('<strong id="je_won">0</strong>원')).appendTo($('.je_total_price'));
-				//$('<strong id="je_won"/>').addClass('je_text-heading').appendTo($('.je_text_black'));
-				$('#je_temp').html('<label style="margin-right: 400px">주문금액</label><span style="width:20px,margin-right:100px"><strong id="je_won">0</strong>원</span>');
+				$('#je_temp').html('<label style="margin-right: 430px">주문금액</label><span style="width:20px,margin-right:100px"><strong id="je_won">0</strong>원</span>');
 				
 				
-				let buttons=$('<div id="je_buttons" style="margin-top: 20px"/>')
+				let buttons=$('<div id="je_buttons" style="margin-top: 20px; margin-bottom:30px"/>')
 				buttons.appendTo(je_div_cover_info);
 				$('<button id="je_get_basket"/>').text('장바구니 담기').appendTo(buttons);
 				$('<button id="je_buy"/>').text('구매하기').appendTo(buttons);
@@ -185,29 +199,28 @@ jieun=(()=>{
 				$('<div id="je_total_1" class="col-md-8"/>').appendTo($('#je_total_div'));
 				$('<div id="je_total_2" class="col-md-4" style="margin-top: 50px; margin-top: 0px;" />').appendTo($('#je_total_div'));
 				
-				let t_order_cart=$('<section class="col-md-10" id="t_order_cart" style="left: 1000px; width: 330px; top: 180px;"/>').appendTo($('#je_total_2'));
+				let t_order_cart=$('<section class="col-md-10" id="t_order_cart" style="left: 20%; width: 330px; top: 100px;"/>').appendTo($('#je_total_2'));
 				
 				$('<div id="je_order_cart"/>').html('<div style="font-weight:bold; font-size:15px;  ">옵션선택</div>').appendTo($('#t_order_cart'));
 				let cart_btn=$('<section style="height: 80px; margin-bottom: 40px" />').html('<div id="je_cart_btn">').appendTo($('#t_order_cart'));
-				$('<select id="je_selectbtn2" class="col-md-12" style="height: 50px; margin-top: 30px"/>').append(
-						$('<option/>').attr("value","0").text('사이즈'),
-						$('<option/>').attr("value","01 몬스터 필로우탑 30T 침대 매트리스 싱글(S)").text('01 몬스터 필로우탑 30T 침대 매트리스 싱글(S)(119,000원)'),
-						$('<option/>').attr("value","02 몬스터 필로우탑 30T 침대 매트리스 슈퍼싱글(SS)").text('02 몬스터 필로우탑 30T 침대 매트리스 슈퍼싱글(SS)(149,000원)'),
-						$('<option/>').attr("value","03 몬스터 필로우탑 30T 침대 매트리스 퀸(Q)").text('03 몬스터 필로우탑 30T 침대 매트리스 퀸(Q)(179,000원)')					
-					).appendTo(cart_btn);
+				$('<select id="je_selectbtn2" class="col-md-12" style="height: 50px; margin-top: 30px"/>').appendTo(cart_btn);
+				$('<option/>').attr("value","0").html('옵션').appendTo($('#je_selectbtn2'));
+				$.each(d.options,(i,j)=>{
+					$('<option/>').attr("value",j.options).html(j.options).appendTo($('#je_selectbtn2'));
+				})
+
 				
-			
 				
-				let selected_opt=$('<section class="selected-options text-caption-1" style=" border: 0.5px solid #80808038; background-color: whitesmoke; padding: 5px; margin-bottom: 30px; height: 261px;">').html('<div class="item" data-index="1" style="border-bottom: solid 1px #ededed; height: 51px;">'
+				let selected_opt2=$('<section class="selected-options text-caption-1" style=" border: 0.5px solid #80808038; background-color: whitesmoke; padding: 5px; margin-bottom: 30px; height: 261px;">').html('<div class="item" data-index="1" style="border-bottom: solid 1px #ededed; height: 51px;">'
 																								+ '<p class="name" style="font-size: 12px;">01 몬스터 필로우탑 30T 침대 매트리스 싱글(S)<span class="glyphicon glyphicon-remove" role="button" aria-hidden="false" style="margin-left:15px"></p>'
 																								+ '<div class="detail"><div class="amount">'
 																								+ '<span class="glyphicon glyphicon-minus" role="button" style="margin-right: 10px;"></span>'
 																								+ '<input type="number" value="1"  style=" border: 0px solid; background-color: whitesmoke; width:30px; text-align:center;"></input>'
 																								+ '<span class="glyphicon glyphicon-plus" role="button" style="margin-left: 10px;"></span></div><p class="bold col-md-12" style="font-weight:bold; left: 200px; width: 33%; padding-left: 0px; bottom: 20px;"><span class="amount">119,000</span>원</p></div></div>');
 				
-				selected_opt.appendTo($('#t_order_cart'));
+				selected_opt2.appendTo($('#t_order_cart'));
 				
-				$('<div id="je_temp2"/>').html('<label style="margin-right: 180px; font-size: 10px">주문금액</label><span style="width:20px,margin-right:120px"><strong id="je_won">0</strong>원</span>').appendTo($('#t_order_cart'));
+				$('<div id="je_temp2"/>').html('<label style="margin-right: 230px; font-size: 10px">주문금액</label><span style="width:20px,margin-right:120px"><strong id="je_won">0</strong>원</span>').appendTo($('#t_order_cart'));
 				
 				let buttons2=$('<div id="je_buttons2" style="margin-top: 20px; text-align: center"/>')
 				buttons2.appendTo($('#t_order_cart'));
@@ -310,19 +323,7 @@ jieun=(()=>{
 				refund2.append($('<p class="text-gray-light"/>').text('아래와 같은 경우 반품/교환이 불가능합니다.'));
 				refund2.append($('<ol class="line-height-normal">').append($('<li>').html('<span>1</span> 반품요청기간이 지난 경우')));
 				$('.line-height-normal').append($('<li/>').html('<span>2</span>구매자의 책임 있는 사유로 상품 등이 멸실 또는 훼손된 경우 <small>(단, 상품의 내용을 확인하기 위하여 포장 등을 훼손한 경우는 제외)</small>'));
-				//
 				
-				/*
-				let section4=$('<section id="je_selling_option style="height: calc(100vh - 131px);"/>').html('<h4 style="font-weight:bold">옵션선택</h4>');
-				let option_div = $('<div class="je_pd_selling_option"/>').appendTo(section4);
-				($('<select/>').attr({id:'je_selectbtn'}).append(
-						$('<option/>').attr("value","0").text('사이즈'),
-						$('<option/>').attr("value","01 몬스터 필로우탑 30T 침대 매트리스 싱글(S)").text('01 몬스터 필로우탑 30T 침대 매트리스 싱글(S)(119,000원)'),
-						$('<option/>').attr("value","02 몬스터 필로우탑 30T 침대 매트리스 슈퍼싱글(SS)").text('02 몬스터 필로우탑 30T 침대 매트리스 슈퍼싱글(SS)(149,000원)'),
-						$('<option/>').attr("value","03 몬스터 필로우탑 30T 침대 매트리스 퀸(Q)").text('03 몬스터 필로우탑 30T 침대 매트리스 퀸(Q)(179,000원)')					
-					)).appendTo(option_div);
-				$('<input class=/>')*/
-			
 			});
 		
 
