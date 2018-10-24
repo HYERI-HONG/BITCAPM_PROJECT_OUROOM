@@ -1,6 +1,6 @@
 "use strict";
 var jieun = jieun || {};
-//변경변경
+
 jieun=(()=>{
 	var w,nav,footer,content,context,script,style,img;
 		context = $.context();
@@ -20,7 +20,7 @@ jieun=(()=>{
 				
 				let section =$('<section />').addClass('je_row').appendTo(content);
 	
-				$('<div id="je_selling_helper_wrap" class="col-md-9" style="width: 100%; height: 55px; " />').append($('<div id="je_selling-helper" style="margin-bottom: 0px;" class=" navbar navbar-default" />')).appendTo(content);
+				$('<div id="je_selling_helper_wrap" class="col-md-9" style="width: 100%; height: 55px;"/>').append($('<div id="je_selling-helper" style="margin-bottom: 0px;" class=" navbar navbar-default" />')).appendTo(content);
 				/*$('<section id="je_col-2"/>').append($('<nav id="je_product_tab"  />')).appendTo($('#je_selling_helper'));*/
 				let ul = $('<ul class="nav nav-tabs nav-justified"/>').appendTo($('.navbar'));
 				$('<li class="col2 active"/>').attr({id:'b_product-info','data-target':'product-info',role:'presentation'}).text('상품정보').appendTo(ul);
@@ -201,7 +201,7 @@ jieun=(()=>{
 				$('<div id="je_total_1" class="col-md-8"/>').appendTo($('#je_total_div'));
 				$('<div id="je_total_2" class="col-md-4" style="margin-top: 50px; margin-top: 0px;" />').appendTo($('#je_total_div'));
 				
-				let t_order_cart=$('<section class="col-md-10" id="t_order_cart" style="left: 1000px; width: 330px; top: 180px;"/>').appendTo($('#je_total_2'));
+				let t_order_cart=$('<section class="col-md-10" id="t_order_cart" style="left: 20%; width: 330px; top: 100px;"/>').appendTo($('#je_total_2'));
 				
 				$('<div id="je_order_cart"/>').html('<div style="font-weight:bold; font-size:15px;  ">옵션선택</div>').appendTo($('#t_order_cart'));
 				let cart_btn=$('<section style="height: 80px; margin-bottom: 40px" />').html('<div id="je_cart_btn">').appendTo($('#t_order_cart'));

@@ -111,20 +111,16 @@ hyeri.page={
 				+'				<form novalidate="novalidate" class="new_normal_user" id="new_normal_user" action="/normal_users" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="HLPM6R/2QK3v2K5H9wCB/J77MnkLmliCKOrL14WRMpimvC/ZD5cJzXEowL2QhhT1VzYlCL8Valy17QKIm45yDQ==">'
 				+'                    <div class="add_email">'
 				+'                        <label class="je_bold">이메일</label>'
-				+'                        <div class="input-group">'
-				+'							<input type="text" style="width:45%; float:right" size="7" class="form-control" id="post_email" autofocus="" autocomplete="off">'
-			    +'                           <span class="form-separator signup-form__email__email-at-mark" style="margin-left:5px">@&nbsp</span>'
-			    +'							<input type="text" style="width:45%" size="12" class="form-control" id="pre_email" autofocus="" autocomplete="off">'
-				+'                        </div>'
+				+'							<input type="email" style="width:100%" class="form-control" id="h_email" autofocus="" autocomplete="off">'
 				+'                    </div>'
 				+'                    <div class="add_pass" style="padding-top:20px">'
-				+'                        <label class="je_bold" for="pass">비밀번호</label>'
+				+'                        <label class="je_bold" for="h_pass">비밀번호</label>'
 				+'                        <p class="p1">8자이상 영문 대 소문자, 숫자, 특수문자를 사용하세요.</p>'
-				+'						<input class="form-control" placeholder=""  required="required" type="password" id="pass">'
+				+'						<input class="form-control" placeholder=""  required="required" type="password" id="h_pass">'
 				+'                    </div>'
 				+'                    <div class="add_pass_confirm" style="padding-top:20px">'
-				+'                        <label class="je_bold" for="pass_confirm">비밀번호 확인</label></br>'
-				+'							<input class="form-control" required="required" type="password" id="pass_confirm">'
+				+'                        <label class="je_bold" for="h_pass_ck">비밀번호 확인</label></br>'
+				+'							<input class="form-control" required="required" type="password" id="h_pass_ck">'
 				+'                        <p class="error"></p>'
 				+'                    </div>'
 				+'                    <div class="add_nickname" style="padding-top:15px">'
@@ -173,11 +169,49 @@ hyeri.page={
 		$('<option/>').html('남자').attr({value:"1"}).appendTo($('#gender'));
 		
 		/*이미지 업로드*/
-		/*$('<label/>').addClass('je_bold').html("프로필 사진 업로드").attr({style:"padding-top:20px"}).appendTo($('#add_form_middle'));
-		$('<input/>').attr({type:"file",name:'add_profile',id:'add_profile'}).appendTo($('#add_form_middle'))
-		.change(function(a){
-			alert();
-		})
+		$('<label/>').addClass('je_bold').html("프로필 사진 업로드").attr({style:"padding-top:20px"}).appendTo($('#add_form_middle'));
+		$('<div/>').addClass('h_imgup_con').append(
+				$('<form/>').attr({enctype:'multipart/form-data',id:'h_imgup_form'}).append(
+						$('<div/>').addClass('h_imgup_prev').append(
+								$('<img/>').attr({id:'h_upimg'})
+						),
+						$('<div/>').addClass('h_imgup_btn').append(
+								$('<input/>').attr({type:"button",value:'업로드',id:'h_add_img',style:'margin-right:5px'}).click(function(){
+									alert('업로드 버튼 클릭');
+								}),
+								$('<input/>').attr({type:"file",name:'h_find_img',id:'h_find_img',style:'display:inline !important'})
+								.change(function(a) {
+									alert(this.files[0].name);
+									
+									let ck = (!(this.files[0].name).match(/jpg|gif|png|jpeg/i)) ? false : true;
+									if(!ck){
+										alert("gif,png,jpg,jpeg 파일만 업로드 할 수 있습니다.");
+									}else{
+										/*var fd = new FormDate();
+										var files = this.files[0];
+										fd.append('file',files);
+										$.ajax({
+											url: $.context() + '/posts/upload',
+											type: 'POST',
+								            data: fd,
+								            async: false,
+								            cache: false,
+								            contentType: false,
+								            processData: false,
+								            success: function(response){
+								                if(response != 0){
+								                    $("#h_upimg").attr("src",response); 
+								                    $(".h_imgup_prev h_upimg").show();
+								                }else{
+								                    alert('file not uploaded');
+								                }
+								            }
+										});*/
+									}
+								})
+						)
+				)
+		).appendTo($('#add_form_middle'));
 			
 		$('#add_submit_btn').click(e=>{
 				e.preventDefault();
@@ -186,7 +220,7 @@ hyeri.page={
 					method : 'POST',
 					contentType : 'application/json',
 					data : JSON.stringify({
-						test : $('#nickname').val()
+						nickname : $('#nickname').val()
 					}),
 					success : d=>{
 								
@@ -198,7 +232,7 @@ hyeri.page={
 		});
 		$('#has-account').click(e=>{
 			e.preventDefault();
-		});*/
+		});
     },
     l:()=>{
     	$('#footer').remove();

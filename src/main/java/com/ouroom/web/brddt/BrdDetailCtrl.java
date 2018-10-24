@@ -15,12 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ouroom.web.item.Item;
 
-
-
 @RestController
 @RequestMapping("/BrdDetail")
-
-
 public class BrdDetailCtrl {
 	static final Logger logger = LoggerFactory.getLogger(BrdDetailCtrl.class);
 	@Autowired BrdDetailCtrl brddt;

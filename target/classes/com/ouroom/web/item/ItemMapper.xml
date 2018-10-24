@@ -26,4 +26,28 @@
 	<select id="read" resultType="com.ouroom.web.item.Item">
 	select * from item i join item_option io where i.seq = io.ITEM_SEQ and i.seq = #{seq};
 	</select>
+	
+	<select id="c1" resultType="com.ouroom.web.item.Item">
+	select * from category1;
+	</select>
+	<select id="c2" resultType="com.ouroom.web.item.Item">
+	select * from category2 where CATEGORY1_SEQ=#{seq};
+	</select>
+	
+	<select id="listSelect" resultType="com.ouroom.web.item.Item">
+	
+ SELECT *
+       FROM (
+           SELECT
+               ROW_NUMBER() OVER(ORDER BY A.SEQ DESC) AS NUM,
+               A.*,c.category
+           FROM
+               item A join category2 c WHERE A.category2_seq=c.seq and A.CATEGORY2_SEQ= #{category}
+       )B
+       WHERE B.NUM BETWEEN  #{sp} AND #{ep}
+       ORDER BY B.NUM;
+       
+	</select>
+	
+	
 </mapper>

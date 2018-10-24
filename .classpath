@@ -26,6 +26,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/jezza/OneDrive/Documents/sts-3.9.5.RELEASE/lombok.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

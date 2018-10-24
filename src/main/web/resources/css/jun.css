@@ -434,9 +434,7 @@ img.mfp-img {
     transform:scale(1);
 	
 }
-  .kj_col_md{
-	padding: 5px;
-}  
+ 
 .kj_icon_div{
 	text-align: right;
 	font-size: 25px;
@@ -476,6 +474,7 @@ img.mfp-img {
 .kj_stroe_item_p{
 	margin-left:5px;
 	margin-top: 3px;
+	font-weight: bold;
 }
 #kj_test2{
 	text-align: center;
@@ -609,6 +608,7 @@ img.mfp-img {
 }
 #kj_cart_div{
 	text-align: center;
+	
 }
 #kj_cart_item_div{
 	border: 1px solid black;	
@@ -618,6 +618,15 @@ img.mfp-img {
 }
 #kj_cart_img_div{
 	text-align: left;
+}
+.kj_list_discount{
+	font-size: 22px;
+	color: #CC5200;
+	margin-right: 10px;
+}
+.kj_list_sum{
+	font-size:18px;
+	font-weight: bold;
 }
 #kj_cart_title{
 	margin-top:20px;
