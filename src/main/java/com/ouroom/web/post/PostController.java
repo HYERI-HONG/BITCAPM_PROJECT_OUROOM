@@ -28,18 +28,26 @@ public class PostController {
 	@Autowired Pagination page;
 	@Autowired TransactionService tx;
 	@Autowired Map<String, Object> m;
+	@Autowired String s;
 	
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 	
 	@PostMapping("/posts/write")
-	public @ResponseBody String postWrite(@RequestBody Map<String, String> p) {
+	public @ResponseBody String postWrite(@RequestBody Map<String, Object> p) {
 		Util.log.accept("등록하기");
 		Util.log.accept(p.toString());
-        p.put("regeDate", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-		tx.postInseart(p);
+		m.clear();
+		///// 로그인 구현되면 지우기!!
+		p.put("memSeq", 48);
+        p.put("regiDate", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        p.put("image", s);
+		m.put("seq", tx.postInseart(p));
+		Util.log.accept("결과값 확인:"+m.toString());
+		Util.log.accept("경로체크"+uploadPath+File.separator+"danah"+File.separator+"post");
 		u.upload.apply(uploadPath+File.separator+"danah"+File.separator+"post");
-		return null;
+		Util.log.accept("마지막"+m.get("seq"));
+		return (String) m.get("seq");
 	}
 	
 	@GetMapping("/posts/list/{pageNo}")
@@ -56,9 +64,9 @@ public class PostController {
 		m.put("beginRow", String.valueOf(page.getBeginRow()));
 		m.put("endRow", String.valueOf(page.getEndRow()));
 		m.put("list", pm.postList(m));
+		m.put("page", page.getTotalPage());
 		m.remove("beginRow");
 		m.remove("endRow");
-		m.put("page", page);
 		return m;
 	}
 	
@@ -89,21 +97,24 @@ public class PostController {
 	@PostMapping("/posts/upload")
 	public @ResponseBody void postUplaod(@RequestBody MultipartFile file) throws Exception {
 		Util.log.accept(file.getOriginalFilename());
-		u.file.accept(file, file.getBytes());
+		s = u.file.apply(file, file.getBytes());
 	}
 	
 	@PostMapping("/comments/write")
-	public @ResponseBody void cmtWrite(@RequestBody Map<String, String> p) {
+	public @ResponseBody Map<String, Object> cmtWrite(@RequestBody Map<String, Object> p) {
 		Util.log.accept("등록하기");
+		///// 로그인 구현되면 지우기!!
+		p.put("memSeq", 48);
 		Util.log.accept(p.toString());
-		pm.commentInseart(p);
+		return cmtList(tx.cmtInseart(p), "1");
 	}
 	
 	@GetMapping("/comments/list/{seq}/{pageNo}")
 	public @ResponseBody Map<String, Object> cmtList(@PathVariable String seq, @PathVariable String pageNo) {
 		PageProxy pxy = new PageProxy();
 		Util.log.accept("리스트");
-		Util.log.accept(pageNo.toString());
+		Util.log.accept(seq);
+		Util.log.accept(pageNo);
 		m.clear();
 		m.put("pageNo", Integer.parseInt(pageNo));
 		m.put("seq", Integer.parseInt(seq));

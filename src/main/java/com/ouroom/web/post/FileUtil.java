@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -38,10 +39,13 @@ public class FileUtil {
 		return d;
 	};
 	
-	public BiConsumer<MultipartFile, byte[]> file = (f, b) -> { this.f = f; sf = b; };	
+	public BiFunction<MultipartFile, byte[], String> file = (f, b) -> { 
+		this.f = f; sf = b; 
+		sn = UUID.randomUUID().toString() + "_" + f.getOriginalFilename();
+		return sn;
+	};	
 	
 	public Function<String, String> upload = p -> {
-		sn = UUID.randomUUID().toString() + "_" + f.getOriginalFilename();
 		sp = calcPath.apply(p);
 		try { FileCopyUtils.copy(sf, new File(p + sp, sn)); } 
 		catch (Exception e) { e.printStackTrace(); }

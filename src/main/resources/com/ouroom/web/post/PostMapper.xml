@@ -25,7 +25,7 @@
 		<result property= "postSeq" column= "POST_SEQ" javaType= "int"/>
 		<result property= "itemTitle" column= "ITEM_TITLE" javaType= "String"/>
 		<result property= "position" column= "POINT" javaType= "String"/>
-		<result property= "ITEM_SEQ" column= "ITEM_SEQ" javaType= "int"/>
+		<result property= "itemSeq" column= "ITEM_SEQ" javaType= "int"/>
 		<result property= "comment" column= "COMMENT" javaType= "String"/>
    </resultMap>
 	
@@ -48,8 +48,11 @@
 		SELECT *
 		FROM post_detail_view
 		<where>
-			SEQ LIKE #{value}
+			<if test=" value != null and value != '' ">
+				SEQ LIKE #{value}
+			</if>
 		</where>
+		LIMIT 1
 	</select>
 	<select id="postCount" parameterType="map" resultType="int">
 		 SELECT COUNT(*)
@@ -84,7 +87,7 @@
 		INSERT INTO hashtag
 			(KEYWORD, POST_SEQ)
 		VALUES
-			('', NULL)
+			(#{keyword}, #{seq})
 	</insert>
 	<select id="hashTagList" resultType="String">
 		SELECT KEYWORD
@@ -108,7 +111,7 @@
 		INSERT INTO imgtag
 			(ITEM_TITLE, POINT, ITEM_SEQ, POST_SEQ)
 		VALUES
-			(NULL, NULL, NULL, NULL)
+			(#{itemTitle}, #{posision}, #{itemSeq}, #{postSeq})
 	</insert>
 	<select id="imgTagList" resultMap= "postResultMap">
 		SELECT ITEM_TITLE, POINT, ITEM_SEQ
@@ -126,21 +129,37 @@
 		INSERT INTO comment
 			(COMMENT, ARTICLE_SEQ, MEM_SEQ, BOARD_SEQ)
 		VALUES
-			('', 0, NULL, NULL)
+			(#{comment}, #{seq}, #{memSeq}, 1)
 	</insert>
 	<select id="commentList" resultMap="postResultMap">
 		SELECT A.*
 		FROM (
-			SELECT ROW_NUMBER() OVER(ORDER BY p.SEQ DESC) AS No, p.SEQ, p.COMMENT, p.NICKNAME, p.PROFILE
-			FROM post_comment_view p
+			SELECT
+				ROW_NUMBER() OVER(ORDER BY p.SEQ DESC) AS No, 
+				p.SEQ, p.COMMENT, p.POST_SEQ ,p.MEM_SEQ, p.NICKNAME, p.PROFILE
+			FROM
+				post_comment_view p
 			<where>
 				POST_SEQ LIKE #{seq}
 			</where> 
 		) A
 		<where>
 			<if test=" beginRow != null and beginRow != '' ">
-				AND A.No BETWEEN #{beginRow} AND #{endRow}
+				A.No BETWEEN #{beginRow} AND #{endRow}
 			</if>
+		</where>
+	</select>
+	<select id="commentRetrieve" resultMap="postResultMap">
+		SELECT A.*
+		FROM (
+			SELECT ROW_NUMBER() OVER(ORDER BY p.SEQ DESC) AS No, 
+			p.SEQ, p.COMMENT, p.POST_SEQ ,p.MEM_SEQ, p.NICKNAME, p.PROFILE
+			FROM post_comment_view p
+			WHERE POST_SEQ LIKE #{seq}
+		) A
+		<where>
+			A.No LIKE 1
+			AND MEM_SEQ LIKE #{memSeq}
 		</where>
 	</select>
 	<select id="commentCount" parameterType="map" resultType="int">

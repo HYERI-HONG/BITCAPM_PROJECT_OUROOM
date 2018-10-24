@@ -1,12 +1,15 @@
 package com.ouroom.web.post;
 
-import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.HashMap;
 
 public class Test {
-
-public void test() {        
-	LocalDateTime ldt = LocalDateTime.now();
-	System.out.println(ldt);
+public void test() {
+	HashMap<String, String> m = new HashMap<String, String>();
+	m.put("keyword", "하얀색,이케아");
+	for (String s : ((String) m.get("keyword")).split(",")) {
+		System.out.println(s);
+	}
 }
 
     public static void main(String[] args) {

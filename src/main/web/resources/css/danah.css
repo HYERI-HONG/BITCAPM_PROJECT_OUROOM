@@ -82,6 +82,10 @@
         bottom: 0
     }
 }
+.ui-tooltip {
+    max-width: 350px;
+    background-color: #CC5200;
+}
 
 /* -------------- 필터 -------------- */
 .d_container {
@@ -1193,7 +1197,8 @@ a.d_filter_item_btn {
 }
 */
 
-.d_keyword {
+.d_keyword,
+.d_keywords {
     margin-left: -3px;
     margin-right: -3px;
     margin-top: 30px;
@@ -1201,7 +1206,8 @@ a.d_filter_item_btn {
 }
 
 @media (max-width:767px) {
-    .d_keyword {
+    .d_keyword,
+    .d_keywords {
         margin-top: 20px
     }
 }
