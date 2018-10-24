@@ -147,46 +147,56 @@ jieun=(()=>{
 		    	$('<select id="je_selectbtn"/>').appendTo(je_div_cover_info);
 		    	$('<option/>').attr("value","0").html('옵션').appendTo($('#je_selectbtn'));
 		    	$('<section id="item_sec" style="overflow:auto; background-color:whitesmoke; margin-top:20px; height: 160px;"/>').appendTo(je_div_cover_info);
-				$.each(d.options,(i,j)=>{
-			    	$('<option/>').attr("value",j.options).html(j.options).appendTo($('#je_selectbtn'));
-			    	
-			    /*	var selected_opt1=$('#item_sec').append($('<div class="item " data-index="1" style="border-bottom: solid 1px #ededed; margin-top: 10px;  padding-left: 10px;">').html(
-							 '<p class="name" style="font-size: 12px;">'+j.options+'<span class="glyphicon glyphicon-remove" role="button" aria-hidden="false" style="margin-left:15px; margin-left: 430px; "></p>'
-							+ '<div class="detail"><div class="amount">'
-							+ '<span class="minus glyphicon glyphicon-minus" role="button" style="margin-right: 10px;"></span>'
-							+ '<input id="num_val" type="number" value="1"  style=" border: 0px solid; width:30px; text-align:center; background-color:whitesmoke;"></input>'
-							+ '<span class="plus glyphicon glyphicon-plus" role="button" style="margin-left: 10px; margin-right: 350px;"></span><p class="bold" style="font-weight:bold; padding-left: 0px; display: inline;"><span class="amount">'+d.sum+'</span>원</p></div></div></div>'));
-				*/
-		    	});		 
-				let p=1;
-				jQuery($('#je_selectbtn'))
-				
-				let count=1;
-				$('.minus').click(e=>{
-					e.preventDefault();
-					alert('- 버튼을 눌렀습니당');
-					if(count>1){
-						count--;
-						$('#num_val').val(count)
-						}
-				});
-				
-				$('.plus').click(e=>{
-					e.preventDefault();
-					alert('+ 버튼을 눌렀습니당');					
-						count++;
-						$('#num_val').val(count)
-						
-				});
-
-					
+		    	$.each(d.options,(i,j)=>{
+					$('<option/>').attr("value",j.options).html(j.options).appendTo($('#je_selectbtn'));
+				});	
 		    	
-		    					
-				$('<hr/>').attr({class:'je_line'}).appendTo(je_div_cover_info);
-			
+		    	
+		    	$('<hr/>').attr({class:'je_line'}).appendTo(je_div_cover_info);
+				
 				$('<p style="font-size: 13px" class="je_total_price"/>').appendTo(je_div_cover_info);
 				$('<span id="je_temp"/>').appendTo($('.je_total_price'));
-				$('#je_temp').html('<label style="margin-right: 430px">주문금액</label><span style="width:20px,margin-right:100px"><strong id="je_won">0</strong>원</span>');
+				
+				
+				
+				let t=1;
+				var sum=0;
+				jQuery($('#je_selectbtn')).change(function(){
+					let t2=t;
+					let count=1;
+ 
+					let selected_opt1=$('<div class="item" data-index="1" style="border-bottom: solid 1px #ededed; height: 61px; margin:10px">').html(
+							 '<p class="name" style="font-size: 12px;">'+$('#je_selectbtn option:selected').val()+'<span class="glyphicon glyphicon-remove" role="button" aria-hidden="false" style="margin-left:430px"></p>'
+							+ '<div class="detail"><div class="amount">'
+							+ '<span class="minus glyphicon glyphicon-minus" role="button" style="margin-right: 3px;"></span>'
+							+ '<input id="num_val" type="number" value="1"  style=" border: 0px solid; background-color: whitesmoke; width:30px; text-align:center;"></input>'
+							+ '<span class="plus glyphicon glyphicon-plus" role="button" style="margin-left: 10px;"></span></div><p class="bold col-md-12" style="font-weight:bold; left: 400px; width: 20%; padding-left: 0px; bottom: 20px;"><span class="amount">'+d.sum+'</span>원</p></div></div>').appendTo(item_sec);
+					
+					$('.minus').click(e=>{
+						e.preventDefault();
+						alert('- 버튼을 눌렀습니당');
+						if(count>1){
+							count--;
+							$('#num_val'+t2).val(count);
+							sum=sum-d.sum;
+							$('#je_won').html(sum);	
+							}
+					});
+					
+					$('.plus').click(e=>{
+						e.preventDefault();
+						alert('+ 버튼을 눌렀습니당');					
+							count++;
+							$('#num_val'+t2).val(count);
+							sum=sum+d.sum;
+							$('#je_won').html(sum);						
+							
+					});
+
+				});
+						    	
+				$('#je_temp').html('<label style="margin-right: 430px">주문금액</label><span style="width:20px,margin-right:100px"><strong id="je_won">'+sum+'</strong>원</span>');				
+				
 				
 				
 				let buttons=$('<div id="je_buttons" style="margin-top: 20px; margin-bottom:30px"/>')

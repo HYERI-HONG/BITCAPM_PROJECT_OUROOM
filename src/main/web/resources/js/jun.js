@@ -17,13 +17,17 @@ jun.main = {
 		$('<div/>').attr({id:"kj_test_div1"}).appendTo($('#kj_div'))
 		$('<h1/>').attr({id:"kj_title",style:"color:white;text-shadow:2px 2px 1px #595959;font-weight: bold"}).html("Search Whatever You Want...").appendTo($('#kj_test_div1'));
 		$('<input/>').attr({id:'kj_select',placeholder:" 검색",size:"40"}).appendTo($('#kj_test_div1'));
-		
+		$('<div/>').attr({id:"kj_category_div"}).appendTo($('#content'));
+		$('<span/>').attr({class:"kj_category_1"}).html('전체').appendTo($('#kj_category_div')).click(()=>{
+			jun.main.store();
+		});
 		$.getJSON($.context()+'/itemsC',dd=>{
 			$.each(dd.c1,(x,j)=>{
 				
 				$('<span/>').attr({class:"kj_category_1"}).html(j.category).appendTo($('#kj_category_div')).click(e=>{
 					$('#kj_category_2').remove();
 					$('<div/>').attr({id:"kj_category_2"}).appendTo($('#kj_test2'));
+					
 					$.getJSON($.context()+'/itemsC/'+j.seq,dd2=>{
 						$('<span/>').attr({id:"kj_category_p"}).html("품목").appendTo($('#kj_category_2'));
 						
@@ -32,7 +36,10 @@ jun.main = {
 							$('<span/>').attr({class:"kj_category_c"}).html(j.category_kr).appendTo($('#kj_category_2')).click(e=>{
 								$('#kj_item_list').empty();
 								category_seq=j.seq
-								jun.main.itemList({page:"0",category:category_seq});
+								for(let i=0; i<2; i++){
+									jun.main.itemList({page:i,category:category_seq});	
+								}
+								
 								
 						
 					})
@@ -48,7 +55,7 @@ jun.main = {
 			
 			
 		})
-		$('<div/>').attr({id:"kj_category_div"}).appendTo($('#content'));
+		
 		
 		/*$.getScript($.script()+'/danah.js',()=>{
 			danah.u.tb($('#content'));
@@ -67,12 +74,14 @@ jun.main = {
 		
 		$('<div/>').attr({id:"kj_array"}).appendTo($('#content'));
 		
-		let array=["인기순","높은가격순","낮은가격순","신상품순"];
+		//let array=["인기순","높은가격순","낮은가격순","신상품순"];
+		//let arrary={all:["인기순","높은가격순","낮은가격순","신상품순"]};
+		let array=[{ag:"최신순",v:"a"},{ag:"인기순",v:"b"},{ag:"높은가격순",v:"c"},{ag:"낮은가격순",v:"d"}];
 		
-		$.each(array,(x,j)=>{
-			
-			$('<span/>').attr({class:"kj_category_1"}).html(j).appendTo($('#kj_array')).click(e=>{
-				alert(j+" 버튼");
+		
+		$.each(array,(i,j)=>{
+			$('<span/>').attr({class:"kj_category_1"}).html(j.ag).appendTo($('#kj_array')).click(e=>{
+				alert(j.v+" 버튼");
 			});
 		})
 		
@@ -323,7 +332,7 @@ jun.main = {
 				$('<div/>').attr({id:'kj_cart_arrowdown_'+c2,class:'arrow down'}).appendTo(div3).click(()=>{
 					if(count>1){// count 가 1 미만으로 안내려가게 할려고 if문검
 					count--;// count -- ;
-					$('#kj_cart_input_'+c2).val(count) // input 박스 id .val(count) 로 값을 변경시킴
+					$('#kj_cart_input_'+c2).val(count); // input 박스 id .val(count) 로 값을 변경시킴
 					f_s=f_s-jun2[0].sum;
 					$('#kj_cart_pri').html(f_s);
 					}
@@ -332,7 +341,7 @@ jun.main = {
 				$('<input/>').attr({id:'kj_cart_input_'+c2,type:'number',}).val(count).appendTo(div4);
 				$('<div/>').attr({id:'kj_cart_arrowup_'+c2,class:'arrow up'}).appendTo(div3).click(()=>{
 					count++;
-					$('#kj_cart_input_'+c2).val(count)
+					$('#kj_cart_input_'+c2).val(count);
 					f_s=f_s+parseInt(jun2[0].sum);
 					$('#kj_cart_pri').html(f_s);
 				});
