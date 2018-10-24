@@ -7,24 +7,32 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PostMapper {
-	public void postInseart(Map<?, ?> p);
-	public List<?> postList(Map<?, ?> p);
-	public List<?> postRetrieve(Map<?, ?> p);
-	public Integer postCount(Map<?, ?> p);
-	public void postUpdate(Map<?, ?> p);
-	public void postDelete(Map<?, ?> p);
-	public void cmtInseart(Map<?, ?> p);
-	public List<?> cmtList(Map<?, ?> p);
-	public Integer cmtCount(Map<?, ?> p);
-	public void cmtDelete(Map<?, ?> p);
-	public void likeInseart(Map<?, ?> p);
-	public List<?> likeList(Map<?, ?> p);
-	public List<?> likeRetrieve(Map<?, ?> p);
-	public Integer likeCount(Map<?, ?> p);
-	public void likeDelete(Map<?, ?> p);
-	public void tagInseart(Map<?, ?> p);
-	public List<?> tagList(Map<?, ?> p);
-	public Integer tagCount(Map<?, ?> p);
-	public void tagDelete(Map<?, ?> p);
+	public void postInseart(Map<?, ?> m);
+	public List<?> postList(Map<?, ?> m);
+	public Map<?, ?> postRetrieve(String s);
+	public Integer postCount(Map<?, ?> m);
+	public void postUpdate(Map<?, ?> m);
+	public void postDelete(Map<?, ?> m);
+	
+	public void hashTagInseart(Map<?, ?> m);
+	public List<?> hashTagList(String s);
+	public List<?> hashTagSearch();
+	public void hashTagDelete(Map<?, ?> m);
 
+	public void imgTagInseart(Map<?, ?> m);
+	public List<?> imgTagList(String s);
+	public Integer imgTagCount(Map<?, ?> m); //미구현
+	public void imgTagDelete(Map<?, ?> m);
+	
+	public void commentInseart(Map<?, ?> m);
+	public List<?> commentList(Map<?, ?> m);
+	public Integer commentCount(Map<?, ?> m);
+	public void commentDelete(Map<?, ?> m);
+	
+	public void likeInseart(Map<?, ?> m);
+	public List<?> likeList(String s);
+	public List<?> likeRetrieve(Map<?, ?> m);
+	public Integer likeCount(Map<?, ?> m); //미구현
+	public void likeDelete(Map<?, ?> m);
+	
 }

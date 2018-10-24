@@ -4,7 +4,156 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.ouroom.web.post.PostMapper">
-<select id="count" resultType="int">
-	 SELECT COUNT(*) FROM POST
- </select>
+	<resultMap id = "postResultMap" type = "map">
+		<id property="seq" column="SEQ"></id>
+		<result property= "title" column= "TITLE" javaType= "String"/>
+		<result property= "content" column= "CONTENT" javaType= "String"/>
+		<result property= "regiDate" column= "REGI_DATE" javaType= "String"/>
+		<result property= "viewCnt" column= "VIEW_CNT" javaType= "int"/>
+		<result property= "likeCnt" column= "LIKE_CNT" javaType= "int"/>
+		<result property= "shareCnt" column= "SHARE_CNT" javaType= "int"/>
+		<result property= "roomType" column= "ROOM_TYPE" javaType= "String"/>
+		<result property= "roomSize" column= "ROOM_SIZE" javaType= "String"/>
+		<result property= "memSeq" column= "MEM_SEQ" javaType= "int"/>
+		<result property= "boardSeq" column= "BOARD_SEQ" javaType= "int"/>
+		<result property= "image" column= "IMAGE" javaType= "String"/>
+		<result property= "nickname" column= "NICKNAME" javaType= "String"/>
+		<result property= "profile" column= "PROFILE" javaType= "String"/>
+		<result property= "imageTagCnt" column= "IMGTAG_CNT" javaType= "String"/>
+		<result property= "commentCnt" column= "COMMENT_CNT" javaType= "int"/>
+		<result property= "keyword" column= "KEYWORD" javaType= "String"/>
+		<result property= "postSeq" column= "POST_SEQ" javaType= "int"/>
+		<result property= "itemTitle" column= "ITEM_TITLE" javaType= "String"/>
+		<result property= "position" column= "POINT" javaType= "String"/>
+		<result property= "ITEM_SEQ" column= "ITEM_SEQ" javaType= "int"/>
+		<result property= "comment" column= "COMMENT" javaType= "String"/>
+   </resultMap>
+	
+	<insert id="postInseart" parameterType="map">
+		INSERT INTO post
+			(TITLE, CONTENT, REGI_DATE, VIEW_CNT, LIKE_CNT, SHARE_CNT, ROOM_TYPE, ROOM_SIZE, MEM_SEQ, BOARD_SEQ, IMAGE)
+		VALUES
+			(#{title}, #{content}, #{regiDate}, 0, 0, 0, #{roomType}, #{roomSize}, #{memSeq}, #{boardSeq}, #{image})
+	</insert>
+	<select id="postList" parameterType="map" resultMap="postResultMap">
+		SELECT *
+		FROM post_list_view
+		<where>
+			<if test=" beginRow != null and beginRow != '' ">
+				No BETWEEN #{beginRow} AND #{endRow}
+			</if>
+		</where>
+	</select>
+	<select id="postRetrieve" resultMap="postResultMap">
+		SELECT *
+		FROM post_detail_view
+		<where>
+			SEQ LIKE #{value}
+		</where>
+	</select>
+	<select id="postCount" parameterType="map" resultType="int">
+		 SELECT COUNT(*)
+		 FROM post
+		 <where>
+			<if test=" memSeq != null and memSeq != '' ">
+				MEM_SEQ LIKE #{memSeq}
+			</if>
+		 </where>
+	</select>
+	<update id="postUpdate" parameterType="map">
+		UPDATE post
+		SET TITLE='', 
+			CONTENT=NULL, 
+			REGI_DATE=current_timestamp(), 
+			VIEW_CNT=0, 
+			LIKE_CNT=0, 
+			SHARE_CNT=0, 
+			ROOM_TYPE=NULL, 
+			ROOM_SIZE=NULL, 
+			MEM_SEQ=NULL, 
+			BOARD_SEQ=NULL, 
+			IMAGE=NULL
+		WHERE SEQ=0
+	</update>
+	<delete id="postDelete" parameterType="map">
+		DELETE FROM post
+		WHERE SEQ=0
+	</delete>
+
+	<insert id="hashTagInseart" parameterType="map">
+		INSERT INTO hashtag
+			(KEYWORD, POST_SEQ)
+		VALUES
+			('', NULL)
+	</insert>
+	<select id="hashTagList" resultType="String">
+		SELECT KEYWORD
+		FROM hashtag
+		<where>
+			POST_SEQ LIKE #{value}
+		</where>
+	</select>
+	<select id="hashTagSearch" resultType="String">
+		SELECT KEYWORD
+		FROM hashtag
+		GROUP BY KEYWORD
+	</select>
+	<delete id="hashTagDelete" parameterType= "map">
+		DELETE 
+		FROM hashtag
+		WHERE LIKE #{seq}
+	</delete>
+	
+	<insert id="imgTagInseart" parameterType= "map">
+		INSERT INTO imgtag
+			(ITEM_TITLE, POINT, ITEM_SEQ, POST_SEQ)
+		VALUES
+			(NULL, NULL, NULL, NULL)
+	</insert>
+	<select id="imgTagList" resultMap= "postResultMap">
+		SELECT ITEM_TITLE, POINT, ITEM_SEQ
+		FROM imgtag
+		<where>
+			POST_SEQ LIKE #{value}
+		</where>
+	</select>
+	<delete id="imgTagDelete" parameterType= "map">
+	DELETE FROM imgtag
+	WHERE SEQ LIKE #{seq}
+	</delete>
+	
+	<insert id="commentInseart" parameterType= "map">
+		INSERT INTO comment
+			(COMMENT, ARTICLE_SEQ, MEM_SEQ, BOARD_SEQ)
+		VALUES
+			('', 0, NULL, NULL)
+	</insert>
+	<select id="commentList" resultMap="postResultMap">
+		SELECT A.*
+		FROM (
+			SELECT ROW_NUMBER() OVER(ORDER BY p.SEQ DESC) AS No, p.SEQ, p.COMMENT, p.NICKNAME, p.PROFILE
+			FROM post_comment_view p
+			<where>
+				POST_SEQ LIKE #{seq}
+			</where> 
+		) A
+		<where>
+			<if test=" beginRow != null and beginRow != '' ">
+				AND A.No BETWEEN #{beginRow} AND #{endRow}
+			</if>
+		</where>
+	</select>
+	<select id="commentCount" parameterType="map" resultType="int">
+		 SELECT COUNT(*)
+		 FROM comment
+		 <where>
+			<if test=" seq != null and seq != '' ">
+				ARTICLE_SEQ LIKE #{seq}
+			</if>
+		 </where>
+	</select>
+	<delete id="commentDelete" parameterType= "map">
+		DELETE FROM mariadb.comment
+		WHERE SEQ LIKE #{seq}
+	</delete>
 </mapper>
