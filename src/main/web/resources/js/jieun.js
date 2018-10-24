@@ -255,7 +255,6 @@ jieun=(()=>{
 				});*/
 				
 
-				////
 				let total_wrap = $('<div id="je_total_wrap" />').appendTo($('#je_total_1'));
 				
 				($('<section id="je_notice" style="padding-top: 50px;"/>').append(
