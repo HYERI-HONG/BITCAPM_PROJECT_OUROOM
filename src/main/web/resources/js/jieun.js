@@ -18,54 +18,43 @@ jieun=(()=>{
 				$('#footer').remove();
 				content.empty();
 				
-				let section =$('<section />').addClass('je_row').appendTo(content);
-	
-				$('<div id="je_selling_helper_wrap" class="col-md-9" style="width: 100%; height: 55px;"/>').append($('<div id="je_selling-helper" style="margin-bottom: 0px;" class=" navbar navbar-default" />')).appendTo(content);
-				/*$('<section id="je_col-2"/>').append($('<nav id="je_product_tab"  />')).appendTo($('#je_selling_helper'));*/
-				let ul = $('<ul class="nav nav-tabs nav-justified"/>').appendTo($('.navbar'));
-				$('<li class="col2 active"/>').attr({id:'b_product-info','data-target':'product-info',role:'presentation'}).text('상품정보').appendTo(ul);
-				$('#b_product-info').click(e=>{
-					e.preventDefault();
-					$(window).scrollTop($('#je_total_wrap').offset().top);
-				});
-				$('<li class="col2" id="je_count"/>').attr({id:'b_product-review','data-target':'product-review',role:'presentation'}).text('리뷰').appendTo(ul);
-				$('#je_count').append($('<span/>').text('(233)'));
-				$('#b_product-review').click(e=>{
-					e.preventDefault();
-					$(window).scrollTop($('#product-review').offset().top);
-				});
-				$('<li class="col2"/>').attr({id:'b_product-shipping','data-target':'product-shipping',role:'presentation'}).html('<span class="lg">배송/교환/환불</span>').appendTo(ul);
-				$('#b_product-shipping').click(e=>{
-					e.preventDefault();
-					$(window).scrollTop($('#product-shipping').offset().top);
-				});
-				$('<li class="col2 "/>').attr({'data-target':'product-blank',role:'presentation'}).appendTo(ul);
-	
-				$(document).ready(function() {
-					// grab the initial top offset of the navigation 
-				   	var stickyNavTop = $('#je_selling_helper_wrap').offset().top;
-				   	
-				   	// our function that decides weather the navigation bar should have "fixed" css position or not.
-				   	var stickyNav = function(){
-					    var scrollTop = $(window).scrollTop(); // our current vertical position from the top
-					         
-					    // if we've scrolled more than the navigation, change its position to fixed to stick to top,
-					    // otherwise change it back to relative
-					    if (scrollTop > stickyNavTop) { 
-					        $('#je_selling_helper_wrap').addClass('sticky');
-					    } else {
-					        $('#je_selling_helper_wrap').removeClass('sticky'); 
-					    }
-					};
-/*					$('.sticky').appendTo($('#h_navigation'));*/
+				let section =$('<section/>').addClass('je_row').appendTo(content);
+				
+				//--------------------------------------------nav :: 변경---------------------------------------//
+				$('<div id="je_selling_helper_wrap" class="col-md-9"/>').append($('<div id="je_selling_helper"/>').addClass('navbar navbar-default')).appendTo(content);
+				
+				$('<ul/>').addClass("nav nav-tabs nav-justified").append(
+						$('<li class="col2 active"/>').attr({id:'b_product-info','data-target':'product-info',role:'presentation'}).text('상품정보').click(e=>{
+							e.preventDefault();
+							$(window).scrollTop($('#je_total_wrap').offset().top);
+						}),
+						$('<li class="col2" id="je_count"/>').attr({id:'b_product-review','data-target':'product-review',role:'presentation'}).text('리뷰').click(e=>{
+							e.preventDefault();
+							$(window).scrollTop($('#product-review').offset().top);
+						}),
+						$('<li class="col2"/>').attr({id:'b_product-shipping','data-target':'product-shipping',role:'presentation'}).text('배송/교환/환불').click(e=>{
+							e.preventDefault();
+							$(window).scrollTop($('#product-shipping').offset().top);
+						})
+				).appendTo($('.navbar'));
+				
+				window.onscroll = function() {myFunction()};
 
-					stickyNav();
-					// and run it again every time you scroll
-					$(window).scroll(function() {
-						stickyNav();
-					});
-				});
-		//
+				var navbar = $('#je_selling_helper_wrap');
+				var sticky = navbar.offset().top;
+				function myFunction() {
+					var scrollTop = $(window).scrollTop();
+				  if (scrollTop > sticky) {
+					  $('#je_selling_helper_wrap').addClass('je_sticky');
+					  
+				  } else {
+					  $('#je_selling_helper_wrap').removeClass('je_sticky'); 
+				  }
+				}
+				$('.je_sticky').appendTo($('#h_navigation'));
+			
+				//--------------------------------------------nav :: 변경---------------------------------------//
+	
 				let section2 =$('<section "/>').addClass('je_row1').appendTo(content);
 				
 				let je_div_cover = $('<div/>').addClass('je_div_cover');
@@ -209,9 +198,9 @@ jieun=(()=>{
 				
 				$('<div id="je_total_div"/>').appendTo(section2);
 				$('<div id="je_total_1" class="col-md-8"/>').appendTo($('#je_total_div'));
-				$('<div id="je_total_2" class="col-md-4" style="margin-top: 50px; margin-top: 0px;" />').appendTo($('#je_total_div'));
+				$('<div id="je_total_2" class="col-md-4" style="margin-top: 100px; height:7000px;padding-left: 80px;"/>').appendTo($('#je_total_div'));
 				
-				let t_order_cart=$('<section class="col-md-10" id="t_order_cart" style="left: 20%; width: 330px; top: 100px;"/>').appendTo($('#je_total_2'));
+				let t_order_cart=$('<section class="col-md-10" id="t_order_cart" style="left: 18%; width: 330px; top: 100px; position:sticky;padding-top:50px;"/>').appendTo($('#je_total_2'));
 				
 				$('<div id="je_order_cart"/>').html('<div style="font-weight:bold; font-size:15px;  ">옵션선택</div>').appendTo($('#t_order_cart'));
 				let cart_btn=$('<section style="height: 80px; margin-bottom: 40px" />').html('<div id="je_cart_btn">').appendTo($('#t_order_cart'));
@@ -240,7 +229,7 @@ jieun=(()=>{
 				$('<button id="je_buy" style="width: 130px; margin-right:0px"/>').text('구매하기').appendTo(buttons2);
 				///
 				
-				$(document).ready(function() {
+			/*	$(document).ready(function() {
 					// grab the initial top offset of the navigation 
 				   	var stickyNavTop = $('#je_selling_helper_wrap').offset().top;
 				   	
@@ -256,14 +245,14 @@ jieun=(()=>{
 					        $('#t_order_cart').removeClass('sticky'); 
 					    }
 					};
-/*					$('.sticky').appendTo($('#h_navigation'));
-*/
+					$('.sticky').appendTo($('#h_navigation'));
+
 					stickyNav();
 					// and run it again every time you scroll
 					$(window).scroll(function() {
 						stickyNav();
 					});
-				});
+				});*/
 				
 
 				////
