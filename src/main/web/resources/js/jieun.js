@@ -23,7 +23,6 @@ jieun=(()=>{
 				//--------------------------------------------nav :: 변경---------------------------------------//
 				$('<div id="je_selling_helper_wrap" class="col-md-9"/>').append($('<div id="je_selling_helper"/>').addClass('navbar navbar-default')).appendTo(content);
 				
-				
 				$('<ul/>').addClass("nav nav-tabs nav-justified").append(
 						$('<li class="col2 active"/>').attr({id:'b_product-info','data-target':'product-info',role:'presentation'}).text('상품정보').click(e=>{
 							e.preventDefault();
@@ -43,7 +42,6 @@ jieun=(()=>{
 
 				var navbar = $('#je_selling_helper_wrap');
 				var sticky = navbar.offset().top;
-
 				function myFunction() {
 					var scrollTop = $(window).scrollTop();
 				  if (scrollTop > sticky) {
