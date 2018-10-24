@@ -26,7 +26,7 @@
     
     <!-- 개인 -->
     <link rel="stylesheet" href="${context}/resources/css/hyeri.css" />
-    <%-- <link rel="stylesheet" href="${context}/resources/css/danah.css" /> --%>
+    <link rel="stylesheet" href="${context}/resources/css/danah.css" />
     <link rel="stylesheet" href="${context}/resources/css/jaekyung.css"/>
     <link rel="stylesheet" href="${context}/resources/css/jieun.css" />
  	<link rel="stylesheet" href="${context}/resources/css/jun.css" />
