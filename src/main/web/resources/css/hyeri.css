@@ -1,3 +1,7 @@
+/*--------------------- common css------------------------- */
+
+
+
 
 /*--------------------- navigation css------------------------- */
 #h_navigation{
@@ -169,3 +173,17 @@
 	border: solid 1px #ccc;
 	
 }
+.h_imgup_con{
+	width:100%;
+}
+.h_imgup_prev{
+	width:150px;
+    height:150px;
+   	background-color:#ffddcc;
+   	margin-bottom : 10px;
+    
+}
+#h_upimg{
+	display: none;
+}
+
