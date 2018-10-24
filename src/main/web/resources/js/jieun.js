@@ -150,15 +150,17 @@ jieun=(()=>{
 				$.each(d.options,(i,j)=>{
 			    	$('<option/>').attr("value",j.options).html(j.options).appendTo($('#je_selectbtn'));
 			    	
-			    	var selected_opt1=$('#item_sec').append($('<div class="item " data-index="1" style="border-bottom: solid 1px #ededed; margin-top: 10px;  padding-left: 10px;">').html(
+			    /*	var selected_opt1=$('#item_sec').append($('<div class="item " data-index="1" style="border-bottom: solid 1px #ededed; margin-top: 10px;  padding-left: 10px;">').html(
 							 '<p class="name" style="font-size: 12px;">'+j.options+'<span class="glyphicon glyphicon-remove" role="button" aria-hidden="false" style="margin-left:15px; margin-left: 430px; "></p>'
 							+ '<div class="detail"><div class="amount">'
 							+ '<span class="minus glyphicon glyphicon-minus" role="button" style="margin-right: 10px;"></span>'
 							+ '<input id="num_val" type="number" value="1"  style=" border: 0px solid; width:30px; text-align:center; background-color:whitesmoke;"></input>'
 							+ '<span class="plus glyphicon glyphicon-plus" role="button" style="margin-left: 10px; margin-right: 350px;"></span><p class="bold" style="font-weight:bold; padding-left: 0px; display: inline;"><span class="amount">'+d.sum+'</span>원</p></div></div></div>'));
-					
-			    	
-		    	});		  
+				*/
+		    	});		 
+				let p=1;
+				jQuery($('#je_selectbtn'))
+				
 				let count=1;
 				$('.minus').click(e=>{
 					e.preventDefault();
