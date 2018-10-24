@@ -356,7 +356,7 @@ jun.main = {
 					$('<img/>').attr({src:$.img()+'/jun/'+j.category+'/'+j.photo+'.jpg',class:"kj_item_img"}).appendTo(div_img).click(e=>{
 						
 						$.getScript($.script()+'/jieun.js',()=>{
-							jieun.detail(j.seq);
+							jieun.detail(j);
 						});
 					});
 					
