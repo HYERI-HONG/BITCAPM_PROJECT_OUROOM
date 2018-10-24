@@ -2,7 +2,6 @@ package com.ouroom.web.post;
 
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 import org.springframework.stereotype.Repository;
 
@@ -27,13 +26,10 @@ public interface PostMapper {
 	
 	public void commentInseart(Map<?, ?> m);
 	public List<?> commentList(Map<?, ?> m);
-	public Map<?, ?> commentRetrive(Map<?, ?> m);
 	public Integer commentCount(Map<?, ?> m);
-	public void commentDelete(Map<?, ?> m);
+	public void commentDelete(String seq);
 	
 	public void likeInseart(Map<?, ?> m);
-	public List<?> likeList(String s);
-	public List<?> likeRetrieve(Map<?, ?> m);
 	public Integer likeCount(Map<?, ?> m); //미구현
 	public void likeDelete(Map<?, ?> m);
 	

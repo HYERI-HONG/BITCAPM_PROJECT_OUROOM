@@ -50,8 +50,7 @@ public class FileUtil {
 		try { FileCopyUtils.copy(sf, new File(p + sp, sn)); } 
 		catch (Exception e) { e.printStackTrace(); }
 		return sn;
-		//FileCopyUtils.copy(f.getBytes(), new File(uploadPath + sp, sn));
-		//file.transferTo(new File(u.uploadPath+file.getOriginalFilename()));
+		//f.transferTo(new File(p + sp, sn));
 	};
 	
 	public Consumer<String> delete = p -> new File(p).delete();

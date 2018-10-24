@@ -104,7 +104,7 @@ danah.s = (() => {
         //history.pushState({list: $('#content').html()}, null, '/web/post/list');
     };
     let d = d => {
-        $.getJSON($ctx + '/posts/detail/' + d, a=>{
+        $.getJSON($ctx + '/posts/'+ d +'/detail', a=>{
         	console.log(a);
             const p = danah.c.div({ c: 'd_post_detail d_container' });
             ctt.html(p);
@@ -168,9 +168,12 @@ danah.s = (() => {
                             danah.c.hr({ c: 'd_section_divider' }),
                             danah.c.div({ c: 'd_footer_stats' })
                             .append(
-                                danah.c.div({ c: 'd_footer_stats_item', ht: danah.c.span({ ht: ['조회', a.post.viewCnt] }) }),
-                                danah.c.div({ c: 'd_footer_stats_item', ht: danah.c.span({ ht: ['댓글', a.post.commentCnt] }) }),
-                                danah.c.div({ c: 'd_footer_stats_item', ht: danah.c.span({ ht: ['공유', a.post.shareCnt] }) })
+                                danah.c.div({ c: 'd_footer_stats_item'})
+                                	.append( danah.c.span({i: 'd_footer_viewCnt'}).append('조회', a.post.viewCnt)),
+                                danah.c.div({ c: 'd_footer_stats_item'})
+                                	.append(danah.c.span({i: 'd_footer_commentCnt'}).append('댓글', a.post.commentCnt)),
+                                danah.c.div({ c: 'd_footer_stats_item'})
+                                	.append(danah.c.span({i: 'd_footer_shareCnt'}).append('공유', a.post.shareCnt))
                             ),
                             danah.c.div({ c: 'd_footer_share' })
                             .append(
@@ -213,7 +216,7 @@ danah.s = (() => {
                             danah.c.h1({
                                 c: 'd_comment_feed_header',
                                 // 0일때 addClass zero
-                                ht: ['댓글', '&nbsp;', danah.c.span({ c: 'd_comment_feed_header_count', t: a.post.commentCnt })]
+                                ht: ['댓글', '&nbsp;', danah.c.span({ c: 'd_comment_feed_header_count', i: 'd_comment_feed_header_count', t: a.post.commentCnt })]
                             }),
                             danah.c.div({ c: 'd_comment_feed_form'})
                             .append(
@@ -255,11 +258,26 @@ danah.s = (() => {
                                                         seq: a.post.seq,
                                                         //로그인 기능 구현시 구현!!
                                                         memSeq: '아이디',
-                                                    }),
-                                                    success: h => {
-                                                        alert('성공');
-                                                        $('#d_comment_feed_list').html(danah.u.c(h.comment));
-                                                    }
+                                                    })
+                                                }).done( h => {
+                                                    console.log(h);
+                                                	$('#d_comment_feed_list').remove();
+                                                	$('#d_list_paginator').remove();
+                                                	$('#d_comment_feed')
+                                                	.append(
+                                                		danah.u.c(h.comment),
+                                                		danah.u.p({s:h.seq, p: h.page})
+                                                	);
+                                                	$('#d_comment_feed_header_count').text(h.page.totalRecode);
+                                                	$('#d_btn_commentCnt')
+                                                	.html('')
+                                                	.append(
+                                                		danah.c.span({ c: 'd_icon_common_action', s: 'vertical-align: middle; margin-right: 6px; background-position: -160px -280px; width: 24px; height: 24px;' })
+                                                		,h.page.totalRecode
+                                                	);
+                                                	$('#d_footer_commentCnt')
+                                                	.html('')
+                                                	.append('댓글', h.page.totalRecode);
                                                 });
                                             }
                                         })
@@ -353,17 +371,17 @@ danah.s = (() => {
                     .append(
                         danah.c.div({ c: 'd_container', s: 'position: relative; height: 100%;' })
                         .append(
-                            danah.c.button({ c: 'd_floating_bar_btn_menu' })
+                            danah.c.button({ c: 'd_floating_bar_btn_menu', i: 'd_btn_likeCnt' })
                             .append(
                                 danah.c.span({ c: 'd_icon_common_action', s: 'vertical-align: middle; margin-right: 6px; background-position: 0px -280px; width: 24px; height: 24px;' }),
                                 a.post.likeCnt
                             ),
-                            danah.c.button({ c: 'd_floating_bar_btn_menu' })
+                            danah.c.button({ c: 'd_floating_bar_btn_menu', i: 'd_btn_commentCnt' })
                             .append(
                                 danah.c.span({ c: 'd_icon_common_action', s: 'vertical-align: middle; margin-right: 6px; background-position: -160px -280px; width: 24px; height: 24px;' }),
                                 a.post.commentCnt 
                             ),
-                            danah.c.button({ c: 'd_floating_bar_btn_menu' })
+                            danah.c.button({ c: 'd_floating_bar_btn_menu', i: 'd_btn_shareCnt' })
                             .append(
                                 danah.c.span({ c: 'd_icon_common_action', s: 'vertical-align: middle; margin-right: 6px; background-position: -200px -280px; width: 24px; height: 24px;' }),
                                 a.post.shareCnt
@@ -444,12 +462,11 @@ danah.s = (() => {
                             room_size: $('#d_post_size').val(),
                             content: $('#d_post_description').text(),
                             keyword: j
-                        }),
-                        success: n => {
-                            alert()
-                            $('.mfp-close').trigger('click');
-                            danah.s.d({});
-                        }
+                        })
+                    }).done( n => {
+                        alert()
+                        $('.mfp-close').trigger('click');
+                        danah.s.d({});
                     });
                 }
             });
@@ -466,15 +483,10 @@ danah.s = (() => {
                     seq: '',
                     regi_date: '',
                     image: ''
-                }),
-                success: x => {
-                    alert('성공');
-                },
-                error: (m1, m2, m3) => {
-                    alert('에러발생1' + m1);
-                    alert('에러발생2' + m2);
-                    alert('에러발생3' + m3);
-                }
+                })
+            }).done( a => {
+                alert('성공');
+                danah.s.l();
             });
         } else {
             alert('취소완료');
@@ -641,6 +653,7 @@ danah.u = {
                                 .appendTo(p.find('.d_container:last'))
                                 .click(function() {
                                     j.eq(i).find('.d_filter_item_btn_search_val').text($(this).text());
+                                    o.addClass('d_filter_hidden');
                                     // $.getJson
                                 });
                         });
@@ -720,20 +733,33 @@ danah.u = {
                             // 로그인 정보 있을경우 $.type($.cookie("userid")) === 'undefined' ? '' : 
                             danah.c.button({ c: 'd_comment_feed_item_footer_delete_btn' })
                             .text('삭제')
-                            .click(n => {
-                                $.ajax({
-                                    url: $ctx + '/cmts/write',
-                                    method: 'POST',
-                                    contentType: 'application/json',
-                                    data: JSON.stringify({
-                                        comment: $('#d_comment').val(),
-                                        board_seq: d.seq,
-                                        mem_seq: '아이디',
-                                    }),
-                                    success: h => {
-                                        alert('성공');
-                                    }
-                                });
+                            .click(a => {
+                            	if (confirm('삭제하시겠습니까?')) {
+                                    alert('삭제완료');
+                                    $.getJSON($.context() + '/comments/delete/' + this.postSeq + '/' + this.seq , n => {
+                                    	console.log(n);
+                                    	$('#d_comment_feed_list').remove();
+                                    	$('#d_list_paginator').remove();
+                                    	$('#d_comment_feed')
+                                    	.append(
+                                    		danah.u.c(n.comment),
+                                    		danah.u.p({s: n.seq, p: n.page})
+                                    	);
+                                    	$('#d_comment_feed_header_count').text(n.page.totalRecode);
+                                    	$('#d_btn_commentCnt')
+                                    	.html('')
+                                    	.append(
+                                    		danah.c.span({ c: 'd_icon_common_action', s: 'vertical-align: middle; margin-right: 6px; background-position: -160px -280px; width: 24px; height: 24px;' })
+                                    		,n.page.totalRecode
+                                    	);
+                                    	$('#d_footer_commentCnt')
+                                    	.html('')
+                                    	.append('댓글', n.page.totalRecode);
+                                    	
+                                    });
+                                } else {
+                                    alert('취소완료');
+                                }
                             })
                             // like 검토중
                         )
@@ -770,7 +796,6 @@ danah.u = {
                 .appendTo(p)
                 .click(function(a) {
                 	let j = $(this).children().hasClass('d_list_paginator_next') ? (d.p.pageNo*1+1) : $(this).text();
-                    alert(j);
                     $.getJSON($.context() + '/comments/list/' + d.s +'/' + i, n => {
                     	console.log(n);
                     	$('#d_comment_feed_list').remove();
@@ -1073,13 +1098,12 @@ function DanahT(d) {
                                     content: $('#d_post_description').text(),
                                     keyword: j,
                                     memSeq: '아이디'
-                                }),
-                                success: n => {
-                                	console.log(n);
-                                    alert('성공인가요?'+n);
-                                    $('.mfp-close').trigger('click');
-                                    danah.s.d(n);
-                                }
+                                })
+                            }).done(n => {
+                            	console.log(n);
+                                alert('성공인가요?'+n);
+                                $('.mfp-close').trigger('click');
+                                danah.s.d(n);
                             });
                         }
                     }),

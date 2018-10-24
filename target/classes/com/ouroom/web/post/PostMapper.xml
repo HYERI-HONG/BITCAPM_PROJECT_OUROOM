@@ -65,22 +65,28 @@
 	</select>
 	<update id="postUpdate" parameterType="map">
 		UPDATE post
-		SET TITLE='', 
-			CONTENT=NULL, 
-			REGI_DATE=current_timestamp(), 
-			VIEW_CNT=0, 
-			LIKE_CNT=0, 
-			SHARE_CNT=0, 
-			ROOM_TYPE=NULL, 
-			ROOM_SIZE=NULL, 
-			MEM_SEQ=NULL, 
-			BOARD_SEQ=NULL, 
-			IMAGE=NULL
-		WHERE SEQ=0
+		<set>
+			TITLE = #{title}, 
+			REGI_DATE = #{regiDate},
+			CONTENT = #{content},
+			ROOM_TYPE = #{roomType},
+			ROOM_SIZE = #{roomSize},
+			IMAGE = #{image}
+			<if test=" viewCnt != null and viewCnt != '' ">
+				VIEW_CNT = #{viewCnt},
+			</if>
+			<if test=" likeCnt != null and likeCnt != '' ">
+				LIKE_CNT = #{likeCnt},
+			</if>
+			<if test=" shareCnt != null and shareCnt != '' ">
+				SHARE_CNT = #{shareCnt},
+			</if>
+		</set>
+		WHERE SEQ LIKE #{seq}
 	</update>
 	<delete id="postDelete" parameterType="map">
 		DELETE FROM post
-		WHERE SEQ=0
+		WHERE SEQ LIKE #{seq}
 	</delete>
 
 	<insert id="hashTagInseart" parameterType="map">
@@ -139,27 +145,12 @@
 				p.SEQ, p.COMMENT, p.POST_SEQ ,p.MEM_SEQ, p.NICKNAME, p.PROFILE
 			FROM
 				post_comment_view p
-			<where>
-				POST_SEQ LIKE #{seq}
-			</where> 
+			WHERE POST_SEQ LIKE #{seq}
 		) A
 		<where>
 			<if test=" beginRow != null and beginRow != '' ">
 				A.No BETWEEN #{beginRow} AND #{endRow}
 			</if>
-		</where>
-	</select>
-	<select id="commentRetrieve" resultMap="postResultMap">
-		SELECT A.*
-		FROM (
-			SELECT ROW_NUMBER() OVER(ORDER BY p.SEQ DESC) AS No, 
-			p.SEQ, p.COMMENT, p.POST_SEQ ,p.MEM_SEQ, p.NICKNAME, p.PROFILE
-			FROM post_comment_view p
-			WHERE POST_SEQ LIKE #{seq}
-		) A
-		<where>
-			A.No LIKE 1
-			AND MEM_SEQ LIKE #{memSeq}
 		</where>
 	</select>
 	<select id="commentCount" parameterType="map" resultType="int">

@@ -6,10 +6,8 @@ import java.util.HashMap;
 public class Test {
 public void test() {
 	HashMap<String, String> m = new HashMap<String, String>();
-	m.put("keyword", "하얀색,이케아");
-	for (String s : ((String) m.get("keyword")).split(",")) {
-		System.out.println(s);
-	}
+	System.out.println(Util.rpb.apply("2018-10-20"));
+	System.out.println();
 }
 
     public static void main(String[] args) {
