@@ -131,7 +131,7 @@
 	<select id="commentList" resultMap="postResultMap">
 		SELECT A.*
 		FROM (
-			SELECT ROW_NUMBER() OVER(ORDER BY p.SEQ DESC) AS No, p.*
+			SELECT ROW_NUMBER() OVER(ORDER BY p.SEQ DESC) AS No, p.SEQ, p.COMMENT, p.NICKNAME, p.PROFILE
 			FROM post_comment_view p
 			<where>
 				POST_SEQ LIKE #{seq}
@@ -139,7 +139,7 @@
 		) A
 		<where>
 			<if test=" beginRow != null and beginRow != '' ">
-				AND No BETWEEN #{beginRow} AND #{endRow}
+				AND A.No BETWEEN #{beginRow} AND #{endRow}
 			</if>
 		</where>
 	</select>
@@ -147,8 +147,8 @@
 		 SELECT COUNT(*)
 		 FROM comment
 		 <where>
-			<if test=" postSeq != null and postSeq != '' ">
-				ARTICLE_SEQ LIKE #{Seq}
+			<if test=" seq != null and seq != '' ">
+				ARTICLE_SEQ LIKE #{seq}
 			</if>
 		 </where>
 	</select>

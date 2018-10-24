@@ -33,18 +33,20 @@ public class PostController {
 	private String uploadPath;
 	
 	@PostMapping("/posts/write")
-	public @ResponseBody void postWrite(@RequestBody Map<String, String> p) {
+	public @ResponseBody String postWrite(@RequestBody Map<String, String> p) {
 		Util.log.accept("등록하기");
 		Util.log.accept(p.toString());
         p.put("regeDate", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 		tx.postInseart(p);
 		u.upload.apply(uploadPath+File.separator+"danah"+File.separator+"post");
+		return null;
 	}
 	
 	@GetMapping("/posts/list/{pageNo}")
 	public @ResponseBody Map<String, Object> postList(@PathVariable String pageNo) {
 		PageProxy pxy = new PageProxy();
 		m.clear();
+		Util.log.accept(pageNo);
 		m.put("pageNo", pageNo.equals("undefined") ? 1 : Integer.parseInt(pageNo));
 		m.put("totalRecode", pm.postCount(m));
 		m.put("recodeSize", 12);
@@ -97,10 +99,29 @@ public class PostController {
 		pm.commentInseart(p);
 	}
 	
-	@GetMapping("/comments/list/{pageNo}")
-	public @ResponseBody Map<String, Object> cmtList(@PathVariable String pageNo) {
+	@GetMapping("/comments/list/{seq}/{pageNo}")
+	public @ResponseBody Map<String, Object> cmtList(@PathVariable String seq, @PathVariable String pageNo) {
+		PageProxy pxy = new PageProxy();
 		Util.log.accept("리스트");
 		Util.log.accept(pageNo.toString());
+		m.clear();
+		m.put("pageNo", Integer.parseInt(pageNo));
+		m.put("seq", Integer.parseInt(seq));
+		m.put("totalRecode", pm.commentCount(m));
+		Util.log.accept("확인 comment : "+m.get("totalRecode"));
+		m.put("recodeSize", 3);
+		pxy.carraryOut(m);
+		page = pxy.getPagination();
+		m.clear();
+		m.put("beginRow", String.valueOf(page.getBeginRow()));
+		m.put("endRow", String.valueOf(page.getEndRow()));
+		m.put("seq", Integer.parseInt(seq));
+		Util.log.accept("확인 : "+m.toString());
+		m.put("comment", pm.commentList(m));
+		Util.log.accept("4차 확인 comment : "+m.get("comment"));
+		m.remove("beginRow");
+		m.remove("endRow");
+		m.put("page", page);
 		return m;
 	}
 	

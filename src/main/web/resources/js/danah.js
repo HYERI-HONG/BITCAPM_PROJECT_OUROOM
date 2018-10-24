@@ -89,16 +89,20 @@ danah.s = (() => {
                 .appendTo(p);
             DanahL(a);
         });
-        $(window).scroll(function() {
-            if ($(this).scrollTop() == $(document).height() - $(this).height()) {
-                j++;
+        danah.u.tb();
+        $(window).scroll(function(){
+            if ($('#d_post_list').length>0 && $(this).scrollTop() >= $(document).height() - $(this).height()) {
+            	j++;
                 $('#d_row')
                     .append(
-                        $.getJSON($ctx + '/posts/list/' + j, a => { DanahL(a); })
+                        $.getJSON($ctx + '/posts/list/' + j, n => { 
+                        	DanahL(n); 
+                        })
                     );
+            }else if(!$('#d_post_list').length>0){
+            	$(window).unbind('scroll');
             }
         });
-        danah.u.tb();
         //history.pushState({list: $('#content').html()}, null, '/web/post/list');
     };
     let d = d => {
@@ -134,11 +138,11 @@ danah.s = (() => {
                                     .append(
                                         danah.c.a({ t: '태그관리' })
                                         .click(n => {
-                                            danah.s.t(d);
+                                            danah.s.t({p: a.post, t: a.imageTag});
                                         }),
                                         danah.c.a({ t: '수정하기' })
                                         .click(n => {
-                                            danah.s.e(d);
+                                            danah.s.e({p: a.post, t: a.hashTag});
                                         })
                                     )
                                 ),
@@ -160,7 +164,7 @@ danah.s = (() => {
                                 ----------------------------------------------------------- */
                                 $('<figcaption/>')
                             ),
-                            danah.u.h()),
+                            danah.u.h(a.hashTag)),
                         danah.c.section({ c: 'd_footer' })
                         .append(
                             danah.c.hr({ c: 'd_section_divider' }),
@@ -206,14 +210,14 @@ danah.s = (() => {
                             ),
                             danah.c.hr({ c: 'd_section_divider' })
                         ),
-                        danah.c.section({ c: 'd_comment_feed' })
+                        danah.c.section({ c: 'd_comment_feed'}).attr({id: 'd_comment_feed'})
                         .append(
                             danah.c.h1({
                                 c: 'd_comment_feed_header',
                                 // 0일때 addClass zero
                                 ht: ['댓글', '&nbsp;', danah.c.span({ c: 'd_comment_feed_header_count', t: a.post.commentCnt })]
                             }),
-                            danah.c.div({ c: 'd_comment_feed_form' })
+                            danah.c.div({ c: 'd_comment_feed_form'})
                             .append(
                                 $.type($.cookie("userid")) === 'undefined' ? '' : danah.c.a({ hr: '#', c: 'd_comment_feed_form_cover' })
                                 .click(n => {
@@ -263,8 +267,8 @@ danah.s = (() => {
                                     )
                                 )
                             ),
-                            danah.u.c(d),
-                            danah.u.p(a.page)
+                            danah.u.c(a.comment),
+                            danah.u.p({s: a.post.seq, p: a.page})
                         )
                     ),
                     danah.c.aside({ c: 'd_col_4 d_sidebar' })
@@ -425,12 +429,13 @@ danah.s = (() => {
         });
     };
     let e = d => {
+    	console.log(d);
         let j = ''
-        DanahT({ f: 'e' });
-        $('#d_post_title').text('제목');
-        $('#d_post_space').val('원룸');
-        $('#d_post_size').val('10평대');
-        $('#d_post_description').text('내용');
+        DanahT({ f: 'e',p: d.p });
+        $('#d_post_title').text(d.p.title);
+        $('#d_post_space').val(d.p.roomType);
+        $('#d_post_size').val(d.p.roomSize);
+        $('#d_post_description').text(d.p.content);
         $('#submit')
             .click(a => {
                 a.preventDefault();
@@ -656,43 +661,43 @@ danah.u = {
     },
     h: d => {
         const p = danah.c.ul({ c: 'd_keyword' });
-        $.each(['이케아', '깔끔한', '협탁'], function() {
+        $.each(d, function() {
             danah.c.li({ c: 'd_keyword_item' })
                 .append(
-                    danah.c.a({ hr: '#' })
+                    danah.c.a({})
                     .append(
                         danah.c.div({ c: 'd_keyword_item_badge', ht: ['#', this] })
                     )
                 )
                 .appendTo(p)
-                .click(() => {
-                    danah.s.s();
+                .click(n => {
+                	n.preventDefault();
+                    danah.s.s({t: this});
                 });
         });
         return p;
     },
     c: d => {
-        const p = danah.c.ul({ c: 'd_comment_feed_list', i: 'd_comment_feed_list' });
+        const p = danah.c.ul({ c: 'd_comment_feed_list', i: 'd_comment_feed_list'});
         const $i = $.img();
-        $.each([{ i: '아이디', c: '깔끔하네요!', d: '2018-10-02' }], function() {
+        $.each(d, function() {
             danah.c.li({ c: 'd_comment_feed_list_item' })
                 .append(
                     danah.c.article({ c: 'd_comment_feed_item' })
                     .append(
                         danah.c.p({ c: 'd_comment_feed_item_content' })
                         .append(
-                            danah.c.a({ hr: '#', c: 'd_comment_feed_item_content_author' })
+                            danah.c.a({c: 'd_comment_feed_item_content_author' })
                             .append(
-                                danah.c.img({ c: 'd_comment_feed_item_content_author_image', sr: $i + '/danah/profile.jpeg' }),
-                                danah.c.span({ c: 'd_comment_feed_item_content_author_name', t: this.i })
+                                danah.c.img({ c: 'd_comment_feed_item_content_author_image', sr: $i + ((this.profile === '' || this.profile === undefined)? '/danah/profile.jpeg' : '/hyeri/profile/' + this.profile) }),
+                                danah.c.span({ c: 'd_comment_feed_item_content_author_name', t: this.nickname })
                             ),
-                            danah.c.span({ c: 'd_comment_feed_item_content_content', t: this.c })
+                            danah.c.span({ c: 'd_comment_feed_item_content_content', t: this.comment })
                         ),
                         $('<footer/>')
                         .addClass('d_comment_feed_item_footer')
                         .append(
-                            $('<time/>').addClass('d_comment_feed_item_footer_time').append(this.d),
-                            // 유저 정보 있을경우 $.type($.cookie("userid")) === 'undefined' ? '' : 
+                            // 로그인 정보 있을경우 $.type($.cookie("userid")) === 'undefined' ? '' : 
                             danah.c.button({ c: 'd_comment_feed_item_footer_delete_btn' })
                             .text('삭제')
                             .click(n => {
@@ -702,7 +707,7 @@ danah.u = {
                                     contentType: 'application/json',
                                     data: JSON.stringify({
                                         comment: $('#d_comment').val(),
-                                        board_seq: '게시글번호',
+                                        board_seq: d.seq,
                                         mem_seq: '아이디',
                                     }),
                                     success: h => {
@@ -718,35 +723,44 @@ danah.u = {
         return p;
     },
     p: d => {
-        const p = danah.c.ul({ c: 'd_list_paginator' });
-        let startPage = 1;
-        let endPage = 5;
-        let pageNum = 1;
-        let existPre = false;
-        let existNext = true;
-        for (let i = startPage - 1; i <= endPage + 1; i++) {
-            danah.c.li({})
+    	console.log(d);
+        const p = danah.c.ul({ c: 'd_list_paginator', i: 'd_list_paginator'});
+        for (let i = d.p.startPage - 1; i <= d.p.endPage + 1; i++) {
+            danah.c.li({s: ((d.p.existPrev===false && (d.p.startPage - 1 == i)) || ((d.p.existNext===false)&&(d.p.endPage + 1 == i))) ?
+            					'visibility: hidden;'
+            					: ''})
+            	.attr({value: i})
                 .append(
                     danah.c.button({
-                        c: (startPage - 1 == i) ?
-                            'd_list_paginator_prev' : (endPage + 1 == i) ?
-                            'd_list_paginator_next' : 'd_list_paginator_page d_sm',
+                        c: (d.p.startPage - 1 == i) ?
+                            'd_list_paginator_prev' : (d.p.endPage + 1 == i) ?
+                            'd_list_paginator_next' : 'd_list_paginator_page d_sm'
                     })
-                    .attr({ style: ((startPage - 1 == i) || (endPage + 1 == i)) ? '' : '' })
-                    .addClass(pageNum == i ? 'selected' : '')
-                    .removeClass(pageNum != i ? 'selected' : '')
+                    .addClass(d.p.PageNo == i ? 'selected' : '')
                     .append(
-                        (startPage - 1 == i) && !existPre ?
-                        danah.c.i({ c: 'fas fa-chevron-left' }) :
-                        (endPage + 1 == i) && existNext ?
-                        danah.c.i({ c: 'fas fa-chevron-right' }) :
+                        (d.p.startPage - 1 == i) ?
+                        danah.c.i({ c: 'fas fa-chevron-left' })
+                         :
+                        (d.p.endPage + 1 == i) ?
+                        danah.c.i({ c: 'fas fa-chevron-right', i: 'd_nextBtn' })
+                         :
                         i
                     )
                 )
                 .appendTo(p)
-                .click(function() {
-                    console.log($(this).text());
-                    //app.service.boards((d.page.startPage - 1 == i) ? d.page.pre : (d.page.endPage + 1 == i) ? d.page.next : $(this).text());
+                .click(function(a) {
+                	let j = $(this).children().hasClass('d_list_paginator_next') ? (d.p.pageNo*1+1) : $(this).text();
+                    alert(j);
+                    $.getJSON($.context() + '/comments/list/' + d.s +'/' + i, n => {
+                    	console.log(n);
+                    	$('#d_comment_feed_list').remove();
+                    	$('#d_list_paginator').remove();
+                    	$('#d_comment_feed')
+                    	.append(
+                    		danah.u.c(n.comment),
+                    		danah.u.p({s: n.seq, p: n.page})
+                    	);
+                    });
                 });
         }
         return p;
@@ -842,7 +856,7 @@ danah.c = {
     a: d => { return $('<a/>').addClass(d.c).attr({ href: d.hr, id: d.i, style: d.s, target: d.tg, rel: d.r }).html(d.ht).text(d.t); },
     p: d => { return $('<p/>').addClass(d.c).attr({ id: d.i }).html(d.ht).text(d.t); },
     ul: d => { return $('<ul/>').addClass(d.c).attr({ id: d.i }).html(d.ht).text(d.t); },
-    li: d => { return $('<li/>').addClass(d.c).attr({ id: d.i }).html(d.ht).text(d.t); },
+    li: d => { return $('<li/>').addClass(d.c).attr({ id: d.i, style: d.s }).html(d.ht).text(d.t); },
     button: d => { return $('<button/>').addClass(d.c).attr({ id: d.i, title: d.t, style: d.s, type: d.ty }).html(d.ht); },
     img: d => { return $('<img/>').addClass(d.c).attr({ id: d.i, src: d.sr, srcset: d.srs, alt: d.a, style: d.s }); },
     span: d => { return $('<span/>').addClass(d.c).attr({ id: d.i, style: d.s }).html(d.ht).text(d.t); },
@@ -969,12 +983,12 @@ function DanahT(d) {
                     ),
                     danah.c.div({ c: 'd_description enable_enter', i: 'd_post_title' })
                     .attr({ contenteditable: 'true', 'data-ph': '제목을 입력해 주세요' })
-                    .text(d.f !== 'e' ? '' : d.post.title)
+                    .text(d.f !== 'e' ? '' : d.p.title)
                     .keydown(a => {
                         if (a.keyCode == 13) a.preventDefault();
                     }),
                     danah.c.select({ c: 'ui-changed-selector', i: 'd_post_space', n: 'd_post_space', s: 'color: rgb(189, 189, 189);' })
-                    .val(d.f !== 'e' ? '' : d.post.room_type)
+                    .val(d.f !== 'e' ? '' : d.p.roomType)
                     .append(
                         danah.c.option({ v: '', t: '공간 선택(필수)' }),
                         danah.c.option({ v: '원룸', t: '원룸' }),
@@ -985,7 +999,7 @@ function DanahT(d) {
                         danah.c.option({ v: '베란다', t: '베란다' })
                     ),
                     danah.c.select({ c: 'ui-changed-selector', i: 'd_post_size', n: 'd_post_size', s: 'color: rgb(189, 189, 189);' })
-                    .val(d.f !== 'e' ? '' : d.post.room_size)
+                    .val(d.f !== 'e' ? '' : d.p.roomSize)
                     .append(
                         danah.c.option({ v: '', t: '평수 선택(필수)' }),
                         danah.c.option({ v: '10평미만', t: '10평미만' }),
@@ -996,7 +1010,7 @@ function DanahT(d) {
                     ),
                     danah.c.div({ c: 'd_description enable_enter', i: 'd_post_description' })
                     .attr({ 'contenteditable': 'true', 'data-ph': '이미지에 대한 설명을 입력해 주세요' })
-                    .text(d.f !== 'e' ? '' : d.post.content),
+                    .text(d.f !== 'e' ? '' : d.p.content),
                     danah.c.div({ c: 'd_keywords' })
                     .append(
                         danah.c.div({ c: 'ui-keyword-field', i: 'd_keywords_view' })

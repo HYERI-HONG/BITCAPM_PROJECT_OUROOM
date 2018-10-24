@@ -31,10 +31,10 @@ public class Pagination implements Proxy{
 		this.endRow = (totalRecode < beginRow + recodeSize - 1) 
 										? totalRecode 
 										: pageNo*(recodeSize);
-		this.existPrev = (startPage != 1);
-		this.existNext = (endPage < totalPage && startPage != totalPage);
-		this.prev = startPage<6 ? 1 : startPage-5;
-		this.next= endPage+1;
+		this.existPrev = pageNo != 1;
+		this.existNext = pageNo != totalPage;
+		this.prev = startPage!=1 ? pageNo-1 : 0;
+		this.next= (existNext==true) ? pageNo+1 : 0;
 	}
 
 }

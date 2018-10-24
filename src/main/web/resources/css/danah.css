@@ -1881,7 +1881,6 @@ a.d_filter_item_btn {
 
 .d_list_paginator>li:first-child,
 .d_list_paginator>li:last-child {
-	margin-top: 2px;
     border: 1px solid #DCDCDC;
     border-radius: 5px;
     display: inline-block;
@@ -2228,7 +2227,7 @@ a.d_filter_item_btn {
     bottom: 0;
     text-align: center;
     width: 100%;
-    padding: 40px 0
+    padding: 140px 0
 }
 
 .d_sidebar_overflow .d_sidebar_container {

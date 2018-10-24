@@ -25,8 +25,10 @@ public class TransactionService {
 		PageProxy pxy = new PageProxy();
 		m.clear();
 		m.put("pageNo", 1);
-		m.put("postSeq", Integer.parseInt(seq));
+		Util.log.accept("넘어온값"+seq);
+		m.put("seq", Integer.parseInt(seq));
 		m.put("totalRecode", pm.commentCount(m));
+		Util.log.accept("확인 comment : "+m.get("totalRecode"));
 		m.put("recodeSize", 3);
 		pxy.carraryOut(m);
 		page = pxy.getPagination();
@@ -34,6 +36,7 @@ public class TransactionService {
 		m.put("beginRow", String.valueOf(page.getBeginRow()));
 		m.put("endRow", String.valueOf(page.getEndRow()));
 		m.put("seq", Integer.parseInt(seq));
+		Util.log.accept("확인 : "+m.toString());
 		m.put("comment", pm.commentList(m));
 		Util.log.accept("4차 확인 comment : "+m.get("comment"));
 		m.remove("beginRow");
