@@ -167,7 +167,6 @@ hyeri.page={
 		for(let i=1;i<31;i++){
 			$('<option/>').attr({value:i+''}).html(i).appendTo($('#bir_day'));
 		}
-		$('<div/>').addClass('add_bir').appendTo($('#bir_wrap'));
 		/*$('<input/>').addClass('bir_int ').attr({value:"일",type:"text",id:"bir_day"}).appendTo($('#bir_dd_s'));
 		 * $('<input/>').addClass('bir_int ').attr({value:"년",type:"text",id:"bir_year"}).appendTo($('#bir_yy_s'));*/
 		
@@ -175,87 +174,74 @@ hyeri.page={
 		$('<label/>').addClass('je_bold').html("성별").attr({style:"padding-top:20px"}).appendTo($('#add_form_middle'));
 		$('<div/>').attr({id:"gender_wrap"}).addClass('add_gen').appendTo($('#add_form_middle'));
 		$('<select/>').addClass('gen_sel ').attr({id:"gender",title:"성별"}).appendTo($('#gender_wrap'));
-		$('<option/>').html('').appendTo($('#gender'));
+		$('<option/>').html('성별').appendTo($('#gender'));
 		$('<option/>').html('여자').attr({value:"여자"}).appendTo($('#gender'));
 		$('<option/>').html('남자').attr({value:"남자"}).appendTo($('#gender'));
 		
-		
 		/*이미지 업로드*/
+		var profile;
 		$('<label/>').addClass('je_bold').html("프로필 사진 업로드").attr({style:"padding-top:20px"}).appendTo($('#add_form_middle'));
 		$('<div/>').addClass('h_imgup_con').append(
 				$('<form/>').attr({enctype:'multipart/form-data',id:'h_imgup_form'}).append(
 						$('<div/>').addClass('h_imgup_prev').append(
-								$('<img/>').attr({id:'h_upimg'})
-						),
-						$('<div/>').addClass('h_imgup_btn').append(
-								$('<input/>').attr({type:"button",value:'업로드',id:'h_add_img',style:'margin-right:5px'}).click(function(){
-									alert('업로드 버튼 클릭');
-								}),
-								$('<input/>').attr({type:"file",name:'h_find_img',id:'h_find_img',style:'display:inline !important'})
-								.change(function(a) {
-									alert(this.files[0].name);
-									
-									let ck = (!(this.files[0].name).match(/jpg|gif|png|jpeg/i)) ? false : true;
-									if(!ck){
-										alert("gif,png,jpg,jpeg 파일만 업로드 할 수 있습니다.");
-									}else{
-										/*var fd = new FormDate();
-										var files = this.files[0];
-										fd.append('file',files);
-										$.ajax({
-											url: $.context() + '/posts/upload',
-											type: 'POST',
-								            data: fd,
-								            async: false,
-								            cache: false,
-								            contentType: false,
-								            processData: false,
-								            success: function(response){
-								                if(response != 0){
-								                    $("#h_upimg").attr("src",response); 
-								                    $(".h_imgup_prev h_upimg").show();
-								                }else{
-								                    alert('file not uploaded');
-								                }
-								            }
-										});*/
-									}
-								})
+								$('<div/>').attr({id:'h_targetLayer',style:'opacity: 0.7;'}),
+								$('<img/>').addClass('h_icon_choose_image').attr({src:$.img()+'/hyeri/upimageicon.png',style:'opacity:0.5'}),
+								$('<div/>').addClass('h_imgup').append(
+										$('<input/>').attr({type:"file",name:'h_find_img',id:'h_find_img'}).addClass('h_inputFile')
+										.change(function(a) {
+											let ck = (this.files[0].name.match(/jpg|gif|png|jpeg/i)) ? true : false;
+											if(ck){
+												profile=this.files[0].name;
+												hyeri.func.iu(this);
+											}else{
+												alert("gif,png,jpg,jpeg 파일만 업로드 할 수 있습니다.");
+											}
+										})	
+								)
 						)
+						
 				)
 		).appendTo($('#add_form_middle'));
 			
+		
+		
 		$('#add_submit_btn').click(e=>{
 			e.preventDefault();
-			let check=true;
+			let ck=true;
 			let arr=[
-				{c:'add_email',i:'#h_email',v:'a1'},
-				{c:'add_pass',i:'#h_pass',v:'b1'},
-				{c:'add_pass_confirm',i:'#h_pass_ck',v:'c1'},
-				{c:'add_nickname',i:'#nickname',v:'d1'},
-				{c:'add_gen',i:'#gender',v:'e1'},
-				{c:'add_bir',i:'#bir_year',v:'년'},
-				{c:'add_bir',i:'#bir_month',v:'월'},
-				{c:'add_bir',i:'#bir_day',v:'일'}
+				{c:'add_email',i:'#h_email'},
+				{c:'add_pass',i:'#h_pass'},
+				{c:'add_pass_confirm',i:'#h_pass_ck'},
+				{c:'add_nickname',i:'#nickname'},
+				{c:'add_gen',i:'#gender'}
 				];
-			let n=0;
 			$.each(arr,(x,j)=>{
-				$('<h7/>').attr({style:'color:red',id:j.v}).appendTo($('.'+j.c));
-				$('#'+j.v).html(($(j.i).val()==''||$(j.i).val()==j.v)?'필수 값을 입력하세요.':'');
+				$('<h7/>').attr({style:'color:red',id:j.c}).appendTo($('.'+j.c));
+				if($(j.i).val()==''||$(j.i).val()=='성별'){
+					$('#'+j.c).html('필수 값을 입력하세요.');
+					ck=false;
+				}else{
+					$('#'+j.c).html('');
+				}
 				if(j.c=='add_pass_confirm'){
 					if($('#h_pass').val()!=$('#h_pass_ck').val()){
-						$('#'+j.v).html('비밀번호가 일치하지 않습니다.');	
+						$('#'+j.c).html('비밀번호가 일치하지 않습니다.');	
+						ck=false;
 					}
 				}
 				if(j.c=='add_email'){
 					if($('#h_email').val()!=''&&$('#h_email').val().indexOf('@')<0){
-						$('#'+j.v).html('이메일 형식이 올바르지 않습니다.');	
+						$('#'+j.c).html('이메일 형식이 올바르지 않습니다.');	
+						ck=false;
 					}
 				}
-				
-				check=false;
 			});
 			
+			$('#add_bir').remove();
+			if($('#bir_year').val()=='년'||$('#bir_month').val()=='월'||$('#bir_day').val()=='일'){
+				$('<h7/>').attr({style:'color:red',id:'add_bir'}).html('생년월일을 모두 선택하세요.').appendTo($('#bir_wrap'));
+				ck=false;
+			}
 			/*$('.nullck').remove();*/
 			/*$.each(arr,(x,j)=>{
 				if(j.c==='add_pass_confirm'){
@@ -283,8 +269,8 @@ hyeri.page={
 			}
 			});*/
 			let d = new Date();
-			//email, nickname 중복 확인 기능 추가
-			if(check){
+	
+			if(ck){
 				$.ajax({
 					url : $.context()+'/member/add',
 					method : 'POST',
@@ -295,7 +281,7 @@ hyeri.page={
 						nickname : $('#nickname').val(),
 						birthday : $('#bir_year').val()+'-'+$('#bir_month').val()+'-'+$('#bir_day').val(),
 						gender  : $('#gender').val(),
-						profile : 'p'+Math.floor((Math.random() * 9) + 1)+'.jpg',
+						profile : profile,
 						join_date : d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()
 					}),
 					success : d=>{
@@ -352,6 +338,33 @@ hyeri.page={
 		
     }
 };
+hyeri.func ={
+		iu: d =>{
+				var fd = new FormData();
+				fd.append('file',d.files[0]);
+				$.ajax({
+					url: $.context()+'/member/upload/h',
+					type: 'POST',
+		            data: fd,
+		            async: false,
+		            cache: false,
+		            contentType: false,
+		            processData: false
+				}).done(function(){
+					 if (d.files[0]) {
+					        var fileReader = new FileReader();
+					        fileReader.onload = function (e) {
+					            $('#blah').attr('src', e.target.result);
+								$("#h_targetLayer").html('<img src="'+e.target.result+'" width="200px" height="200px" class="h_upload-preview" />');
+								$(".h_icon_choose_image").attr({style:'opacity:0 !important'});
+					        }
+							fileReader.readAsDataURL(d.files[0]);
+					    }
+
+				});
+		
+		}
+}
 
 
 

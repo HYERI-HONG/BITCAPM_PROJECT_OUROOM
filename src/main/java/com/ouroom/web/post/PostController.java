@@ -89,6 +89,7 @@ public class PostController {
 	@PostMapping("/posts/upload")
 	public @ResponseBody void postUplaod(@RequestBody MultipartFile file) throws Exception {
 		Util.log.accept(file.getOriginalFilename());
+		System.out.println(file.getBytes());
 		u.file.accept(file, file.getBytes());
 	}
 	
