@@ -4,6 +4,7 @@
 -@Desc : 공지사항
 - 차트 sql
 -==============
+
   SELECT visit_date AS visitDate , COUNT(*) AS count FROM visitor 
   WHERE visit_date BETWEEN #{startDate} AND #{endDate}
   GROUP BY visit_date ;
@@ -13,12 +14,13 @@
   WHERE regi_date LIKE  #{todayDate}
   GROUP BY regi_date;
   
-  -=====Notice=====
+-=====Notice=====
 -@Author : 류재경
 -@Create : 2018-10-24
 -@Desc : 공지사항
 - 차트 프로시저
 -==============
+
 DROP PROCEDURE IF EXISTS sp_select_totalsale;
 CREATE PROCEDURE sp_select_totalsale(
 	IN in_start_date VARCHAR(20),
@@ -40,7 +42,7 @@ BEGIN
     DEALLOCATE PREPARE stmt;
 END;
 
-  -=====Notice=====
+-=====Notice=====
 -@Author : 류재경
 -@Create : 2018-10-25
 -@Desc : 공지사항
