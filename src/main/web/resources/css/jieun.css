@@ -20,7 +20,7 @@
     text-align: left;
 }
 
-/* 혜리가 변경 */
+
 .je_sign-in-form__form__input{
 	display: block;
     width: 100%;
@@ -238,14 +238,19 @@
 	height: 700px;
 }
 #je_selling_helper_wrap{
-
 	padding-right: 5cm;
 	padding-left:5cm;
 	z-index: 3;
+	width: 100%; 
+	height: 55px;
 }
- .sticky{
+#je_selling_helper{
+	margin-bottom: 0px;
+}
+
+ .je_sticky{
 	position: fixed;
- 	top: 77px; 
+ 	top: 75px; 
 }  
 .je_row{
 	width: 100%;
