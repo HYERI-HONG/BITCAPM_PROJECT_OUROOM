@@ -33,7 +33,7 @@ public class TransactionService {
 		m = (Map<String, Object>) pm.postRetrieve((String) m.get("memSeq"));
 		Util.log.accept("유틸라스트"+m.toString());
 		return s;
-	};
+	}; //로그인 기능 구현후 수정
 	
 	@Transactional
 	public Map<?, ?> postDetail(String seq){

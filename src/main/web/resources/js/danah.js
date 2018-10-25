@@ -40,16 +40,21 @@ danah.s = (() => {
                 if (ctt.children().length > 3) {
                     $('#d_search_tooltip').remove();
                 } else {
-                    danah.c.div({ c: 'ui-widget d_search_tooltip', i: 'd_search_tooltip', s: 'z-index: 502;' })
-                        .append(
-                            danah.c.input({ c: 'ui-autocomplete-input', i: 'd_search_description', ph: '검색' })
-                            .keydown(function(a) {
-                                if (a.keyCode == 13) {
-                                    danah.s.s({ t: $(this).val() });
-                                }
-                            })
-                        )
-                        .prependTo(ctt);
+                    $.getJSON($ctx + '/hashTags/search', a => {
+                        danah.c.div({ c: 'ui-widget d_search_tooltip', i: 'd_search_tooltip', s: 'z-index: 502;' })
+                            .append(
+                                danah.c.input({ c: 'ui-autocomplete-input', i: 'd_search_description', ph: '검색' })
+                                .autocomplete({ source: a })
+                                .keydown(function(a) {
+                                    if (a.keyCode == 13) {
+                                        danah.s.s($(this).val());
+                                    }
+                                })
+                            )
+                            .prependTo(ctt);
+                        $('.ui-autocomplete').attr({ style: 'left: 40%;right: 40%;top: 3.5em;position: fixed;z-index: 2000;border-radius: 4px; max-height: 100px; overflow-y: auto; overflow-x: hidden;' })
+                    });
+                    /*
                     $.getJSON($ctx + '/hashTags/search', a => {
                         $(function() {
                             $('#d_search_description')
@@ -60,6 +65,7 @@ danah.s = (() => {
                         });
 
                     });
+                    */
                 }
             });
         $('#h_wirte_btn')
@@ -88,15 +94,15 @@ danah.s = (() => {
                 .append(danah.c.div({ c: 'd_row', i: 'd_row', s: 'margin-top:20px' }))
                 .appendTo(p);
             DanahL(a);
-            $(window).scroll(function(){
-                if (a.page>j && $('#d_post_list').length>0 && $(this).scrollTop() >= $(document).height() - $(this).height()) {
-                	j++;
+            $(window).scroll(function() {
+                if (a.page > j && $('#d_post_list').length > 0 && $(this).scrollTop() >= $(document).height() - $(this).height()) {
+                    j++;
                     $('#d_row')
                         .append(
-                            $.getJSON($ctx + '/posts/list/' + j, n => { DanahL(n);})
+                            $.getJSON($ctx + '/posts/list/' + j, n => { DanahL(n); })
                         );
-                }else if(!$('#d_post_list').length>0){
-                	$(window).unbind('scroll').scrollTop(0);
+                } else if (!$('#d_post_list').length > 0) {
+                    $(window).unbind('scroll').scrollTop(0);
                 }
             });
             danah.u.tb();
@@ -104,8 +110,8 @@ danah.s = (() => {
         //history.pushState({list: $('#content').html()}, null, '/web/post/list');
     };
     let d = d => {
-        $.getJSON($ctx + '/posts/'+ d +'/detail', a=>{
-        	console.log(a);
+        $.getJSON($ctx + '/posts/' + d + '/detail', a => {
+            console.log(a);
             const p = danah.c.div({ c: 'd_post_detail d_container' });
             ctt.html(p);
             p.append(
@@ -129,18 +135,18 @@ danah.s = (() => {
                             .append(
                                 danah.c.div({ c: 'd_post_img d_post_img_pc' })
                                 .append(
-                                    danah.c.img({ sr: $i + '/danah/post/' + a.post.regiDate.replace(/-/gi, '/')+"/"+a.post.image, s: 'width: 100%; display: block;' }),
+                                    danah.c.img({ sr: $i + '/danah/post/' + a.post.regiDate.replace(/-/gi, '/') + "/" + a.post.image, s: 'width: 100%; display: block;' }),
                                     danah.u.i(a.imageTag)
                                     // 자기 게시글일 경우
                                     , danah.c.div({ c: 'd_post_img_btn_manage' })
                                     .append(
                                         danah.c.a({ t: '태그관리' })
                                         .click(n => {
-                                            danah.s.t({p: a.post, t: a.imageTag});
+                                            danah.s.t({ p: a.post, t: a.imageTag });
                                         }),
                                         danah.c.a({ t: '수정하기' })
                                         .click(n => {
-                                            danah.s.e({p: a.post, t: a.hashTag});
+                                            danah.s.e({ p: a.post, t: a.hashTag });
                                         })
                                     )
                                 ),
@@ -168,12 +174,12 @@ danah.s = (() => {
                             danah.c.hr({ c: 'd_section_divider' }),
                             danah.c.div({ c: 'd_footer_stats' })
                             .append(
-                                danah.c.div({ c: 'd_footer_stats_item'})
-                                	.append( danah.c.span({i: 'd_footer_viewCnt'}).append('조회', a.post.viewCnt)),
-                                danah.c.div({ c: 'd_footer_stats_item'})
-                                	.append(danah.c.span({i: 'd_footer_commentCnt'}).append('댓글', a.post.commentCnt)),
-                                danah.c.div({ c: 'd_footer_stats_item'})
-                                	.append(danah.c.span({i: 'd_footer_shareCnt'}).append('공유', a.post.shareCnt))
+                                danah.c.div({ c: 'd_footer_stats_item' })
+                                .append(danah.c.span({ i: 'd_footer_viewCnt' }).append('조회', a.post.viewCnt)),
+                                danah.c.div({ c: 'd_footer_stats_item' })
+                                .append(danah.c.span({ i: 'd_footer_commentCnt' }).append('댓글', a.post.commentCnt)),
+                                danah.c.div({ c: 'd_footer_stats_item' })
+                                .append(danah.c.span({ i: 'd_footer_shareCnt' }).append('공유', a.post.shareCnt))
                             ),
                             danah.c.div({ c: 'd_footer_share' })
                             .append(
@@ -192,16 +198,16 @@ danah.s = (() => {
                                 .append(
                                     danah.c.div({ c: 'd_writer_profile_img' })
                                     .append(
-                                    	danah.c.a({})
-                                    		.append(
-                                    			danah.c.img({ sr: $i + ((a.post.profile === '' || a.post.profile === undefined)? '/danah/profile.jpeg' : '/hyeri/profile/' + a.post.profile) })
-                                    		)
-                                    	),
+                                        danah.c.a({})
+                                        .append(
+                                            danah.c.img({ sr: $i + ((a.post.profile === '' || a.post.profile === undefined) ? '/danah/profile.jpeg' : '/hyeri/profile/' + a.post.profile) })
+                                        )
+                                    ),
                                     danah.c.div({})
                                     .append(
-                                        danah.c.a({ hr: '#'})
+                                        danah.c.a({ hr: '#' })
                                         .append(
-                                        	$('<strong/>').addClass('d_writer_profile_name').text(a.post.nickname)
+                                            $('<strong/>').addClass('d_writer_profile_name').text(a.post.nickname)
                                         )
                                     )
                                 )
@@ -211,23 +217,23 @@ danah.s = (() => {
                             ),
                             danah.c.hr({ c: 'd_section_divider' })
                         ),
-                        danah.c.section({ c: 'd_comment_feed'}).attr({id: 'd_comment_feed'})
+                        danah.c.section({ c: 'd_comment_feed' }).attr({ id: 'd_comment_feed' })
                         .append(
                             danah.c.h1({
                                 c: 'd_comment_feed_header',
                                 // 0일때 addClass zero
                                 ht: ['댓글', '&nbsp;', danah.c.span({ c: 'd_comment_feed_header_count', i: 'd_comment_feed_header_count', t: a.post.commentCnt })]
                             }),
-                            danah.c.div({ c: 'd_comment_feed_form'})
+                            danah.c.div({ c: 'd_comment_feed_form' })
                             .append(
                                 $.type($.cookie("userid")) === 'undefined' ? '' : danah.c.a({ hr: '#', c: 'd_comment_feed_form_cover' })
                                 .click(n => {
                                     $.getScript($.script() + '/app.js', () => { app.permission.login(); });
                                 }),
-                                danah.c.div({ c: 'd_comment_feed_form_user'})
+                                danah.c.div({ c: 'd_comment_feed_form_user' })
                                 .append(
-                                	// 로그인 정보에서 가져오기!
-                                	danah.c.img({ sr: $i + '/danah/profile.jpeg' })
+                                    // 로그인 정보에서 가져오기!
+                                    danah.c.img({ sr: $i + '/danah/profile.jpeg' })
                                 ),
                                 danah.c.div({ c: 'd_comment_feed_form_input' })
                                 .append(
@@ -259,25 +265,24 @@ danah.s = (() => {
                                                         //로그인 기능 구현시 구현!!
                                                         memSeq: '아이디',
                                                     })
-                                                }).done( h => {
+                                                }).done(h => {
                                                     console.log(h);
-                                                	$('#d_comment_feed_list').remove();
-                                                	$('#d_list_paginator').remove();
-                                                	$('#d_comment_feed')
-                                                	.append(
-                                                		danah.u.c(h.comment),
-                                                		danah.u.p({s:h.seq, p: h.page})
-                                                	);
-                                                	$('#d_comment_feed_header_count').text(h.page.totalRecode);
-                                                	$('#d_btn_commentCnt')
-                                                	.html('')
-                                                	.append(
-                                                		danah.c.span({ c: 'd_icon_common_action', s: 'vertical-align: middle; margin-right: 6px; background-position: -160px -280px; width: 24px; height: 24px;' })
-                                                		,h.page.totalRecode
-                                                	);
-                                                	$('#d_footer_commentCnt')
-                                                	.html('')
-                                                	.append('댓글', h.page.totalRecode);
+                                                    $('#d_comment_feed_list').remove();
+                                                    $('#d_list_paginator').remove();
+                                                    $('#d_comment_feed')
+                                                        .append(
+                                                            danah.u.c(h.comment),
+                                                            danah.u.p({ s: h.seq, p: h.page })
+                                                        );
+                                                    $('#d_comment_feed_header_count').text(h.page.totalRecode);
+                                                    $('#d_btn_commentCnt')
+                                                        .html('')
+                                                        .append(
+                                                            danah.c.span({ c: 'd_icon_common_action', s: 'vertical-align: middle; margin-right: 6px; background-position: -160px -280px; width: 24px; height: 24px;' }), h.page.totalRecode
+                                                        );
+                                                    $('#d_footer_commentCnt')
+                                                        .html('')
+                                                        .append('댓글', h.page.totalRecode);
                                                 });
                                             }
                                         })
@@ -285,7 +290,7 @@ danah.s = (() => {
                                 )
                             ),
                             danah.u.c(a.comment),
-                            danah.u.p({s: a.post.seq, p: a.page})
+                            danah.u.p({ s: a.post.seq, p: a.page })
                         )
                     ),
                     danah.c.aside({ c: 'd_col_4 d_sidebar' })
@@ -336,14 +341,14 @@ danah.s = (() => {
                                                 .append(
                                                     danah.c.a({})
                                                     .append(
-                                                    	danah.c.img({ sr: $i + ((a.post.profile === '' || a.post.profile === undefined)? '/danah/profile.jpeg' : '/hyeri/profile/' + a.post.profile) })
+                                                        danah.c.img({ sr: $i + ((a.post.profile === '' || a.post.profile === undefined) ? '/danah/profile.jpeg' : '/hyeri/profile/' + a.post.profile) })
                                                     )
                                                 ),
                                                 danah.c.div({})
                                                 .append(
                                                     danah.c.a({})
                                                     .append(
-                                                    	$('<strong/>').addClass('d_writer_profile_name').text(a.post.nickname)
+                                                        $('<strong/>').addClass('d_writer_profile_name').text(a.post.nickname)
                                                     )
                                                 )
                                             )
@@ -379,7 +384,7 @@ danah.s = (() => {
                             danah.c.button({ c: 'd_floating_bar_btn_menu', i: 'd_btn_commentCnt' })
                             .append(
                                 danah.c.span({ c: 'd_icon_common_action', s: 'vertical-align: middle; margin-right: 6px; background-position: -160px -280px; width: 24px; height: 24px;' }),
-                                a.post.commentCnt 
+                                a.post.commentCnt
                             ),
                             danah.c.button({ c: 'd_floating_bar_btn_menu', i: 'd_btn_shareCnt' })
                             .append(
@@ -433,16 +438,16 @@ danah.s = (() => {
         });
     };
     let e = d => {
-    	console.log(d);
+        console.log(d);
         let j = ''
-        DanahT({ f: 'e',p: d.p });
+        DanahT({ f: 'e', p: d.p });
         $('#d_post_title').text(d.p.title);
         $('#d_post_space').val(d.p.roomType);
         $('#d_post_size').val(d.p.roomSize);
         $('#d_post_description').text(d.p.content);
-        $.each(d.t, function(){
-        	danah.c.div({ c: 'd_keywords', n: 'd_keywords', t: this })
-            .insertBefore($('#d_add_keyword'));
+        $.each(d.t, function() {
+            danah.c.div({ c: 'd_keywords', n: 'd_keywords', t: this })
+                .insertBefore($('#d_add_keyword'));
         });
         $('#submit')
             .click(a => {
@@ -463,7 +468,7 @@ danah.s = (() => {
                             content: $('#d_post_description').text(),
                             keyword: j
                         })
-                    }).done( n => {
+                    }).done(n => {
                         alert()
                         $('.mfp-close').trigger('click');
                         danah.s.d({});
@@ -484,7 +489,7 @@ danah.s = (() => {
                     regi_date: '',
                     image: ''
                 })
-            }).done( a => {
+            }).done(a => {
                 alert('성공');
                 danah.s.l();
             });
@@ -554,24 +559,33 @@ danah.s = (() => {
     let s = d => {
         const p = danah.c.p({ c: 'd_post_search' });
         let j = 1;
-        ctt.html(
-            danah.c.div({ c: 'd_container', i: 'd_post_list' })
-            .append(
-                p
-                .html(["'", d.t, "'에 대한 검색 결과 "])
-                .append(danah.c.span({ ht: ['20,077', '개'] })),
-                danah.c.div({ c: 'd_row', i: 'd_row', s: 'margin-top:20px' })
-            )
-        );
-        DanahL({ 'f': 'l', 'p': 1 });
-        $('figcaption').remove();
-        $(window).scroll(function() {
-            if ($(this).scrollTop() == $(document).height() - $(this).height()) {
-                $('#d_row').append(DanahL({ 'f': 'l', 'p': j }));
-                j++;
-            }
+        $.getJSON($ctx + '/posts/search/' + d + '/' + j, a => {
+            console.log(a);
+            ctt.html(
+                danah.c.div({ c: 'd_container', i: 'd_post_search' })
+                .append(
+                    p
+                    .html(["'", d, "'에 대한 검색 결과   "])
+                    .append(
+                        danah.c.span({}).append(a.list.length, ' 개')
+                    ),
+                    danah.c.div({ c: 'd_row', i: 'd_row', s: 'margin-top:20px' })
+                )
+            );
+            DanahL(a);
+            $(window).scroll(function() {
+                if (a.page > j && $('#d_post_search').length > 0 && $(this).scrollTop() >= $(document).height() - $(this).height()) {
+                    j++;
+                    $('#d_row')
+                        .append(
+                            $.getJSON($ctx + '/posts/search/' + e + '/' + j, n => { DanahL(n); })
+                        );
+                } else if (!$('#d_post_search').length > 0) {
+                    $(window).unbind('scroll').scrollTop(0);
+                }
+            });
+            danah.u.tb();
         });
-        danah.u.tb();
     };
     return { m: m, w: w, l: l, d: d, e: e, r: r, t: t, s: s };
 })();
@@ -632,14 +646,14 @@ danah.u = {
                     const e = $('.d_filter_item_btn_search_icon');
                     const o = p.children(':last');
                     if (j.eq(i).hasClass('d_filter_item_active')) {
-                        e.attr('style', 'margin-left:7px;transform-origin:center 7px;transition:transform .2s linear;transform:rotate(0deg);background-position-x:-40px;background-position-y:-0px;width:12px;height:12px');
                         j.removeClass('d_filter_item_active')
+                        e.attr('style', 'margin-left:7px;transform-origin:center 7px;transition:transform .2s linear;transform:rotate(0deg);background-position-x:-40px;background-position-y:-0px;width:12px;height:12px');
                         o.addClass('d_filter_hidden');
                     } else {
-                        e.attr('style', 'margin-left:7px;transform-origin:center 7px;transition:transform .2s linear;transform:rotate(0deg);background-position-x:-40px;background-position-y:-0px;width:12px;height:12px');
-                        e.eq(i).attr('style', 'margin-left: 7px; transform-origin: center 7px 0px; transition: transform 0.2s linear 0s; transform: rotate(-180deg); background-position: -40px 0px; width: 12px; height: 12px;');
                         j.removeClass('d_filter_item_active')
                         j.eq(i).addClass('d_filter_item_active');
+                        e.attr('style', 'margin-left:7px;transform-origin:center 7px;transition:transform .2s linear;transform:rotate(0deg);background-position-x:-40px;background-position-y:-0px;width:12px;height:12px');
+                        e.eq(i).attr('style', 'margin-left: 7px; transform-origin: center 7px 0px; transition: transform 0.2s linear 0s; transform: rotate(-180deg); background-position: -40px 0px; width: 12px; height: 12px;');
                         o.removeClass('d_filter_hidden');
                         p.find('.d_container:last').html('');
                         $.each((i == 0 ? ['최신순', '인기순', '베스트'] :
@@ -653,7 +667,10 @@ danah.u = {
                                 .appendTo(p.find('.d_container:last'))
                                 .click(function() {
                                     j.eq(i).find('.d_filter_item_btn_search_val').text($(this).text());
+                                    j.removeClass('d_filter_item_active')
+                                    e.attr('style', 'margin-left:7px;transform-origin:center 7px;transition:transform .2s linear;transform:rotate(0deg);background-position-x:-40px;background-position-y:-0px;width:12px;height:12px');
                                     o.addClass('d_filter_hidden');
+                                    alert($(this).text() + '//' + i);
                                     // $.getJson
                                 });
                         });
@@ -674,44 +691,44 @@ danah.u = {
                 )
                 .appendTo(p)
                 .click(n => {
-                	n.preventDefault();
-                    danah.s.s({t: this});
+                    n.preventDefault();
+                    danah.s.s(this);
                 });
         });
         return p;
     },
     i: d => {
-    	const p = danah.c.div({ c: 'd_post_img_tags' });
-    	console.log(d);
-    	$.each(d, function() {
+        const p = danah.c.div({ c: 'd_post_img_tags' });
+        console.log(d);
+        $.each(d, function() {
             danah.c.a({})
                 .append(
-                    danah.c.span({ c: 'd_product_tag', s: 'left:' + this.position.split(',')[0] + 'px; top: ' + this.position.split(',')[1]+'px;'})
+                    danah.c.span({ c: 'd_product_tag', s: 'left:' + this.position.split(',')[0] + 'px; top: ' + this.position.split(',')[1] + 'px;' })
                     .append(
                         danah.c.a({ c: 'd_product_tag_icon' })
                         .append(
                             danah.c.i({ c: 'fas fa-plus' })
                         )
-                        .attr({'data-placement': 'bottom', title: this.itemTitle})
+                        .attr({ 'data-placement': 'bottom', title: this.itemTitle })
                         .tooltip({
                             show: null,
                             position: {
-                              my: "left top",
-                              at: "left bottom"
+                                my: "left top",
+                                at: "left bottom"
                             },
-                            open: function( event, ui ) {
-                              ui.tooltip.animate({ top: ui.tooltip.position().top + 10 }, "fast" );
+                            open: function(event, ui) {
+                                ui.tooltip.animate({ top: ui.tooltip.position().top + 10 }, "fast");
                             }
-                          })
+                        })
                     )
                 )
                 .appendTo(p);
             //$('.ui-tooltip').attr({style: 'left:' + this.position.split(',')[0] + 'px; top: ' + this.position.split(',')[1]+'px;'});
         });
-    	return p;
+        return p;
     },
     c: d => {
-        const p = danah.c.ul({ c: 'd_comment_feed_list', i: 'd_comment_feed_list'});
+        const p = danah.c.ul({ c: 'd_comment_feed_list', i: 'd_comment_feed_list' });
         const $i = $.img();
         $.each(d, function() {
             danah.c.li({ c: 'd_comment_feed_list_item' })
@@ -720,9 +737,9 @@ danah.u = {
                     .append(
                         danah.c.p({ c: 'd_comment_feed_item_content' })
                         .append(
-                            danah.c.a({c: 'd_comment_feed_item_content_author' })
+                            danah.c.a({ c: 'd_comment_feed_item_content_author' })
                             .append(
-                                danah.c.img({ c: 'd_comment_feed_item_content_author_image', sr: $i + ((this.profile === '' || this.profile === undefined)? '/danah/profile.jpeg' : '/hyeri/profile/' + this.profile) }),
+                                danah.c.img({ c: 'd_comment_feed_item_content_author_image', sr: $i + ((this.profile === '' || this.profile === undefined) ? '/danah/profile.jpeg' : '/hyeri/profile/' + this.profile) }),
                                 danah.c.span({ c: 'd_comment_feed_item_content_author_name', t: this.nickname })
                             ),
                             danah.c.span({ c: 'd_comment_feed_item_content_content', t: this.comment })
@@ -734,28 +751,27 @@ danah.u = {
                             danah.c.button({ c: 'd_comment_feed_item_footer_delete_btn' })
                             .text('삭제')
                             .click(a => {
-                            	if (confirm('삭제하시겠습니까?')) {
+                                if (confirm('삭제하시겠습니까?')) {
                                     alert('삭제완료');
-                                    $.getJSON($.context() + '/comments/delete/' + this.postSeq + '/' + this.seq , n => {
-                                    	console.log(n);
-                                    	$('#d_comment_feed_list').remove();
-                                    	$('#d_list_paginator').remove();
-                                    	$('#d_comment_feed')
-                                    	.append(
-                                    		danah.u.c(n.comment),
-                                    		danah.u.p({s: n.seq, p: n.page})
-                                    	);
-                                    	$('#d_comment_feed_header_count').text(n.page.totalRecode);
-                                    	$('#d_btn_commentCnt')
-                                    	.html('')
-                                    	.append(
-                                    		danah.c.span({ c: 'd_icon_common_action', s: 'vertical-align: middle; margin-right: 6px; background-position: -160px -280px; width: 24px; height: 24px;' })
-                                    		,n.page.totalRecode
-                                    	);
-                                    	$('#d_footer_commentCnt')
-                                    	.html('')
-                                    	.append('댓글', n.page.totalRecode);
-                                    	
+                                    $.getJSON($.context() + '/comments/delete/' + this.postSeq + '/' + this.seq, n => {
+                                        console.log(n);
+                                        $('#d_comment_feed_list').remove();
+                                        $('#d_list_paginator').remove();
+                                        $('#d_comment_feed')
+                                            .append(
+                                                danah.u.c(n.comment),
+                                                danah.u.p({ s: n.seq, p: n.page })
+                                            );
+                                        $('#d_comment_feed_header_count').text(n.page.totalRecode);
+                                        $('#d_btn_commentCnt')
+                                            .html('')
+                                            .append(
+                                                danah.c.span({ c: 'd_icon_common_action', s: 'vertical-align: middle; margin-right: 6px; background-position: -160px -280px; width: 24px; height: 24px;' }), n.page.totalRecode
+                                            );
+                                        $('#d_footer_commentCnt')
+                                            .html('')
+                                            .append('댓글', n.page.totalRecode);
+
                                     });
                                 } else {
                                     alert('취소완료');
@@ -769,13 +785,14 @@ danah.u = {
         return p;
     },
     p: d => {
-    	console.log(d);
-        const p = danah.c.ul({ c: 'd_list_paginator', i: 'd_list_paginator'});
+        console.log(d);
+        const p = danah.c.ul({ c: 'd_list_paginator', i: 'd_list_paginator' });
         for (let i = d.p.startPage - 1; i <= d.p.endPage + 1; i++) {
-            danah.c.li({s: ((d.p.existPrev===false && (d.p.startPage - 1 == i)) || ((d.p.existNext===false)&&(d.p.endPage + 1 == i))) ?
-            					'visibility: hidden;'
-            					: ''})
-            	.attr({value: i})
+            danah.c.li({
+                    s: ((d.p.existPrev === false && (d.p.startPage - 1 == i)) || ((d.p.existNext === false) && (d.p.endPage + 1 == i))) ?
+                        'visibility: hidden;' : ''
+                })
+                .attr({ value: i })
                 .append(
                     danah.c.button({
                         c: (d.p.startPage - 1 == i) ?
@@ -785,26 +802,24 @@ danah.u = {
                     .addClass(d.p.PageNo == i ? 'selected' : '')
                     .append(
                         (d.p.startPage - 1 == i) ?
-                        danah.c.i({ c: 'fas fa-chevron-left' })
-                         :
+                        danah.c.i({ c: 'fas fa-chevron-left' }) :
                         (d.p.endPage + 1 == i) ?
-                        danah.c.i({ c: 'fas fa-chevron-right', i: 'd_nextBtn' })
-                         :
+                        danah.c.i({ c: 'fas fa-chevron-right', i: 'd_nextBtn' }) :
                         i
                     )
                 )
                 .appendTo(p)
                 .click(function(a) {
-                	let j = $(this).children().hasClass('d_list_paginator_next') ? (d.p.pageNo*1+1) : $(this).text();
-                    $.getJSON($.context() + '/comments/list/' + d.s +'/' + i, n => {
-                    	console.log(n);
-                    	$('#d_comment_feed_list').remove();
-                    	$('#d_list_paginator').remove();
-                    	$('#d_comment_feed')
-                    	.append(
-                    		danah.u.c(n.comment),
-                    		danah.u.p({s: n.seq, p: n.page})
-                    	);
+                    let j = $(this).children().hasClass('d_list_paginator_next') ? (d.p.pageNo * 1 + 1) : $(this).text();
+                    $.getJSON($.context() + '/comments/list/' + d.s + '/' + i, n => {
+                        console.log(n);
+                        $('#d_comment_feed_list').remove();
+                        $('#d_list_paginator').remove();
+                        $('#d_comment_feed')
+                            .append(
+                                danah.u.c(n.comment),
+                                danah.u.p({ s: n.seq, p: n.page })
+                            );
                     });
                 });
         }
@@ -812,7 +827,6 @@ danah.u = {
     },
     s: d => {
         const p = danah.c.div({ c: 'd_share_post' });
-
         $.each([
             { l: '', s: 'background-position: -320px -40px; width: 48px; height: 48px;' },
             { s: 'background-position: -240px -40px; width: 48px; height: 48px;' },
@@ -898,7 +912,7 @@ danah.c = {
     div: d => { return $('<div/>').addClass(d.c).attr({ id: d.i, style: d.s, name: d.n }).html(d.ht).text(d.t); },
     h1: d => { return $('<h1/>').addClass(d.c).html(d.ht) },
     hr: d => { return $('<hr/>').addClass(d.c); },
-    a: d => { return $('<a/>').addClass(d.c).attr({ href: d.hr, id: d.i, style: d.s, target: d.tg, rel: d.r}).html(d.ht).text(d.t); },
+    a: d => { return $('<a/>').addClass(d.c).attr({ href: d.hr, id: d.i, style: d.s, target: d.tg, rel: d.r }).html(d.ht).text(d.t); },
     p: d => { return $('<p/>').addClass(d.c).attr({ id: d.i }).html(d.ht).text(d.t); },
     ul: d => { return $('<ul/>').addClass(d.c).attr({ id: d.i }).html(d.ht).text(d.t); },
     li: d => { return $('<li/>').addClass(d.c).attr({ id: d.i, style: d.s }).html(d.ht).text(d.t); },
@@ -947,7 +961,7 @@ function DanahL(d) {
                 .append(
                     danah.c.a({ c: 'd_post_writer_profile' })
                     .append(
-                        danah.c.img({ sr: $i + ((this.profile === '' || this.profile === undefined)? '/danah/profile.jpeg' : '/hyeri/profile/' + this.profile), a: this.nickname + '의 프로필 사진' })
+                        danah.c.img({ sr: $i + ((this.profile === '' || this.profile === undefined) ? '/danah/profile.jpeg' : '/hyeri/profile/' + this.profile), a: this.nickname + '의 프로필 사진' })
                     ),
                     danah.c.p({ c: 'd_post_writer_about', ht: danah.c.a({ ht: $('<strong/>').text(this.nickname) }) })
                 ),
@@ -1007,7 +1021,7 @@ function DanahT(d) {
                     danah.c.div({ i: 'd_upload_image' })
                     .append(
                         danah.c.img({ i: 'd_real_image' })
-                        .attr({src: d.f !== 'e' ? '' : $.img() + '/danah/post/' + d.p.regiDate.replace(/-/gi, '/')+"/"+d.p.image}),
+                        .attr({ src: d.f !== 'e' ? '' : $.img() + '/danah/post/' + d.p.regiDate.replace(/-/gi, '/') + "/" + d.p.image }),
                         danah.c.div({ i: 'd_upload_panel' })
                         .append(
                             danah.c.div({ c: 'd_icon' }),
@@ -1082,10 +1096,10 @@ function DanahT(d) {
                             j += $(this).text() + ",";
                             alert(j);
                         });
-                        if (!$('#d_upload_panel').hasClass('change')){
-                        	alert('사진을 등록해주세요!!');
-                        }else if ($.fn.danahValChk([$('#d_post_title').text(), $('#d_post_space').val(), $('#d_post_size').val()])) {
-                        	alert('통과');
+                        if (!$('#d_upload_panel').hasClass('change')) {
+                            alert('사진을 등록해주세요!!');
+                        } else if ($.fn.danahValChk([$('#d_post_title').text(), $('#d_post_space').val(), $('#d_post_size').val()])) {
+                            alert('통과');
                             $.ajax({
                                 url: $.context() + '/posts/' + (d.f === 'w' ? 'write' : (d.pageNo + '/edit')),
                                 method: 'POST',
@@ -1100,8 +1114,8 @@ function DanahT(d) {
                                     memSeq: '아이디'
                                 })
                             }).done(n => {
-                            	console.log(n);
-                                alert('성공인가요?'+n);
+                                console.log(n);
+                                alert('성공인가요?' + n);
                                 $('.mfp-close').trigger('click');
                                 danah.s.d(n);
                             });

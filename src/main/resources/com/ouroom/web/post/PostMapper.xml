@@ -44,6 +44,19 @@
 			</if>
 		</where>
 	</select>
+	<select id="postSearch" parameterType="String" resultMap="postResultMap">
+		SELECT A.*, COUNT(c.SEQ) AS COMMENT_CNT
+		FROM (
+			SELECT ROW_NUMBER() OVER(ORDER by p.SEQ DESC) AS No, p.*, h.KEYWORD, m.NICKNAME, m.PROFILE
+			FROM hashtag h
+			JOIN post p on h.POST_SEQ like p.SEQ
+			JOIN member m on p.MEM_SEQ like m.seq
+			WHERE h.KEYWORD like #{value}
+			GROUP BY p.SEQ
+		) A
+		LEFT JOIN comment c ON A.SEQ LIKE c.ARTICLE_SEQ
+		GROUP BY A.seq
+	</select>
 	<select id="postRetrieve" resultMap="postResultMap">
 		SELECT *
 		FROM post_detail_view

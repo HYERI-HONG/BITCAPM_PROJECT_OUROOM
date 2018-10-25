@@ -35,26 +35,22 @@ public class PostController {
 	
 	@PostMapping("/posts/write")
 	public @ResponseBody String postWrite(@RequestBody Map<String, Object> p) {
-		Util.log.accept("등록하기");
-		Util.log.accept(p.toString());
 		m.clear();
+		Util.log.accept("등록하기");
 		///// 로그인 구현되면 지우기!!
 		p.put("memSeq", 48);
         p.put("regiDate", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         p.put("image", s);
+        Util.log.accept(p.toString());
 		m.put("seq", tx.postInseart(p));
-		Util.log.accept("결과값 확인:"+m.toString());
-		Util.log.accept("경로체크"+uploadPath+File.separator+"danah"+File.separator+"post");
 		u.upload.apply(uploadPath+File.separator+"danah"+File.separator+"post");
-		Util.log.accept("마지막"+m.get("seq"));
 		return (String) m.get("seq");
-	}
+	} //로그인 기능 구현후 수정
 	
 	@GetMapping("/posts/list/{pageNo}")
 	public @ResponseBody Map<String, Object> postList(@PathVariable String pageNo) {
 		PageProxy pxy = new PageProxy();
 		m.clear();
-		Util.log.accept(pageNo);
 		m.put("pageNo", pageNo.equals("undefined") ? 1 : Integer.parseInt(pageNo));
 		m.put("totalRecode", pm.postCount(m));
 		m.put("recodeSize", 12);
@@ -64,6 +60,25 @@ public class PostController {
 		m.put("beginRow", String.valueOf(page.getBeginRow()));
 		m.put("endRow", String.valueOf(page.getEndRow()));
 		m.put("list", pm.postList(m));
+		m.put("page", page.getTotalPage());
+		m.remove("beginRow");
+		m.remove("endRow");
+		return m;
+	}
+	
+	@GetMapping("/posts/search/{query}/{pageNo}")
+	public @ResponseBody Map<String, Object> postSearch(@PathVariable String query, @PathVariable String pageNo){
+		PageProxy pxy = new PageProxy();
+		m.clear();
+		m.put("pageNo", pageNo.equals("undefined") ? 1 : Integer.parseInt(pageNo));
+		m.put("totalRecode", pm.postCount(m));
+		m.put("recodeSize", 12);
+		pxy.carraryOut(m);
+		page = pxy.getPagination();
+		m.clear();
+		m.put("beginRow", String.valueOf(page.getBeginRow()));
+		m.put("endRow", String.valueOf(page.getEndRow()));
+		m.put("list", pm.postSearch(query));
 		m.put("page", page.getTotalPage());
 		m.remove("beginRow");
 		m.remove("endRow");
@@ -108,7 +123,7 @@ public class PostController {
 		Util.log.accept(p.toString());
 		pm.commentInseart(p);
 		return commentList(String.valueOf(p.get("seq")), "1");
-	}
+	} //로그인 기능 구현후 수정
 	
 	@GetMapping("/comments/list/{seq}/{pageNo}")
 	public @ResponseBody Map<String, Object> commentList(@PathVariable String seq, @PathVariable String pageNo) {
@@ -142,10 +157,10 @@ public class PostController {
 		Util.log.accept("등록하기");
 		Util.log.accept(p.toString());
 		pm.hashTagInseart(p);
-	}
+	} //수정중
 	
 	@GetMapping("/hashTags/search")
-	public @ResponseBody List<?> TagList() {
+	public @ResponseBody List<?> TagSearch() {
 		m.clear();
 		return pm.hashTagSearch();
 	}

@@ -9,15 +9,16 @@ import org.springframework.stereotype.Repository;
 public interface PostMapper {
 	public void postInseart(Map<?, ?> m);
 	public List<?> postList(Map<?, ?> m);
+	public List<?> postSearch(String s);
 	public Map<?, ?> postRetrieve(String s);
 	public Integer postCount(Map<?, ?> m);
-	public void postUpdate(Map<?, ?> m);
+	public void postUpdate(Map<?, ?> m); //수정중
 	public void postDelete(Map<?, ?> m);
 	
 	public void hashTagInseart(Map<?, ?> m);
 	public List<?> hashTagList(String s);
 	public List<?> hashTagSearch();
-	public void hashTagDelete(Map<?, ?> m);
+	public void hashTagDelete(Map<?, ?> m); //수정중
 
 	public void imgTagInseart(Map<?, ?> m);
 	public List<?> imgTagList(String s);
@@ -29,8 +30,8 @@ public interface PostMapper {
 	public Integer commentCount(Map<?, ?> m);
 	public void commentDelete(String seq);
 	
-	public void likeInseart(Map<?, ?> m);
+	public void likeInseart(Map<?, ?> m); //수정중
 	public Integer likeCount(Map<?, ?> m); //미구현
-	public void likeDelete(Map<?, ?> m);
+	public void likeDelete(Map<?, ?> m); //수정중
 	
 }
