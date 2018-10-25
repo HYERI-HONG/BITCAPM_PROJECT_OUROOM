@@ -7,4 +7,12 @@
 <select id="count" resultType="String">
 	 SELECT COUNT(*) FROM MEMBER
 </select>
+<select id="dupck" resultType="int">
+	 SELECT COUNT(SEQ) FROM MEMBER
+	 WHERE #{attr} like #{val}
+</select>
+<insert id="insert">
+  	INSERT INTO MEMBER(email,nickname,password,gender,birthday,profile,join_date,age)
+	VALUES(#{email},#{nickname},#{password},#{gender},#{birthday},#{profile},#{join_date},#{age})
+</insert>
 </mapper>

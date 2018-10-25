@@ -111,16 +111,16 @@ hyeri.page={
 				+'				<form novalidate="novalidate" class="new_normal_user" id="new_normal_user" action="/normal_users" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="HLPM6R/2QK3v2K5H9wCB/J77MnkLmliCKOrL14WRMpimvC/ZD5cJzXEowL2QhhT1VzYlCL8Valy17QKIm45yDQ==">'
 				+'                    <div class="add_email">'
 				+'                        <label class="je_bold">이메일</label>'
-				+'							<input type="email" style="width:100%" class="form-control" id="h_email" autofocus="" autocomplete="off">'
+				+'							<input type="email" style="width:100%" class="form-control " id="h_email" autofocus="" autocomplete="off">'
 				+'                    </div>'
 				+'                    <div class="add_pass" style="padding-top:20px">'
 				+'                        <label class="je_bold" for="h_pass">비밀번호</label>'
 				+'                        <p class="p1">8자이상 영문 대 소문자, 숫자, 특수문자를 사용하세요.</p>'
-				+'						<input class="form-control" placeholder=""  required="required" type="password" id="h_pass">'
+				+'						<input class="form-control " placeholder="" type="password" id="h_pass">'
 				+'                    </div>'
 				+'                    <div class="add_pass_confirm" style="padding-top:20px">'
 				+'                        <label class="je_bold" for="h_pass_ck">비밀번호 확인</label></br>'
-				+'							<input class="form-control" required="required" type="password" id="h_pass_ck">'
+				+'							<input class="form-control " type="password" id="h_pass_ck">'
 				+'                        <p class="error"></p>'
 				+'                    </div>'
 				+'                    <div class="add_nickname" style="padding-top:15px">'
@@ -128,7 +128,7 @@ hyeri.page={
 				+'                        <p class="p1">'
 				+'                            2~15자 자유롭게 입력해주세요.'
 				+'                        </p>'
-				+'						<input class="form-control" required="required" type="text" id="nickname">'
+				+'						<input class="form-control " type="text" id="nickname">'
 				+'                    </div>'
 				+'					</form></section>'
 				+'        <button id="add_submit_btn" class="je_sign-in-form__form__submit btn je_btn-priority" type="submit" form="new_normal_user">'
@@ -140,33 +140,45 @@ hyeri.page={
 				+'</div>'	
     	);
 		
-		/*생년월일*/
+		/*생년월일 placeholder*/
 		$('<label/>').addClass('je_bold').html("생년월일").attr({style:"padding-top:20px"}).appendTo($('#add_form_middle'));
 		$('<div/>').attr({id:"bir_wrap",style:"diplay:table; width:100%, height:34px"}).appendTo($('#add_form_middle'));
 		
-		$('<div/>').addClass('bir_yy').attr({id:"bir_yy_d"}).appendTo($('#bir_wrap'));
-		$('<span/>').addClass('bir_box').attr({id:"bir_yy_s"}).appendTo($('#bir_yy_d'));
-		$('<input/>').addClass('bir_int').attr({placeholder:"년(4자)",type:"text",id:"bir_year"}).appendTo($('#bir_yy_s'));
 		
+		$('<div/>').attr({class:"bir_yy",id:"bir_yy_d"}).appendTo($('#bir_wrap'));
+		$('<span/>').addClass('bir_box').attr({id:"bir_yy_s"}).appendTo($('#bir_yy_d'));
+		$('<select/>').addClass('bir_sel ').attr({id:"bir_year",title:"년"}).appendTo($('#bir_yy_s'));
+		$('<option/>').html('년').appendTo($('#bir_year'));
+		for(let i=1950;i<2018;i++){
+			$('<option/>').attr({value:i+''}).html(i+'년').appendTo($('#bir_year'));
+		}
+	
 		$('<div/>').attr({class:"bir_mm", id:"bir_mm_d"}).appendTo($('#bir_wrap'));
 		$('<span/>').addClass('bir_box').attr({id:"bir_mm_s"}).appendTo($('#bir_mm_d'));
-		$('<select/>').addClass('bir_sel').attr({id:"bir_month",title:"월"}).appendTo($('#bir_mm_s'));
+		$('<select/>').addClass('bir_sel ').attr({id:"bir_month",title:"월"}).appendTo($('#bir_mm_s'));
 		$('<option/>').html('월').appendTo($('#bir_month'));
 		for(let i=1;i<13;i++){
 			$('<option/>').attr({value:i+''}).html(i+'월').appendTo($('#bir_month'));
 		}
-		
 		$('<div/>').attr({class:"bir_dd", id:"bir_dd_d"}).appendTo($('#bir_wrap'));
 		$('<span/>').addClass('bir_box').attr({id:"bir_dd_s"}).appendTo($('#bir_dd_d'));
-		$('<input/>').addClass('bir_int').attr({placeholder:"일",type:"text",id:"bir_day"}).appendTo($('#bir_dd_s'));
-	
+		$('<select/>').addClass('bir_sel').attr({id:"bir_day",title:"일"}).appendTo($('#bir_dd_s'));
+		$('<option/>').html('일').appendTo($('#bir_day'));
+		for(let i=1;i<31;i++){
+			$('<option/>').attr({value:i+''}).html(i).appendTo($('#bir_day'));
+		}
+		$('<div/>').addClass('add_bir').appendTo($('#bir_wrap'));
+		/*$('<input/>').addClass('bir_int ').attr({value:"일",type:"text",id:"bir_day"}).appendTo($('#bir_dd_s'));
+		 * $('<input/>').addClass('bir_int ').attr({value:"년",type:"text",id:"bir_year"}).appendTo($('#bir_yy_s'));*/
+		
 		/*성별*/
 		$('<label/>').addClass('je_bold').html("성별").attr({style:"padding-top:20px"}).appendTo($('#add_form_middle'));
-		$('<div/>').attr({id:"gender_wrap"}).appendTo($('#add_form_middle'));
-		$('<select/>').addClass('gen_sel').attr({id:"gender",title:"성별"}).appendTo($('#gender_wrap'));
-		$('<option/>').html('성별').appendTo($('#gender'));
-		$('<option/>').html('여자').attr({value:"2"}).appendTo($('#gender'));
-		$('<option/>').html('남자').attr({value:"1"}).appendTo($('#gender'));
+		$('<div/>').attr({id:"gender_wrap"}).addClass('add_gen').appendTo($('#add_form_middle'));
+		$('<select/>').addClass('gen_sel ').attr({id:"gender",title:"성별"}).appendTo($('#gender_wrap'));
+		$('<option/>').html('').appendTo($('#gender'));
+		$('<option/>').html('여자').attr({value:"여자"}).appendTo($('#gender'));
+		$('<option/>').html('남자').attr({value:"남자"}).appendTo($('#gender'));
+		
 		
 		/*이미지 업로드*/
 		$('<label/>').addClass('je_bold').html("프로필 사진 업로드").attr({style:"padding-top:20px"}).appendTo($('#add_form_middle'));
@@ -214,24 +226,90 @@ hyeri.page={
 		).appendTo($('#add_form_middle'));
 			
 		$('#add_submit_btn').click(e=>{
-				e.preventDefault();
+			e.preventDefault();
+			let check=true;
+			let arr=[
+				{c:'add_email',i:'#h_email',v:'a1'},
+				{c:'add_pass',i:'#h_pass',v:'b1'},
+				{c:'add_pass_confirm',i:'#h_pass_ck',v:'c1'},
+				{c:'add_nickname',i:'#nickname',v:'d1'},
+				{c:'add_gen',i:'#gender',v:'e1'},
+				{c:'add_bir',i:'#bir_year',v:'년'},
+				{c:'add_bir',i:'#bir_month',v:'월'},
+				{c:'add_bir',i:'#bir_day',v:'일'}
+				];
+			let n=0;
+			$.each(arr,(x,j)=>{
+				$('<h7/>').attr({style:'color:red',id:j.v}).appendTo($('.'+j.c));
+				$('#'+j.v).html(($(j.i).val()==''||$(j.i).val()==j.v)?'필수 값을 입력하세요.':'');
+				if(j.c=='add_pass_confirm'){
+					if($('#h_pass').val()!=$('#h_pass_ck').val()){
+						$('#'+j.v).html('비밀번호가 일치하지 않습니다.');	
+					}
+				}
+				if(j.c=='add_email'){
+					if($('#h_email').val()!=''&&$('#h_email').val().indexOf('@')<0){
+						$('#'+j.v).html('이메일 형식이 올바르지 않습니다.');	
+					}
+				}
+				
+				check=false;
+			});
+			
+			/*$('.nullck').remove();*/
+			/*$.each(arr,(x,j)=>{
+				if(j.c==='add_pass_confirm'){
+					if($('#h_pass_ck').val()!=''&&$('#h_pass').val()!==$('#h_pass_ck').val()){
+						$('#'+j.v).html('비밀번호가 일치하지 않습니다.<br>');
+						check=false;	
+					}else{
+						$('#'+j.v).remove();
+					}
+				}
+				else if(j.c==='add_email'){
+					if($('#h_email').val()!=''&&$('#h_email').val().indexOf('@')<0){
+						$('#'+j.v).html('이메일 형식이 올바르지 않습니다.');
+						check=false;
+					}else{
+						$('#'+j.v).remove();
+					}		
+				}else{
+					$('#'+j.v).remove();
+				}
+				if(($(j.i).val()===''||$(j.i).val()===j.v)&&n==0){
+					$('<h7/>').attr({style:'color:red',id:j.v}).html('필수 값을 입력하세요.').appendTo($('.'+j.c));
+					n=($(j.i).val()===j.v)?1:0;
+					check=false;
+			}
+			});*/
+			let d = new Date();
+			//email, nickname 중복 확인 기능 추가
+			if(check){
 				$.ajax({
 					url : $.context()+'/member/add',
 					method : 'POST',
 					contentType : 'application/json',
 					data : JSON.stringify({
-						nickname : $('#nickname').val()
+						email : $('#h_email').val(),
+						password : $('#h_pass').val(),
+						nickname : $('#nickname').val(),
+						birthday : $('#bir_year').val()+'-'+$('#bir_month').val()+'-'+$('#bir_day').val(),
+						gender  : $('#gender').val(),
+						profile : 'p'+Math.floor((Math.random() * 9) + 1)+'.jpg',
+						join_date : d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()
 					}),
 					success : d=>{
-								
+						alert("성공");		
 					},
 					error : (m1,m2,m3)=>{
 						alert("error발생");
 					}
-				});	
+				});		
+			}
 		});
 		$('#has-account').click(e=>{
 			e.preventDefault();
+			hyeri.page.l();
 		});
     },
     l:()=>{

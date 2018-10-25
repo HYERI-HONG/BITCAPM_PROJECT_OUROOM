@@ -21,12 +21,14 @@ public class MemberCtrl {
 	static final Logger logger = LoggerFactory.getLogger(MemberCtrl.class);
 	@Autowired Member member;
 	@Autowired MemberMapper mbrmapper;
+	@Autowired Calc calc;
 	
 	@PostMapping(value="/add")
-	public  @ResponseBody Map<String, Object> add(@RequestBody String p){
+	public  @ResponseBody Map<String, Object> add(@RequestBody Member p){
 		logger.info("======== MemberController ::: add() =======");
 		System.out.println("넘어온 값"+p.toString());
-		System.out.println("결과 : "+mbrmapper.count());
+		System.out.println("나이계산 :: "+calc.calcAge(p.getBirthday()));
+		//System.out.println("결과 : "+mbrmapper.count());
 		Map<String, Object> map = new HashMap<>();
 		return map;
 	}
