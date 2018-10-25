@@ -110,8 +110,8 @@ hyeri.page={
 				+'        <section id="add_form_middle" class="signup-form__email">'
 				+'				<form novalidate="novalidate" class="new_normal_user" id="new_normal_user" action="/normal_users" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="HLPM6R/2QK3v2K5H9wCB/J77MnkLmliCKOrL14WRMpimvC/ZD5cJzXEowL2QhhT1VzYlCL8Valy17QKIm45yDQ==">'
 				+'                    <div class="add_email">'
-				+'                        <label class="je_bold">이메일</label>'
-				+'							<input type="email" style="width:100%" class="form-control " id="h_email" autofocus="" autocomplete="off">'
+				+'                        <label class="je_bold" style="display:block">이메일</label>'
+				+'							<input type="email" style="width:70%;display:inline" class="form-control " id="h_email" autofocus="" autocomplete="off">'
 				+'                    </div>'
 				+'                    <div class="add_pass" style="padding-top:20px">'
 				+'                        <label class="je_bold" for="h_pass">비밀번호</label>'
@@ -128,7 +128,7 @@ hyeri.page={
 				+'                        <p class="p1">'
 				+'                            2~15자 자유롭게 입력해주세요.'
 				+'                        </p>'
-				+'						<input class="form-control " type="text" id="nickname">'
+				+'						<input class="form-control " type="text" id="nickname" style="width:70%;display:inline">'
 				+'                    </div>'
 				+'					</form></section>'
 				+'        <button id="add_submit_btn" class="je_sign-in-form__form__submit btn je_btn-priority" type="submit" form="new_normal_user">'
@@ -202,9 +202,13 @@ hyeri.page={
 						
 				)
 		).appendTo($('#add_form_middle'));
-			
 		
+		/*이메일, 별명 중복 체크*/
+		$('<a/>').addClass('h_dupck_btn').html('중복확인<br>').appendTo($('.add_email'));
+		$('<a/>').addClass('h_dupck_btn').html('중복확인<br>').appendTo($('.add_nickname'));
 		
+		/*<a id="h_wirte_btn" class="h_wirte_btn" href="/board_upload" style="visibility: hidden;top:12px">글쓰기</a>*/
+
 		$('#add_submit_btn').click(e=>{
 			e.preventDefault();
 			let ck=true;
@@ -236,40 +240,13 @@ hyeri.page={
 					}
 				}
 			});
-			
 			$('#add_bir').remove();
 			if($('#bir_year').val()=='년'||$('#bir_month').val()=='월'||$('#bir_day').val()=='일'){
 				$('<h7/>').attr({style:'color:red',id:'add_bir'}).html('생년월일을 모두 선택하세요.').appendTo($('#bir_wrap'));
 				ck=false;
 			}
-			/*$('.nullck').remove();*/
-			/*$.each(arr,(x,j)=>{
-				if(j.c==='add_pass_confirm'){
-					if($('#h_pass_ck').val()!=''&&$('#h_pass').val()!==$('#h_pass_ck').val()){
-						$('#'+j.v).html('비밀번호가 일치하지 않습니다.<br>');
-						check=false;	
-					}else{
-						$('#'+j.v).remove();
-					}
-				}
-				else if(j.c==='add_email'){
-					if($('#h_email').val()!=''&&$('#h_email').val().indexOf('@')<0){
-						$('#'+j.v).html('이메일 형식이 올바르지 않습니다.');
-						check=false;
-					}else{
-						$('#'+j.v).remove();
-					}		
-				}else{
-					$('#'+j.v).remove();
-				}
-				if(($(j.i).val()===''||$(j.i).val()===j.v)&&n==0){
-					$('<h7/>').attr({style:'color:red',id:j.v}).html('필수 값을 입력하세요.').appendTo($('.'+j.c));
-					n=($(j.i).val()===j.v)?1:0;
-					check=false;
-			}
-			});*/
-			let d = new Date();
 	
+			let d = new Date();
 			if(ck){
 				$.ajax({
 					url : $.context()+'/member/add',
@@ -285,7 +262,13 @@ hyeri.page={
 						join_date : d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()
 					}),
 					success : d=>{
-						alert("성공");		
+						if(d==1){
+							alert("회원가입 성공");
+							hyeri.page.l();
+						}
+						else{
+							alert("회원가입 실패");
+						}
 					},
 					error : (m1,m2,m3)=>{
 						alert("error발생");
@@ -343,7 +326,7 @@ hyeri.func ={
 				var fd = new FormData();
 				fd.append('file',d.files[0]);
 				$.ajax({
-					url: $.context()+'/member/upload/h',
+					url: $.context()+'/member/upload',
 					type: 'POST',
 		            data: fd,
 		            async: false,

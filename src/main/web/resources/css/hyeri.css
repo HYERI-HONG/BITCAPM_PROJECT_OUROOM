@@ -218,4 +218,24 @@
    	height:200px;
    	
 }
+.h_dupck_btn{
+	margin-left:5px;
+	border-radius:4px;
+    display: inline-block;
+    user-select: none;
+	width: 74px;
+    height: 32px;
+    font-size: 15px;
+    color: white;
+    background-color:#CC5200; 
+    /* font-weight: bold; */
+    text-align: right;
+    transition: .1s background, .1s color;
+	position: relative;
+    padding: 7px; 
+ /*    box-sizing: border-box;
+    cursor: pointer;
+    font-family: inherit; */
+	text-decoration:none; 
+}
 

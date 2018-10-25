@@ -9,7 +9,8 @@
 </select>
 <select id="dupck" resultType="int">
 	 SELECT COUNT(SEQ) FROM MEMBER
-	 WHERE #{attr} like #{val}
+	 WHERE #{EA} like #{EV} 
+	 OR #{NA} like #{NV}
 </select>
 <insert id="insert">
   	INSERT INTO MEMBER(email,nickname,password,gender,birthday,profile,join_date,age)

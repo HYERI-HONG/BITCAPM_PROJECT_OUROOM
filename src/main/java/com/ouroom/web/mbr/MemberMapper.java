@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface MemberMapper {
 	public String count();
 	public Integer dupck(Map<?, ?> p);
-	public void insert(Member p);
+	public Integer insert(Member p);
 }

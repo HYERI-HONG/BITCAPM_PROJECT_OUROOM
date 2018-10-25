@@ -6,12 +6,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,39 +33,30 @@ public class MemberCtrl {
 	@Autowired Member member;
 	@Autowired MemberMapper mbrmapper;
 	@Autowired Calc calc;
-	//사진 업로드
-	@Autowired FileUtil f;
-	
+
+	//사진 업로드------------------------------
 	@Resource(name = "uploadPath")
 	private String uploadPath;
+	private byte[] filedata;
+	//--------------------------------------
 	
 	@PostMapping(value="/add")
-	public  @ResponseBody Map<String, Object> add(@RequestBody Member p){
+	public  @ResponseBody int add(@RequestBody Member p) throws IOException{
 		logger.info("======== MemberController ::: add() =======");
-		System.out.println("넘어온 값"+p.toString());
-		System.out.println("나이계산 :: "+calc.calcAge(p.getBirthday()));
-		//System.out.println("결과 : "+mbrmapper.count());
-		Map<String, Object> map = new HashMap<>();
-		return map;
-	}
-	@PostMapping(value="/upload/{name}")
-	public  @ResponseBody String upload(@RequestBody MultipartFile file, @PathVariable String name) throws IOException{
-		logger.info("======== MemberController ::: upload() =======");
-		/*f.file.accept(file, file.getBytes());*/
 		
-		if(name.equals("h")) {
-			String path = uploadPath+File.separator+"hyeri"+File.separator+"profile"+File.separator;
-			String fileName = file.getOriginalFilename();
-		/*	new SimpleDateFormat("yyyy").format(new Date())*/
-			//디렉토리 없을 경우 생성
-			File dir = new File(path);
-	        if(!dir.isDirectory()){
-	            dir.mkdir();
-	        }
-	        //file.transferTo(new File(path+fileName));
-		}else if(name.equals("j")){
-			
-		}
+		p.setAge(calc.calcAge(p.getBirthday()));
+		//int i = mbrmapper.insert(p);
+		String path = uploadPath+File.separator+"hyeri"+File.separator+"profile"+File.separator;
+		/*String savedName = UUID.randomUUID().toString() + "_" + p.getProfile();*/
+		File target = new File(path, p.getProfile());
+		FileCopyUtils.copy(filedata, target);
+		return 0;
+	}
+	@PostMapping(value="/upload")
+	public  @ResponseBody String upload(@RequestBody MultipartFile file) throws IOException{
+		logger.info("======== MemberController ::: upload() =======");
+		filedata = file.getBytes();
+		//files.transferTo(new File(path+fileName));
 		return "";
 	}
 	
