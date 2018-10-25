@@ -27,13 +27,16 @@
 		<result property= "position" column= "POINT" javaType= "String"/>
 		<result property= "itemSeq" column= "ITEM_SEQ" javaType= "int"/>
 		<result property= "comment" column= "COMMENT" javaType= "String"/>
+		<result property= "itemTitle" column= "ITEM_TITLE" javaType= "String"/>
+		<result property= "category" column= "CATEGORY" javaType= "String"/>
+		<result property= "lastUpdate" column= "LAST_UPDATE" javaType= "String"/>
    </resultMap>
 	
 	<insert id="postInseart" parameterType="map">
 		INSERT INTO post
-			(TITLE, CONTENT, REGI_DATE, VIEW_CNT, LIKE_CNT, SHARE_CNT, ROOM_TYPE, ROOM_SIZE, MEM_SEQ, BOARD_SEQ, IMAGE)
+			(TITLE, CONTENT, REGI_DATE, VIEW_CNT, LIKE_CNT, SHARE_CNT, ROOM_TYPE, ROOM_SIZE, MEM_SEQ, BOARD_SEQ, IMAGE, LAST_UPDATE)
 		VALUES
-			(#{title}, #{content}, #{regiDate}, 0, 0, 0, #{roomType}, #{roomSize}, #{memSeq}, #{boardSeq}, #{image})
+			(#{title}, #{content}, #{regiDate}, 0, 0, 0, #{roomType}, #{roomSize}, #{memSeq}, 1, #{image}, #{regiDate})
 	</insert>
 	<select id="postList" parameterType="map" resultMap="postResultMap">
 		SELECT *
@@ -61,8 +64,11 @@
 		SELECT *
 		FROM post_detail_view
 		<where>
-			<if test=" value != null and value != '' ">
-				SEQ LIKE #{value}
+			<if test=" memSeq != null and memSeq != '' ">
+				MEM_SEQ LIKE #{memSeq}
+			</if>
+			<if test=" seq != null and seq != '' ">
+				AND SEQ LIKE #{seq}
 			</if>
 		</where>
 		LIMIT 1
@@ -80,20 +86,14 @@
 		UPDATE post
 		<set>
 			TITLE = #{title}, 
-			REGI_DATE = #{regiDate},
 			CONTENT = #{content},
 			ROOM_TYPE = #{roomType},
 			ROOM_SIZE = #{roomSize},
-			IMAGE = #{image}
-			<if test=" viewCnt != null and viewCnt != '' ">
-				VIEW_CNT = #{viewCnt},
-			</if>
-			<if test=" likeCnt != null and likeCnt != '' ">
-				LIKE_CNT = #{likeCnt},
-			</if>
-			<if test=" shareCnt != null and shareCnt != '' ">
-				SHARE_CNT = #{shareCnt},
-			</if>
+			IMAGE = #{image},
+			LAST_UPDATE = #{lastUpdate},
+			<if test=" viewCnt != null and viewCnt != '' ">VIEW_CNT = #{viewCnt},</if>
+			<if test=" likeCnt != null and likeCnt != '' ">LIKE_CNT = #{likeCnt},</if>
+			<if test=" shareCnt != null and shareCnt != '' ">SHARE_CNT = #{shareCnt}</if>
 		</set>
 		WHERE SEQ LIKE #{seq}
 	</update>
@@ -123,7 +123,7 @@
 	<delete id="hashTagDelete" parameterType= "map">
 		DELETE 
 		FROM hashtag
-		WHERE LIKE #{seq}
+		WHERE POST_SEQ LIKE #{seq}
 	</delete>
 	
 	<insert id="imgTagInseart" parameterType= "map">
@@ -133,11 +133,17 @@
 			(#{itemTitle}, #{posision}, #{itemSeq}, #{postSeq})
 	</insert>
 	<select id="imgTagList" resultMap= "postResultMap">
-		SELECT ITEM_TITLE, POINT, ITEM_SEQ
-		FROM imgtag
+		SELECT t.ITEM_TITLE, t.POINT, t.ITEM_SEQ, i.PHOTO AS image, c.CATEGORY
+		FROM imgtag t
+		JOIN item i ON t.ITEM_SEQ LIKE i.SEQ
+		JOIN category2 c ON i.CATEGORY2_SEQ = c.SEQ
 		<where>
 			POST_SEQ LIKE #{value}
 		</where>
+	</select>
+	<select id="imgTagSearch" resultType="String">
+		SELECT SEQ AS ITEM_SEQ, TITLE AS ITEM_TITLE
+		FROM item
 	</select>
 	<delete id="imgTagDelete" parameterType= "map">
 	DELETE FROM imgtag

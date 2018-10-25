@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,10 +41,12 @@ public class PostController {
 		///// 로그인 구현되면 지우기!!
 		p.put("memSeq", 48);
         p.put("regiDate", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        p.put("lastUpdate", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         p.put("image", s);
         Util.log.accept(p.toString());
 		m.put("seq", tx.postInseart(p));
 		u.upload.apply(uploadPath+File.separator+"danah"+File.separator+"post");
+		s = "";
 		return (String) m.get("seq");
 	} //로그인 기능 구현후 수정
 	
@@ -85,22 +88,29 @@ public class PostController {
 		return m;
 	}
 	
-	@GetMapping("/posts/{seq}/detail")
+	@GetMapping("/posts/{seq}")
 	public @ResponseBody Map<?,?> postDetail(@PathVariable String seq) {
 		return tx.postDetail(seq);
 	}
 	
-	@GetMapping @PostMapping("/posts/{seq}/edit")
-	public @ResponseBody String postEdit(@PathVariable String seq, @RequestBody Map<String, String> p) {
-		Util.log.accept("수정하기");
-		Util.log.accept(p.toString());
-		tx.postUpdate(m);
-		p.put("image", u.upload.apply(uploadPath+File.separator+"danah"+File.separator+"post"));
-		return null;
-	}//수정중
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/posts/{seq}/edit")
+	public @ResponseBody String postEdit(@PathVariable String seq, @RequestBody Map<String, Object> p) {
+		p.put("lastUpdate", p.get("image").equals("") ? LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) : p.get("lastUpdate"));
+        p.put("image", p.get("image").equals("")? s : p.get("image"));
+        m.put("seq", tx.postUpdate(p));
+		if(p.get("image").equals(s)) {
+			Map<String, Object> a = (Map<String, Object>) pm.postRetrieve(p);
+			u.delete.accept(uploadPath+File.separator+"danah"+File.separator+"post"+File.separator
+					+Util.rpb.apply((String) a.get("regiDate"))+File.separator+a.get("image"));
+			u.upload.apply(uploadPath+File.separator+"danah"+File.separator+"post");
+		}
+		s = "";
+		return (String) m.get("seq");
+	}
 	
-	@PostMapping("/posts/remove")
-	public @ResponseBody String postRemove(@RequestBody Map<String, String> p) {
+	@RequestMapping("/posts/{seq}/delete")
+	public @ResponseBody String postDelete(@PathVariable String seq, @RequestBody Map<String, String> p) {
 		Util.log.accept("삭제하기");
 		Util.log.accept(p.toString());
 		tx.postDelete(p);
@@ -152,24 +162,24 @@ public class PostController {
 		return commentList(pSeq, "1");
 	}
 	
-	@PostMapping("/hashTags/write")
-	public @ResponseBody void TagWrite(@RequestBody Map<String, String> p) {
-		Util.log.accept("등록하기");
-		Util.log.accept(p.toString());
-		pm.hashTagInseart(p);
-	} //수정중
-	
-	@GetMapping("/hashTags/search")
-	public @ResponseBody List<?> TagSearch() {
-		m.clear();
+	@GetMapping("/hashTags")
+	public @ResponseBody List<?> hashTagList() {
 		return pm.hashTagSearch();
 	}
 	
-	@PostMapping("/hashTags/remove")
-	public @ResponseBody void TagRemove(@RequestBody Map<String, String> p) {
-		Util.log.accept("삭제하기");
+	@PostMapping("/imageTags")
+	public @ResponseBody String imageTag(@RequestBody Map<String, Object> p) {
+		Util.log.accept("생성하기");
 		Util.log.accept(p.toString());
-		pm.hashTagDelete(p);
+		((TransactionService) tx).imageTag(p);
+		return (String) p.get("seq");
+	}//수정중
+	
+	@GetMapping("/imageTags/search")
+	public @ResponseBody List<?> imageTagSearch() {
+		Util.log.accept("아이템");
+		Util.log.accept("확인"+pm.imgTagSearch());
+		return pm.imgTagSearch();
 	}//수정중
 	
 	@PostMapping("/likes/write")

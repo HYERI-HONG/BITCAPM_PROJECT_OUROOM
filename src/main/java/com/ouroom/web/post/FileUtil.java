@@ -14,7 +14,6 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Component
-
 public class FileUtil {
 	private MultipartFile f;
 	private String sn, sp;
@@ -54,5 +53,4 @@ public class FileUtil {
 	};
 	
 	public Consumer<String> delete = p -> new File(p).delete();
-
 }

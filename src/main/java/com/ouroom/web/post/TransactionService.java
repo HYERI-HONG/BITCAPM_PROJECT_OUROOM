@@ -19,28 +19,30 @@ public class TransactionService {
 		Util.log.accept("진입확인"+p);
 		m.clear();
 		pm.postInseart(p);
-		m = (Map<String, Object>) pm.postRetrieve((String) m.get("seq"));
+		m = (Map<String, Object>) pm.postRetrieve(p);
+		Util.log.accept("m체크중"+m);
 		s = String.valueOf(m.get("seq"));
-		Util.log.accept("seq값체크중"+s);
 		m.clear();
+		Util.log.accept("seq값체크중"+s);		
 		for (Object o : ((String) p.get("keyword")).split(",")) {
 			m.put("keyword", o);
 			m.put("seq", s);
 			pm.hashTagInseart(m);
-			System.out.println("해시태그"+s);
+			System.out.println("해시태그"+o);
 		}
-		m.clear();
-		m = (Map<String, Object>) pm.postRetrieve((String) m.get("memSeq"));
-		Util.log.accept("유틸라스트"+m.toString());
 		return s;
-	}; //로그인 기능 구현후 수정
+	}; //로그인 기능 구현후 제대로 확인할것
 	
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public Map<?, ?> postDetail(String seq){
 		PageProxy pxy = new PageProxy();
 		m.clear();
-		m.put("pageNo", 1);
 		m.put("seq", Integer.parseInt(seq));
+		Map<String, Object> a = (Map<String, Object>) pm.postRetrieve(m);
+		a.put("viewCnt", (int) a.get("viewCnt")+1);
+		pm.postUpdate(a);
+		m.put("pageNo", 1);
 		m.put("totalRecode", pm.commentCount(m));
 		m.put("recodeSize", 3);
 		pxy.carraryOut(m);
@@ -49,20 +51,28 @@ public class TransactionService {
 		m.put("beginRow", String.valueOf(page.getBeginRow()));
 		m.put("endRow", String.valueOf(page.getEndRow()));
 		m.put("seq", Integer.parseInt(seq));
+		m.put("post", pm.postRetrieve(m));
+		m.put("hashTag", pm.hashTagList(seq));
+		m.put("imageTag", pm.imgTagList(seq));
 		m.put("comment", pm.commentList(m));
+		m.put("page", page);
 		m.remove("beginRow");
 		m.remove("endRow");
 		m.remove("seq");
-		m.put("page", page);
-		m.put("post", pm.postRetrieve(seq));
-		m.put("hashTag", pm.hashTagList(seq));
-		m.put("imageTag", pm.imgTagList(seq));
 		return m;
 	};
 	
 	@Transactional
-	public void postUpdate(Map<?, ?> p){
-		
+	public String postUpdate(Map<?, ?> p){
+		m.clear();
+		pm.postUpdate(p);
+		pm.hashTagDelete(p);
+		for (Object o : ((String) p.get("keyword")).split(",")) {
+			m.put("keyword", o);
+			m.put("seq", p.get("seq"));
+			pm.hashTagInseart(m);
+		}
+		return String.valueOf(p.get("seq"));
 	};
 	
 	@Transactional
@@ -71,11 +81,15 @@ public class TransactionService {
 		return pm.postCount(m)==0;
 	};
 	
+	@Transactional
+	public void imageTag(Map<?, ?> p) {
+		
+	};
+	
 	/*
 	@Transactional
 	public void cmtDelete(Map<?, ?> p){};
-	@Transactional
-	public void tagInseart(Map<?, ?> p) {};
+	
 	@Transactional
 	public void tagDelete(Map<?, ?> p){};
 	@Transactional

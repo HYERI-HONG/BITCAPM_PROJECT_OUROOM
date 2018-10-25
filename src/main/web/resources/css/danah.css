@@ -82,9 +82,8 @@
         bottom: 0
     }
 }
-.ui-tooltip {
-    max-width: 350px;
-    background-color: #CC5200;
+.tooltip {
+    width: 300px;
 }
 
 /* -------------- 필터 -------------- */
@@ -2567,6 +2566,15 @@ form {
     background-color: #fafafa;
     font-size: 16px;
     line-height: 30px;
+}
+
+.ui-keyword-field>.d_keywords {
+    cursor: pointer
+}
+
+.ui-keyword-field>.d_keywords.active {
+    background-color: rgba(204, 82, 0, 0.5);
+    color: #ffffff;
 }
 
 .ui-keyword-field {
