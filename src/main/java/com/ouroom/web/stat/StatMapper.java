@@ -18,5 +18,13 @@ public interface StatMapper {
 	public List<HashMap<?,?>> drawvstac(Map<?, ?> m);
 	public List<HashMap<?,?>> extrvstt(Map<?, ?> m); 
 	
+	public List<HashMap<?, ?>> drawsbalc();
+	
+	public List<HashMap<?, ?>> drawctgrtco(Map<?,?> m);
+	public List<HashMap<?, ?>> drawctgrtct(Map<?,?> m);
+	
+	public List<HashMap<?, ?>> drawmbrpc();
+	public List<HashMap<?, ?>> drawmbrbc();
+	
 	
 }

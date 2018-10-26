@@ -17,10 +17,10 @@ public class StatCtrl {
 	@GetMapping("/stats/smmChart")
 	@Transactional
 	public Map<?, ?> smmChart() {
-		mm.put("stD", "2018-11-09");
-		mm.put("enD", "2018-11-15");
+		mm.put("stDSmm", "2018-11-09");
+		mm.put("enDSmm", "2018-11-15");
 		mm.put("postStartDate","2018-10-02" );
-		mm.put("selectD","2018-11-15" );
+		mm.put("selectDSmm","2018-11-15" );
 		
 		mm.put("smmvstlc", sm.drawsvlc(mm));
 		mm.put("smmvstcc", sm.drawsvcc(mm));
@@ -34,8 +34,8 @@ public class StatCtrl {
 	@GetMapping("/stats/vstChart")
 	@Transactional
 	public Map<?, ?> vstChart() {
-		mm.put("stD", "2018-11-01");
-		mm.put("enD", "2018-11-15");
+		mm.put("stDVst", "2018-11-01");
+		mm.put("enDVst", "2018-11-15");
 		mm.put("vstac", sm.drawvstac(mm));
 		mm.put("vstt", sm.extrvstt(mm));
 		return mm;
@@ -44,10 +44,24 @@ public class StatCtrl {
 	@GetMapping("/stats/sbaChart")
 	@Transactional
 	public Map<?, ?> sbaChart() {
-		mm.put("stD", "2018-11-01");
-		mm.put("enD", "2018-11-15");
-		mm.put("vstac", sm.drawvstac(mm));
-		mm.put("vstt", sm.extrvstt(mm));
+		mm.put("sbalc", sm.drawsbalc());
+		return mm;
+	}
+	
+	@GetMapping("/stats/ctgrChart")
+	@Transactional
+	public Map<?, ?> ctgrChart() {
+		mm.put("stDCtgr", "2018-11-01");
+		mm.put("enDCtgr", "2018-11-15");
+		mm.put("ctgrtco", sm.drawctgrtco(mm));
+		mm.put("ctgrtct", sm.drawctgrtct(mm));
+		return mm;
+	}
+	@GetMapping("/stats/mbrChart")
+	@Transactional
+	public Map<?, ?> mbrChart() {
+		mm.put("mbrpc", sm.drawmbrpc());
+		mm.put("mbrbc", sm.drawmbrbc());
 		return mm;
 	}
 	
