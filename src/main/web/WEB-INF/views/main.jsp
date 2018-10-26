@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
 	
-	
 	<!-- 공통 -->
 	<script src="${context}/resources/js/app.js"></script> 
 	<script src="${context}/resources/js/jquery/popup.js"></script> <!--단아/준 -->
