@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MemberMapper {
-	public String count();
-	public Integer dupck(Map<?, ?> p);
+	public Integer count(Member p);
+	public Integer dpck(Map<?, ?> p);
 	public Integer insert(Member p);
+	public Member get(Member p);
 }

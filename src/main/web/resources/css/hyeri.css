@@ -228,14 +228,10 @@
     font-size: 15px;
     color: white;
     background-color:#CC5200; 
-    /* font-weight: bold; */
-    text-align: right;
+    text-align: center;
     transition: .1s background, .1s color;
 	position: relative;
     padding: 7px; 
- /*    box-sizing: border-box;
-    cursor: pointer;
-    font-family: inherit; */
 	text-decoration:none; 
 }
 
