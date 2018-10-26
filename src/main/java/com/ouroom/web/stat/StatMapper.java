@@ -26,5 +26,7 @@ public interface StatMapper {
 	public List<HashMap<?, ?>> drawmbrpc();
 	public List<HashMap<?, ?>> drawmbrbc();
 	
+	public List<HashMap<?, ?>> drawabbasc();
+	
 	
 }

@@ -27,6 +27,7 @@ jaekyung.main={// 메인페이지//변경
                      jaekyung.chart.sba(); 
                      jaekyung.chart.ctgr1();
                      jaekyung.chart.mbr();
+                     jaekyung.chart.abba();
               },
               nav:()=>{
             	  	 let d=$('<div />');
@@ -316,9 +317,7 @@ jaekyung.main={// 메인페이지//변경
                 abbac.attr({style:"margin-top:40px"}).appendTo(abbaa);
                 abbaco.appendTo(abbac);
                 abbaco.addClass("row-fluid").append(
-                             $('<div />').addClass("col-md-12 btb1__ryu borderG__ryu").append(
-                                         $('<img src="'+$.img()+'/jaekyung/13.PNG" />').addClass("img-responsive center-block margintb15__ryu")   
-                             )                         
+                             $('<div />').attr({id:"abba__sc",style:"height:500px"}).addClass("col-md-12 btb1__ryu borderG__ryu")                   
                 );
                 return abba;
               },
@@ -784,6 +783,36 @@ jaekyung.chart={
 		    	      var chart = new google.visualization.BarChart(document.getElementById('mbr__bc'));
 		    	      chart.draw(data, options);
 			      });
+			});
+		},
+		abba:()=>{
+			$.getJSON($.context()+"/stats/abbaChart",r=>{
+				google.charts.load('current', {'packages':['corechart']});
+			    google.charts.setOnLoadCallback(()=>{
+			        var data = new google.visualization.DataTable();
+			        data.addColumn('number', '개당 평균 구매액');
+			        data.addColumn('number', '연령');
+			        $.each(r.abbasc,(i,v)=>{
+			        	data.addRow([
+			        		v.av_salesabba 
+			        		,v.ageabba
+			        	]);
+			        });
+			          var options = {
+			            title: 'Age vs. Weight comparison',
+			            hAxis: {title: '', minValue: 0, maxValue: 15, viewWindow: {
+		    	        	  min:0, max: 350000
+	    	        	  }},
+			            vAxis: {title: 'Weight', minValue: 0, maxValue: 15},
+			            legend: 'none',
+			            pointSize:2
+			            
+			          };
+
+			          var chart = new google.visualization.ScatterChart(document.getElementById('abba__sc'));
+
+			          chart.draw(data, options);
+			        });
 			});
 		}
 		

@@ -65,6 +65,13 @@ public class StatCtrl {
 		return mm;
 	}
 	
+	@GetMapping("/stats/abbaChart")
+	@Transactional
+	public Map<?, ?> abbaChart() {
+		mm.put("abbasc", sm.drawabbasc());
+		return mm;
+	}
+	
 	
 	
 }

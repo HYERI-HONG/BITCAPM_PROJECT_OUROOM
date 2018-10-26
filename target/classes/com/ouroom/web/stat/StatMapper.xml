@@ -38,6 +38,9 @@
 		<result column="mancount" property="mancount" javaType="int" />
 		<result column="womancount" property="womancount" javaType="int" />
 		
+		<result column="ageabba" property="ageabba" javaType="int" />
+		<result column="av_salesabba" property="av_salesabba" javaType="int" />
+		
 	</resultMap>
 
 	<select id="drawsvlc" resultMap="statbigbean">
@@ -188,5 +191,21 @@
 				,mancount mancount
 				,womancount womancount
 		FROM v_mbr_manwoman_ryu
+	</select>
+	
+	
+	
+	<select id="drawabbasc" resultMap="statbigbean">
+		select age ageabba
+			, av_sales av_salesabba
+		from member b 
+			join(
+				select b.mem_seq mem_seq 
+					,round(sum(a.sum)/sum(b.CNT)) av_sales 
+				from purchase b 
+				left join item a 
+					on a.SEQ like b.ITEM_SEQ 
+				group by b.mem_seq) a 
+			on a.MEM_SEQ like b.SEQ
 	</select>
 </mapper>
