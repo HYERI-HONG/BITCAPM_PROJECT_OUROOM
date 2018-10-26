@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ouroom.web.stat.StatMapper">
+
+	<resultMap id="statbigbean" type="hashmap">
+		<result column="visitDate" property="visitDate" javaType="string"/>
+		<result column="count" property="count" javaType="int" />
+		<result column="sum" property="sum" javaType="int" />
+		<result column="smmDate" property="smmDate" javaType="string" />
+		<result column="smmSale" property="smmSale" javaType="int" />
+		<result column="postCount" property="postCount" javaType="int" />
+		<result column="joinCount" property="joinCount" javaType="int" />
+		<result column="totalsaleperday" property="totalSalePerDay" javaType="int" />
+		<result column="categorysOfBestSeller" property="categorysOfBestSeller" javaType="string" />
+		<result column="sumOfBestSeller" property="sumOfBestSeller" javaType="int" />
+		<result column="totalVisitor" property="totalVisitor" javaType="int" />
+		<result column="memberVisitor" property="memberVisitor" javaType="int" />
+		<result column="maleC" property="maleC" javaType="int" />
+		<result column="femaleC" property="femaleC" javaType="int" />
+		
+		<result column="sum" property="sum" javaType="int" />
+		<result column="teen" property="teen" javaType="int" />
+		<result column="twen" property="twen" javaType="int" />
+		<result column="thir" property="thir" javaType="int" />
+		<result column="fort" property="fort" javaType="int" />
+		<result column="fift" property="fift" javaType="int" />
+		
+		<result column="title" property="title" javaType="string" />
+		<result column="ctgr2Kor" property="ctgr2Kor" javaType="string" />
+		<result column="sales" property="sales" javaType="int" />
+		<result column="ctgr1" property="ctgr1" javaType="string" />
+		<result column="ctgr2" property="ctgr2" javaType="string" />
+		
+		<result column="ages" property="ages" javaType="int" />
+		<result column="gendercount" property="gendercount" javaType="int" />
+		<result column="mancount" property="mancount" javaType="int" />
+		<result column="womancount" property="womancount" javaType="int" />
+		
+	</resultMap>
+
+	<select id="drawsvlc" resultMap="statbigbean">
+		 SELECT visit_date AS visitDate , COUNT(*) AS count FROM visitor 
+		 WHERE visit_date BETWEEN #{stDSmm} AND #{enDSmm}
+		 GROUP BY visit_date ;
+	</select>
+	<select id="drawsvcc" resultMap="statbigbean">
+		 SELECT a.purchase_date AS smmDate, sum(b.sum * a.cnt) AS smmSale
+				FROM item b
+					JOIN (SELECT item_seq , SUM(cnt) cnt, purchase_date
+						FROM purchase
+						WHERE purchase_date between #{stDSmm} and #{enDSmm}
+						GROUP BY item_seq, purchase_date) a
+					ON b.seq = a.item_seq
+				GROUP BY a.purchase_date;
+	</select>
+	<select id="extrsvvc" resultMap="statbigbean">
+		    SELECT SUM(view_cnt) AS postCount 
+		    FROM post  
+		    WHERE regi_date LIKE #{postStartDate} 
+			GROUP BY regi_date ;
+	</select>
+	<select id="extrsvjc" resultMap="statbigbean">
+		    SELECT COUNT(join_date) AS joinCount 
+		    FROM member 
+		    WHERE join_date LIKE #{selectDSmm} 
+		    GROUP BY join_date;
+	</select>
+	<select id="totalSalePerDay" resultMap="statbigbean">
+			SELECT sum(cnt) totalSalePerDay 
+			FROM purchase 
+			WHERE purchase_date LIKE #{selectDSmm} 
+	</select>
+	<select id="bestSellerPerDay" resultMap="statbigbean">
+			SELECT d.CATEGORY_KR AS categorysOfBestSeller, SUM(c.summ) AS sumOfBestSeller
+			FROM category2 d
+				join (
+						SELECT a.ITEM_SEQ ITEM_SEQ
+							, b.CATEGORY2_SEQ CATEGORY2_SEQ
+							, a.purchase_date purchase_date
+							, a.summ summ
+		    			FROM item b
+		    			join (
+		    					SELECT ITEM_SEQ
+		    						, sum(cnt) summ
+		    						, PURCHASE_DATE
+			          			FROM purchase 
+			          			WHERE purchase_date like #{selectDSmm} 
+			          			GROUP BY item_seq, purchase_date
+		          			) a
+			          	on a.ITEM_SEQ = b.seq
+			          	) c
+			     on d.SEQ LIKE c.CATEGORY2_SEQ
+			GROUP BY d.SEQ
+			ORDER BY summ desc
+			LIMIT 5
+	</select>
+	
+	<!-- <select id="drawsvcc"  statementType="CALLABLE" resultMap="statbigbean" >
+		 {?=call sp_select_totalsale[(#{stD, mode=IN, jdbcType=VARCHAR, javaType=string},
+				 #{enD, mode=IN, jdbcType=VARCHAR, javaType=string}
+		 )]}
+	</select>-->
+	
+	
+	<!-- 밑 둘은 프로시져로 하면 하나로 줄일 수 있을 거 같은데, -->
+	<select id="drawvstac" resultMap="statbigbean">
+			select  b.cc AS totalVisitor, c.cc AS memberVisitor, a.VISIT_DATE AS visitDate
+			FROM visitor a
+			  JOIN (SELECT count(*) AS cc, VISIT_DATE
+			        FROM visitor
+			        WHERE VISIT_DATE BETWEEN #{stDVst} AND #{enDVst} group by VISIT_DATE)b
+			    ON a.VISIT_DATE LIKE b.VISIT_DATE
+			  JOIN (SELECT count(*) AS cc, VISIT_DATE
+			        FROM visitor
+			        WHERE VISIT_DATE BETWEEN #{stDVst} AND #{enDVst}
+			        	 AND MEM_VALI LIKE 1 group by VISIT_DATE)c
+			    ON a.VISIT_DATE LIKE c.VISIT_DATE
+			group by a.VISIT_DATE
+	</select>
+	<select id="extrvstt" resultMap="statbigbean">
+		select * from v_totalvisitorcount where date between #{stDVst} and #{enDVst}
+	</select>
+	
+	
+	<select id="drawsbalc" resultMap="statbigbean">
+			select  sum
+					,10sc AS teen
+					,20sc AS twen
+					,30sc AS thir
+					,40sc AS fort
+					,50sc AS fift 	
+			 from v_gazuaAll_ryu
+			 WHERE 20sc IS NOT NULL;
+	</select>
+
+
+	<select id="drawctgrtco" resultMap="statbigbean">
+		SELECT e.title title
+		      ,e.ctgr2Kor ctgr2Kor
+		      ,e.sales sales
+		FROM (SELECT c.title title 
+		            ,d.CATEGORY_KR ctgr2Kor
+		            ,(c.price *c.count) sales 
+		            ,d.CATEGORY1_SEQ ctgr1 
+		      FROM (SELECT b.seq seq
+		                  ,b.title title
+		                  ,b.CATEGORY2_SEQ ctgr2 
+		                  ,a.sum count
+		                  ,a.pd pd 
+		                  ,b.PRICE price
+		            FROM item b
+		              JOIN (
+		                    SELECT item_seq 
+		                          ,sum(cnt) sum 
+		                          ,purchase_date pd
+		                    FROM purchase
+		                    WHERE purchase_date BETWEEN #{stDCtgr} AND #{enDCtgr}
+		                    GROUP BY ITEM_SEQ
+		                    ) a
+		                ON b.SEQ LIKE a.ITEM_SEQ
+		             ) c
+		        LEFT JOIN category2 d
+		           ON c.ctgr2 LIKE d.SEQ
+		      )e
+		  LEFT JOIN category1 f
+		    ON e.ctgr1 LIKE f.SEQ
+	</select>
+	<select id="drawctgrtct" resultMap="statbigbean">
+		SELECT category2.CATEGORY_KR  ctgr2
+		      ,category1.CATEGORY ctgr1
+		FROM category2 
+		RIGHT JOIN category1 
+		  ON category1.SEQ = category2.CATEGORY1_SEQ
+		GROUP BY category2.CATEGORY_KR 
+		ORDER BY category2.CATEGORY1_SEQ
+	</select>
+	
+	
+	<select id="drawmbrpc" resultMap="statbigbean">
+		SELECT ages ages
+				,gendercount gendercount
+		FROM v_mbr_total
+	</select>
+	<select id="drawmbrbc" resultMap="statbigbean">
+		SELECT ages ages
+				,mancount mancount
+				,womancount womancount
+		FROM v_mbr_manwoman_ryu
+	</select>
+</mapper>

@@ -82,6 +82,8 @@ div .txtcw__ryu{
 }
 .borderG__ryu{
 	border-color:#8c8c8c !important;
+	border-right:0px !important;
+	border-left:0px !important;
 }
 /* 글자 음영 */
 .ganjitxt__ryu{
@@ -122,8 +124,8 @@ div .txtcw__ryu{
 	z-index:2;
 }
 .nav-up{
-	    margin-top: -50px;
-	    transition: margin-top 0.45s ease-in-out;
+	    margin-top: -25px;
+	    transition: margin-top 0.25s ease-in-out;
 }
 .nav-down{
 	    margin-top: 0px;
@@ -182,3 +184,45 @@ div .txtcw__ryu{
     background: inherit;
     left: 20px;
 }
+
+
+
+
+  /*테이블 헤더 고정*/
+.header-fixed {
+    width: 100% 
+}
+
+.header-fixed > thead,
+.header-fixed > tbody,
+.header-fixed > thead > tr,
+.header-fixed > tbody > tr,
+.header-fixed > thead > tr > th,
+.header-fixed > tbody > tr > td {
+    display: block;
+}
+
+.header-fixed > tbody > tr:after,
+.header-fixed > thead > tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.header-fixed > tbody {
+    overflow-y: auto;
+    height: 236px;
+}
+
+.header-fixed > tbody > tr > td,
+.header-fixed > thead > tr > th {
+    width: 16.6%;
+    float: left;
+}
+/*swap div*/
+#sortWrap div div{
+     cursor: ns-resize;
+}
+#swap__div__ryu div:nth-child(even){background-color:rgba(204, 82, 0, 0.25)}
+#swap__div__ryu div:nth-child(odd){background-color:#FFFFFF}

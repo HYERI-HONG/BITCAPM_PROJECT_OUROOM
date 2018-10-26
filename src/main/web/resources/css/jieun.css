@@ -116,8 +116,11 @@
 }
 .je_col1{
 	width:45%;
-	float:right;
-	
+	float:right;	
+}
+.je_col2{
+	width:45%;
+	float:right;	
 }
 .je_total_share{
 	text-align: left !important;
@@ -183,12 +186,7 @@
 .je_price_cover{
 	line-height:1; !important;
 }
-.je_line{
-	color: gray;
-	size: 0.5em;
-	
-	noshade;
-}
+
 #je_won{
 	font-size: 30px;
 	margin-right: 2px;	

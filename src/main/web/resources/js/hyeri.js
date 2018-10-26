@@ -17,9 +17,12 @@ hyeri = (() => {
 })();
 hyeri.page={
     h:()=>{
+    	//메인홈
+    	$('#content').empty();
     	$('<div/>').addClass('container').attr({id:"h_main"}).appendTo($('#content'));
 		
 		/*-------------------section1 :: banner --------------------*/
+    	//캐러셀
 		$('<div/>').addClass('h_section').attr({id:"section_banner"}).appendTo($('#h_main'));
 		$('<div/>').addClass('carousel slide').attr({id:'carousel-example-generic','data-ride':'carousel'}).appendTo($('#section_banner'));
 		
@@ -94,8 +97,10 @@ hyeri.page={
 		$('<div/>').addClass('section').attr({id:"section_community"}).appendTo($('#main'));
 		$('<div/>').addClass('section').attr({id:"section_category"}).appendTo($('#main'));
 		$('<div/>').addClass('section').attr({id:"section_store"}).appendTo($('#main'));
+		
     },
     a:()=>{
+    	//회원가입
     	$('#footer').remove();
 		$('#content').html('<div id="add_form" class="je_sign-in-form" >'
 				+'<p id="je_font_2em" class="je_bold">회원가입</p>'
@@ -110,17 +115,17 @@ hyeri.page={
 				+'        <section id="add_form_middle" class="signup-form__email">'
 				+'				<form novalidate="novalidate" class="new_normal_user" id="new_normal_user" action="/normal_users" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="HLPM6R/2QK3v2K5H9wCB/J77MnkLmliCKOrL14WRMpimvC/ZD5cJzXEowL2QhhT1VzYlCL8Valy17QKIm45yDQ==">'
 				+'                    <div class="add_email">'
-				+'                        <label class="je_bold">이메일</label>'
-				+'							<input type="email" style="width:100%" class="form-control" id="h_email" autofocus="" autocomplete="off">'
+				+'                        <label class="je_bold" style="display:block">이메일</label>'
+				+'							<input type="email" style="width:255px;display:inline" class="form-control " id="h_email" autofocus="" autocomplete="off">'
 				+'                    </div>'
 				+'                    <div class="add_pass" style="padding-top:20px">'
 				+'                        <label class="je_bold" for="h_pass">비밀번호</label>'
 				+'                        <p class="p1">8자이상 영문 대 소문자, 숫자, 특수문자를 사용하세요.</p>'
-				+'						<input class="form-control" placeholder=""  required="required" type="password" id="h_pass">'
+				+'						<input class="form-control " placeholder="" type="password" id="h_pass">'
 				+'                    </div>'
 				+'                    <div class="add_pass_confirm" style="padding-top:20px">'
 				+'                        <label class="je_bold" for="h_pass_ck">비밀번호 확인</label></br>'
-				+'							<input class="form-control" required="required" type="password" id="h_pass_ck">'
+				+'							<input class="form-control " type="password" id="h_pass_ck">'
 				+'                        <p class="error"></p>'
 				+'                    </div>'
 				+'                    <div class="add_nickname" style="padding-top:15px">'
@@ -128,7 +133,7 @@ hyeri.page={
 				+'                        <p class="p1">'
 				+'                            2~15자 자유롭게 입력해주세요.'
 				+'                        </p>'
-				+'						<input class="form-control" required="required" type="text" id="nickname">'
+				+'						<input class="form-control " type="text" id="nickname" style="width:255px;display:inline">'
 				+'                    </div>'
 				+'					</form></section>'
 				+'        <button id="add_submit_btn" class="je_sign-in-form__form__submit btn je_btn-priority" type="submit" form="new_normal_user">'
@@ -144,97 +149,182 @@ hyeri.page={
 		$('<label/>').addClass('je_bold').html("생년월일").attr({style:"padding-top:20px"}).appendTo($('#add_form_middle'));
 		$('<div/>').attr({id:"bir_wrap",style:"diplay:table; width:100%, height:34px"}).appendTo($('#add_form_middle'));
 		
-		$('<div/>').addClass('bir_yy').attr({id:"bir_yy_d"}).appendTo($('#bir_wrap'));
-		$('<span/>').addClass('bir_box').attr({id:"bir_yy_s"}).appendTo($('#bir_yy_d'));
-		$('<input/>').addClass('bir_int').attr({placeholder:"년(4자)",type:"text",id:"bir_year"}).appendTo($('#bir_yy_s'));
 		
+		$('<div/>').attr({class:"bir_yy",id:"bir_yy_d"}).appendTo($('#bir_wrap'));
+		$('<span/>').addClass('bir_box').attr({id:"bir_yy_s"}).appendTo($('#bir_yy_d'));
+		$('<select/>').addClass('bir_sel ').attr({id:"bir_year",title:"년"}).appendTo($('#bir_yy_s'));
+		$('<option/>').html('년').appendTo($('#bir_year'));
+		for(let i=1950;i<2018;i++){
+			$('<option/>').attr({value:i+''}).html(i+'년').appendTo($('#bir_year'));
+		}
+	
 		$('<div/>').attr({class:"bir_mm", id:"bir_mm_d"}).appendTo($('#bir_wrap'));
 		$('<span/>').addClass('bir_box').attr({id:"bir_mm_s"}).appendTo($('#bir_mm_d'));
-		$('<select/>').addClass('bir_sel').attr({id:"bir_month",title:"월"}).appendTo($('#bir_mm_s'));
+		$('<select/>').addClass('bir_sel ').attr({id:"bir_month",title:"월"}).appendTo($('#bir_mm_s'));
 		$('<option/>').html('월').appendTo($('#bir_month'));
 		for(let i=1;i<13;i++){
 			$('<option/>').attr({value:i+''}).html(i+'월').appendTo($('#bir_month'));
 		}
-		
 		$('<div/>').attr({class:"bir_dd", id:"bir_dd_d"}).appendTo($('#bir_wrap'));
 		$('<span/>').addClass('bir_box').attr({id:"bir_dd_s"}).appendTo($('#bir_dd_d'));
-		$('<input/>').addClass('bir_int').attr({placeholder:"일",type:"text",id:"bir_day"}).appendTo($('#bir_dd_s'));
-	
+		$('<select/>').addClass('bir_sel').attr({id:"bir_day",title:"일"}).appendTo($('#bir_dd_s'));
+		$('<option/>').html('일').appendTo($('#bir_day'));
+		for(let i=1;i<31;i++){
+			$('<option/>').attr({value:i+''}).html(i).appendTo($('#bir_day'));
+		}
+		
 		/*성별*/
 		$('<label/>').addClass('je_bold').html("성별").attr({style:"padding-top:20px"}).appendTo($('#add_form_middle'));
-		$('<div/>').attr({id:"gender_wrap"}).appendTo($('#add_form_middle'));
-		$('<select/>').addClass('gen_sel').attr({id:"gender",title:"성별"}).appendTo($('#gender_wrap'));
+		$('<div/>').attr({id:"gender_wrap"}).addClass('add_gen').appendTo($('#add_form_middle'));
+		$('<select/>').addClass('gen_sel ').attr({id:"gender",title:"성별"}).appendTo($('#gender_wrap'));
 		$('<option/>').html('성별').appendTo($('#gender'));
-		$('<option/>').html('여자').attr({value:"2"}).appendTo($('#gender'));
-		$('<option/>').html('남자').attr({value:"1"}).appendTo($('#gender'));
+		$('<option/>').html('여자').attr({value:"여자"}).appendTo($('#gender'));
+		$('<option/>').html('남자').attr({value:"남자"}).appendTo($('#gender'));
 		
 		/*이미지 업로드*/
-		$('<label/>').addClass('je_bold').html("프로필 사진 업로드").attr({style:"padding-top:20px"}).appendTo($('#add_form_middle'));
+		var profile;
+		$('<label/>').addClass('je_bold').html("프로필 사진 업로드").attr({style:"padding-top:20px;padding-bottom:5px"}).appendTo($('#add_form_middle'));
 		$('<div/>').addClass('h_imgup_con').append(
 				$('<form/>').attr({enctype:'multipart/form-data',id:'h_imgup_form'}).append(
 						$('<div/>').addClass('h_imgup_prev').append(
-								$('<img/>').attr({id:'h_upimg'})
-						),
-						$('<div/>').addClass('h_imgup_btn').append(
-								$('<input/>').attr({type:"button",value:'업로드',id:'h_add_img',style:'margin-right:5px'}).click(function(){
-									alert('업로드 버튼 클릭');
-								}),
-								$('<input/>').attr({type:"file",name:'h_find_img',id:'h_find_img',style:'display:inline !important'})
-								.change(function(a) {
-									alert(this.files[0].name);
-									
-									let ck = (!(this.files[0].name).match(/jpg|gif|png|jpeg/i)) ? false : true;
-									if(!ck){
-										alert("gif,png,jpg,jpeg 파일만 업로드 할 수 있습니다.");
-									}else{
-										/*var fd = new FormDate();
-										var files = this.files[0];
-										fd.append('file',files);
-										$.ajax({
-											url: $.context() + '/posts/upload',
-											type: 'POST',
-								            data: fd,
-								            async: false,
-								            cache: false,
-								            contentType: false,
-								            processData: false,
-								            success: function(response){
-								                if(response != 0){
-								                    $("#h_upimg").attr("src",response); 
-								                    $(".h_imgup_prev h_upimg").show();
-								                }else{
-								                    alert('file not uploaded');
-								                }
-								            }
-										});*/
-									}
-								})
+								$('<div/>').attr({id:'h_targetLayer',style:'opacity: 0.7;'}),
+								$('<img/>').addClass('h_icon_choose_image').attr({src:$.img()+'/hyeri/upimageicon.png',style:'opacity:0.5'}),
+								$('<div/>').addClass('h_imgup').append(
+										$('<input/>').attr({type:"file",name:'h_find_img',id:'h_find_img'}).addClass('h_inputFile')
+										.change(function(a) {
+											let ck = (this.files[0].name.match(/jpg|gif|png|jpeg/i)) ? true : false;
+											if(ck){
+												profile=this.files[0].name;
+												hyeri.func.iu(this);
+											}else{
+												alert("gif,png,jpg,jpeg 파일만 업로드 할 수 있습니다.");
+											}
+										})	
+								)
 						)
+						
 				)
 		).appendTo($('#add_form_middle'));
+		
+		/*이메일, 별명 중복 체크*/
+		$('<a/>').addClass('h_dupck_btn').html('중복확인<br>').appendTo($('.add_email')).click(e=>{
+			$.ajax({
+				url : $.context()+'/member/dpcheck',
+				method : 'POST',
+				contentType : 'application/json',
+				data : JSON.stringify({
+					attr : 'email',
+					val : $('#h_email').val()
+				}),
+				success : d=>{
+					$('#ec').remove();
+					$('<h7/>').attr({style:'color:blue',id:'ec'}).html(
+							(d==1)?'이미 사용중인 이메일입니다.'
+									:
+									($('#h_email').val().indexOf('@')<0)?'이메일형식이 올바르지 않습니다.':'사용 가능한 이메일입니다.').appendTo($('.add_email'));
+				},
+				error : (m1,m2,m3)=>{
+					alert("error발생");
+				}
+			});		
 			
+		});
+		$('<a/>').addClass('h_dupck_btn').html('중복확인<br>').appendTo($('.add_nickname')).click(e=>{
+			$.ajax({
+				url : $.context()+'/member/dpcheck',
+				method : 'POST',
+				contentType : 'application/json',
+				data : JSON.stringify({
+					attr : 'nickname',
+					val : $('#nickname').val()
+				}),
+				success : d=>{
+					$('#nc').remove();
+					$('<h7/>').attr({style:'color:blue',id:'nc'}).html((d==1)?'이미 사용중인 별명입니다.':'사용 가능한 별명입니다.').appendTo($('.add_nickname'));
+				},
+				error : (m1,m2,m3)=>{
+					alert("error발생");
+				}
+			});		
+			
+		});
+		
+		//회원가입버튼 클릭
 		$('#add_submit_btn').click(e=>{
-				e.preventDefault();
+			e.preventDefault();
+			//입력값 유무 체크
+			let ck=true;
+			let arr=[
+				{c:'add_email',i:'#h_email'},
+				{c:'add_pass',i:'#h_pass'},
+				{c:'add_pass_confirm',i:'#h_pass_ck'},
+				{c:'add_nickname',i:'#nickname'},
+				{c:'add_gen',i:'#gender'}
+				];
+			$.each(arr,(x,j)=>{
+				$('<h7/>').attr({style:'color:red',id:j.c}).appendTo($('.'+j.c));
+				if($(j.i).val()==''||$(j.i).val()=='성별'){
+					$('#'+j.c).html('필수 값을 입력하세요.');
+					ck=false;
+				}else{
+					$('#'+j.c).html('');
+				}
+				if(j.c=='add_pass_confirm'){
+					if($('#h_pass').val()!=$('#h_pass_ck').val()){
+						$('#'+j.c).html('비밀번호가 일치하지 않습니다.');	
+						ck=false;
+					}
+				}
+				if(j.c=='add_email'){
+					if($('#h_email').val()!=''&&$('#h_email').val().indexOf('@')<0){
+						$('#'+j.c).html('이메일 형식이 올바르지 않습니다.');	
+						ck=false;
+					}
+				}
+			});
+			$('#add_bir').remove();
+			if($('#bir_year').val()=='년'||$('#bir_month').val()=='월'||$('#bir_day').val()=='일'){
+				$('<h7/>').attr({style:'color:red',id:'add_bir'}).html('생년월일을 모두 선택하세요.').appendTo($('#bir_wrap'));
+				ck=false;
+			}
+			//submit
+			let d = new Date();
+			if(ck){
 				$.ajax({
 					url : $.context()+'/member/add',
 					method : 'POST',
 					contentType : 'application/json',
 					data : JSON.stringify({
-						nickname : $('#nickname').val()
+						email : $('#h_email').val(),
+						password : $('#h_pass').val(),
+						nickname : $('#nickname').val(),
+						birthday : $('#bir_year').val()+'-'+$('#bir_month').val()+'-'+$('#bir_day').val(),
+						gender  : $('#gender').val(),
+						profile : profile,
+						join_date : d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()
 					}),
 					success : d=>{
-								
+						if(d==1){
+							alert("회원가입 성공");
+							hyeri.page.l();
+						}
+						else{
+							alert("회원가입 실패");
+						}
 					},
 					error : (m1,m2,m3)=>{
 						alert("error발생");
 					}
-				});	
+				});		
+			}
 		});
 		$('#has-account').click(e=>{
 			e.preventDefault();
+			hyeri.page.l();
 		});
     },
     l:()=>{
+    	//로그인
     	$('#footer').remove();
 		$('#content').html('<div class="je_sign-in-form" >'
 				+ '<h1 class="je_sign-in-form__header">'
@@ -246,14 +336,14 @@ hyeri.page={
 				+ '</a>    </h1>'
 				+ '<form class="je_sign-in-form__form" id="new_user">'
 				+ '<input placeholder="이메일" autofocus="autofocus" class="je_sign-in-form__form__input form-control sign-in-form__form__email" type="text" name="user[email]" id="user_email">'
-				+ '<div class="je_sign-in-form__form__input-wrap je_sign-in-form__form__password">'
+				+ '<div id="h_rs" class="je_sign-in-form__form__input-wrap je_sign-in-form__form__password">'
 				+ '<input placeholder="비밀번호" autocomplete="off" class="je_sign-in-form__form__input form-control" type="password" name="user[password]" id="user_password">'
 				+ '</div>'
 				+ '<input type="hidden" name="remember_me" id="remember_me" value="checked">'
 				+ '<input type="hidden" name="is_pro" id="is_pro" value="false">'
 				+ '<input id="login_btn1" type="button" name="commit" value="로그인" class="je_sign-in-form__form__submit btn je_btn-priority" data-disable-with="로그인">'
 				+ '</form>    <div class="je_sign-in-form__action">'
-				+ '<a class="je_sign-in-form__action__entry" href="/users/password/new">비밀번호 재설정</a>'
+				+ '<a id="pwup_btn1" class="je_sign-in-form__action__entry" href="/users/password/new">비밀번호 재설정</a>'
 				+ '<a id="join_btn1" class="je_sign-in-form__action__entry" href="#">회원가입</a>'
 				+ '</div>'
 				+ '<section class="je_sign-in-form__sns">'
@@ -272,8 +362,80 @@ hyeri.page={
 				+ '</a>        </div>' + '</section>' + '</div>'
 		);
 		
+		$('#login_btn1').click(e=>{
+			e.preventDefault();
+			$('<h7/>').attr({style:'color:red',id:'h_rsh'}).empty().appendTo($('#h_rs'));
+			if($('#user_email').val()==''||$('#user_password').val()==''){
+				$('#h_rsh').html('이메일과 비밀번호를 모두 입력해주세요.');
+			}else{
+				$.ajax({
+					url : $.context()+'/member/login',
+					method : 'POST',
+					contentType : 'application/json',
+					data : JSON.stringify({
+						email : $('#user_email').val(),
+						password : $('#user_password').val(),
+					}),
+					success : d=>{
+						if(d.idValid==='WRONG'){
+							$('#h_rsh').html('일치하는 이메일이 없습니다.');
+						}else if(d.pwValid==='WRONG'){
+							$('#h_rsh').html('비밀번호를 잘못 입력했습니다.');
+						}else{
+							//브라우저닫으면 없어지는 세션 쿠키 생성		
+							$.cookie('userid', d.value.email);
+							//쿠키삭제하기,true/false반환
+							//$.removeCookie('userid');
+							hyeri.page.h();
+						}
+					},
+					error : (m1,m2,m3)=>{
+						alert("error발생");
+					}
+				});		
+			}
+		});
+		$('#join_btn1').click(e=>{
+			e.preventDefault();
+			hyeri.page.a();
+		});
+		$('.je_manImg').click(e=>{
+			e.preventDefault();
+			hyeri.page.h();
+		});
+		$('#pwup_btn1').click(e=>{
+			e.preventDefault();
+			alert("비밀번호 재설정 클릭");
+		});
     }
 };
+hyeri.func ={
+		//기능 분리
+		iu: d =>{
+			//이미지 업로드시 업로드한 파일 임시 저장 기능, 이미지 미리보기
+				var fd = new FormData();
+				fd.append('file',d.files[0]);
+				$.ajax({
+					url: $.context()+'/member/upload',
+					type: 'POST',
+		            data: fd,
+		            async: false,
+		            cache: false,
+		            contentType: false,
+		            processData: false
+				}).done(function(){
+					 if (d.files[0]) {
+					        var fileReader = new FileReader();
+					        fileReader.onload = function (e) {
+					            $('#blah').attr('src', e.target.result);
+								$("#h_targetLayer").html('<img src="'+e.target.result+'" width="200px" height="200px" class="h_upload-preview" />');
+								$(".h_icon_choose_image").attr({style:'opacity:0 !important'});
+					        }
+							fileReader.readAsDataURL(d.files[0]);
+					    }
+				});
+		}
+}
 
 
 

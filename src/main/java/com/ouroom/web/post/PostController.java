@@ -121,6 +121,7 @@ public class PostController {
 	public @ResponseBody void postUplaod(@RequestBody MultipartFile file) throws Exception {
 		Util.log.accept(file.getOriginalFilename());
 		s = u.file.apply(file, file.getBytes());
+		System.out.println(file.getBytes());
 	}
 	
 	@PostMapping("/comments/write")

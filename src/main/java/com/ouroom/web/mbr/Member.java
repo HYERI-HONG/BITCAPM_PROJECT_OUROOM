@@ -7,6 +7,6 @@ import lombok.Data;
 @Component
 @Data @Lazy
 public class Member {
-	private String seq,email,nickname,password,gender,bir_year,bir_month,bir_day,profile,join_day,age;
+	private String seq,email,nickname,password,gender,birthday,profile,join_date,age;
 
 }

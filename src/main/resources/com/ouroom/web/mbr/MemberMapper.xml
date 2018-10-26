@@ -4,7 +4,47 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.ouroom.web.mbr.MemberMapper">
-<select id="count" resultType="String">
+<!-- <select id="count" resultType="String">
 	 SELECT COUNT(*) FROM MEMBER
+</select> -->
+<select id="dpck"  resultType="int">
+	 SELECT COUNT(*) 
+	 FROM MEMBER 
+	 <where>
+	 	<if test="attr=='email'">
+	 		EMAIL LIKE #{val}
+	 	</if>
+	 	<if test="attr=='nickname'">
+	 		NICKNAME LIKE #{val}
+	 	</if>
+	</where>
 </select>
+<insert id="insert">
+  	INSERT INTO MEMBER(email,nickname,password,gender,birthday,profile,join_date,age)
+	VALUES(#{email},#{nickname},#{password},#{gender},#{birthday},#{profile},#{join_date},#{age})
+</insert>
+ <select id="get" resultType="com.ouroom.web.mbr.Member">
+    SELECT EMAIL,NICKNAME,PASSWORD,GENDER,BIRTHDAY,PROFILE,JOIN_DATE,AGE 
+    FROM MEMBER 
+    <where>
+    	<if test=" email !=null and email !='' ">
+    	EMAIL LIKE #{email}
+    	</if>
+    	<if test=" password !=null and password !='' ">
+    	AND PASSWORD LIKE #{password}
+    	</if>
+    </where>
+  </select>
+ <select id="count" resultType="int">
+	 SELECT COUNT(*) FROM MEMBER
+	 <where>
+ 		 <if test="email !=null and email !=''">
+ 		 	EMAIL LIKE #{email}
+ 		 </if>
+ 	</where>
+ </select>
+
+
+
+
 </mapper>
