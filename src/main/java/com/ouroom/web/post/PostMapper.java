@@ -9,16 +9,16 @@ import org.springframework.stereotype.Repository;
 public interface PostMapper {
 	public void postInseart(Map<?, ?> m);
 	public List<?> postList(Map<?, ?> m);
-	public List<?> postSearch(String s);
+	public List<?> postSearch(Map<?, ?> m);
 	public Map<?, ?> postRetrieve(Map<?,?> m);
 	public Integer postCount(Map<?, ?> m);
-	public void postUpdate(Map<?, ?> m); //수정중
-	public void postDelete(Map<?, ?> m); //수정중
+	public void postUpdate(Map<?, ?> m);
+	public void postDelete(String s);
 	
 	public void hashTagInseart(Map<?, ?> m);
 	public List<?> hashTagList(String s);
 	public List<?> hashTagSearch();
-	public void hashTagDelete(Map<?, ?> m); //수정중
+	public void hashTagDelete(Map<?, ?> m);
 
 	public void imgTagInseart(Map<?, ?> m); //수정중
 	public List<?> imgTagSearch();

@@ -33,18 +33,13 @@
    </resultMap>
 	
 	<insert id="postInseart" parameterType="map">
-		INSERT INTO post
-			(TITLE, CONTENT, REGI_DATE, VIEW_CNT, LIKE_CNT, SHARE_CNT, ROOM_TYPE, ROOM_SIZE, MEM_SEQ, BOARD_SEQ, IMAGE, LAST_UPDATE)
-		VALUES
-			(#{title}, #{content}, #{regiDate}, 0, 0, 0, #{roomType}, #{roomSize}, #{memSeq}, 1, #{image}, #{regiDate})
+		INSERT INTO post (TITLE, CONTENT, REGI_DATE, VIEW_CNT, LIKE_CNT, SHARE_CNT, ROOM_TYPE, ROOM_SIZE, MEM_SEQ, BOARD_SEQ, IMAGE, LAST_UPDATE)
+		VALUES (#{title}, #{content}, #{regiDate}, 0, 0, 0, #{roomType}, #{roomSize}, #{memSeq}, 1, #{image}, #{regiDate})
 	</insert>
 	<select id="postList" parameterType="map" resultMap="postResultMap">
-		SELECT *
-		FROM post_list_view
+		SELECT * FROM post_list_view
 		<where>
-			<if test=" beginRow != null and beginRow != '' ">
-				No BETWEEN #{beginRow} AND #{endRow}
-			</if>
+			<if test=" beginRow != null and beginRow != '' ">No BETWEEN #{beginRow} AND #{endRow}</if>
 		</where>
 	</select>
 	<select id="postSearch" parameterType="String" resultMap="postResultMap">
@@ -61,128 +56,86 @@
 		GROUP BY A.seq
 	</select>
 	<select id="postRetrieve" resultMap="postResultMap">
-		SELECT *
-		FROM post_detail_view
+		SELECT * FROM post_detail_view
 		<where>
-			<if test=" memSeq != null and memSeq != '' ">
-				MEM_SEQ LIKE #{memSeq}
-			</if>
-			<if test=" seq != null and seq != '' ">
-				AND SEQ LIKE #{seq}
-			</if>
+			<if test=" memSeq != null and memSeq != '' ">MEM_SEQ LIKE #{memSeq}</if>
+			<if test=" seq != null and seq != '' ">AND SEQ LIKE #{seq}</if>
 		</where>
 		LIMIT 1
 	</select>
 	<select id="postCount" parameterType="map" resultType="int">
-		 SELECT COUNT(*)
-		 FROM post
+		 SELECT COUNT(*) FROM post
 		 <where>
-			<if test=" memSeq != null and memSeq != '' ">
-				MEM_SEQ LIKE #{memSeq}
-			</if>
+			<if test=" memSeq != null and memSeq != '' ">MEM_SEQ LIKE #{memSeq}</if>
 		 </where>
 	</select>
 	<update id="postUpdate" parameterType="map">
 		UPDATE post
 		<set>
-			TITLE = #{title}, 
-			CONTENT = #{content},
-			ROOM_TYPE = #{roomType},
-			ROOM_SIZE = #{roomSize},
-			IMAGE = #{image},
-			LAST_UPDATE = #{lastUpdate},
+			TITLE = #{title}, CONTENT = #{content}, ROOM_TYPE = #{roomType}, ROOM_SIZE = #{roomSize}, IMAGE = #{image}, LAST_UPDATE = #{lastUpdate},
 			<if test=" viewCnt != null and viewCnt != '' ">VIEW_CNT = #{viewCnt},</if>
 			<if test=" likeCnt != null and likeCnt != '' ">LIKE_CNT = #{likeCnt},</if>
 			<if test=" shareCnt != null and shareCnt != '' ">SHARE_CNT = #{shareCnt}</if>
 		</set>
 		WHERE SEQ LIKE #{seq}
 	</update>
-	<delete id="postDelete" parameterType="map">
-		DELETE FROM post
-		WHERE SEQ LIKE #{seq}
+	<delete id="postDelete">
+		DELETE FROM post WHERE SEQ LIKE #{seq}
 	</delete>
 
 	<insert id="hashTagInseart" parameterType="map">
-		INSERT INTO hashtag
-			(KEYWORD, POST_SEQ)
-		VALUES
-			(#{keyword}, #{seq})
+		INSERT INTO hashtag (KEYWORD, POST_SEQ) VALUES (#{keyword}, #{seq})
 	</insert>
 	<select id="hashTagList" resultType="String">
-		SELECT KEYWORD
-		FROM hashtag
-		<where>
-			POST_SEQ LIKE #{value}
-		</where>
+		SELECT KEYWORD FROM hashtag WHERE POST_SEQ LIKE #{value}
 	</select>
 	<select id="hashTagSearch" resultType="String">
-		SELECT KEYWORD
-		FROM hashtag
-		GROUP BY KEYWORD
+		SELECT KEYWORD FROM hashtag GROUP BY KEYWORD
 	</select>
 	<delete id="hashTagDelete" parameterType= "map">
-		DELETE 
-		FROM hashtag
-		WHERE POST_SEQ LIKE #{seq}
+		DELETE FROM hashtag WHERE POST_SEQ LIKE #{seq}
 	</delete>
 	
 	<insert id="imgTagInseart" parameterType= "map">
-		INSERT INTO imgtag
-			(ITEM_TITLE, POINT, ITEM_SEQ, POST_SEQ)
-		VALUES
-			(#{itemTitle}, #{posision}, #{itemSeq}, #{postSeq})
+		INSERT INTO imgtag (ITEM_TITLE, POINT, ITEM_SEQ, POST_SEQ)
+		VALUES (#{itemTitle}, #{posision}, #{itemSeq}, #{postSeq})
 	</insert>
 	<select id="imgTagList" resultMap= "postResultMap">
-		SELECT t.ITEM_TITLE, t.POINT, t.ITEM_SEQ, i.PHOTO AS image, c.CATEGORY
+		SELECT t.POST_SEQ, t.ITEM_TITLE, t.POINT, t.ITEM_SEQ, i.PHOTO AS image, c.CATEGORY
 		FROM imgtag t
 		JOIN item i ON t.ITEM_SEQ LIKE i.SEQ
 		JOIN category2 c ON i.CATEGORY2_SEQ = c.SEQ
-		<where>
-			POST_SEQ LIKE #{value}
-		</where>
+		WHERE POST_SEQ LIKE #{value}
 	</select>
 	<select id="imgTagSearch" resultType="String">
-		SELECT SEQ AS ITEM_SEQ, TITLE AS ITEM_TITLE
-		FROM item
+		SELECT SEQ AS ITEM_SEQ, TITLE AS ITEM_TITLE FROM item
 	</select>
 	<delete id="imgTagDelete" parameterType= "map">
-	DELETE FROM imgtag
-	WHERE SEQ LIKE #{seq}
+	DELETE FROM imgtag WHERE SEQ LIKE #{seq}
 	</delete>
 	
 	<insert id="commentInseart" parameterType= "map">
-		INSERT INTO comment
-			(COMMENT, ARTICLE_SEQ, MEM_SEQ, BOARD_SEQ)
-		VALUES
-			(#{comment}, #{seq}, #{memSeq}, 1)
+		INSERT INTO comment (COMMENT, ARTICLE_SEQ, MEM_SEQ, BOARD_SEQ)
+		VALUES (#{comment}, #{seq}, #{memSeq}, 1)
 	</insert>
 	<select id="commentList" resultMap="postResultMap">
 		SELECT A.*
 		FROM (
-			SELECT
-				ROW_NUMBER() OVER(ORDER BY p.SEQ DESC) AS No, 
-				p.SEQ, p.COMMENT, p.POST_SEQ ,p.MEM_SEQ, p.NICKNAME, p.PROFILE
-			FROM
-				post_comment_view p
+			SELECT ROW_NUMBER() OVER(ORDER BY p.SEQ DESC) AS No, p.SEQ, p.COMMENT, p.POST_SEQ ,p.MEM_SEQ, p.NICKNAME, p.PROFILE
+			FROM post_comment_view p
 			WHERE POST_SEQ LIKE #{seq}
 		) A
 		<where>
-			<if test=" beginRow != null and beginRow != '' ">
-				A.No BETWEEN #{beginRow} AND #{endRow}
-			</if>
+			<if test=" beginRow != null and beginRow != '' ">A.No BETWEEN #{beginRow} AND #{endRow}</if>
 		</where>
 	</select>
 	<select id="commentCount" parameterType="map" resultType="int">
-		 SELECT COUNT(*)
-		 FROM comment
+		 SELECT COUNT(*) FROM comment
 		 <where>
-			<if test=" seq != null and seq != '' ">
-				ARTICLE_SEQ LIKE #{seq}
-			</if>
+			<if test=" seq != null and seq != '' ">ARTICLE_SEQ LIKE #{seq}</if>
 		 </where>
 	</select>
 	<delete id="commentDelete" parameterType= "map">
-		DELETE FROM mariadb.comment
-		WHERE SEQ LIKE #{seq}
+		DELETE FROM comment WHERE SEQ LIKE #{seq}
 	</delete>
 </mapper>

@@ -63,7 +63,7 @@ public class TransactionService {
 	};
 	
 	@Transactional
-	public String postUpdate(Map<?, ?> p){
+	public void postUpdate(Map<?, ?> p){
 		m.clear();
 		pm.postUpdate(p);
 		pm.hashTagDelete(p);
@@ -72,13 +72,6 @@ public class TransactionService {
 			m.put("seq", p.get("seq"));
 			pm.hashTagInseart(m);
 		}
-		return String.valueOf(p.get("seq"));
-	};
-	
-	@Transactional
-	public boolean postDelete(Map<?, ?> p){
-		
-		return pm.postCount(m)==0;
 	};
 	
 	@Transactional
@@ -87,11 +80,6 @@ public class TransactionService {
 	};
 	
 	/*
-	@Transactional
-	public void cmtDelete(Map<?, ?> p){};
-	
-	@Transactional
-	public void tagDelete(Map<?, ?> p){};
 	@Transactional
 	public void likeInseart(Map<?, ?> p) {};
 	@Transactional

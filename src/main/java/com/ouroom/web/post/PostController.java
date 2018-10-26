@@ -70,8 +70,10 @@ public class PostController {
 	}
 	
 	@GetMapping("/posts/search/{query}/{pageNo}")
-	public @ResponseBody Map<String, Object> postSearch(@PathVariable String query, @PathVariable String pageNo){
+	public @ResponseBody Map<String, Object> postSearch(@PathVariable List<String> query, @PathVariable String pageNo){
 		PageProxy pxy = new PageProxy();
+		Util.log.accept("체크:::"+query);
+		
 		m.clear();
 		m.put("pageNo", pageNo.equals("undefined") ? 1 : Integer.parseInt(pageNo));
 		m.put("totalRecode", pm.postCount(m));
@@ -81,7 +83,7 @@ public class PostController {
 		m.clear();
 		m.put("beginRow", String.valueOf(page.getBeginRow()));
 		m.put("endRow", String.valueOf(page.getEndRow()));
-		m.put("list", pm.postSearch(query));
+		//m.put("list", pm.postSearch(query));
 		m.put("page", page.getTotalPage());
 		m.remove("beginRow");
 		m.remove("endRow");
@@ -94,11 +96,9 @@ public class PostController {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping("/posts/{seq}/edit")
+	@RequestMapping ("/posts/{seq}/edit")
 	public @ResponseBody String postEdit(@PathVariable String seq, @RequestBody Map<String, Object> p) {
-		p.put("lastUpdate", p.get("image").equals("") ? LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) : p.get("lastUpdate"));
-        p.put("image", p.get("image").equals("")? s : p.get("image"));
-        m.put("seq", tx.postUpdate(p));
+        tx.postUpdate(p);
 		if(p.get("image").equals(s)) {
 			Map<String, Object> a = (Map<String, Object>) pm.postRetrieve(p);
 			u.delete.accept(uploadPath+File.separator+"danah"+File.separator+"post"+File.separator
@@ -106,18 +106,16 @@ public class PostController {
 			u.upload.apply(uploadPath+File.separator+"danah"+File.separator+"post");
 		}
 		s = "";
-		return (String) m.get("seq");
+		return seq;
 	}
 	
 	@RequestMapping("/posts/{seq}/delete")
 	public @ResponseBody String postDelete(@PathVariable String seq, @RequestBody Map<String, String> p) {
-		Util.log.accept("삭제하기");
-		Util.log.accept(p.toString());
-		tx.postDelete(p);
+		pm.postDelete(seq);
 		u.delete.accept(uploadPath+File.separator+"danah"+File.separator+"post"+File.separator
-			+Util.rpb.apply("2018-10-20")+File.separator+"8439edf5-7bd4-4ba2-95e9-5a593881cb8d_005.png");
+			+Util.rpb.apply(p.get("lastUpdate"))+File.separator+p.get("image"));
 		return "1";
-	}//수정중
+	}
 	
 	@PostMapping("/posts/upload")
 	public @ResponseBody void postUplaod(@RequestBody MultipartFile file) throws Exception {

@@ -1196,9 +1196,14 @@ a.d_filter_item_btn {
 }
 */
 
-.d_keyword,
-.d_keywords {
+.d_keyword {
     margin-left: -3px;
+    margin-right: -3px;
+    margin-top: 30px;
+    padding: 0;
+}
+
+.d_keywords {
     margin-right: -3px;
     margin-top: 30px;
     padding: 0;
