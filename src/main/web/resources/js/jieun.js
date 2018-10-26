@@ -20,7 +20,8 @@ jieun=(()=>{
 				
 				let section =$('<section/>').addClass('je_row').appendTo(content);
 				
-				//--------------------------------------------nav :: 변경---------------------------------------//
+				// --------------------------------------------nav ::
+				// 변경---------------------------------------//
 				$('<div id="je_selling_helper_wrap" class="col-md-9"/>').append($('<div id="je_selling_helper"/>').addClass('navbar navbar-default')).appendTo(content);
 				
 				$('<ul/>').addClass("nav nav-tabs nav-justified").append(
@@ -53,22 +54,26 @@ jieun=(()=>{
 				}
 				$('.je_sticky').appendTo($('#h_navigation'));
 			
-				//--------------------------------------------nav :: 변경---------------------------------------//
+				// --------------------------------------------nav ::
+				// 변경---------------------------------------//
 	
 				let section2 =$('<section "/>').addClass('je_row1').appendTo(content);
 				
 				let je_div_cover = $('<div/>').addClass('je_div_cover');
-				let je_div_cover_info = $('<div/>').addClass('je_div_cover_info');
-				let arr = ['a','b'];
+
+				let je_div_cover_info1 = $('<div/>').addClass('je_div_cover_info1');
+				let je_div_cover_info2 = $('<div/>').addClass('je_div_cover_info2');
+				let arr = ['a','b','c'];
 				$.each(arr,function(i,j){
 					let col = $('<div>').addClass('je_col'+i).appendTo(section).appendTo(content);
 					col.appendTo(section);
 					$('.je_col0').append(je_div_cover);
-					$('.je_col1').append(je_div_cover_info);					
+					$('.je_col1').append(je_div_cover_info1);					
+					$('.je_col2').append(je_div_cover_info2);					
 				});
 				$('<img/>').attr({src:$.img()+'/jun/'+x.category+'/'+x.photo+'.jpg',id:'je_view1'}).appendTo(je_div_cover).appendTo($('.je_col0'));
 				
-				let p = $('<p style="margin-top: 50px; color:#8080805c"/>').addClass('je_info1').appendTo(je_div_cover_info);
+				let p = $('<p style="margin-top: 50px; color:#8080805c"/>').addClass('je_info1').appendTo(je_div_cover_info1);
 				let a1=$('<a id="gray_a"/>').attr({href:"https://ohou.se/store"}).text('오늘의 집 스토어');
 				let span1 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
 				let span2 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
@@ -88,10 +93,10 @@ jieun=(()=>{
 				a4.appendTo(p); 
 				span4.appendTo(p);
 				a5.appendTo(p);
-				p.appendTo(je_div_cover_info);
+				p.appendTo(je_div_cover_info1);
 				
 				let p1=$('<p/>').addClass('je_cover_title');
-				p1.text(d.title).appendTo(je_div_cover_info);
+				p1.text(d.title).appendTo(je_div_cover_info1);
 				$('.je_cover_title').html();
 				
 				let a6 = $('<a style="color:#cc5200"/>').addClass('je_review').attr({href:"https://ohou.se/productions/54844/selling#product-review"});
@@ -103,7 +108,7 @@ jieun=(()=>{
 					star.appendTo(a6);
 					star.appendTo(review).appendTo(a6).html('226개의 리뷰<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>');
 					$('<br/>').appendTo(a6);
-					a6.appendTo(je_div_cover_info);
+					a6.appendTo(je_div_cover_info1);
 				
 				let p_price=$('<p/>').addClass('je_price_cover');
 
@@ -114,10 +119,10 @@ jieun=(()=>{
 				
 				origin.appendTo(p_price);
 				ins.appendTo(p_price);
-				p_price.appendTo(je_div_cover_info);
+				p_price.appendTo(je_div_cover_info1);
 				
 				
-				$('<button/>').attr({id:'je_sharebtn',class:'btn btn-primary btn-lg'}).appendTo(je_div_cover_info);
+				$('<button/>').attr({id:'je_sharebtn',class:'btn btn-primary btn-lg'}).appendTo(je_div_cover_info1);
 				$('#je_sharebtn').append(
 						$('<span/>').addClass('glyphicon glyphicon-share').attr("aria-hidden","true"),
 						$('<span style="font-size: 13px; margin-right:6px; margin-left:6px"/>').addClass('je_action__btn').text('공유'),
@@ -130,130 +135,267 @@ jieun=(()=>{
 						),
 						$('<a/>').addClass('naver_share').attr({href:"http://share.naver.com/web/shareView.nhn?url=https://ohou.se/productions/54844/selling&title=[%EB%A0%88%EC%9D%B4%EB%94%94%EA%B0%80%EA%B5%AC][%EC%B5%9C%EC%A0%80%EA%B0%80]%20%EA%B3%A0%EB%B0%80%EB%8F%84%20%ED%95%84%EB%A1%9C%EC%9A%B0%ED%83%91%20%ED%95%98%EC%9D%B4%EB%B8%8C%EB%A6%AC%EB%93%9C%20%EB%A7%A4%ED%8A%B8%EB%A6%AC%EC%8A%A4(S/SS/Q/K)",target:'_blank'})
 									.append($('<img/>').attr({src:img+'/jieun/naver.png',style:'width="100px" height="100px"'})
-						)).appendTo(je_div_cover_info);
+						)).appendTo(je_div_cover_info1);
 				
 
-		    	$('<select id="je_selectbtn"/>').appendTo(je_div_cover_info);
-		    	$('<option/>').attr("value","0").html('옵션').appendTo($('#je_selectbtn'));
-		    	$('<section id="item_sec" style="overflow:auto; background-color:whitesmoke; margin-top:20px; height: 160px;"/>').appendTo(je_div_cover_info);
-		    	$.each(d.options,(i,j)=>{
-					$('<option/>').attr("value",j.options).html(j.options).appendTo($('#je_selectbtn'));
-				});	
+		    	$('<select id="je_selectbtn" style="font-size: 12px;"/>').appendTo(je_div_cover_info1);
+		    	$('<option selected disabled/>').html('옵션').appendTo($('#je_selectbtn'));
 		    	
-		    	
-		    	$('<hr/>').attr({class:'je_line'}).appendTo(je_div_cover_info);
+		    	$('<div id="je_total_div"/>').appendTo(section2);
+				$('<div id="je_total_1" class="col-md-8"/>').appendTo($('#je_total_div'));
+				$('<div id="je_total_2" class="col-md-4" style="margin-top: 50px; height:7000px;padding-left: 80px;"/>').appendTo($('#je_total_div'));
 				
-				$('<p style="font-size: 13px" class="je_total_price"/>').appendTo(je_div_cover_info);
+				let t_order_cart=$('<section class="col-md-10" id="t_order_cart" style="left: 18%; width: 330px; top: 150px; position:sticky;"/>').appendTo($('#je_total_2'));
+				
+				$('<div id="je_order_cart"/>').html('<div style="font-weight:bold; font-size:15px;  ">옵션선택</div>').appendTo($('#t_order_cart'));
+				let cart_btn=$('<section style="height: 80px; margin-bottom: 40px" />').html('<div id="je_cart_btn">').appendTo($('#t_order_cart'));
+				$('<select id="je_selectbtn2" class="col-md-12" style="height: 50px; margin-top: 30px"/>').appendTo(cart_btn);
+				$('<option selected disabled/>').html('옵션').appendTo($('#je_selectbtn2'));
+				$.each(d.options,(i,j)=>{
+					$('<option data-index="0"/>').attr("value",j.options).html(j.options).appendTo($('#je_selectbtn2'));
+				})
+		    	
+		    	
+		    	var je_item=$('<section class="je_item" id="item_sec" style="overflow:auto; margin-top:20px; max-height:100px"/>').appendTo(je_div_cover_info1);
+		    	var item_sec2=$('<section class="selected-options text-caption-1" id="item_sec2" style=" border: 0.5px solid #80808038; background-color: whitesmoke; padding: 5px; margin-bottom: 30px; height: 261px;">').appendTo($('#t_order_cart'));
+
+		    	$.each(d.options,(i,j)=>{
+					$('<option data-index="0" id="opt"/>').attr("value",j.options).html(j.options).appendTo($('#je_selectbtn'));
+				});	
+
+
+		    	$('<hr style="	color: gray; size: 0.5em; noshade;"/>').appendTo(je_div_cover_info2);
+				
+				$('<p style="font-size: 13px" class="je_total_price"/>').appendTo(je_div_cover_info2);
 				$('<span id="je_temp"/>').appendTo($('.je_total_price'));
 				
 				
-				
+
 				let t=1;
-				var sum=0;
-				jQuery($('#je_selectbtn')).change(function(){
+				
+				var sum=0;	
+				var y=parseInt(d.sum);
+				
+				$('#je_selectbtn').change(function(){
+						
+					
 					let t2=t;
 					let count=1;
- 
-					let selected_opt1=$('<div class="item" data-index="1" style="border-bottom: solid 1px #ededed; height: 61px; margin:10px">').html(
-							 '<p class="name" style="font-size: 12px;">'+$('#je_selectbtn option:selected').val()+'<span class="glyphicon glyphicon-remove" role="button" aria-hidden="false" style="margin-left:430px"></p>'
-							+ '<div class="detail"><div class="amount">'
-							+ '<span class="minus glyphicon glyphicon-minus" role="button" style="margin-right: 3px;"></span>'
-							+ '<input id="num_val" type="number" value="1"  style=" border: 0px solid; background-color: whitesmoke; width:30px; text-align:center;"></input>'
-							+ '<span class="plus glyphicon glyphicon-plus" role="button" style="margin-left: 10px;"></span></div><p class="bold col-md-12" style="font-weight:bold; left: 400px; width: 20%; padding-left: 0px; bottom: 20px;"><span class="amount">'+d.sum+'</span>원</p></div></div>').appendTo(item_sec);
+					let x = $("#je_selectbtn option:selected").text();				
+
+					sum=sum+y;
+					$('#je_won').html(sum);	
 					
-					$('.minus').click(e=>{
+					
+// ///
+					let minus=$('<span id="je_minus'+t2+ '" class="minus glyphicon glyphicon-minus" role="button" style="margin-right: 3px;"/>');
+					let amount=$('<div class="amount"/>');
+					let plus=$('<span id="je_plus'+t2+ '" class="plus glyphicon glyphicon-plus" role="button" style="margin-left: 10px;"/>');
+					let input=$('<input id="je_num_val'+t2+'" type="number" value="1"  style=" border: 0px solid; width:30px;   text-align:center;"/>');
+					let divv=$('<div id="item'+t2+'" class="divv_c" data-index="1" style="border-bottom: solid 1px #ededed; margin:10px; font-size: 12px;">');
+					let detail=$('<div class="detail" style="margin-top:20px">');
+					let bold_p=$('<p class="bold col-md-12" style="font-weight:bold; left: 400px; width: 20%;  bottom: 20px;">');
+					let span_left=$('<span style="float:left">').html(x);
+					let no_wrap_p=$('<p style="font-size: 12px; white-space: nowrap; margin-bottom: 10px; height: 10px;">');
+					let span_am=$('<span class="amount" style="float:right"/>').html(y+'원');
+					let remove = $('<span class="remove glyphicon glyphicon-remove" role="button" aria-hidden="false" style="float: right; right: 10px;">');
+					let br=$('<br>');
+
+					
+					span_left.appendTo(no_wrap_p);
+					remove.appendTo(no_wrap_p);
+					no_wrap_p.append(br);
+					
+					minus.appendTo(amount);
+					input.appendTo(amount);
+					plus.appendTo(amount);					
+					amount.appendTo(detail);					
+					span_am.appendTo(bold_p);
+					bold_p.appendTo(detail);
+					
+					no_wrap_p.appendTo(divv);
+					detail.appendTo(divv);
+					divv.appendTo(je_item);
+					
+					divv.append(br);
+					
+					$("#je_selectbtn option:selected").change(function()  {
+						alert('change func 먹니????');
+						$('#item_sec2').change();
+						});		
+
+										
+					alert('t2 :: '+ t2);
+					$(this).click(e=>{
+						e.preventDefault();						
+						je_item.show();
+						$('#je_won').html(sum);	
+						});
+					
+					
+					
+					$('#je_minus'+t2).click(e=>{
 						e.preventDefault();
-						alert('- 버튼을 눌렀습니당');
+						
 						if(count>1){
 							count--;
-							$('#num_val'+t2).val(count);
-							sum=sum-d.sum;
+							$('#je_num_val'+t2).val(count);							
+							sum=sum-y;
 							$('#je_won').html(sum);	
 							}
+						
 					});
 					
-					$('.plus').click(e=>{
-						e.preventDefault();
-						alert('+ 버튼을 눌렀습니당');					
+					$('#je_plus'+t2).click(e=>{
+						e.preventDefault();				
 							count++;
-							$('#num_val'+t2).val(count);
-							sum=sum+d.sum;
-							$('#je_won').html(sum);						
+							$('#je_num_val'+t2).val(count);
+							sum=sum+y;
+							$('#je_won').html(sum);	
+							
 							
 					});
+			
+					
+					$('#je_won').html(sum);	
 
+					remove.click(e=>{
+						e.preventDefault();	
+						divv.remove();											
+						});
+					
+					
+					t++;
+				
+					
 				});
-						    	
-				$('#je_temp').html('<label style="margin-right: 430px">주문금액</label><span style="width:20px,margin-right:100px"><strong id="je_won">'+sum+'</strong>원</span>');				
 				
+				let or_pri=$('<label style="margin-top: 10px;"/>').html('주문금액');
+				let in_span=$('<span class="in_span1" style="float: right; display: inline;"/>').html('<strong id="je_won">'+sum+'</strong>원');
+				or_pri.appendTo($('#je_temp'));
+				in_span.appendTo($('#je_temp'));
+								
 				
-				
-				let buttons=$('<div id="je_buttons" style="margin-top: 20px; margin-bottom:30px"/>')
-				buttons.appendTo(je_div_cover_info);
+				let buttons=$('<div id="je_buttons" style="margin-top: 15px; margin-bottom:30px"/>')
+				buttons.appendTo(je_div_cover_info2);
 				$('<button id="je_get_basket"/>').text('장바구니 담기').appendTo(buttons);
 				$('<button id="je_buy"/>').text('구매하기').appendTo(buttons);
 				
 
 				//
 				
-				$('<div id="je_total_div"/>').appendTo(section2);
-				$('<div id="je_total_1" class="col-md-8"/>').appendTo($('#je_total_div'));
-				$('<div id="je_total_2" class="col-md-4" style="margin-top: 100px; height:7000px;padding-left: 80px;"/>').appendTo($('#je_total_div'));
 				
-				let t_order_cart=$('<section class="col-md-10" id="t_order_cart" style="left: 18%; width: 330px; top: 100px; position:sticky;padding-top:50px;"/>').appendTo($('#je_total_2'));
-				
-				$('<div id="je_order_cart"/>').html('<div style="font-weight:bold; font-size:15px;  ">옵션선택</div>').appendTo($('#t_order_cart'));
-				let cart_btn=$('<section style="height: 80px; margin-bottom: 40px" />').html('<div id="je_cart_btn">').appendTo($('#t_order_cart'));
-				$('<select id="je_selectbtn2" class="col-md-12" style="height: 50px; margin-top: 30px"/>').appendTo(cart_btn);
-				$('<option/>').attr("value","0").html('옵션').appendTo($('#je_selectbtn2'));
-				$.each(d.options,(i,j)=>{
-					$('<option/>').attr("value",j.options).html(j.options).appendTo($('#je_selectbtn2'));
-				})
 
+				/*여기가 따라다니는 옵션버튼*/
+				
+				let cart_tp=$('<div id="je_temp2"/>');
+				let or_pri1=$('<label style="margin-top: 10px;"/>').html('주문금액');
+				let in_span1=$('<span class="in_span1" style="float: right; display: inline;"/>').html('<strong id="je_won">'+sum+'</strong>원');
+				
+				$('#je_selectbtn2').change(function(){
+						
+					
+					let t2=t;
+					let count=1;
+					let x = $("#je_selectbtn2 option:selected").text();		
+
+					sum=sum+y;
+					$('#je_won1').html(sum);	
+					
+					let minus=$('<span id="je_minus'+t2+ '" class="minus glyphicon glyphicon-minus" role="button" style="margin-right: 3px;"/>');
+					let amount=$('<div class="amount"/>');
+					let plus=$('<span id="je_plus'+t2+ '" class="plus glyphicon glyphicon-plus" role="button" style="margin-left: 10px;"/>');
+					let input1=$('<input id="je_num_val'+t2+'" type="number" value="1"  style=" border: 0px solid; width:30px;   text-align:center; background-color:whitesmoke;"/>');
+					let divv1=$('<div id="item'+t2+'" class="divv_c" data-index="1" style="border-bottom: solid 1px #ededed; margin:10px; font-size: 12px;">');
+					let detail=$('<div class="detail" style="margin-top:20px">');
+					let bold_p1=$('<p class="bold col-md-12" style="font-weight:bold; left: 220px; width: 20%; padding: 0px; bottom: 20px;">');
+					let span_left=$('<span style="float:left">').html(x);
+					let no_wrap_p=$('<p style="font-size: 12px; white-space: nowrap; margin-bottom: 10px; height: 10px;">');
+					let span_am=$('<span class="amount" style="float:right; width: 45px;"/>').html(y+'원');
+					let remove = $('<span class="remove glyphicon glyphicon-remove" role="button" aria-hidden="false" style="float: right;">');
+					let br=$('<br>');
+
+					divv1.appendTo(item_sec2);
+					span_left.appendTo(no_wrap_p);
+					remove.appendTo(no_wrap_p);
+					no_wrap_p.append(br);
+					
+					minus.appendTo(amount);
+					input1.appendTo(amount);
+					plus.appendTo(amount);					
+					amount.appendTo(detail);					
+					span_am.appendTo(bold_p1);
+					bold_p1.appendTo(detail);
+					
+					no_wrap_p.appendTo(divv1);
+					detail.appendTo(divv1);
+					
+					
+					/*divv1.appendTo(je_item);*/
+					divv1.append(br);
+					
+					alert('t2 :: '+ t2);
+					$(this).click(e=>{
+						e.preventDefault();				
+						$('#je_won1').html(sum);	
+						});
+										
+					$('#je_minus'+t2).click(e=>{
+						e.preventDefault();
+						
+						if(count>1){
+							count--;
+							$('#je_num_val'+t2).val(count);							
+							sum=sum-y;
+							$('#je_won1').html(sum);	
+							}
+						
+					});
+					
+					$('#je_plus'+t2).click(e=>{
+						e.preventDefault();				
+							count++;
+							$('#je_num_val'+t2).val(count);
+							sum=sum+y;
+							$('#je_won1').html(sum);	
+							
+							
+					});
+			
+					
+					$('#je_won1').html(sum);	
+
+					remove.click(e=>{
+						e.preventDefault();	
+						divv1.remove();											
+						});
+					
+					
+					t++;
 				
 				
-				let selected_opt2=$('<section class="selected-options text-caption-1" style=" border: 0.5px solid #80808038; background-color: whitesmoke; padding: 5px; margin-bottom: 30px; height: 261px;">').html('<div class="item" data-index="1" style="border-bottom: solid 1px #ededed; height: 51px;">'
-																								+ '<p class="name" style="font-size: 12px;">01 몬스터 필로우탑 30T 침대 매트리스 싱글(S)<span class="glyphicon glyphicon-remove" role="button" aria-hidden="false" style="margin-left:15px"></p>'
-																								+ '<div class="detail"><div class="amount">'
-																								+ '<span class="glyphicon glyphicon-minus" role="button" style="margin-right: 10px;"></span>'
-																								+ '<input type="number" value="1"  style=" border: 0px solid; background-color: whitesmoke; width:30px; text-align:center;"></input>'
-																								+ '<span class="glyphicon glyphicon-plus" role="button" style="margin-left: 10px;"></span></div><p class="bold col-md-12" style="font-weight:bold; left: 200px; width: 33%; padding-left: 0px; bottom: 20px;"><span class="amount">119,000</span>원</p></div></div>');
+
+				});
 				
-				selected_opt2.appendTo($('#t_order_cart'));
+			
+
+				or_pri1.appendTo(cart_tp);
+				in_span1.appendTo(cart_tp);
+				cart_tp.appendTo($('#t_order_cart'));
+				in_span=in_span1;S
 				
-				$('<div id="je_temp2"/>').html('<label style="margin-right: 230px; font-size: 10px">주문금액</label><span style="width:20px,margin-right:120px"><strong id="je_won">0</strong>원</span>').appendTo($('#t_order_cart'));
 				
+				/////
+		
+				////////////
+								
 				let buttons2=$('<div id="je_buttons2" style="margin-top: 20px; text-align: center"/>')
 				buttons2.appendTo($('#t_order_cart'));
 				$('<button id="je_get_basket" style="width: 130px"/>').text('장바구니 담기').appendTo(buttons2);
 				$('<button id="je_buy" style="width: 130px; margin-right:0px"/>').text('구매하기').appendTo(buttons2);
-				///
+				// /
 				
-			/*	$(document).ready(function() {
-					// grab the initial top offset of the navigation 
-				   	var stickyNavTop = $('#je_selling_helper_wrap').offset().top;
-				   	
-				   	// our function that decides weather the navigation bar should have "fixed" css position or not.
-				   	var stickyNav = function(){
-					    var scrollTop = $(window).scrollTop(); // our current vertical position from the top
-					         
-					    // if we've scrolled more than the navigation, change its position to fixed to stick to top,
-					    // otherwise change it back to relative
-					    if (scrollTop > stickyNavTop) { 
-					        $('#t_order_cart').addClass('sticky');
-					    } else {
-					        $('#t_order_cart').removeClass('sticky'); 
-					    }
-					};
-					$('.sticky').appendTo($('#h_navigation'));
-
-					stickyNav();
-					// and run it again every time you scroll
-					$(window).scroll(function() {
-						stickyNav();
-					});
-				});*/
-				
+		
 
 				let total_wrap = $('<div id="je_total_wrap" />').appendTo($('#je_total_1'));
 				
@@ -266,41 +408,41 @@ jieun=(()=>{
 				//
 				$('<section id="je_detail">').appendTo(total_wrap);
 				($('<div id="je_detail_contents" class="je_detail_hidden"/>').append($('<div style="margin: 0px; padding: 0px; width: 100%; text-align: center;"/>'))).appendTo($('#je_detail'));
-				//<!-------------------- 오하임 전체공지------------------>
-				//<!-------------------- 레이디가구 전체공지--------------->
+				// <!-------------------- 오하임 전체공지------------------>
+				// <!-------------------- 레이디가구 전체공지--------------->
 				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/gong.jpg'}));
 				$('<div/>').html('&nbsp');
 				$('<div/>').html('&nbsp');
 				$('<div/>').html('&nbsp');
-				//<!--------------------업체별(가드너) 공지 ST--------->
-				//<!---------------------상세 START---------------------------->
+				// <!--------------------업체별(가드너) 공지 ST--------->
+				// <!---------------------상세 START---------------------------->
 				
 				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/gong2.jpg'}));
 				
 				$('<br/>');
 				$('<br/>');
 				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/faq.jpg'}));
-				//<!-------------------배송정보 START----------------------------->
+				// <!-------------------배송정보 START----------------------------->
 				$('<br/>');
 				$('<br/>');
 				
 				$('#je_detail_contents').append($('<img class="je_detail_img">').attr({src:img+'/jieun/배송1.jpg'}));
 
-				//<!-------------------배송정보 END----------------------------->
+				// <!-------------------배송정보 END----------------------------->
 				
-				//product-info-noti
+				// product-info-noti
 				$('<section id="je_info_noti">').appendTo(total_wrap);
 				($('<tbody id="je_tbody"/>').appendTo($('<table class="line-height-normal" cellspacing="0">'))).appendTo($('#je_info_noti'));
 				
 				
-				//review
+				// review
 				$('<section id="product-review">').appendTo(total_wrap);
 				$('#product-review').html('리뷰가 들어가야되는 자리이니다. 넘보지 마새오.');
 				
 				
 				$('<br/>');
 				$('<br/>');
-				//shipping
+				// shipping
 				let section4 =$('<section/>');
 				$('<section id="product-shipping">').appendTo(total_wrap);
 				section4.appendTo($('#product-shipping'));
