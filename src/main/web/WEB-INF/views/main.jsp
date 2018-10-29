@@ -22,6 +22,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
 	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script><!-- 혜리 -->
 	
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+	<link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+	
 	
 	<!-- 공통 -->
 	<script src="${context}/resources/js/app.js"></script> 

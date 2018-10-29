@@ -18,6 +18,7 @@ hyeri = (() => {
 hyeri.page={
     h:()=>{
     	//메인홈
+    	
     	$('#content').empty();
     	$('<div/>').addClass('container').attr({id:"h_main"}).appendTo($('#content'));
 		
