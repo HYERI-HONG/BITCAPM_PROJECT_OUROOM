@@ -2,7 +2,7 @@
 var jieun = jieun || {};
 
 jieun=(()=>{
-	var w,nav,footer,content,context,script,style,img;
+	var w,nav,content,context,script,style,img;
 		context = $.context();
 		script = $.script();
 		style = $.style();
@@ -14,8 +14,6 @@ jieun=(()=>{
 
 			$.getJSON(context+'/BrdDetail/detail/'+x.seq,d=>{
 
-			 	content.appendTo(w);
-				$('#footer').remove();
 				content.empty();
 				
 				let section =$('<section/>').addClass('je_row').appendTo(content);
@@ -382,12 +380,8 @@ jieun=(()=>{
 				or_pri1.appendTo(cart_tp);
 				in_span1.appendTo(cart_tp);
 				cart_tp.appendTo($('#t_order_cart'));
-				in_span=in_span1;S
+				in_span=in_span1;
 				
-				
-				/////
-		
-				////////////
 								
 				let buttons2=$('<div id="je_buttons2" style="margin-top: 20px; text-align: center"/>')
 				buttons2.appendTo($('#t_order_cart'));

@@ -18,7 +18,6 @@ hyeri = (() => {
 hyeri.page={
     h:()=>{
     	//메인홈
-    	
     	$('#content').empty();
     	$('<div/>').addClass('container').attr({id:"h_main"}).appendTo($('#content'));
 		
@@ -235,7 +234,6 @@ hyeri.page={
     },
     a:()=>{
     	//회원가입
-    	$('#footer').remove();
 		$('#content').html('<div id="add_form" class="je_sign-in-form" >'
 				+'<p id="je_font_2em" class="je_bold">회원가입</p>'
 				+'        <hr class="h_border">'
@@ -452,7 +450,6 @@ hyeri.page={
     },
     l:()=>{
     	//로그인
-    	$('#footer').remove();
 		$('#content').html('<div class="je_sign-in-form" >'
 				+ '<h1 class="je_sign-in-form__header">'
 				+ '<a id="main_btn" class="je_sign-in-form__header__link" href="#">'
@@ -499,14 +496,13 @@ hyeri.page={
 						}else if(d.pwValid==='WRONG'){
 							$('#h_rsh').html('비밀번호를 잘못 입력했습니다.');
 						}else{
-							//브라우저닫으면 없어지는 세션 쿠키 생성		
+							//브라우저닫으면 없어지는 세션 쿠키 생성	
 							$.cookie('userid', d.value.seq);
 							$.cookie('nickname', d.value.nickname);
 							$.cookie('profile', d.value.profile);
-							
 							//쿠키삭제하기,true/false반환
 							//$.removeCookie('userid');
-							hyeri.page.h();
+							app.router.main();
 						}
 					},
 					error : (m1,m2,m3)=>{
@@ -525,28 +521,24 @@ hyeri.page={
 		});
 		$('#pwup_btn1').click(e=>{
 			e.preventDefault();
-			alert("비밀번호 재설정 클릭");
+			alert("서비스 준비중입니다.");
 		});
 		//카카오톡 로그인
 		
 		$('<a/>').attr({id:'kakao-login-btn'}).appendTo('.h_kakaologin');
 		$('<a/>').attr({href:'http://developers.kakao.com/logout'}).appendTo('.h_kakaologin');
 		
-		Kakao.init('cf638c2a7c366ab17beba0ec7c52bbcb');
+		
         // 카카오 로그인 버튼을 생성합니다.
         Kakao.Auth.createLoginButton({
           container: '#kakao-login-btn',
           success: function(authObj) {
-            alert(JSON.stringify(authObj));
-            
-            
             Kakao.API.request({
                 url: '/v1/user/me',
                 success: function(res) {
-                	alert(res);
                 	//카카오톡으로 부터 정보를 가져옴
 
-                      console.log("id : "+res.id);
+               /*       console.log("id : "+res.id);
                       console.log("email : "+res.kaccount_email);
                       console.log("pw : "+res.uuid);
                       
@@ -555,7 +547,7 @@ hyeri.page={
                       console.log("gender : "+res.properties.gender);
                       
                       console.log("profile image : "+res.properties.profile_image);
-                      console.log("nickname : "+res.properties.nickname);
+                      console.log("nickname : "+res.properties.nickname);*/
                 	
                       //카카오톡에서 가져온 정보로 로그인
                       $.ajax({
@@ -601,7 +593,9 @@ hyeri.page={
       						}else{
       							console.log("카카오톡으로 로그인되었습니다.");
       							$.cookie('userid', d.value.seq);
-      							hyeri.page.h();
+      							$.cookie('nickname', d.value.nickname);
+    							$.cookie('profile', d.value.profile);
+      							app.router.main();
       						}
       					},
       					error : (m1,m2,m3)=>{
@@ -615,11 +609,6 @@ hyeri.page={
              alert(JSON.stringify(err));
           }
         });
-		
-		
-		
-		
-		
     }
 };
 hyeri.func ={

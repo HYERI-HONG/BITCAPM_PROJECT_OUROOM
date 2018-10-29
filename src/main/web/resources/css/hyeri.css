@@ -4,8 +4,17 @@
 
 
 /*--------------------- navigation css------------------------- */
+#h_search_btn{
+	font-size:25px; 
+	margin-bottom:9px; 
+	vertical-align: bottom; 
+	margin-left:10px;
+}
+#h_wirte_btn{
+	top:12px; 
+	margin-left: -13.5px;
+}
 #h_navigation{
-	text-align: center;
 	
 }
 
@@ -19,7 +28,7 @@
  	align-items:center;
  	z-index :502;
  	position: fixed;
- 	
+ 	padding-left: 13%;
  	
 }
 .h_nav_left{
@@ -438,8 +447,7 @@
 	width: 100%;
 	text-align: left;
 	font: bold 16px sans-serif;
-
-	padding: 55px 50px;
+	padding: 55px 20px 55px 150px;
 	margin-top: 80px;
 }
 
@@ -453,7 +461,7 @@
 /* Footer left */
 
 .footer-distributed .footer-left{
-	width: 40%;
+	width: 35%;
 }
 
 /* The company logo */
@@ -465,7 +473,7 @@
 }
 
 .footer-distributed h3 span{
-	color:  #5383d3;
+	color:  #CC5200;
 }
 
 /* Footer links */
@@ -529,7 +537,7 @@
 }
 
 .footer-distributed .footer-center p a{
-	color:  #5383d3;
+	color:  #CC5200;
 	text-decoration: none;;
 }
 

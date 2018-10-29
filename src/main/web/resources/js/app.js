@@ -6,6 +6,7 @@ app =(()=>{
 		$.getScript(x+'/resources/js/router.js',
 				()=>{
 					$.extend(new Session(x)); 
+					Kakao.init('cf638c2a7c366ab17beba0ec7c52bbcb');
 					app.router.main();
 		})
 	};
@@ -21,44 +22,77 @@ app.router = {
 						$(y.resolve);
 					})
 				).done(x=>{
-						$('#wrapper').append(nav(),content(),footer());
+						$('#footer').remove();
+						$('#wrapper').html((($.type($.cookie("userid")) === 'undefined')?nav():anav())
+								+content()).append(footer());
 	                    hyeri.home();
 	                  
 						$('#logo').click(e=>{
 							e.preventDefault();
+						 	$('#h_search_btn').attr({ style: "visibility: hidden"});
+							$('#h_wirte_btn').attr({ style: "visibility: hidden"});
 							app.router.main();
                         });
 						 $('#login_btn').click(e=>{
 							e.preventDefault();
+							$('#footer').remove();
+						 	$('#h_search_btn').attr({ style: "visibility: hidden"});
+							$('#h_wirte_btn').attr({ style: "visibility: hidden"});
 							hyeri.login();
 						});
 						$('#join_btn').click(e=>{
 							e.preventDefault();
+							$('#footer').remove();
+						 	$('#h_search_btn').attr({ style: "visibility: hidden"});
+							$('#h_wirte_btn').attr({ style: "visibility: hidden"});
 							hyeri.add();
 						});
 						$('#board_btn').click(e=>{
 							e.preventDefault();
-						 	$('#footer').remove();
-							$('#h_search_btn').attr({ style: "visibility: visible;font-size:25px; margin-bottom:9px; vertical-align: bottom; margin-left:10px;" });
-							$('#h_wirte_btn').attr({ style: "visibility: visible; top:12px; margin-left: -13.5px;" });
+							$('#footer').remove();
+							$('#h_search_btn').attr({ style: "visibility: visible"});
+							$('#h_wirte_btn').attr({ style: "visibility: visible"});
 							$.getScript($.script()+'/danah.js', ()=>{
                                 danah.init($.context());
                             });
                         });
 						 $('#store_btn').click(e=>{
 		                    e.preventDefault();
-		                 	$('#footer').remove();
+		                    $('#footer').remove();
+		                	$('#h_search_btn').attr({ style: "visibility: hidden"});
+							$('#h_wirte_btn').attr({ style: "visibility: hidden"});
 		                    jun.init(); 
 		                 });
 						 $('#h_cart_btn').click(e=>{
 							e.preventDefault();
 							$('#footer').remove();
+						 	$('#h_search_btn').attr({ style: "visibility: hidden"});
+							$('#h_wirte_btn').attr({ style: "visibility: hidden"});
 							jun.main.cart();	
 						 });
 						 $('#statics_btn').click(e=>{
 	                        e.preventDefault();
+	                        $('#footer').remove();
+	                        $('#wrapper').append(footer());
+	                     	$('#h_search_btn').attr({ style: "visibility: hidden"});
+							$('#h_wirte_btn').attr({ style: "visibility: hidden"});
 	                        jaekyung.init();
 	                     });
+						 $('#logout_btn').click(e=>{
+		                        e.preventDefault();
+		                        if($.removeCookie('userid')
+		                        		&&$.removeCookie('nickname')
+		                        		&&$.removeCookie('profile')){
+		                        	alert("정상적으로 로그아웃 되었습니다.");
+		                        }else{
+		                        	alert("로그아웃 실패");
+		                        }
+		                        app.router.main();
+		                 });
+						 $('#mypage_btn').click(e=>{
+		                        e.preventDefault();
+		                       alert("서비스 준비중입니다.");
+		                 });
 				})
 		}
 };
@@ -67,7 +101,7 @@ var nav = () =>'<div id="h_navigation" style="height:77px">'
 	+'<img src="'+$.img()+'/hyeri/logo.png" id="logo">'
 	+'<span id="board_btn" class="h_nav_left">커뮤니티</span>'
 	+'<span id="store_btn" class="h_nav_left">스토어</span>'
-	+'<span id="statics_btn" class="h_nav_left" style="margin-right:30%">통계</span>'
+	+'<span id="statics_btn" class="h_nav_left" style="margin-right:38%">통계</span>'
 	+'<span><a id="h_wirte_btn" class="h_wirte_btn" href="/board_upload" style="visibility: hidden;top:12px">글쓰기</a></span>'
 	+'<span id="h_search_btn"class="glyphicon glyphicon-search" aria-hidden="true" style="visibility: hidden;font-size:25px; margin-bottom:9px; vertical-align: bottom; margin-left:10px"></span>'
 	+'<span id="h_cart_btn" class="glyphicon glyphicon-shopping-cart" aria-hidden="false" style="font-size:25px; margin-bottom:9px; vertical-align: bottom; margin-left:10px"></span>'
@@ -76,36 +110,50 @@ var nav = () =>'<div id="h_navigation" style="height:77px">'
 	+'<span id="join_btn" class="h_nav_right">회원가입</span>'
 	+'</div>'
 	+'</div>'
-
+	
+var anav = () =>'<div id="h_navigation"style="height:77px">'
+	+'<div id="h_navigation_primary">'
+	+'<img src="'+$.img()+'/hyeri/logo.png" id="logo">'
+	+'<span id="board_btn" class="h_nav_left">커뮤니티</span>'
+	+'<span id="store_btn" class="h_nav_left">스토어</span>'
+	+'<span id="statics_btn" class="h_nav_left" style="margin-right:30%">통계</span>'
+	+'<span><a id="h_wirte_btn" class="h_wirte_btn" href="/board_upload" style="visibility: hidden;top:12px">글쓰기</a></span>'
+	+'<span id="h_search_btn"class="glyphicon glyphicon-search" aria-hidden="true" style="visibility: hidden;font-size:25px; margin-bottom:9px; vertical-align: bottom; margin-left:10px"></span>'
+	+'<span id="h_cart_btn" class="glyphicon glyphicon-shopping-cart" aria-hidden="false" style="font-size:25px; margin-bottom:9px; vertical-align: bottom; margin-left:10px"></span>'
+	+'<span id="logout_btn" class="h_nav_right">로그아웃</span>'
+	+'<span class="h_nav_middle">|</span>'
+	+'<span id="mypage_btn" class="h_nav_right">마이페이지</span>'
+	+'</div>'
+	+'</div>'
 var content = () =>'<div id="content"><div/>';
 
 var footer =()=>'<div id="footer" class="footer-distributed">'
 	+'			<div class="footer-left">'
-	+'				<h3>Company<span>logo</span></h3>'
+	+'				<h3>nibangne<span>bang</span></h3>'
 	+'				<p class="footer-links">'
-	+'					<a href="#">Home</a>·<a href="#">Blog</a>'
-	+'					·<a href="#">Pricing</a>·<a href="#">About</a>'
-	+'					·<a href="#">Faq</a>·<a href="#">Contact</a>'
+	+'					<a href="#">Jaekyung</a>·<a href="#">Jun</a>'
+	+'					·<a href="#">Jieun</a>·<a href="#">Danah</a>'
+	+'					·<a href="#">Hyeri</a>'
 	+'				</p>'
-	+'				<p class="footer-company-name">Company Name &copy; 2015</p>'
+	+'				<p class="footer-company-name">ouroom &copy; 2018</p>'
 	+'			</div>'
 	+'			<div class="footer-center">'
 	+'				<div>'
 	+'					<i class="fa fa-map-marker"></i>'
-	+'					<p><span>21 Revolution Street</span> Paris, France</p>'
+	+'					<p><span>23, Baekbeom-ro, Mapo-gu</span>Seoul, Republic of Korea</p>'
 	+'				</div>'
 	+'				<div>'
 	+'					<i class="fa fa-phone"></i>'
-	+'					<p>+1 555 123456</p>'
+	+'					<p>+82 02 707 1480</p>'
 	+'				</div>'
 	+'				<div>'
 	+'					<i class="fa fa-envelope"></i>'
-	+'					<p><a href="mailto:support@company.com">support@company.com</a></p>'
+	+'					<p><a href="mailto:support@company.com">support@ouroom.com</a></p>'
 	+'				</div>'
 	+'			</div>'
 	+'			<div class="footer-right">'
 	+'				<p class="footer-company-about">'
-	+'					<span>About the company</span>'
+	+'					<span>About us</span>'
 	+'					Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.'
 	+'				</p>'
 	+'				<div class="footer-icons">'

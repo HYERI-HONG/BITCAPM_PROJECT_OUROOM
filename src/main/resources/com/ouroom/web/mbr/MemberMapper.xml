@@ -24,7 +24,7 @@
 	VALUES(#{email},#{nickname},#{password},#{gender},#{birthday},#{profile},#{join_date},#{age})
 </insert>
  <select id="get" resultType="com.ouroom.web.mbr.Member">
-    SELECT EMAIL,NICKNAME,PASSWORD,GENDER,BIRTHDAY,PROFILE,JOIN_DATE,AGE 
+    SELECT SEQ,EMAIL,NICKNAME,PASSWORD,GENDER,BIRTHDAY,PROFILE,JOIN_DATE,AGE 
     FROM MEMBER 
     <where>
     	<if test=" email !=null and email !='' ">
