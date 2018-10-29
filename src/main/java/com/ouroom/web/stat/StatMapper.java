@@ -10,8 +10,10 @@ import org.springframework.stereotype.Repository;
 public interface StatMapper {
 	public List<HashMap<?,?>> drawsvlc(Map<?, ?> m);
 	public List<HashMap<?,?>> drawsvcc(Map<?, ?> m);
-	public List<HashMap<?,?>> extrsvvc(Map<?, ?> m); 
-	public List<HashMap<?,?>> extrsvjc(Map<?, ?> m); 
+	public List<HashMap<?,?>> totalPostPerDay(Map<?, ?> m); 
+	public List<HashMap<?,?>> totalPostPerDayBefore(Map<?, ?> m); 
+	public List<HashMap<?,?>> totalJoinPerDay(Map<?, ?> m); 
+	public List<HashMap<?,?>> totalJoinPerDayBefore(Map<?, ?> m); 
 	public List<HashMap<?,?>> totalSalePerDay(Map<?, ?> m); 
 	public List<HashMap<?,?>> bestSellerPerDay(Map<?, ?> m); 
 	
@@ -27,6 +29,8 @@ public interface StatMapper {
 	public List<HashMap<?, ?>> drawmbrbc();
 	
 	public List<HashMap<?, ?>> drawabbasc();
+	
+	public List<HashMap<?, ?>> drawwrdcld();
 	
 	
 }
