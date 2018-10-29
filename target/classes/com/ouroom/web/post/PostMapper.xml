@@ -30,6 +30,8 @@
 		<result property= "itemTitle" column= "ITEM_TITLE" javaType= "String"/>
 		<result property= "category" column= "CATEGORY" javaType= "String"/>
 		<result property= "lastUpdate" column= "LAST_UPDATE" javaType= "String"/>
+		<result property= "no" column= "No" javaType= "int"/>
+		<result property= "check" column= "CHK" javaType= "int"/>
    </resultMap>
 	
 	<insert id="postInseart" parameterType="map">
@@ -38,11 +40,9 @@
 	</insert>
 	<select id="postList" parameterType="map" resultMap="postResultMap">
 		SELECT * FROM post_list_view
-		<where>
-			<if test=" beginRow != null and beginRow != '' ">No BETWEEN #{beginRow} AND #{endRow}</if>
-		</where>
+		<where><if test=" beginRow != null and beginRow != '' ">No BETWEEN #{beginRow} AND #{endRow}</if></where>
 	</select>
-	<select id="postSearch" parameterType="String" resultMap="postResultMap">
+	<select id="posthashTagSearch" parameterType="String" resultMap="postResultMap">
 		SELECT A.*, COUNT(c.SEQ) AS COMMENT_CNT
 		FROM (
 			SELECT ROW_NUMBER() OVER(ORDER by p.SEQ DESC) AS No, p.*, h.KEYWORD, m.NICKNAME, m.PROFILE
@@ -52,8 +52,22 @@
 			WHERE h.KEYWORD like #{value}
 			GROUP BY p.SEQ
 		) A
-		LEFT JOIN comment c ON A.SEQ LIKE c.ARTICLE_SEQ
+		LEFT JOIN comment c ON A.SEQ LIKE c.ARTICLE_SEQ AND c.BOARD_SEQ LIKE 1
 		GROUP BY A.seq
+	</select>
+	<select id="postSearch" parameterType="map" resultMap="postResultMap">
+		SELECT A.*
+		FROM (
+			SELECT ROW_NUMBER() OVER(ORDER BY ${order} DESC) AS No, SEQ, TITLE, CONTENT, REGI_DATE, VIEW_CNT, LIKE_CNT, SHARE_CNT, ROOM_TYPE, ROOM_SIZE, LAST_UPDATE, IMAGE, MEM_SEQ, NICKNAME, PROFILE, IMGTAG_CNT, COMMENT_CNT
+			FROM post_list_view
+			<where>
+				<if test=" roomType != null and roomType != '' ">ROOM_TYPE LIKE #{roomType}</if>
+				<if test=" roomSize != null and roomSize != '' ">AND ROOM_SIZE LIKE #{roomSize}</if>
+				<if test=" imageTagCnt != null and imageTagCnt != '' ">AND IMGTAG_CNT > 0</if>
+			</where>
+			ORDER BY No
+		)A
+		<where><if test=" beginRow != null and beginRow != '' ">No BETWEEN #{beginRow} AND #{endRow}</if></where>
 	</select>
 	<select id="postRetrieve" resultMap="postResultMap">
 		SELECT * FROM post_detail_view
@@ -66,8 +80,9 @@
 	<select id="postCount" parameterType="map" resultType="int">
 		 SELECT COUNT(*) FROM post
 		 <where>
-			<if test=" memSeq != null and memSeq != '' ">MEM_SEQ LIKE #{memSeq}</if>
-		 </where>
+		 	<if test=" memSeq != null and memSeq != '' ">MEM_SEQ LIKE #{memSeq}</if>
+		 	<if test=" seq != null and seq != '' ">AND SEQ LIKE #{seq}</if>
+	 	</where>
 	</select>
 	<update id="postUpdate" parameterType="map">
 		UPDATE post
@@ -98,20 +113,27 @@
 	
 	<insert id="imgTagInseart" parameterType= "map">
 		INSERT INTO imgtag (ITEM_TITLE, POINT, ITEM_SEQ, POST_SEQ)
-		VALUES (#{itemTitle}, #{posision}, #{itemSeq}, #{postSeq})
+		VALUES (#{itemTitle}, #{position}, #{itemSeq}, #{postSeq})
 	</insert>
 	<select id="imgTagList" resultMap= "postResultMap">
-		SELECT t.POST_SEQ, t.ITEM_TITLE, t.POINT, t.ITEM_SEQ, i.PHOTO AS image, c.CATEGORY
+		SELECT t.SEQ, t.ITEM_TITLE, t.POINT, t.ITEM_SEQ, i.PHOTO AS image, c.CATEGORY
 		FROM imgtag t
 		JOIN item i ON t.ITEM_SEQ LIKE i.SEQ
 		JOIN category2 c ON i.CATEGORY2_SEQ = c.SEQ
 		WHERE POST_SEQ LIKE #{value}
 	</select>
-	<select id="imgTagSearch" resultType="String">
+	<select id="imgTagSearch" resultMap= "postResultMap">
 		SELECT SEQ AS ITEM_SEQ, TITLE AS ITEM_TITLE FROM item
+		<where><if test=" itemSeq != null and itemSeq != '' ">SEQ LIKE #{itemSeq}</if></where>
 	</select>
+	<update id="imgTagUpdate" parameterType="map">
+		UPDATE imgtag
+		SET ITEM_TITLE=#{itemTitle}, POINT=#{position}, ITEM_SEQ=#{itemSeq}, POST_SEQ=#{postSeq}
+		WHERE SEQ=#{seq}
+	</update>
 	<delete id="imgTagDelete" parameterType= "map">
-	DELETE FROM imgtag WHERE SEQ LIKE #{seq}
+		DELETE FROM imgtag 
+		SEQ LIKE #{seq}
 	</delete>
 	
 	<insert id="commentInseart" parameterType= "map">
@@ -125,17 +147,36 @@
 			FROM post_comment_view p
 			WHERE POST_SEQ LIKE #{seq}
 		) A
-		<where>
-			<if test=" beginRow != null and beginRow != '' ">A.No BETWEEN #{beginRow} AND #{endRow}</if>
-		</where>
+		<where><if test=" beginRow != null and beginRow != '' ">A.No BETWEEN #{beginRow} AND #{endRow}</if></where>
 	</select>
 	<select id="commentCount" parameterType="map" resultType="int">
 		 SELECT COUNT(*) FROM comment
-		 <where>
-			<if test=" seq != null and seq != '' ">ARTICLE_SEQ LIKE #{seq}</if>
-		 </where>
+		 <where>BOARD_SEQ LIKE 1<if test=" seq != null and seq != '' "> AND ARTICLE_SEQ LIKE #{seq}</if></where>
 	</select>
 	<delete id="commentDelete" parameterType= "map">
 		DELETE FROM comment WHERE SEQ LIKE #{seq}
 	</delete>
+	
+	<insert id="likeInseart" parameterType= "map">
+		INSERT INTO likeit (ARTICLE_SEQ, MEM_SEQ, BOARD_SEQ, CHK)
+		VALUES(#{seq}, #{memSeq}, 1, 1);
+	</insert>
+	<select id="likeList" resultMap="postResultMap">
+		SELECT ARTICLE_SEQ AS SEQ, CHK
+		FROM likeit
+		WHERE BOARD_SEQ LIKE 1 AND MEM_SEQ LIKE #{memSeq}
+	</select>
+	<select id="likeRetrieve" parameterType= "map" resultMap="postResultMap">
+		SELECT ARTICLE_SEQ AS SEQ, MEM_SEQ, CHK
+		FROM likeit
+		<where>
+			BOARD_SEQ LIKE 1 AND MEM_SEQ LIKE #{memSeq}
+			<if test=" seq != null and seq != '' ">AND ARTICLE_SEQ LIKE #{seq}</if>
+		</where>
+	</select>
+	<update id="likeUpdate" parameterType= "map">
+		UPDATE likeit
+		SET CHK = #{check}
+		WHERE ARTICLE_SEQ = #{seq} AND MEM_SEQ = #{memSeq};
+	</update>
 </mapper>
