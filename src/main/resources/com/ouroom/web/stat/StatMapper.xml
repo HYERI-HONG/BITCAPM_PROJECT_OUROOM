@@ -11,7 +11,9 @@
 		<result column="smmDate" property="smmDate" javaType="string" />
 		<result column="smmSale" property="smmSale" javaType="int" />
 		<result column="postCount" property="postCount" javaType="int" />
+		<result column="postBeforeCount" property="postBeforeCount" javaType="int" />
 		<result column="joinCount" property="joinCount" javaType="int" />
+		<result column="joinBeforeCount" property="joinBeforeCount" javaType="int" />
 		<result column="totalsaleperday" property="totalSalePerDay" javaType="int" />
 		<result column="categorysOfBestSeller" property="categorysOfBestSeller" javaType="string" />
 		<result column="sumOfBestSeller" property="sumOfBestSeller" javaType="int" />
@@ -38,11 +40,17 @@
 		<result column="mancount" property="mancount" javaType="int" />
 		<result column="womancount" property="womancount" javaType="int" />
 		
+		<result column="ageabba" property="ageabba" javaType="int" />
+		<result column="av_salesabba" property="av_salesabba" javaType="int" />
+		
+		<result column="keywc" property="keywc" javaType="string" />
+		<result column="countwc" property="countwc" javaType="int" />
+		
 	</resultMap>
 
 	<select id="drawsvlc" resultMap="statbigbean">
 		 SELECT visit_date AS visitDate , COUNT(*) AS count FROM visitor 
-		 WHERE visit_date BETWEEN #{stDSmm} AND #{enDSmm}
+		 WHERE visit_date BETWEEN #{stDSmm} AND  #{enDSmm}
 		 GROUP BY visit_date ;
 	</select>
 	<select id="drawsvcc" resultMap="statbigbean">
@@ -55,16 +63,28 @@
 					ON b.seq = a.item_seq
 				GROUP BY a.purchase_date;
 	</select>
-	<select id="extrsvvc" resultMap="statbigbean">
+	<select id="totalPostPerDay" resultMap="statbigbean">
 		    SELECT SUM(view_cnt) AS postCount 
 		    FROM post  
 		    WHERE regi_date LIKE #{postStartDate} 
 			GROUP BY regi_date ;
 	</select>
-	<select id="extrsvjc" resultMap="statbigbean">
+	<select id="totalPostPerDayBefore" resultMap="statbigbean">
+		    SELECT SUM(view_cnt) AS postBeforeCount 
+		    FROM post  
+		    WHERE regi_date LIKE #{postStartDateBefore} 
+			GROUP BY regi_date ;
+	</select>
+	<select id="totalJoinPerDay" resultMap="statbigbean">
 		    SELECT COUNT(join_date) AS joinCount 
 		    FROM member 
-		    WHERE join_date LIKE #{selectDSmm} 
+		    WHERE join_date LIKE #{joinStartDate} 
+		    GROUP BY join_date;
+	</select>
+	<select id="totalJoinPerDayBefore" resultMap="statbigbean">
+		    SELECT COUNT(join_date) AS joinBeforeCount 
+		    FROM member 
+		    WHERE join_date LIKE #{joinStartDateBefore} 
 		    GROUP BY join_date;
 	</select>
 	<select id="totalSalePerDay" resultMap="statbigbean">
@@ -188,5 +208,25 @@
 				,mancount mancount
 				,womancount womancount
 		FROM v_mbr_manwoman_ryu
+	</select>
+	
+	
+	
+	<select id="drawabbasc" resultMap="statbigbean">
+		select age ageabba
+			, av_sales av_salesabba
+		from member b 
+			join(
+				select b.mem_seq mem_seq 
+					,round(sum(a.sum)/sum(b.CNT)) av_sales 
+				from purchase b 
+				left join item a 
+					on a.SEQ like b.ITEM_SEQ 
+				group by b.mem_seq) a 
+			on a.MEM_SEQ like b.SEQ
+	</select>
+	
+	<select id="drawwrdcld" resultMap="statbigbean">
+		select keyword keywc,count(*) countwc from hashtag group by KEYWORD order by count(KEYWORD)
 	</select>
 </mapper>

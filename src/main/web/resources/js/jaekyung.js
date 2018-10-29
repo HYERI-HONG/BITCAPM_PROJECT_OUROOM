@@ -27,13 +27,15 @@ jaekyung.main={// 메인페이지//변경
                      jaekyung.chart.sba(); 
                      jaekyung.chart.ctgr1();
                      jaekyung.chart.mbr();
+                     jaekyung.chart.abba();
+                     jaekyung.chart.wrdcld();
               },
               nav:()=>{
             	  	 let d=$('<div />');
                      let navc =$('<nav />');
                      let dd=$('<div />');
                      let u = $('<ul />');
-                     let ip = [{lst:'요약',id:'smmryu'},{lst:'방문자',id:'vstryu'},{lst:'연령별',id:'sbaryu'},{lst:'카테고리별',id:'ctgr1ryu'},{lst:'가입자',id:'mbrryu'},{lst:'구매액',id:'abbaryu'},{lst:'시간별방문자',id:'vbtryu'},{lst:'성별',id:'cbgryu'}];
+                     let ip = [{lst:'요약',id:'smmryu'},{lst:'방문자',id:'vstryu'},{lst:'연령별',id:'sbaryu'},{lst:'카테고리별',id:'ctgr1ryu'},{lst:'가입자',id:'mbrryu'},{lst:'구매액',id:'abbaryu'},{lst:'시간별방문자',id:'vbtryu'}];
                      d.addClass("container");
                      navc.attr({id:"navc__st",style:"position: fixed; max-width:1140px"})
                            .addClass("navbar navbar-default").appendTo(d);
@@ -66,7 +68,7 @@ jaekyung.main={// 메인페이지//변경
                             findPosition();
                         });
                         function findPosition(){
-                            $('div .woruddlrkshfogksekghdghdghd').each(function(){
+                            $('div .scrollsd_ryu').each(function(){
                                 if( ($(this).offset().top - $(window).scrollTop() ) <600){
                                     $('li.scrollS__ryu').removeClass('active');
                                     $('#ididid').find('[data-scroll="'+ $(this).attr('id') +'"]').addClass('active');
@@ -102,13 +104,15 @@ jaekyung.main={// 메인페이지//변경
               ctner:()=>{
                      let d = $('<div>');
                      (jaekyung.main.smm()).appendTo(d);
-                     (jaekyung.main.vst()).appendTo(d);
                      (jaekyung.main.sba()).appendTo(d);
+
+                     (jaekyung.main.vbt()).appendTo(d);
                      (jaekyung.main.ctgr1()).appendTo(d);
+                     (jaekyung.main.vst()).appendTo(d);
+                     
+                     
                      (jaekyung.main.mbr()).appendTo(d);
                      (jaekyung.main.abba()).appendTo(d);
-                     (jaekyung.main.vbt()).appendTo(d);
-                     (jaekyung.main.cbg()).appendTo(d);
                      return d;
               },
               ftr:()=>{
@@ -124,7 +128,7 @@ jaekyung.main={// 메인페이지//변경
                 let smmco = $('<div />');
                 let smmct = $('<div />');
                 smm.attr({style:"background-color: rgba(204, 82, 0, 0.25);"});
-                $('<div />').attr({id:"smmryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").appendTo(smm);
+                $('<div />').attr({id:"smmryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu").appendTo(smm);
                 smma.addClass("container compogap__ryu").appendTo(smm);
                 smmh.attr({id:"smmryu"}).addClass("txtcw_ryu text-center txtcw__ryu").append(
                              $('<h1 />').append($('<strong>').addClass("ganjitxt__ryu").html("요약")),
@@ -134,32 +138,21 @@ jaekyung.main={// 메인페이지//변경
                 smmc.attr({style:"margin-top:40px;"}).appendTo(smma);
                 smmco.appendTo(smmc);
                 smmco.attr({style:"display:flex"}).addClass("row-fluid").append(
-                     $('<div />').attr({style:"border:1px solid;" ,id:"smm_v_l"}).addClass("col-lg-7 col-md-12 bgcw__ryu borderG__ryu"),
-                     $('<div />').addClass("col-lg-5 col-sm-12 pr0__ryu ml15__ryu ").append(
+                     $('<div />').attr({style:"padding:0px",id:"smm_v_ld"}).addClass("col-lg-8 col-md-12 bgcw__ryu").append(
+                    		 $('<div />').attr({style:"margin:10px 0px 10px 20px; width:550px",id:"smm_v_l_t"}).addClass("text-center col-md-12 bgcw__ryu pa0__ryu"),
+                             $('<div />').attr({style:"border:1px solid ;",id:"smm_v_l"}).addClass("col-md-12 bgcw__ryu pa0__ryu borderG__ryu")
+                     ),
+                     $('<div />').addClass("col-lg-4 col-sm-12 pr0__ryu ml15__ryu ").append(
                                   $('<div />').addClass("col-md-12 pr0__ryu ").append(
-                                		  $('<div />').attr({style:"border:1px solid;border-bottom:0px; display:flex"}).addClass("col-md-12 bgcw__ryu pa0__ryu borderG__ryu")
-                                		  .append(
-		                                      $('<div />').addClass("col-md-offset-2").html("<h4>오늘  신규 게시글 수</h4>")
+                                	  $('<div />').attr({style:" display:flex",id:"smm_np_h"}).addClass("col-md-12 bgcw__ryu pa0__ryu "),
+	                                  $('<div />').attr({style:"border:1px solid;" , id:"smm_np_c"}).addClass("col-md-12 bgcw__ryu pa0__ryu borderG__ryu"),
+	                                  $('<div />').attr({style:"margin-bottom:15px ; display:flex",id:"smm_np_f"}).addClass("col-md-12 bgcw__ryu pa0__ryu ")
                                   ),
-                                  $('<div />').attr({style:"border:1px solid; border-top:0px;" , id:"smm_np"}).addClass("col-md-12 bgcw__ryu pa0__ryu borderG__ryu"),
-                                  $('<div />').attr({style:"border:1px solid;margin-bottom:15px ;border-top:0px; display:flex"}).addClass("col-md-12 bgcw__ryu pa0__ryu borderG__ryu").append(
-                                                $('<div />').addClass("col-md-2")
-                                                	.append($('<span />').attr({style:"color:red"}).html("<h4><strong>TODAY</strong></h4>")),
-                                                $('<div />').addClass("col-md-3 ").html("<h5>신규 게시글 수</h5>")
-                                  )
-                                  ),
-                                  
-                                  $('<div />').addClass("col-md-12 pr0__ryu ").append(
-                            		  $('<div />').attr({style:"border:1px solid;border-bottom:0px; display:flex"}).addClass("col-md-12 bgcw__ryu pa0__ryu borderG__ryu")
-	                            		  .append(
-		                                      $('<div />').addClass("col-md-offset-2 ").html("<h4>오늘  신규 가입자</h4>")
-		                              ),
-		                              $('<div />').attr({style:"border:1px solid", id:"smm_nj"}).addClass("col-md-12 bgcw__ryu borderG__ryu")
-		                            	,
-		                              $('<div />').attr({style:"border:1px solid ;border-top:0px ;display:flex"}).addClass("col-md-12 bgcw__ryu pa0__ryu mb0__ryu borderG__ryu").append(
-		                                            $('<div />').addClass("col-md-2").append($('<span />').attr({style:"color:red"}).html("<h4><strong>TODAY</strong></h4>")),
-		                                            $('<div />').addClass("col-md-3  ").html("<h5>신규 가입자</h5>")
-                                  ))
+                                  $('<div />').attr({id : "smm_nj"}).addClass("col-md-12 pr0__ryu ").append(
+                            		  $('<div />').attr({style:"display:flex",id:"smm_nj_h"}).addClass("col-md-12 bgcw__ryu pa0__ryu "),
+		                              $('<div />').attr({style:"border:1px solid;padding-right:0px; padding-left:0px", id:"smm_nj_c"}).addClass("col-md-12 bgcw__ryu borderG__ryu"),
+		                              $('<div />').attr({style:"border:1px solid ;border-top:0px",id:"smm_nj_f"}).addClass("col-md-12 bgcw__ryu pa0__ryu mb0__ryu borderG__ryu")
+		                              )
                      )
                 );
                 
@@ -167,13 +160,13 @@ jaekyung.main={// 메인페이지//변경
                 
                 smmct.appendTo(smmc);
                 smmct.attr({style:"display:flex"}).addClass("row-fluid margint20__ryu").append(
-                     $('<div />').attr({style:"border:1px solid; margin-right:15px",id:"smm_v_c"}).addClass("col-md-6 bgcw__ryu borderG__ryu")
+                     $('<div />').attr({style:"margin-right:15px",id:"smm_v_c"}).addClass("col-md-5 bgcw__ryu")
                      ,
-                     $('<div />').addClass("col-md-3").append(
-                    		 $('<div />').attr({style:"border:1px solid;",id:"smmtable"}).addClass("col-md-12 bgcw__ryu text-center borderG__ryu").html("<h4><strong>오늘 상위 매출 카테고리</strong></h4>")
+                     $('<div />').addClass("col-md-4").attr({style:"padding-left:0px"}).append(
+                    		 $('<div />').attr({id:"smmtable"}).addClass("col-md-12 bgcw__ryu text-center ").html("<h4><strong>오늘 상위 매출 카테고리</strong></h4>")
                      ),
-                     $('<div />').addClass("col-md-3 pr0__ryu borderG__ryu").append(
-                                  $('<div />').attr({style:"border:1px solid; height:338px ", id:"smm_v_d"}).addClass("col-md-12 bgcw__ryu borderG__ryu")
+                     $('<div />').attr({style:"display:flex"}).addClass("col-md-3 pr0__ryu borderG__ryu").append(
+                                  $('<div />').attr({id:"smm_v_d"}).addClass("col-md-12 bgcw__ryu")
                                   
                      )
                 );
@@ -187,7 +180,7 @@ jaekyung.main={// 메인페이지//변경
                 let vstco = $('<div />');
                 let vstct = $('<div />');
                 vst.attr({style:"background-color: #FFFFFF"});
-                $('<div />').attr({id:"vstryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").appendTo(vst);
+                $('<div />').attr({id:"vstryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu").appendTo(vst);
                 vsta.addClass("container compogap__ryu").appendTo(vst);
                 $('<div />').append(
                              vsth.addClass("txtcw_ryu text-center").append(
@@ -218,7 +211,7 @@ jaekyung.main={// 메인페이지//변경
                 let sbaco = $('<div />');
                 let sbact = $('<div />');
                 sba.attr({style:"background-color: rgba(204, 82, 0, 0.25);"});
-                $('<div />').attr({id:"sbaryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").appendTo(sba);
+                $('<div />').attr({id:"sbaryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu").appendTo(sba);
                 sbaa.addClass("container compogap__ryu").appendTo(sba);
                 $('<div />').append(
                               sbah.attr({id:"sbaryu"}).addClass(" text-center txtcw__ryu").append(
@@ -249,7 +242,7 @@ jaekyung.main={// 메인페이지//변경
                 let ctgr1c = $('<div />');
                 let ctgr1co = $('<div />');
                 ctgr1.attr({style:"background-color: #FFFFFF"});
-                $('<div />').attr({id:"ctgr1ryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").appendTo(ctgr1);
+                $('<div />').attr({id:"ctgr1ryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu").appendTo(ctgr1);
                 ctgr1a.addClass("container compogap__ryu").appendTo(ctgr1);
                 $('<div />').append(
                              ctgr1h.attr({id:"ctgr1ryu"}).addClass("text-center").append(
@@ -274,7 +267,7 @@ jaekyung.main={// 메인페이지//변경
                 let mbrco = $('<div />');
                 let mbrct = $('<div />');
                 mbr.attr({style:"background-color:rgba(204, 82, 0, 0.25)"});
-                $('<div />').attr({id:"mbrryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").appendTo(mbr);
+                $('<div />').attr({id:"mbrryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu").appendTo(mbr);
                 mbra.addClass('container compogap__ryu').appendTo(mbr);
                 $('<div />').append(     
                              mbrh.attr({id:"mbrryu"}).addClass("txtcw__ryu text-center").append(
@@ -286,15 +279,14 @@ jaekyung.main={// 메인페이지//변경
                 mbrc.appendTo(mbra);
                 mbrco.attr({style:"display:flex"}).addClass("row-fluid ").appendTo(mbrc);
                 $('<div />').addClass('col-md-6').append(
-                             $('<div />').attr({style:"border:1px solid; height:480px",id:"mbr__pc"}).addClass('col-md-12 bgcw__ryu')
+                             $('<div />').attr({style:" height:480px",id:"mbr__pc"}).addClass('col-md-12 bgcw__ryu')
                 ).appendTo(mbrco);
                 $('<div />').addClass('col-md-6').append(
-                             $('<div />').attr({style:"border:1px solid; height:480px",id:"mbr__bc"}).addClass('col-md-12 bgcw__ryu')
+                             $('<div />').attr({style:" height:480px",id:"mbr__bc"}).addClass('col-md-12 bgcw__ryu')
                 ).appendTo(mbrco);
                 mbrct.appendTo(mbrc);
                 mbrct.addClass('row-fluid');
                 mbrct.addClass("margint20__ryu").appendTo(mbrc);
-               
                 return mbr;
               },
               abba:()=>{
@@ -304,7 +296,7 @@ jaekyung.main={// 메인페이지//변경
                 let abbac = $('<div />');
                 let abbaco = $('<div />');
                 abba.attr({style:"background-color: #FFFFFF"});
-                $('<div />').attr({id:"abbaryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").appendTo(abba);
+                $('<div />').attr({id:"abbaryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu").appendTo(abba);
                 abbaa.addClass("container compogap__ryu").appendTo(abba);
                 $('<div />').append(
                              abbah.attr({id:"abbaryu"}).addClass("text-center").append(
@@ -316,9 +308,7 @@ jaekyung.main={// 메인페이지//변경
                 abbac.attr({style:"margin-top:40px"}).appendTo(abbaa);
                 abbaco.appendTo(abbac);
                 abbaco.addClass("row-fluid").append(
-                             $('<div />').addClass("col-md-12 btb1__ryu borderG__ryu").append(
-                                         $('<img src="'+$.img()+'/jaekyung/13.PNG" />').addClass("img-responsive center-block margintb15__ryu")   
-                             )                         
+                             $('<div />').attr({id:"abba__sc",style:"height:500px"}).addClass("col-md-12 btb1__ryu borderG__ryu")                   
                 );
                 return abba;
               },
@@ -330,124 +320,103 @@ jaekyung.main={// 메인페이지//변경
                 let vbtco = $('<div />');
                 let vbtct = $('<div />');
                 vbt.attr({style:"background-color:rgba(204, 82, 0, 0.25)"});
-                $('<div />').attr({id:"vbtryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").appendTo(vbt);
+                $('<div />').attr({id:"vbtryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu").appendTo(vbt);
                 vbta.addClass('container compogap__ryu').appendTo(vbt);
                 $('<div />').append(     
                              vbth.addClass("txtcw__ryu text-center").append(
-                                           $('<h1 />').append($('<strong>').addClass("ganjitxt__ryu").html("시간 별 방문자 통계")),
+                                           $('<h1 />').append($('<strong>').addClass("ganjitxt__ryu").html("해시태그 워드클라우드")),
                                            $('<hr />').addClass('txthr35__ryu'),
                                            $('<span aria-hidden="true" />').addClass('glyphicon glyphicon-certificate glyalone__ryu glyalone__ryu')
                              )
                 ).appendTo(vbta)
                 vbtc.appendTo(vbta);
-                vbtco.addClass("row-fluid btb1__ryu").appendTo(vbtc);
-                       $('<div />').attr({style:"border:1px solid"}).addClass('col-md-12 bgcw__ryu').append(
-                                    $('<img src="'+$.img()+'/jaekyung/14.PNG" />').addClass("img-responsive center-block ")
-                ).appendTo(vbtco);
+                vbtco.addClass("row-fluid").appendTo(vbtc);
+                       $('<div />').attr({id:"vbt__wc"}).addClass('col-md-12 bgcw__ryu').appendTo(vbtco);
                 vbtct.appendTo(vbtc);
                 vbtct.addClass("margint20__ryu").appendTo(vbtc);
-                let r ={list:['시간','총 방문자',' 남성 방문자 ',' 여성 방문자 ','성비']};
-                let rr =[{x1:'0시',x2:'10029 명',x3:'3742 명',x4:'6387 명', x5:'37% : 63%'},{x1:'1시',x2:'651234명',x3:'6548명',x4:'321명', x5:'16.3%'},{x1:'2시',x2:'651234명',x3:'6548명',x4:'321명', x5:'16.3%'},{x1:'3시',x2:'651234명',x3:'6548명',x4:'321명', x5:'16.3%'},{x1:'4시',x2:'651234명',x3:'6548명',x4:'321명', x5:'16.3%'}];
-                let t = $('<table />');
-                let th = $('<thead />');
-                let tb = $('<tbody />');
-                let tr = $('<tr />');
-                let tp = $('<p />');
-                vbtct.addClass("row-fluid").append(
-                             $('<div />').attr({style:" padding: 20px 40px 20px 40px"})
-                                  .addClass("col-md-12  btb1__ryu borderG__ryu margint20__ryu").append(
-                                           tp,
-                                           t.attr({style:"border-top:1px solid; border-bottom:1px solid"})
-                                                .addClass("table table-striped table-hover borderG__ryu")
-                             )
-                );
-                let l =$('<label />');
-                tp.append(
-                		l
-                         .html('<strong>상세데이터 열기 &nbsp;&nbsp;</strong>'
-                 			+' <div class="material-switch pull-right">'
-                 			+'<input id="vbtDtSwitch" name="vbtDtSwitch" value="1" type="checkbox" checked="checked"/>'
-                 			+'<label for="vbtDtSwitch" class="label-warning"></label></div>'
-                                )
-                );
-                tb.appendTo(t);
-            	th.appendTo(t);
-                $(l).change (e=>{
-                	if($('#vbtDtSwitch').val()==="1"){
-                		t.empty();
-                		$('#vbtDtSwitch').prop('value',"2");
-                	}else{
-                    	tb.appendTo(t);
-                    	th.appendTo(t);
-                    	$('#vbtDtSwitch').prop('value',"1");
-                	}
-                });
-                $.each(r.list,(i,v)=>{
-                            $('<th />').addClass("text-center").html(v).appendTo(tr)
-                });
-                $(rr).each(function(i){
-                       $('<tr />').addClass("text-center").append(
-                                    $('<td />').attr('width','10%').html(this.x1),
-                                    $('<td />').attr('width','30%').html(this.x2),
-                                    $('<td />').attr('width','20%').html(this.x3),
-                                    $('<td />').attr('width','20%').html(this.x4),
-                                    $('<td />').attr('width','20%').html(this.x5)
-                       ).appendTo(tb);
-                });
                 return vbt;
-              },
-              cbg:()=>{
-                let cbg = $('<div />');
-                let cbga = $('<div />');
-                let cbgh = $('<div />');
-                let cbgc = $('<div />');
-                let cbgco = $('<div />');
-                cbg.attr({style:"background-color: #FFFFFF"});
-                $('<div />').attr({id:"cbgryu",style:" position:relative; top:-50px"}).addClass("woruddlrkshfogksekghdghdghd").appendTo(cbg);
-                cbga.addClass("container compogap__ryu").appendTo(cbg);
-                $('<div />').append(
-                             cbgh.attr({id:"cbgryu"}).addClass("text-center").append(
-                                    $('<h1 />').append($('<strong>').addClass("ganjitxt_4d4d4d__ryu").html("성별 카테고리 통계")),
-                                    $('<hr />').addClass('txthr35__ryu'),
-                                    $('<span aria-hidden="true" />').addClass('glyphicon glyphicon-certificate glyalone__ryu')
-                       )
-                ).appendTo(cbga);
-                cbgc.attr({style:"margin-top:40px"}).appendTo(cbga);
-                cbgco.appendTo(cbgc);
-                cbgco.addClass("row-fluid");
-                       $('<div />').addClass("col-md-7 btb1__ryu borderG__ryu").append(
-                                  $('<img src="'+$.img()+'/jaekyung/13.PNG" />').addClass("img-responsive center-block margintb15__ryu")   
-                       ).appendTo(cbgco);
-                       $('<div />').addClass("col-md-4 col-md-offset-1 btb1__ryu borderG__ryu").append(
-                                    $('<img src="'+$.img()+'/jaekyung/13.PNG" />').addClass("img-responsive center-block margintb15__ryu")   
-                       ).appendTo(cbgco);
-                return cbg;
               }
 }
 jaekyung.chart={
+		reLc:x=>{
+			google.charts.load('current', {packages: ['corechart', 'line']});
+			google.charts.setOnLoadCallback(()=>{
+				let data = new google.visualization.DataTable();
+				data.addColumn('string', '날짜');
+				data.addColumn('number', '방문자수');
+				$.each(x.smmvstlc,(i,j)=>{
+		    	  data.addRow(
+		    		  [j.visitDate.split('-')[1]+'월 '+j.visitDate.split('-')[2]+'일', j.count]
+		    	  );
+		      });
+		      let options = {
+		    	title: '일일 방문자 통계',
+		    	legend:{position:'none'},	  
+		        hAxis: {title: ''},
+		        vAxis: {title: '방문자 수',viewWindow: {min:500}},
+		        backgroundColor: '#FFFFFF'
+		      };
+		      var chart = new google.visualization.LineChart(document.getElementById('smm_v_l'));
+		      chart.draw(data, options);
+			});
+				
+		},
 		smm : () =>{
-			$.getJSON($.context()+'/stats/smmChart',r=>{
+			let today = new Date();
+			let dd = today.getDay()+10;
+			let ddn = dd-7;
+			let mm = today.getMonth()+2; // 10월이라 +1인데 11월 가상 설정
+			let mmn = mm;
+			let yyyy = today.getFullYear();
+			
+			if(dd<10)dd='0'+dd;
+			if(ddn<10&&ddn>0)ddn='0'+ddn;
+			if(ddn<0){
+				if(mm===11){
+					ddn= ddn+31;
+					mmn=10;
+				}
+			}
+			if(mm<10)mm='0'+mm; 
+			if(mmn<10)mmn='0'+mmn; 
+			today = yyyy+'년 '+mm+'월 '+dd+"일";
+			let beforeweek = yyyy+'년 '+mmn+'월 '+ddn+"일";
+			$.getJSON($.context()+'/stats/smmChart/'+today+"/"+beforeweek,r=>{
 				// smm line
-				google.charts.load('current', {packages: ['corechart', 'line']});
-				google.charts.setOnLoadCallback(()=>{
-						let data = new google.visualization.DataTable();
-						data.addColumn('string', '날짜');
-						data.addColumn('number', '방문자수');
-						$.each(r.smmvstlc,(i,j)=>{
-				    	  data.addRow(
-				    		  [j.visitDate.split('-')[1]+'월 '+j.visitDate.split('-')[2]+'일', j.count]
-				    	  );
-				      });
-				      var options = {
-				    	title: '일일 방문자 통계',
-				    	legend:{position:'none'},	  
-				        hAxis: {title: ''},
-				        vAxis: {title: '방문자 수',viewWindow: {min:500}},
-				        
-				        backgroundColor: '#FFFFFF'
-				      };
-				      var chart = new google.visualization.LineChart(document.getElementById('smm_v_l'));
-				      chart.draw(data, options);
+				jaekyung.chart.reLc(r);
+				$('<input />').attr({type:"text",id:"smm_v_l_t_date",style:"width:160px; font-size:15px; margin-right:6px; text-align:center"}).appendTo($('#smm_v_l_t'));
+				$('<span />').attr({style:'font-size:20px'}).html('<b> ~ </b>').appendTo($('#smm_v_l_t'));
+				$('<input />').attr({type:"text",id:"smm_v_l_t_date2",style:"width:160px; font-size:15px; margin-right:6px;  text-align:center"}).appendTo($('#smm_v_l_t'));
+				$('<span />').attr({style:'font-size:20px'}).html('<b> 의 방문자 통계 </b>').appendTo($('#smm_v_l_t'));
+				$(()=> {
+		              $.datepicker.setDefaults($.datepicker.regional['ko']); 
+		              $('#smm_v_l_t_date').datepicker({
+		            	  dateFormat: 'yy년 mm월 dd일',
+		            	  minDate: new Date('2018-11-01'),
+		            	  maxDate: new Date('2018-11-15'),
+		            	  onClose: selectedDate=>{
+		            		  $("#smm_v_l_t_date2").datepicker( "option", "minDate", selectedDate );
+		            	  }
+		              }).datepicker('setDate', $.datepicker.parseDate('yy년 mm월 dd일', beforeweek));
+		              $('#smm_v_l_t_date2').datepicker({
+		            	  dateFormat: 'yy년 mm월 dd일', 
+		            	  minDate: $('#smm_v_l_t_date').val(),
+            		      maxDate: new Date('2018-11-15'),
+            		      onClose: selectedDate=>{
+		            		  $("#smm_v_l_t_date").datepicker( "option", "maxDate", selectedDate );
+		            	  }
+		              }).datepicker('setDate', $.datepicker.parseDate('yy년 mm월 dd일', today));
+		        });
+				$('#smm_v_l_t_date2').val(new Date(today));
+				$('#smm_v_l_t_date').change(e=>{
+						$.getJSON($.context()+'/stats/smmvstlc/'+$('#smm_v_l_t_date').val()+'/'+$('#smm_v_l_t_date2').val(),rr=>{
+							jaekyung.chart.reLc(rr);
+						});
+				});
+				$('#smm_v_l_t_date2').change(e=>{
+					$.getJSON($.context()+'/stats/smmvstlc/'+$('#smm_v_l_t_date').val()+'/'+$('#smm_v_l_t_date2').val(),rr=>{
+						jaekyung.chart.reLc(rr);
+					});
 				});
 				// smm column
 				google.charts.load('current', {packages: ['corechart', 'bar']});
@@ -505,27 +474,28 @@ jaekyung.chart={
 			    
 			    let smmtd = $('<div />');
 				let t = $('<table />');
-				let th = $('<thaed />');
+				let th = $('<thead />');
 				let tb = $('<tbody />');
 				let tr = $('<tr />');
-				t.attr({style:"border-top:1px solid; border-bottom:1px solid", id:"smmt"}).addClass("table table-striped table-hover borderG__ryu").appendTo(smmtd);
-		// 아이디 왜 안먹지? appendTo(('#smmt'))
+				t.attr({style:"border-top:1px solid; border-bottom:1px solid", id:"smmt"})
+					.addClass("table table-striped table-hover borderG__ryu").appendTo(smmtd);
 				th.appendTo(t);
 				tb.appendTo(t);
 		        tr.appendTo(th);
-		        /*
-				 * 
-				 * $('<th />').html('<b>순위</b>').appendTo(tr); $('<th />').html("<b>카테고리</b>").appendTo(tr);
-				 * $('<th />').html("<b>판매수</b>").appendTo(tr); $('<th />').html("<b>전체대비비율</b>").appendTo(tr);
-				 */
-		        
-		        
+				$('<th />').attr({style:'width:10%'}).html('<b>순위</b>').appendTo(tr);
+				$('<th />').attr({style:'width:20%'}).html("<b>카테고리</b>").appendTo(tr);
+				$('<th />').attr({style:'width:15%'}).html("<b>판매수</b>").appendTo(tr); 
+				$('<th />').attr({style:'width:15% pon'}).html("<b>전체대비비율</b>").appendTo(tr);
 		        $(r.bestSellerPerDay).each(function(i){
 		               $('<tr />').attr({style:'font-size:12px'}).addClass("text-center").append(
-		                            $('<td />').attr({style:'width:10%'}).html(i+1),
-		                            $('<td />').attr('width','20%').html("<b>"+this.categorysOfBestSeller+"</b>"),
-		                            $('<td />').attr('width','15%').html(this.sumOfBestSeller+" 개"),
-		                            $('<td />').attr('width','15%').html((this.sumOfBestSeller/r.totalSalePerDay[0].totalSalePerDay*100).toFixed(1)+"%")
+		                            $('<td />').attr({style:'width:10%'})
+		                            	.html(i+1),
+		                            $('<td />').attr('width','20%')
+		                            	.html("<b>"+this.categorysOfBestSeller+"</b>"),
+		                            $('<td />').attr('width','15%')
+		                            	.html(this.sumOfBestSeller+" 개"),
+		                            $('<td />').attr('width','20%')
+		                            	.html((this.sumOfBestSeller/r.totalSalePerDay[0].totalSalePerDay*100).toFixed(1)+"%")
 		               ).appendTo(tb);
 		        });
 		        smmtd.appendTo($('#smmtable'));
@@ -536,24 +506,93 @@ jaekyung.chart={
 				tnp.attr({style:"border-top:1px solid;  margin-bottom:0px!important;"}).addClass("table table-striped table-hover borderG__ryu").appendTo(smmtnpd);
 				tbnp.appendTo(tnp);
 				trnp.append(
-						 $('<td />').attr({style:'font-size:35px ; width:60%; text-align:right'}).html("<b>"+r.smmvsttvc[0].postCount+"</b>"),
-						 $('<td />').attr({style:'font-size:25px; width:40%'}).html("개")
+						 $('<td />').attr({style:'font-size:35px ; width:60%; text-align:right',id:"smm_totalPostPerDay"}).html("<b>"+r.totalPostPerDay[0].postCount+"</b>"),
+						 $('<td />').attr({style:'font-size:25px; width:40%; padding-left:0px; padding-top:20px; padding-bottom:0px'}).html("회")
 				).appendTo(tbnp);
-				smmtnpd.appendTo($('#smm_np'));
-				
+				smmtnpd.appendTo($('#smm_np_c'));
+				$('<table />').attr({id:'smm_np_h_table',style:" margin:6px 6px 6px 6px ; margin-left:40px;"}).appendTo($('#smm_np_h'));
+				$('<tr />').attr({id:'smm_np_h_tr'}).appendTo($('#smm_np_h_table'));
+				$('<td />').attr({id:'smm_np_h_tr_td'}).prependTo($('#smm_np_h_tr'));
+				$('<input />').attr({type:"text",id:"smm_np_date",style:"width:160px; font-size:20px; margin-right:6px"}).appendTo($('#smm_np_h_tr_td'));
+				$('<td />').attr({style:"font-size:16px"}).html('<b>의 총 조회수</b>').appendTo($('#smm_np_h_tr'));
+				$(function() {
+		              $.datepicker.setDefaults($.datepicker.regional['ko']); 
+		              $('#smm_np_date').datepicker({
+		            	  dateFormat: 'yy년 mm월 dd일',
+		            	  minDate: new Date('2018-10-01'),
+		            	  maxDate: new Date('2018-10-24')
+		              });
+		              $('#smm_np_date').datepicker('setDate', $.datepicker.parseDate('yy년 mm월 dd일', '2018년 10월 2일')); // $('#smm_np_date').datepicker('setDate',
+																														// '+0');//현재날짜.
+																														// 지금은
+																														// 현재날짜를
+																														// 쓰면
+																														// 안되서
+																														// 블럭.
+		        });
+				$('#smm_np_date').change(e=>{
+						$.getJSON($.context()+'/stats/smmPost/'+$('#smm_np_date').val(),rr=>{
+							$('#smm_totalPostPerDay').html("<b>"+rr.totalPostPerDay[0].postCount+"</b>");
+							$('#smm_np_f_input')
+								.html("<b>"+rr.totalPostPerDayBefore[0].postBeforeCount+' ('+((rr.totalPostPerDay[0].postCount-rr.totalPostPerDayBefore[0].postBeforeCount)/rr.totalPostPerDay[0].postCount*100).toFixed(1)+"%"+')'+"</b>");
+						});
+				});
+				$('<table />').attr({id:'smm_np_f_table',style:" margin:6px 6px 6px 6px ; margin-left:40px;"})
+					.appendTo($('#smm_np_f'));
+				$('<tr />').attr({id:'smm_np_f_tr'}).appendTo($('#smm_np_f_table'));
+				$('<td />').attr({style:"font-size:16px; "})
+					.append($('<span  aria-hidden="true" />').addClass("glyphicon glyphicon-pencil")).appendTo($('#smm_np_f_tr'));
+				$('<td />').attr({style:"font-size:16px; padding-left:13px"})
+					.html(' <b>전날 대비 증감</b>').appendTo($('#smm_np_f_tr'));
+				$('<td />').attr({style:"font-size:16px; padding-left:13px; padding-left:25px"})
+					.append($('<span />').attr({id:"smm_np_f_input",style:"color:red"})).appendTo($('#smm_np_f_tr'));
+				$('#smm_np_f_input')
+					.html("<b>"+r.totalPostPerDayBefore[0].postBeforeCount+' ('+((r.totalPostPerDay[0].postCount-r.totalPostPerDayBefore[0].postBeforeCount)/r.totalPostPerDay[0].postCount*100).toFixed(1)+"%"+')'+"</b>");
 				let smmtnjd = $('<div />');
 				let tnj = $('<table />');
 				let tbnj = $('<tbody />');
 				let trnj = $('<tr />');
-				tnj.attr({style:"border-top:1px solid; margin-bottom:0px!important;"}).addClass("table table-striped table-hover borderG__ryu").appendTo(smmtnjd);
+				tnj.attr({style:"border-top:1px solid; margin-bottom:0px!important;"})
+					.addClass("table table-striped table-hover borderG__ryu").appendTo(smmtnjd);
 				tbnj.appendTo(tnj);
 				trnj.append(
-						 $('<td />').attr({style:'font-size:35px ; width:60%; text-align:right'}).html("<b>"+r.smmvsttjc[0].joinCount+"</b>"),
-						 $('<td />').attr({style:'font-size:25px; width:40%'}).html("명")
+						 $('<td />').attr({style:'font-size:35px ; width:60%; text-align:right',id:"smm_totalJoinPerDay"}).html("<b>"+r.totalJoinPerDay[0].joinCount+"</b>"),
+						 $('<td />').attr({style:'font-size:25px; width:40%; padding-left:0px; padding-top:20px; padding-bottom:0px'}).html("명")
 				).appendTo(tbnj);
-				smmtnjd.appendTo($('#smm_nj'));
-			    
-			    
+				smmtnjd.appendTo($('#smm_nj_c'));
+				$('<table />').attr({id:'smm_nj_h_table',style:" margin:6px 6px 6px 6px ; margin-left:40px;"}).appendTo($('#smm_nj_h'));
+				$('<tr />').attr({id:'smm_nj_h_tr'}).appendTo($('#smm_nj_h_table'));
+				$('<td />').attr({id:'smm_nj_h_tr_td'}).prependTo($('#smm_nj_h_tr'));
+				$('<input />').attr({type:"text",id:"smm_nj_date",style:"width:160px; font-size:20px; margin-right:6px"}).appendTo($('#smm_nj_h_tr_td'));
+				$('<td />').attr({style:"font-size:16px"}).html('<b>의 신규 가입자 수</b>').appendTo($('#smm_nj_h_tr'));
+				$(function() {
+					$.datepicker.setDefaults($.datepicker.regional['ko']); 
+					$('#smm_nj_date').datepicker({
+						dateFormat: 'yy년 mm월 dd일',
+						minDate: new Date('2018-11-01'),
+		            	maxDate: new Date('2018-11-15')
+					});
+					$('#smm_nj_date').datepicker('setDate', $.datepicker.parseDate('yy년 mm월 dd일', today));
+				});
+				
+				$('#smm_nj_date').change(e=>{
+					$.getJSON($.context()+'/stats/smmJoin/'+$('#smm_nj_date').val(),rr=>{
+						$('#smm_totalJoinPerDay')
+							.html("<b>"+rr.totalJoinPerDay[0].joinCount+"</b>");
+						$('#smm_nj_f_input')
+							.html("<b>"+rr.totalJoinPerDayBefore[0].joinBeforeCount+' ('+((rr.totalJoinPerDay[0].joinCount-rr.totalJoinPerDayBefore[0].joinBeforeCount)/rr.totalJoinPerDay[0].joinCount*100).toFixed(1)+"%"+')'+"</b>");
+					});
+				});
+				$('<table />').attr({id:'smm_nj_f_table',style:" margin:6px 6px 6px 6px ; margin-left:40px;"}).appendTo($('#smm_nj_f'));
+				$('<tr />').attr({id:'smm_nj_f_tr'}).appendTo($('#smm_nj_f_table'));
+				$('<td />').attr({style:"font-size:16px; "})
+					.append($('<span  aria-hidden="true" />').addClass("glyphicon glyphicon-user")).appendTo($('#smm_nj_f_tr'));
+				$('<td />').attr({style:"font-size:16px; padding-left:13px"}).html(' <b>전날 대비 증감</b>').appendTo($('#smm_nj_f_tr'));
+				$('<td />').attr({style:"font-size:16px; padding-left:13px; padding-left:25px"})
+					.append($('<span />').attr({id:"smm_nj_f_input",style:"color:red"})).appendTo($('#smm_nj_f_tr'));
+				$('#smm_nj_f_input')
+					.html("<b>"+r.totalJoinPerDayBefore[0].joinBeforeCount+' ('+((r.totalJoinPerDay[0].joinCount-r.totalJoinPerDayBefore[0].joinBeforeCount)/r.totalJoinPerDay[0].joinCount*100).toFixed(1)+"%"+')'+"</b>");
+				
 			});
 		},
 		vst:()=>{
@@ -617,9 +656,11 @@ jaekyung.chart={
 	                     $('<td />').attr('width','15%').html(j.totalVisitor-j.memberVisitor+" 명")
                     ).appendTo($('#vst_tbody'));
                 });
-                $.each(r.vstt,function(i,j){ 
-                        $('<td />').attr('width','15%').html((j.maleC*100/(j.maleC+j.femaleC)).toFixed(1)+"%").appendTo($('#trr_'+i));
-                        $('<td />').attr('width','15%').html((j.femaleC*100/(j.maleC+j.femaleC)).toFixed(1)+"%").appendTo($('#trr_'+i));
+                $.each(r.vstt,function(i,j){
+                        $('<td />').attr('width','15%')
+                        	.html((j.maleC*100/(j.maleC+j.femaleC)).toFixed(1)+"%").appendTo($('#trr_'+i));
+                        $('<td />').attr('width','15%')
+                        	.html((j.femaleC*100/(j.maleC+j.femaleC)).toFixed(1)+"%").appendTo($('#trr_'+i));
                 });
 			});
 		},
@@ -719,14 +760,32 @@ jaekyung.chart={
 			        });
 			        var tree = new google.visualization.TreeMap(document.getElementById('ctgr1__tc'));
 			        tree.draw(data, {
-			          minColor: '#f00',
-			          midColor: '#ddd',
-			          maxColor: '#0d0',
+			          minColor: '#ff9933',
+			          midColor: '#ff3300',
+			          maxColor: '#800000',
 			          headerHeight: 15,
 			          fontColor: 'black',
 			          highlightOnMouseOver: true,
-			          useWeightedAverageForAggregation: true
+			          useWeightedAverageForAggregation: true,
+			          hintOpacity:0.9,
+			          maxPostDepth:2
 			        });
+			   /*
+				 * google.visualization.events.addListener(tree, 'select',
+				 * selectHandler); function selectHandler(e) { var selection =
+				 * tree.getSelection(); var message = '';
+				 * 
+				 * for (var i = 0; i < selection.length; i++) { var item =
+				 * selection[i]; if (item.row != null && item.column != null) {
+				 * message += '{row:' + item.row + ',column:' + item.column +
+				 * '}'; } else if (item.row != null) { message += '{row:' +
+				 * item.row +item.column + '}'; } else if (item.column != null) {
+				 * message += '{column:' + item.column + '}'; } } if (message ==
+				 * '') { message = 'nothing'; } alert('You selected ' +
+				 * message); }
+				 */
+			        
+			        
 			      });
 			});
   
@@ -785,6 +844,107 @@ jaekyung.chart={
 		    	      chart.draw(data, options);
 			      });
 			});
+		},
+		abba:()=>{
+			$.getJSON($.context()+"/stats/abbaChart",r=>{
+			google.charts.load('current', {'packages':['corechart']});
+			    google.charts.setOnLoadCallback(()=>{
+			        var data = new google.visualization.DataTable();
+			        data.addColumn('number', '개당 평균 구매액');
+			        data.addColumn('number', '연령');
+			        $.each(r.abbasc,(i,v)=>{
+			        	data.addRow([
+			        		v.av_salesabba 
+			        		,v.ageabba
+			        	]);
+			        });
+			          var options = {
+			            title: 'Age vs. Weight comparison',
+			            hAxis: {title: '', minValue: 0, maxValue: 15, viewWindow: {
+		    	        	  min:0, max: 350000
+	    	        	  }},
+			            vAxis: {title: 'Weight', minValue: 0, maxValue: 15},
+			            legend: 'none',
+			            pointSize:2
+			            
+			          };
+
+			          var chart = new google.visualization.ScatterChart(document.getElementById('abba__sc'));
+
+			          chart.draw(data, options);
+			        });
+			});
+		},
+		wrdcld:()=>{
+			var width = 1100;
+	        var height = 500;
+	        var svg = d3.select("#vbt__wc").append("svg")
+	            .attr("width", width)
+	            .attr("height", height);
+	        d3.json($.context()+"/stats/wrdcld", function (error,r) {
+	            showCloud(r.wrdcld);
+	            setInterval(function(){
+	                 showCloud(r.wrdcld);
+	            },2000); 
+	        });
+	        // scale.linear: 선형적인 스케일로 표준화를 시킨다.
+	        // domain: 데이터의 범위, 입력 크기
+	        // range: 표시할 범위, 출력 크기
+	        // clamp: domain의 범위를 넘어간 값에 대하여 domain의 최대값으로 고정시킨다.
+	        var wordScale = d3.scale.linear().domain([0, 10]).range([0, 160]).clamp(true);
+	        var keywords = ["눈물", "원룸", "수납","사랑","반려견","인테리어","나혼자"];
+	        var svg = d3.select("svg")
+	                    .append("g")
+	                    .attr({transform:"translate(" + width/2 + "," + height/2 + ")"});
+	
+	        function showCloud(data) {
+	            d3.layout.cloud().size([width, height])
+	                // 클라우드 레이아웃에 데이터 전달
+	                .words(data)
+	                .rotate(function (data) {
+	                    return data.countwc > 4 ? 0 : data.countwc > 3 ? 40 : -90;
+	                })
+	                // 스케일로 각 단어의 크기를 설정
+	                .fontSize(function (data) {
+	                    return wordScale(data.countwc);
+	                })
+	                // 클라우드 레이아웃을 초기화 > end이벤트 발생 > 연결된 함수 작동
+	                .on("end", draw(data))
+	                .start();
+	
+	            function draw(words) { 
+	                var cloud = svg.selectAll("text").data(words);
+	                cloud.enter()
+	                    .append("text")
+	                    .style("fill", function (r) {
+	                        return (keywords.indexOf(r.keywc) > -1 ? "#fbc280" : "#405275");
+	                    })
+	                    .style("fill-opacity", .5)
+	                    .attr("text-anchor", "middle") 
+	                    .attr('font-size', 1)
+	                    .text(function (r) {
+	                        return r.keywc;
+	                    }); 
+	                cloud
+	                    .transition()
+	                    .duration(600)
+	                    .style("font-size", function (r) {
+	                        return r.size + "px";
+	                    })
+	                    .attr("transform", function (r) {
+	                    	
+	                        return r.x && r.y? "translate(" + [r.x, r.y] + ")rotate(" + r.rotate + ")" : "translate(0,0)";
+	                    })
+	                    .style("fill-opacity", 1); 
+	                
+	            }
+	        }
+					
+
+
+	        
+	        
+	        
 		}
 		
 		

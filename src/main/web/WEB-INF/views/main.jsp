@@ -6,6 +6,8 @@
 	<title>니방내방</title>
 	
 	<!-- 외부라이브러리 -->
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
@@ -31,6 +33,9 @@
     <link rel="stylesheet" href="${context}/resources/css/hyeri.css" />
     <link rel="stylesheet" href="${context}/resources/css/danah.css" />
     <link rel="stylesheet" href="${context}/resources/css/jaekyung.css"/>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js" ></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
     <link rel="stylesheet" href="${context}/resources/css/jieun.css" />
  	<link rel="stylesheet" href="${context}/resources/css/jun.css" />
   
