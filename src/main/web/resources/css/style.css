@@ -5,6 +5,9 @@
 body {
 	font-family:'Noto Sans KR','Nanum Gothic' !important;
 }
+#content{
+	height: auto;
+}
 
 
 

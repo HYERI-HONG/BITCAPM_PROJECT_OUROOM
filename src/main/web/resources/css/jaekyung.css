@@ -60,7 +60,7 @@ div .txtcw__ryu{
 	max-width: 30rem ;
 	border: none; 
 	border-top: solid .25rem;
-	/* 조심하세요 형님 ;; */
+	/* 議곗떖�븯�꽭�슂 �삎�떂 ;; */
 }
 .txthr35__ryu{
 	max-width: 35rem ;
@@ -85,7 +85,7 @@ div .txtcw__ryu{
 	border-right:0px !important;
 	border-left:0px !important;
 }
-/* 글자 음영 */
+/* 湲��옄 �쓬�쁺 */
 .ganjitxt__ryu{
 	text-shadow: 2px 2px 2px gray;
 }
@@ -94,8 +94,8 @@ div .txtcw__ryu{
 	color:#4d4d4d;
 }
 
-/* 네비게이션 영역 */
-/* 전체틀  */
+/* �꽕鍮꾧쾶�씠�뀡 �쁺�뿭 */
+/* �쟾泥댄�  */
 
 .btb1__ryu {
 	border:none;
@@ -103,8 +103,20 @@ div .txtcw__ryu{
 	border-bottom:1px solid ;
 }
 
+/*div shadow*/
+#smm_v_ld, #smm_np_h,#smm_np_c, #smm_np_f, #smm_nj, #smm_v_c, #smm_v_d, #smmtable,
+#mbr__pc, #mbr__bc,
+#vbt__wc{
+    box-shadow: 4px 4px gray;
+}
+/*date*/
+.ui-datepicker {
+    position: relative !important;
+    top: -290px !important;
+    left: 1 !important;
+}
 
-/*아이콘*/
+/*�븘�씠肄�*/
 .glyphicon-certificate{
 	position: relative;
     top: -1.12em;
@@ -119,7 +131,7 @@ div .txtcw__ryu{
 	color:rgba(204,82,0,08) !important; 
     line-height: 0.98 !important;
 } 
-/*스크롤감추기*/
+/*�뒪�겕濡ㅺ컧異붽린*/
 #navc__st {
 	z-index:2;
 }
@@ -132,7 +144,7 @@ div .txtcw__ryu{
 	    transition: margin-top 0.45s ease-in-out;
 }
 
-/*스크롤*/
+/*�뒪�겕濡�*/
 #ctnerb__st{
 	position: relative;
 }
@@ -188,7 +200,7 @@ div .txtcw__ryu{
 
 
 
-  /*테이블 헤더 고정*/
+  /*�뀒�씠釉� �뿤�뜑 怨좎젙*/
 .header-fixed {
     width: 100% 
 }
