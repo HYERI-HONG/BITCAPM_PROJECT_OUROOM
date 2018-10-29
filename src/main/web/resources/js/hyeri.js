@@ -93,10 +93,143 @@ hyeri.page={
 		
 		/*-------------------section2 :: direct --------------------*/
 		
-		$('<div/>').addClass('section').attr({id:"section_icon"}).appendTo($('#main'));
-		$('<div/>').addClass('section').attr({id:"section_community"}).appendTo($('#main'));
-		$('<div/>').addClass('section').attr({id:"section_category"}).appendTo($('#main'));
-		$('<div/>').addClass('section').attr({id:"section_store"}).appendTo($('#main'));
+		$('<div/>').addClass('h_section').attr({id:"section_icon"}).appendTo($('#h_main'));
+		$('<ul/>').addClass('h_icon_list').attr({id:"h_icon_list"}).appendTo($('#section_icon'));
+		$('<li/>').addClass('col-4 col-md-2 h_icon').append(
+				$('<a/>').addClass('h_icon_atag').attr({id:'h_gologin'}).append(
+					$('<div/>').addClass('h_icon_image').append(
+							$('<img/>').addClass('h_icon_image_image').attr({src:$.img()+'/hyeri/join.svg'})
+					),
+					$('<div/>').addClass('h_icon_title').html('니방내방 시작하기'),	
+					$('<div/>').addClass('h_icon_caption').html('로그인 바로가기')
+				)
+		).appendTo($('#h_icon_list'));
+		$('<li/>').addClass('col-4 col-md-2 h_icon').append(
+				$('<a/>').addClass('h_icon_atag').attr({id:'h_gowrite'}).append(
+					$('<div/>').addClass('h_icon_image').append(
+							$('<img/>').addClass('h_icon_image_image').attr({src:$.img()+'/hyeri/myroom.svg'})
+					),
+					$('<div/>').addClass('h_icon_title').html('내방 소개하기'),	
+					$('<div/>').addClass('h_icon_caption').html('글쓰기 바로가기')
+				)
+		).appendTo($('#h_icon_list'));
+		$('<li/>').addClass('col-4 col-md-2 h_icon').append(
+				$('<a/>').addClass('h_icon_atag').attr({id:'h_gocom'}).append(
+					$('<div/>').addClass('h_icon_image').append(
+							$('<img/>').addClass('h_icon_image_image').attr({src:$.img()+'/hyeri/sns.svg'})
+					),
+					$('<div/>').addClass('h_icon_title').html('니방 보러가기'),	
+					$('<div/>').addClass('h_icon_caption').html('커뮤니티 바로가기')
+				)
+		).appendTo($('#h_icon_list'));
+		$('<li/>').addClass('col-4 col-md-2 h_icon').append(
+				$('<a/>').addClass('h_icon_atag').attr({id:'h_gostore'}).append(
+					$('<div/>').addClass('h_icon_image').append(
+							$('<img/>').addClass('h_icon_image_image').attr({src:$.img()+'/hyeri/cart.svg'})
+					),
+					$('<div/>').addClass('h_icon_title').html('쇼핑하기'),	
+					$('<div/>').addClass('h_icon_caption').html('스토어 바로가기')
+				)
+		).appendTo($('#h_icon_list'));
+		
+		
+		//icon클릭시 페이지 이동
+		$('#h_gologin').click(e=>{
+			alert("로그인 바로가기 버튼 클릭");
+		});
+		$('#h_gowrite').click(e=>{
+			alert("글쓰기 바로가기 버튼 클릭");
+		});
+		$('#h_gocom').click(e=>{
+			alert("커뮤니티 바로가기 버튼 클릭");
+		});
+		$('#h_gostore').click(e=>{
+			alert("스토어 바로가기 버튼 클릭");
+		});
+		
+		//중간 광고
+		$('<div/>').addClass('h_section').attr({id:"h_middle_banner"}).append(
+			$('<img/>').addClass('h_middle_banner_img').attr({src:$.img()+'/hyeri/middlebanner.png'})	
+		).appendTo($('#h_main'));
+		
+		
+		/*-------------------section3 :: community 게시글 --------------------*/
+		$('<div/>').addClass('h_section').attr({id:"section_community"}).appendTo($('#h_main'));
+		
+		$('<div/>').addClass('h_menu_header').append(
+				$('<h4/>').addClass('h_menu_title').text('오늘의 커뮤니티 사진'),
+				$('<a/>').addClass('h_menu_move').attr({id:'h_com_dirbtn'}).text('더보기')
+				.click(e=>{
+					//커뮤니티 더보기 버튼
+					alert("커뮤니티 더보기 버튼 클릭");
+				})
+		).appendTo($('#section_community'));
+		
+		
+		$('<ul/>').addClass('h_com_list').attr({id:"h_com_list"}).appendTo($('#section_community'));
+		for(let i=1;i<9;i++){
+			$('<li/>').addClass('col-6 col-md-3 h_com_article').append(
+					$('<div/>').addClass('h_com_article_wrap').append(
+						$('<div/>').addClass('h_com_article_img_wrap').append(
+							$('<img/>').addClass('h_com_article_image').attr({src:$.img()+'/hyeri/main_post/post'+i+'.jpg'}).click(e=>{
+								alert("커뮤니티 사진 클릭"+i);
+							})
+						),
+						$('<div/>').addClass('h_com_article_content_wrap').append(
+							$('<span/>').attr({style:'background-image:url('+$.img()+'/hyeri/profile/p'+i+'.jpg)'}).addClass('h_com_article_content_profile'),
+							$('<span/>').addClass('h_com_article_content_nickname').text('nickname')
+						)
+						
+					)
+			).appendTo($('#h_com_list'));
+			
+		}
+		
+		
+		/*-------------------section3 :: store 게시글 --------------------*/
+		let cate =[{name:'침실', seq:1},
+			{name:'거실', seq:'3'},
+			{name:'주방', seq:'4'},
+			{name:'학생', seq:'6'},
+			{name:'서재', seq:'7'}]
+		
+		$('<div/>').addClass('h_section').attr({id:"section_store"}).appendTo($('#h_main'));
+		
+		$('<div/>').addClass('h_menu_header').append(
+				$('<h4/>').addClass('h_menu_title').text('오늘의 인기 상품')	
+		).appendTo($('#section_store'));
+		$('<div/>').addClass('h_menu_category1').append(
+			$('<ul/>').addClass('h_menu_category_menu')
+		).appendTo($('#section_store'));
+		//active 
+		$.each(cate,(i,j)=>{
+			$('<li/>').addClass('h_menu_category_menu_li').text(j.name).appendTo('.h_menu_category_menu').click(e=>{
+				alert(j.seq);
+			})
+		});
+		
+		$('<div/>').addClass('h_menu_category2').append(
+				$('<ul/>').addClass('h_menu_item_list').attr({id:'h_menu_item_list'})
+		).appendTo($('#section_store'));
+		
+		for(let i=1;i<7;i++){
+			$('<li/>').addClass('col-5 col-md-3 col-xl-2 h_menu_item').append(
+					$('<div/>').addClass('h_menu_item_wrap').append(
+						$('<div/>').addClass('h_menu_item_img_wrap').append(
+							$('<img/>').addClass('h_menu_item_img').attr({src:$.img()+'/hyeri/main_item/'+i+'.jpg'}).click(e=>{
+								alert("스토어 사진 클릭"+i);
+							})
+						),
+						$('<div/>').addClass('h_menu_item_content_wrap').append(
+							$('<p/>').addClass('h_menu_item_content_title').text('상품명'),
+							$('<p/>').addClass('h_menu_item_content_percent').text('50%'),
+							$('<p/>').addClass('h_menu_item_content_price').text('49000원')
+						)
+						
+					)
+			).appendTo($('#h_menu_item_list'));
+			
+		}
 		
     },
     a:()=>{
@@ -104,13 +237,6 @@ hyeri.page={
     	$('#footer').remove();
 		$('#content').html('<div id="add_form" class="je_sign-in-form" >'
 				+'<p id="je_font_2em" class="je_bold">회원가입</p>'
-				+'        <section id="add_form_top" class="je_signup-form__social">'
-				+'            <hr class="h_border">'
-				+'            <p class="je_bold je_signup-form__social__title text-body-1">SNS계정으로 간편하게 회원가입</p>'
-				+'            <a class="icon icon-sns-circle-md-kakao-talk je_signup-form__social__button" href="/users/auth/kakao">'
-				+'					<img class="manImg" src='+$.img()+'/jieun/kakao.png ></img></a>'
-				+'					<img class="manImg" src='+$.img()+'/jieun/naver.png ></img></a>'
-				+'        </section>'
 				+'        <hr class="h_border">'
 				+'        <section id="add_form_middle" class="signup-form__email">'
 				+'				<form novalidate="novalidate" class="new_normal_user" id="new_normal_user" action="/normal_users" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="HLPM6R/2QK3v2K5H9wCB/J77MnkLmliCKOrL14WRMpimvC/ZD5cJzXEowL2QhhT1VzYlCL8Valy17QKIm45yDQ==">'
@@ -291,7 +417,7 @@ hyeri.page={
 			let d = new Date();
 			if(ck){
 				$.ajax({
-					url : $.context()+'/member/add',
+					url : $.context()+'/member/add/basic',
 					method : 'POST',
 					contentType : 'application/json',
 					data : JSON.stringify({
@@ -343,23 +469,13 @@ hyeri.page={
 				+ '<input type="hidden" name="is_pro" id="is_pro" value="false">'
 				+ '<input id="login_btn1" type="button" name="commit" value="로그인" class="je_sign-in-form__form__submit btn je_btn-priority" data-disable-with="로그인">'
 				+ '</form>    <div class="je_sign-in-form__action">'
-				+ '<a id="pwup_btn1" class="je_sign-in-form__action__entry" href="/users/password/new">비밀번호 재설정</a>'
+				+ '<a id="pwup_btn1" class="je_sign-in-form__action__entry" href="/users/password/new">비회원 주문조회</a>'
 				+ '<a id="join_btn1" class="je_sign-in-form__action__entry" href="#">회원가입</a>'
 				+ '</div>'
-				+ '<section class="je_sign-in-form__sns">'
-				+ '<div class="je_sign-in-form__sns__list">'
-				+ '<p style="font-size:80%; color:gray;">SNS계정으로 간편 로그인/회원가입</p>'
-				+ '<img class="manImg" src='
-				+ $.img()
-				+ '/jieun/kakao.png ></img></a>&nbsp&nbsp&nbsp'
-				+ '<img class="manImg" src='
-				+ $.img()
-				+ '/jieun/naver.png ></img></a>'
-				+ '       <a class="je_sign-in-form__sns__entry" href="/users/auth/kakao">'
-				+ '<span class="icon-page-login__c-3" aria-label="카카오계정으로 로그인"></span>'
-				+ '</a>          <a class="je_sign-in-form__sns__entry" href="/users/auth/naver">'
-				+ '<span class="icon-page-login__e-3" aria-label="네이버 아이디로 로그인"></span>'
-				+ '</a>        </div>' + '</section>' + '</div>'
+				+ '<hr border-width: 0.5px>'
+				+ '<section class="h_sns_login">'
+				+ '<div class="h_kakaologin">'
+				+ '</div>' + '</section>' + '</div>'
 		);
 		
 		$('#login_btn1').click(e=>{
@@ -383,7 +499,10 @@ hyeri.page={
 							$('#h_rsh').html('비밀번호를 잘못 입력했습니다.');
 						}else{
 							//브라우저닫으면 없어지는 세션 쿠키 생성		
-							$.cookie('userid', d.value.email);
+							$.cookie('userid', d.value.seq);
+							$.cookie('nickname', d.value.nickname);
+							$.cookie('profile', d.value.profile);
+							
 							//쿠키삭제하기,true/false반환
 							//$.removeCookie('userid');
 							hyeri.page.h();
@@ -407,6 +526,99 @@ hyeri.page={
 			e.preventDefault();
 			alert("비밀번호 재설정 클릭");
 		});
+		//카카오톡 로그인
+		
+		$('<a/>').attr({id:'kakao-login-btn'}).appendTo('.h_kakaologin');
+		$('<a/>').attr({href:'http://developers.kakao.com/logout'}).appendTo('.h_kakaologin');
+		
+		Kakao.init('cf638c2a7c366ab17beba0ec7c52bbcb');
+        // 카카오 로그인 버튼을 생성합니다.
+        Kakao.Auth.createLoginButton({
+          container: '#kakao-login-btn',
+          success: function(authObj) {
+            alert(JSON.stringify(authObj));
+            
+            
+            Kakao.API.request({
+                url: '/v1/user/me',
+                success: function(res) {
+                	alert(res);
+                	//카카오톡으로 부터 정보를 가져옴
+
+                      console.log("id : "+res.id);
+                      console.log("email : "+res.kaccount_email);
+                      console.log("pw : "+res.uuid);
+                      
+                      console.log("age : "+res.properties.age_rang);
+                      console.log("birthday : "+res.properties.birthday);
+                      console.log("gender : "+res.properties.gender);
+                      
+                      console.log("profile image : "+res.properties.profile_image);
+                      console.log("nickname : "+res.properties.nickname);
+                	
+                      //카카오톡에서 가져온 정보로 로그인
+                      $.ajax({
+      						url : $.context()+'/member/login',
+      						method : 'POST',
+      						contentType : 'application/json',
+      						data : JSON.stringify({
+      							email : res.kaccount_email,
+      							password : res.uuid,
+      					}),
+      					success : d=>{
+      						if(d.idValid==='WRONG'||d.pwValid==='WRONG'){
+      							 console.log("가입 정보 없음");
+      							//기존에 가입된 정보가 없으면 자동 회원가입
+      							let a = new Date();
+      							$.ajax({
+      								url : $.context()+'/member/add/kakao',
+      								method : 'POST',
+      								contentType : 'application/json',
+      								data : JSON.stringify({
+      									email : res.kaccount_email,
+      									password : res.uuid,
+      									nickname : 'kakao'+res.id,
+      									birthday : a.getFullYear()+'-'+(a.getMonth()+1)+'-'+a.getDate(),
+      									gender  : ((Math.floor((Math.random() * 2) + 1)==1)? '남자':'여자'),
+      									profile : null,
+      									join_date : a.getFullYear()+'-'+(a.getMonth()+1)+'-'+a.getDate(),
+      									age : (Math.floor((Math.random() * 55) + 1)+10)
+      								}),
+      								success : d=>{
+      									if(d==1){
+      										alert("가입 기록이 없어 자동 회원가입 후 로그인되었습니다.");
+      										hyeri.page.l();
+      									}
+      									else{
+      										alert("카카오톡 회원 가입이 실패하였습니다.");
+      									}
+      								},
+      								error : (m1,m2,m3)=>{
+      									alert("카카오톡 회원가입 오류 발생");
+      								}
+      							});		
+      						}else{
+      							console.log("카카오톡으로 로그인되었습니다.");
+      							$.cookie('userid', d.value.seq);
+      							hyeri.page.h();
+      						}
+      					},
+      					error : (m1,m2,m3)=>{
+      						alert("카카오톡 로그인 오류발생");
+      					}
+      				});		
+                }
+            })
+          },
+          fail: function(err) {
+             alert(JSON.stringify(err));
+          }
+        });
+		
+		
+		
+		
+		
     }
 };
 hyeri.func ={

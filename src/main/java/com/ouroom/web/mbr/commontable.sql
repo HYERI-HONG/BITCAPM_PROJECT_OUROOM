@@ -1,4 +1,5 @@
 SHOW TABLES;
+select * from post;
 
 #----------------------------Table01 :: Member----------------------------
 CREATE TABLE MEMBER(
@@ -118,12 +119,6 @@ CREATE TABLE ITEM(
 );
 ALTER TABLE ITEM ADD CONSTRAINT FOREIGN KEY(CATEGORY2_SEQ) REFERENCES CATEGORY2(SEQ);
 ALTER TABLE ITEM ADD CONSTRAINT FOREIGN KEY(ITEM_POST_SEQ) REFERENCES ITEM_POST(SEQ);
-SELECT * FROM ITEM;
-UPDATE item SET SUM =(PRICE * (100-DISCOUNT)*0.01) WHERE SEQ IN(42,45,51,58,65,72,75,78,79,90,93);
-COMMIT;
-
-SELECT * FROM member;
-
 
 #----------------------------Table10 :: Item_option----------------------------
 CREATE TABLE ITEM_OPTION(
@@ -133,15 +128,11 @@ CREATE TABLE ITEM_OPTION(
 );
 ALTER TABLE ITEM_OPTION ADD CONSTRAINT FOREIGN KEY(ITEM_SEQ) REFERENCES ITEM(SEQ);
 
-
-
-
 #----------------------------Table11 :: category1----------------------------
 CREATE TABLE CATEGORY1(
    SEQ INT AUTO_INCREMENT PRIMARY KEY,
    CATEGORY VARCHAR(20)
 );
-
 
 
 #----------------------------Table12 :: category2----------------------------
@@ -151,7 +142,6 @@ CREATE TABLE CATEGORY2(
    CATEGORY1_SEQ INT
 );
 ALTER TABLE CATEGORY2 ADD CONSTRAINT FOREIGN KEY(CATEGORY1_SEQ) REFERENCES CATEGORY1(SEQ);
-
 ALTER TABLE category2 ADD CATEGORY_KR VARCHAR(20);
 
 
@@ -180,32 +170,36 @@ ALTER TABLE CART ADD CONSTRAINT FOREIGN KEY(MEM_SEQ) REFERENCES MEMBER(SEQ);
 ALTER TABLE CART ADD CONSTRAINT FOREIGN KEY(ITEM_SEQ) REFERENCES ITEM(SEQ);
 ALTER TABLE CART ADD CONSTRAINT FOREIGN KEY(OPTION_SEQ) REFERENCES ITEM_OPTION(SEQ);
 
+#----------------------------Table16 :: REVIEW----------------------------
+CREATE TABLE REVIEW(
+  SEQ INT AUTO_INCREMENT PRIMARY KEY,
+  CONTENTS VARCHAR(300),
+  REGI_DATE VARCHAR(30),
+  IMAGE VARCHAR(30),
+  NICKNAME VARCHAR(30)
+);
 
 #----------------------------기타----------------------------
 #테이블 속성 삭제
 ALTER TABLE POST DROP CONTENT;
 
-SELECT * FROM purchase order by mem_seq;
-SELECT * FROM member;
+#테이블 데이터 변경
+UPDATE item SET SUM =(PRICE * (100-DISCOUNT)*0.01) WHERE SEQ IN(42,45,51,58,65,72,75,78,79,90,93);
 
 #테이블 속성 추가
 ALTER TABLE ITEM_POST ADD CONTENT VARCHAR(200);
 
-
 #외래키 삭제
 ALTER TABLE POST DROP FOREIGN KEY post_ibfk_2;
-
 
 #제약 조건명 확인
 SHOW CREATE TABLE member;
 
-#컬럼 자료형 변경
-ALTER TABLE POST CHANGE CONTENT CONTENT VARCHAR(500);
+#컬럼명, 자료형 변경
+ALTER TABLE REVIEW CHANGE CONTENT CONTENT VARCHAR(500);
 
 #TIMESTAMP 걸기
 ALTER TABLE post MODIFY COLUMN REGI_DATE date DEFAULT current_timestamp() NOT NULL;
-
-SELECT * FROM item_post;
 
 commit;
 #---------------------------INSERT----------------------------
@@ -220,11 +214,6 @@ INSERT INTO MEMBER(EMAIL,NICKNAME,PASSWORD,GENDER,BIRTHDAY,PROFILE,JOIN_DATE,AGE
 INSERT INTO BOARD(ARTICLE) VALUES ('item');
 
 INSERT INTO POST(TITLE,CONTENT,REGI_DATE,VIEW_CNT,LIKE_CNT,SHARE_CNT,ROOM_TYPE,ROOM_SIZE,MEM_SEQ,BOARD_SEQ,IMAGE) VALUES('','','2018-10-18',0,0,0,'원룸','20평대',5,1,'post_1');
-SELECT * FROM POST ORDER BY MEM_SEQ DESC;
-SHOW CREATE TABLE POST;
-DELETE FROM POST;
-
-SELECT * FROM member;
 
 INSERT INTO POST(TITLE, CONTENT, REGI_DATE, VIEW_CNT, LIKE_CNT, SHARE_CNT, ROOM_TYPE, ROOM_SIZE, MEM_SEQ, BOARD_SEQ,IMAGE) VALUES('자연스러움이 매력적인 유럽 스타일의 복층 인테리어', '원래 옷이든 가구든 화려한 것보다는 심플한걸 좋아하고, 제가 미적 감각이 별로 없어서 인테리어 꾸미는거를 잘은 못하지만, 어렸을 때 오랫동안 유럽에서 자라서 그때의 영향과 엄마가 꾸몄던 집의 가구와 분위기의 영향을 받아 꾸며보았어요.', '2018-10-18',0, 0, 0, '원룸', '10평대', 55,1, 'post_1');
 INSERT INTO post (TITLE, CONTENT, REGI_DATE, VIEW_CNT, LIKE_CNT, SHARE_CNT, ROOM_TYPE, ROOM_SIZE, MEM_SEQ, BOARD_SEQ,IMAGE) VALUES('1년의 경험으로 취향에 따라 싹 바꾸기', '1년만에 이사,  새로운 집은 제가 1년 동안 직접 살림을 하면서 느낀 점을 적용해서 고치고 싶더라고요. 인테리어하는 아빠에게 이런 의견을 말씀드렸더니 감사히 이번 집은 집 구조부터 타일, 벽지, 싱크대 구조, 문고리 하나까지, 100% 제 의견에 맞춰 진행하게 해주셨어요.', '2018-10-17',157, 129, 96, '거실', '30평대', 49,1, 'post_2');
@@ -276,3 +265,61 @@ INSERT INTO post (TITLE, CONTENT, REGI_DATE, VIEW_CNT, LIKE_CNT, SHARE_CNT, ROOM
 INSERT INTO post (TITLE, CONTENT, REGI_DATE, VIEW_CNT, LIKE_CNT, SHARE_CNT, ROOM_TYPE, ROOM_SIZE, MEM_SEQ, BOARD_SEQ,IMAGE) VALUES('아이와 함께 하는 더 나은 삶을 위한 집', '아이가 태어난 뒤의 집의 모습은 아이가 태어나기 전의 모습과 많이 다릅니다. 날카롭고 작은 것은 점점 높은 곳으로 올라가고 알록달록하고 둥글고 부드러운 것만 바닥으로 내려옵니다. 덩달아 아이를 키우는 사람도 달라져요. 낯을 가리면서 사람을 가리고, 예민하고 까다롭게 굴던 제 마음도 덩달아 둥글어지더라고요.', '2018-09-26',187, 127, 93, '아이방', '20평대', 31,1, 'post_48');
 INSERT INTO post (TITLE, CONTENT, REGI_DATE, VIEW_CNT, LIKE_CNT, SHARE_CNT, ROOM_TYPE, ROOM_SIZE, MEM_SEQ, BOARD_SEQ,IMAGE) VALUES('내가 꾸민 나의 옷장', '제 침실겸 옷방입니다 ㅎㅎ 원래 흰벽지였는데 혼자 페인트칠한다고 아주 힘들었네요ㅠㅠ 근데 하고보니 또 엄청이쁩니다 호', '2018-09-26',100, 59, 78, '드레스룸', '10평대', 24,1, 'post_49');
 INSERT INTO post (TITLE, CONTENT, REGI_DATE, VIEW_CNT, LIKE_CNT, SHARE_CNT, ROOM_TYPE, ROOM_SIZE, MEM_SEQ, BOARD_SEQ,IMAGE) VALUES('여전히 잘 유지중인 드레스룸', '확장진행후 오픈형 시스템장 및 드레스룸의 색상과 맞추어 천정또한 블랙실크벽지 시공 및 할로겐 전구색으로으로 톤을 맞추어 드레스룸에 어울리는 채도를 만들었습니다.', '2018-09-25',29, 16, 30, '드레스룸', '40평대이상', 57,1, 'post_50');
+
+
+
+
+
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('너무 잘 산거 같아요! 정말 좋습니다~', '2018-10-01', 'r1.jpg', 'manzitnam');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('괜찮네요. 배송이 좀 늦었지만 만족합니다!', '2018-10-02', 'r2.jpg', 'talzang');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('마음에 들어용! ', '2018-10-02', 'r3.jpg', 'hellspell130');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('배송도 빠르고 방에 너무 잘 어울려서 좋아요! ', '2018-10-03', 'r4.jpg', 'fire_love642');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('좋아요!', '2018-10-03', 'r5.jpg', 'destinyNinja546');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('배송 빠르고 제품도 제가 생각했던 그대로라 좋아요~', '2018-10-04', 'r6.jpg', 'darksun202');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('좋아요.', '2018-10-04', 'r7.jpg', 'cherishHpy314');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('다른색상으로 또 구입하고싶네요.', '2018-10-04', 'r8.jpg', 'fireNinja721');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('사진보고 판단하시죠~ 저는 정말 마음에 듭니다!', '2018-10-05', 'r9.jpg', 'beliefNinja039');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('너무 맘에듬, 생각보다 넘 튼튼하고 디자인도 맘에 들어서 만족합니다.ㅎㅎ', '2018-10-05', 'r10.jpg', 'peaceMaan226');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('설치기사님도 너무 친절하시구!빠른배송,빠른설치 감사합니다:) 추가구매할게요!', '2018-10-05', 'r11.jpg', 'blossomsun158');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('지인에게 선물해줬는데 매우 만족해하네요~좋아요!', '2018-10-07', 'r12.jpg', 'blesscouple187');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('아주 마음에 들어요. 아쉬운점은 배송이 너무 느렸다는거!', '2018-10-08', 'r13.jpg', 'yellowLife231');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('맘에 듭니다! 많이파세요~', '2018-10-08', 'r14.jpg', 'whiteNinja132');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('잘 쓰고 있습니다!!', '2018-10-09', 'r15.jpg', 'peaceLife989');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('깔끔하고 괜찮은거같아요.', '2018-10-09', 'r16.jpg', 'pretty_smile881');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('친구 주려고 구매했는데 친구가 좋아하네요! 추천합니다!', '2018-10-09', 'r17.jpg', 'bluehope921');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('가격대비 이정도 클라스면 좋습니다.ㅋㅋ', '2018-10-10', 'r18.jpg', 'enjoyMosol055');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('생각했던것보다 사이즈가 좀 크네요. 그것 빼고는 만족합니다.', '2018-10-11', 'r19.jpg', 'blesssun670');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('이쁘고 내구성 좋고..배송도 빠릅니다.', '2018-10-12', 'r20.jpg', 'peacerainbow313');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('좋습니다.', '2018-10-12', 'r21.jpg', 'hellHpy801');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('굳!!', '2018-10-13', 'r22.jpg', 'adorablespell983');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('한개 더 구매하려구요! 너무 좋아요!!', '2018-10-13', 'r23.jpg', 'cherishhope033');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('배송이 너무 느려서 별로에요. 한 15일은 기다린거같네요.', '2018-10-14', 'r24.jpg', 'blueMosol951');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('색상이 넘나 맘에 쏙 드네요^^', '2018-10-14', 'r25.jpg', 'cherishcouple599');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('약간 이상한 냄새가 나요. 그것 빼곤 괜찮아요.', '2018-10-15', 'r1.jpg', 'enjoysun050');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('가성비 갑! 추천합니다~~', '2018-10-16', 'r2.jpg', 'cutegirl163');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('제품도 만족스럽고 배송기사분도 정말 친절하셨어요!', '2018-10-17', 'r3.jpg', 'prettymonday920');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('배송이 엄청 빨랐어욬ㅋㅋ그리고 생각했던거보다 더 좋고 이뻐요. 가격에 비해서 만족합니다.', '2018-10-18', 'r4.jpg', 'white_love515');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('완전 좋아요! 배송빨랐구요 냄새도 하나도 안나요!', '2018-10-19', 'r5.jpg', 'cuterainbow007');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('너무너무너무 좋습니다.', '2018-10-19', 'r6.jpg', 'yellowmonday111');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('가격에 한번 놀라고 편안함에 두번 놀라네요 짱', '2018-10-20', 'r7.jpg', 'darkNinja909');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('제가 써보고 너무 좋아서 엄마도 사드렸어요. 너무 좋아하시네요~', '2018-10-21', 'r8.jpg', 'dreamcouple073');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('굿굿굿 좋아요!!!!!!!!!!!!^-^', '2018-10-22', 'r9.jpg', 'beliefNinja065');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('다른사이트랑 다 비교해봤는데 여기가 제일 저렴해서 샀어요!', '2018-10-22', 'r10.jpg', 'whitemonday047');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('항상 니방내방에서 가구 사는데~ 실망한적이 없어요!', '2018-10-23', 'r11.jpg', 'charmingLife751');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('너무 클까봐 걱정했는데 딱 적당하고 좋네요~', '2018-10-23', 'r12.jpg', 'beliefrainbow926');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('디자인이 생각했던 그대로구요. 제가 놓으려는곳에 크기가 딱 맞아서 놀랐어요~이뻐요^^', '2018-10-24', 'r13.jpg', 'peacegirl874');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('생각보다 색이 어두워서 놀랐지만 아주 좋아요~', '2018-10-24', 'r14.jpg', 'beatifulsun839');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('고민하다가 샀는데 괜한 시간낭비였네요~ 너무 좋습니다!!', '2018-10-25', 'r15.jpg', 'belieflucid127');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('작은 저희집에 딱이네요~ 제가 원했던 디자인이라 잘 쓰고 있어요~', '2018-10-26', 'r16.jpg', 'possiblelucid054');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('배송이 너무 오래걸렸어요. 15일날 주문하고 20일날 받았어요.ㅠㅠ', '2018-10-26', 'r17.jpg', 'white_love962');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('주문한지 일주일 좀 넘어서 왔습니다. 색감은 제가 생각했던 색감이 아니라서 조금 아쉽내요 ㅠㅠ', '2018-10-26', 'r18.jpg', 'darklucid067');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('배송 빠르게 왔고 제품 만족합니다!', '2018-10-27', 'r19.jpg', 'beliefcouple785');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('생각보다 별로에요. 너무 ㅜㅜ 배송도 늦고...환불 하려구요.', '2018-10-27', 'r20.jpg', 'peacesun275');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('사이즈가 너무 작아요 ㅠㅠ', '2018-10-27', 'r21.jpg', 'aromaBp229');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('진짜 너무 이뻐요! 설치기사님도 친절하시고 배송도 원하는 날짜에 받고 물건이 너무 이뻐요! 진짜!>_<', '2018-10-28', 'r22.jpg', 'hellHpy582');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('딱 왔는데 포장도 안전하게 잘 되있고, 제품도 정말 튼튼한거 같아서 매우 만족합니다! 많이파세요~', '2018-10-28', 'r23.jpg', 'peaceLife759');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('배송 빠르고 제품도 제가 생각했던 그대로라 좋아요~', '2018-10-28', 'r24.jpg', 'hell_love646');
+INSERT INTO REVIEW(CONTENTS,REGI_DATE,IMAGE,NICKNAME) VALUES ('배송이 주말 끼어서 늦을까 걱정했는데 빨랐고, 설치 기사님도 너무 착하셨어요! 자리배치도 원하는곳에 척척 해주시고..매우 만족합니다!', '2018-10-29', 'r25.jpg', 'peace_smile127');
+
+
+

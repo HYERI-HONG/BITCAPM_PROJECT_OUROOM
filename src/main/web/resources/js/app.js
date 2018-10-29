@@ -16,6 +16,7 @@ app.router = {
 			$.when(
 					$.getScript($.script()+'/nav.js'),
 					$.getScript($.script()+'/content.js'),
+					$.getScript($.script()+'/footer.js'),
 					$.getScript($.script()+'/hyeri.js'),
 					$.getScript($.script()+'/jun.js'),
 					$.getScript($.script()+'/jaekyung.js'),
@@ -25,7 +26,7 @@ app.router = {
 				).done(x=>{
 						$('#wrapper').html(navUI()
 								+contentUI()
-								/*+footerUI()*/
+								+footerUI()
 						);
 	                    hyeri.home();
 	                  

@@ -1,7 +1,9 @@
 package com.ouroom.web.mbr;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -10,6 +12,7 @@ import java.util.UUID;
 import java.util.function.Function;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,14 +44,25 @@ public class MemberCtrl {
 	private byte[] filedata;
 	//--------------------------------------
 	
-	@PostMapping(value="/add")
-	public @ResponseBody int add(@RequestBody Member p) throws IOException{
+	@PostMapping(value="/add/{from}")
+	public @ResponseBody int add(@RequestBody Member p, @PathVariable String from) throws IOException{
 		logger.info("======== MemberController ::: add() =======");
-		p.setAge(calc.calcAge(p.getBirthday()));
-		String path = uploadPath+File.separator+"hyeri"+File.separator+"profile"+File.separator;
-		/*String savedName = UUID.randomUUID().toString() + "_" + p.getProfile();*/
-		File target = new File(path, p.getProfile());
-		FileCopyUtils.copy(filedata, target);
+		if(from.equals("kakao")) {
+			System.out.println("getEmail : "+p.getEmail());
+			System.out.println("getPassword : "+p.getPassword());
+			System.out.println("getAge : "+p.getAge());
+			System.out.println("getBirthday : "+p.getBirthday());
+			System.out.println("getGender : "+p.getGender());
+			System.out.println("getJoin_date : "+p.getJoin_date());
+			System.out.println("getNickname : "+p.getNickname());
+			System.out.println("getProfile : "+p.getProfile());
+		}else {
+			p.setAge(calc.calcAge(p.getBirthday()));
+			String path = uploadPath+File.separator+"hyeri"+File.separator+"profile"+File.separator;
+			/*String savedName = UUID.randomUUID().toString() + "_" + p.getProfile();*/
+			File target = new File(path, p.getProfile());
+			FileCopyUtils.copy(filedata, target);
+		}
 		return mbrmapper.insert(p);
 	}
 	@PostMapping(value="/upload")
