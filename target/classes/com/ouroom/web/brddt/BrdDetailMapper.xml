@@ -10,13 +10,26 @@
 	FROM ITEM
 	WHERE SEQ LIKE #{seq};
 </select>
-<!-- <select id="category2_seq" resultType="">
-	SELECT * FROM ITEM I JOIN CATEGORY2 C 
-	WHERE I.CATEGORY2_SEQ = C.SEQ
-	AND I.SEQ LIKE #{seq};
-</select> -->
+
 <select id="item_opt" resultType="com.ouroom.web.item.Item">
 	SELECT OPTIONS FROM item_option
 	WHERE ITEM_SEQ LIKE #{seq};
+</select>
+<select id="review" resultType="com.ouroom.web.brddt.Review">
+
+	  SELECT *
+       FROM (
+           SELECT
+               ROW_NUMBER() OVER(ORDER BY A.seq desc) AS NUM,
+               A.*
+           FROM
+               review A
+       )B
+       WHERE B.NUM BETWEEN  1 AND 5
+       ORDER BY B.NUM;
+</select>
+<select id="rev_insert">
+	INSERT INTO REVIEW (CONTENTS,REGI_DATE,IMAGE,NICKNAME)
+	VALUES(#{CONTENTS},#{REGI_DATE},#{IMAGE},#{NICKNAME});
 </select>
 </mapper>
