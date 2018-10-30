@@ -6,6 +6,7 @@
 	<title>니방내방</title>
 	
 	<!-- 외부라이브러리 -->
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
@@ -18,11 +19,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR" rel="stylesheet">
-	
+
 	
 	<!-- 공통 -->
 	<script src="${context}/resources/js/app.js"></script> 
 	<script src="${context}/resources/js/jquery/popup.js"></script> <!--단아/준 -->
+	
 	<link rel="stylesheet" href="${context}/resources/css/style.css" />
     <link rel="SHORTCUT ICON" href="${context}/resources/img/hyeri/favicon.ico" />
     
