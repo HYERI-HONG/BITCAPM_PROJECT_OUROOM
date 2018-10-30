@@ -135,16 +135,27 @@ hyeri.page={
 		
 		//icon클릭시 페이지 이동
 		$('#h_gologin').click(e=>{
-			alert("로그인 바로가기 버튼 클릭");
+			$('#footer').remove();
+			hyeri.page.l();
 		});
 		$('#h_gowrite').click(e=>{
-			alert("글쓰기 바로가기 버튼 클릭");
+			$('#d_top_btn').hide();
+			$.getScript($.script()+'/danah.js', ()=>{
+				 danah.s.w();
+            });	
 		});
 		$('#h_gocom').click(e=>{
-			alert("커뮤니티 바로가기 버튼 클릭");
+			$('#footer').remove();
+			$.getScript($.script()+'/danah.js', ()=>{
+				 danah.s.m();
+			     danah.s.l();
+            });
 		});
 		$('#h_gostore').click(e=>{
-			alert("스토어 바로가기 버튼 클릭");
+			 $('#footer').remove();
+			 $.getScript($.script()+'/jun.js', ()=>{
+				 jun.init(); 
+	         });
 		});
 		
 		//중간 광고
@@ -160,38 +171,49 @@ hyeri.page={
 				$('<h4/>').addClass('h_menu_title').text('오늘의 커뮤니티 사진'),
 				$('<a/>').addClass('h_menu_move').attr({id:'h_com_dirbtn'}).text('더보기')
 				.click(e=>{
-					//커뮤니티 더보기 버튼
-					alert("커뮤니티 더보기 버튼 클릭");
+					//커뮤니티 더보기 버튼, 커뮤니티로 이동
+					$('#footer').remove();
+					$('#h_search_btn').attr({ style: "visibility: visible"});
+					$('#h_wirte_btn').attr({ style: "visibility: visible"});
+					$.getScript($.script()+'/danah.js', ()=>{
+                        danah.init($.context());
+                    });
+					
 				})
 		).appendTo($('#section_community'));
 		
 		
 		$('<ul/>').addClass('h_com_list').attr({id:"h_com_list"}).appendTo($('#section_community'));
-		for(let i=1;i<9;i++){
-			$('<li/>').addClass('col-6 col-md-3 h_com_article').append(
-					$('<div/>').addClass('h_com_article_wrap').append(
-						$('<div/>').addClass('h_com_article_img_wrap').append(
-							$('<img/>').addClass('h_com_article_image').attr({src:$.img()+'/hyeri/main_post/post'+i+'.jpg'}).click(e=>{
-								alert("커뮤니티 사진 클릭"+i);
-							})
-						),
-						$('<div/>').addClass('h_com_article_content_wrap').append(
-							$('<span/>').attr({style:'background-image:url('+$.img()+'/hyeri/profile/p'+i+'.jpg)'}).addClass('h_com_article_content_profile'),
-							$('<span/>').addClass('h_com_article_content_nickname').text('nickname')
+		//커뮤니티 list 가져오기
+		$.getJSON($.context()+'/home/clist',d=>{
+			$.each(d.list,(i,j)=>{
+				$('<li/>').addClass('col-6 col-md-3 h_com_article').append(
+						$('<div/>').addClass('h_com_article_wrap').append(
+							$('<div/>').addClass('h_com_article_img_wrap').append(
+								$('<img/>').addClass('h_com_article_image').attr({src:$.img()+'/danah/post/'+ j.lastUpdate.replace(/-/gi, '/') + '/' + j.image}).click(e=>{
+									alert("커뮤니티 사진 클릭");
+									$.getScript($.script()+'/danah.js', ()=>{
+										//사진 클릭하면 커뮤니티 디테일 페이지로 넘어가기
+				                    });
+								})
+							),
+							$('<div/>').addClass('h_com_article_content_wrap').append(
+								$('<span/>').attr({style:'background-image:url('+$.img()+((j.profile === '' || j.profile === undefined) ? '/danah/profile.jpeg' : '/hyeri/profile/' + j.profile)+')'}).addClass('h_com_article_content_profile'),
+								$('<span/>').addClass('h_com_article_content_nickname').text(j.nickname)
+							)
 						)
-						
-					)
-			).appendTo($('#h_com_list'));
-			
-		}
+				).appendTo($('#h_com_list'));
+			})
+		})
 		
 		
 		/*-------------------section3 :: store 게시글 --------------------*/
-		let cate =[{name:'침실', seq:1},
-			{name:'거실', seq:'3'},
-			{name:'주방', seq:'4'},
-			{name:'학생', seq:'6'},
-			{name:'서재', seq:'7'}]
+		let cate =[{name:'전체', seq:0},
+			{name:'침실', seq:1},
+			{name:'거실', seq:2},
+			{name:'주방', seq:3},
+			{name:'학생방', seq:4},
+			{name:'서재', seq:5}]
 		
 		$('<div/>').addClass('h_section').attr({id:"section_store"}).appendTo($('#h_main'));
 		
@@ -201,36 +223,64 @@ hyeri.page={
 		$('<div/>').addClass('h_menu_category1').append(
 			$('<ul/>').addClass('h_menu_category_menu')
 		).appendTo($('#section_store'));
-		//active 
+		
+	
 		$.each(cate,(i,j)=>{
-			$('<li/>').addClass('h_menu_category_menu_li').text(j.name).appendTo('.h_menu_category_menu').click(e=>{
-				alert(j.seq);
+			//카테고리 메뉴 그리기
+			$('<li/>').addClass('h_menu_category_menu_li '+((j.seq==0)?'active':'')).attr({id:j.seq}).text(j.name).appendTo('.h_menu_category_menu')
+			.click(e=>{
+				//active 설정 변경, 카테고리 클릭했을때 상품 list가져오기
+				$('.h_menu_category_menu_li').removeClass('active');
+			    $('#'+j.seq).addClass('active');
+			   
+			    $.getJSON($.context()+'/home/slist/'+j.name,d=>{
+					$('#h_menu_item_list').empty();
+					$.each(d.list,(i,j)=>{
+						$('<li/>').addClass('col-5 col-md-3 col-xl-2 h_menu_item').append(
+								$('<div/>').addClass('h_menu_item_wrap').append(
+									$('<div/>').addClass('h_menu_item_img_wrap').append(
+										$('<img/>').addClass('h_menu_item_img').attr({src:$.img()+'/jun/'+j.category+'/'+j.photo+'.jpg'}).click(e=>{
+											alert("스토어 사진 클릭");
+										})
+									),
+									$('<div/>').addClass('h_menu_item_content_wrap').append(
+										$('<p/>').addClass('h_menu_item_content_title').text(j.title),
+										$('<p/>').addClass('h_menu_item_content_percent').text(j.discount+'%'),
+										$('<p/>').addClass('h_menu_item_content_price').text(j.sum+'원')
+									)
+								)
+						).appendTo($('#h_menu_item_list'));
+					});
+				})
 			})
 		});
+		
+		//상품 list가져오기
 		
 		$('<div/>').addClass('h_menu_category2').append(
 				$('<ul/>').addClass('h_menu_item_list').attr({id:'h_menu_item_list'})
 		).appendTo($('#section_store'));
 		
-		for(let i=1;i<7;i++){
-			$('<li/>').addClass('col-5 col-md-3 col-xl-2 h_menu_item').append(
-					$('<div/>').addClass('h_menu_item_wrap').append(
-						$('<div/>').addClass('h_menu_item_img_wrap').append(
-							$('<img/>').addClass('h_menu_item_img').attr({src:$.img()+'/hyeri/main_item/'+i+'.jpg'}).click(e=>{
-								alert("스토어 사진 클릭"+i);
-							})
-						),
-						$('<div/>').addClass('h_menu_item_content_wrap').append(
-							$('<p/>').addClass('h_menu_item_content_title').text('상품명'),
-							$('<p/>').addClass('h_menu_item_content_percent').text('50%'),
-							$('<p/>').addClass('h_menu_item_content_price').text('49000원')
+		$.getJSON($.context()+'/home/slist/전체',d=>{
+			$.each(d.list,(i,j)=>{
+				$('<li/>').addClass('col-5 col-md-3 col-xl-2 h_menu_item').append(
+						$('<div/>').addClass('h_menu_item_wrap').append(
+							$('<div/>').addClass('h_menu_item_img_wrap').append(
+								$('<img/>').addClass('h_menu_item_img').attr({src:$.img()+'/jun/'+j.category+'/'+j.photo+'.jpg'}).click(e=>{
+									alert("스토어 사진 클릭");
+								})
+							),
+							$('<div/>').addClass('h_menu_item_content_wrap').append(
+								$('<p/>').addClass('h_menu_item_content_title').text(j.title),
+								$('<p/>').addClass('h_menu_item_content_percent').text(j.discount+'%'),
+								$('<p/>').addClass('h_menu_item_content_price').text(j.sum+'원')
+							)
 						)
-						
-					)
-			).appendTo($('#h_menu_item_list'));
+				).appendTo($('#h_menu_item_list'));
 			
-		}
-		
+			});
+			
+		})	
     },
     a:()=>{
     	//회원가입
@@ -528,6 +578,8 @@ hyeri.page={
 		$('<a/>').attr({id:'kakao-login-btn'}).appendTo('.h_kakaologin');
 		$('<a/>').attr({href:'http://developers.kakao.com/logout'}).appendTo('.h_kakaologin');
 		
+		Kakao.cleanup();
+		Kakao.init('cf638c2a7c366ab17beba0ec7c52bbcb');
 		
         // 카카오 로그인 버튼을 생성합니다.
         Kakao.Auth.createLoginButton({

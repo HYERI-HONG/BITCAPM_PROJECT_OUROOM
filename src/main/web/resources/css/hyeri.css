@@ -293,6 +293,7 @@
 
 .h_menu_category2{
 	margin: 10px -40px;
+	height: 300px;
 }
 .h_menu_item_list{
 	
@@ -326,6 +327,7 @@
 .h_menu_item_content_title{
 	font-size: 13px;
 	margin-bottom:5px;
+	height: 48px;
 }
 .h_menu_item_content_percent{
 	color: #CC5200;
@@ -339,6 +341,10 @@
     font-weight: bold;
     display:inline;
 }
+.h_menu_category_menu_li.active{
+	color: #CC5200;
+}
+
 /*--------------------- add css------------------------- */
 .h_border{
 	border:dotted 0.03em #8c8c8c;

@@ -11,7 +11,19 @@ public interface ItemMapper {
 	public List<Item> read(String s);
 	public List<Item> list(Map<?,?> m);
 	public List<Item> listSelect(Map<?,?> m);
+	public List<Item> listsearch(Map<?,?> m);
 	public List<Item> c1();
 	public List<Item> c2(String seq);
+	public Item selectOne(String s);
+	public void cartAdd(Map<?,?> m);
+	public List<Item> cartList(String seq);
+	public List<Item> cartOption(Map<?,?> m);
+	public void cartDelete(Map<?,?> m);
+	public void purC(Object i);
+	public List<Item> cartAll(String seq);
+	public void itemAdd(Map<?,?> m);
+	public String ItemPk(String s);
+	public void insertOption(Map<?,?> m);
+	public void insertItemPost(Map<?,?> m);
 	
 }

@@ -9,7 +9,7 @@
 		SELECT *
        FROM (
            SELECT
-               ROW_NUMBER() OVER(ORDER BY A.SEQ DESC) AS NUM,
+               ROW_NUMBER() OVER(ORDER BY A.${ag}) AS NUM,
                A.*,c.category
            FROM
                item A join category2 c WHERE A.category2_seq=c.seq
@@ -24,7 +24,7 @@
 	</select>
 	
 	<select id="read" resultType="com.ouroom.web.item.Item">
-	select * from item i join item_option io where i.seq = io.ITEM_SEQ and i.seq = #{seq};
+	select *,io.seq seqo from item i join item_option io where i.seq = io.ITEM_SEQ and i.seq = #{seq};
 	</select>
 	
 	<select id="c1" resultType="com.ouroom.web.item.Item">
@@ -39,7 +39,7 @@
  SELECT *
        FROM (
            SELECT
-               ROW_NUMBER() OVER(ORDER BY A.SEQ DESC) AS NUM,
+               ROW_NUMBER() OVER(ORDER BY A.${ag}) AS NUM,
                A.*,c.category
            FROM
                item A join category2 c WHERE A.category2_seq=c.seq and A.CATEGORY2_SEQ= #{category}
@@ -48,6 +48,65 @@
        ORDER BY B.NUM;
        
 	</select>
+	<select id="listsearch" resultType="com.ouroom.web.item.Item">
+	
+ 	SELECT *
+       FROM (
+           SELECT
+               ROW_NUMBER() OVER(ORDER BY A.${ag}) AS NUM,
+               A.*,c.category
+           FROM
+               item A join category2 c WHERE A.category2_seq=c.seq and A.title like '%${search}%'
+       )B
+       WHERE B.NUM BETWEEN  #{sp} AND #{ep}
+       ORDER BY B.NUM;
+       
+	</select>
+	<insert id="cartAdd" >
+	insert into cart(MEM_SEQ,item_seq,cnt,option_seq) values(#{userid},#{seq},#{itemCount},#{itemSeq});
+       
+	</insert>
+	
+	<select id="cartList" resultType="com.ouroom.web.item.Item">
+	select distinct item_seq from cart where MEM_SEQ =#{userid};
+	</select>
+	
+	<select id="selectOne" resultType="com.ouroom.web.item.Item">
+	select * from item i join category2 c on i.CATEGORY2_SEQ = c.seq where i.seq=#{item_seq};
+	</select>
+	
+	<select id="cartOption" resultType="com.ouroom.web.item.Item">
+	select * from cart c join item_option io on c.option_seq = io.seq  join item i on i.seq = c.item_seq where c.item_seq = ${item_seq} and c.mem_seq= #{userid};
+	</select>
+	
+	<delete id="cartDelete">
+	delete from cart where mem_seq = #{mem_seq} and item_seq=#{item_seq};
+	</delete>
+	
+	<insert id="purC" >
+	insert into purchase(MEM_SEQ,item_seq,cnt,option_seq) values(#{mem_seq},#{item_seq},#{cnt},#{option_seq});
+	</insert>
+	
+	<select id="cartAll" resultType="com.ouroom.web.item.Item">
+	select * from cart where mem_seq = #{mem_seq}
+	</select>
+	
+	<insert id="itemAdd" >
+	insert into item(title,price,delivery,discount,photo,category2_seq,sum,sale_cnt,store_cnt) values(#{title},#{price},#{delivery},#{discount},#{photo},#{category2},#{sum},0,#{store_cnt});
+	</insert>
+	
+	<select id="ItemPk" resultType="java.lang.String">
+	select seq from item where title like #{title}
+	</select>
+	
+	<insert id="insertOption" >
+	insert into item_option(options,item_seq) values(#{options},#{seq})
+	</insert>
+	
+	<insert id="insertItemPost" >
+	insert into item_post(view_cnt,like_cnt,share_cnt,board_seq,item_seq,image,content) values(0,0,0,2,#{seq},#{img},#{content})
+	</insert>
+	
 	
 	
 </mapper>

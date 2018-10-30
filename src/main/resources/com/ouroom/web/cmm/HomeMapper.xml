@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.ouroom.web.cmm.HomeMapper">
+	<resultMap id="mainResultMap" type="map">
+		<id property="seq" column="SEQ"></id>
+		<result property="image" column="IMAGE" javaType="String" />
+		<result property="lastUpdate" column="LAST_UPDATE" javaType="String" />
+		<result property="nickname" column="NICKNAME" javaType="String" />
+		<result property="profile" column="PROFILE" javaType="String" />
+		<result property="title" column="TITLE" javaType="String" />
+		<result property="sum" column="SUM" javaType="String" />
+		<result property="discount" column="DISCOUNT" javaType="String" />
+		<result property="photo" column="PHOTO" javaType="String" />
+		<result property="category" column="CATEGORY" javaType="String" />
+	</resultMap>
+
+	<select id="cList" resultMap="mainResultMap">
+		SELECT P.SEQ,P.IMAGE,P.LAST_UPDATE,M.NICKNAME,M.PROFILE
+		FROM post P
+		JOIN MEMBER M
+		ON P.MEM_SEQ LIKE M.SEQ
+		ORDER BY P.SEQ
+		LIMIT 8;
+	</select>
+	<select id="sList" resultMap="mainResultMap">
+		SELECT I.SEQ, I.TITLE,I.SUM,I.DISCOUNT,I.PHOTO,C.CATEGORY
+		FROM item I
+		JOIN category2 C
+		ON I.CATEGORY2_SEQ LIKE C.SEQ
+		<where>
+	 		<if test="category!='전체'">
+	 		C.CATEGORY1_SEQ LIKE (SELECT SEQ FROM category1 WHERE CATEGORY LIKE #{category})
+	 		</if>
+	 	</where>
+		ORDER BY SALE_CNT DESC LIMIT 6;
+	</select>
+	
+</mapper>

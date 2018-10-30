@@ -6,7 +6,6 @@ app =(()=>{
 		$.getScript(x+'/resources/js/router.js',
 				()=>{
 					$.extend(new Session(x)); 
-					Kakao.init('cf638c2a7c366ab17beba0ec7c52bbcb');
 					app.router.main();
 		})
 	};
