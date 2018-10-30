@@ -23,19 +23,19 @@ jaekyung.main={// 메인페이지//변경
                      (jaekyung.main.ctner()).appendTo(ctnerb__st);
                      (jaekyung.main.ftr()).appendTo(ctnerf__st);
                      jaekyung.chart.smm(); 
-                     jaekyung.chart.vst(); 
                      jaekyung.chart.sba(); 
+                     jaekyung.chart.wrdcld();
                      jaekyung.chart.ctgr1();
+                     jaekyung.chart.vst(); 
                      jaekyung.chart.mbr();
                      jaekyung.chart.abba();
-                     jaekyung.chart.wrdcld();
               },
               nav:()=>{
             	  	 let d=$('<div />');
                      let navc =$('<nav />');
                      let dd=$('<div />');
                      let u = $('<ul />');
-                     let ip = [{lst:'요약',id:'smmryu'},{lst:'방문자',id:'vstryu'},{lst:'연령별',id:'sbaryu'},{lst:'카테고리별',id:'ctgr1ryu'},{lst:'가입자',id:'mbrryu'},{lst:'구매액',id:'abbaryu'},{lst:'시간별방문자',id:'vbtryu'}];
+                     let ip = [{lst:'요약',id:'smmryu'},{lst:'연령별',id:'sbaryu'},{lst:'시간별방문자',id:'vbtryu'},{lst:'카테고리별',id:'ctgr1ryu'},{lst:'방문자',id:'vstryu'},{lst:'가입자',id:'mbrryu'},{lst:'구매액',id:'abbaryu'}];
                      d.addClass("container");
                      navc.attr({id:"navc__st",style:"position: fixed; max-width:1140px"})
                            .addClass("navbar navbar-default").appendTo(d);
@@ -98,19 +98,15 @@ jaekyung.main={// 메인페이지//변경
 		                					 $('#navc__st').removeClass('nav-up').addClass(' nav-down'):"";
 		                 lastScrollTop = st; 
                      }
-
                      return d;
               },
               ctner:()=>{
-                     let d = $('<div>');
+                     let d = $('<div>').attr({id:'kingofcontainer'});
                      (jaekyung.main.smm()).appendTo(d);
                      (jaekyung.main.sba()).appendTo(d);
-
                      (jaekyung.main.vbt()).appendTo(d);
                      (jaekyung.main.ctgr1()).appendTo(d);
                      (jaekyung.main.vst()).appendTo(d);
-                     
-                     
                      (jaekyung.main.mbr()).appendTo(d);
                      (jaekyung.main.abba()).appendTo(d);
                      return d;
@@ -127,7 +123,7 @@ jaekyung.main={// 메인페이지//변경
                 let smmc = $('<div />');
                 let smmco = $('<div />');
                 let smmct = $('<div />');
-                smm.attr({style:"background-color: rgba(204, 82, 0, 0.25);"});
+                smm;
                 $('<div />').attr({id:"smmryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu").appendTo(smm);
                 smma.addClass("container compogap__ryu").appendTo(smm);
                 smmh.attr({id:"smmryu"}).addClass("txtcw_ryu text-center txtcw__ryu").append(
@@ -138,20 +134,20 @@ jaekyung.main={// 메인페이지//변경
                 smmc.attr({style:"margin-top:40px;"}).appendTo(smma);
                 smmco.appendTo(smmc);
                 smmco.attr({style:"display:flex"}).addClass("row-fluid").append(
-                     $('<div />').attr({style:"padding:0px",id:"smm_v_ld"}).addClass("col-lg-8 col-md-12 bgcw__ryu").append(
+                     $('<div />').attr({style:"padding:0px",id:"smm_v_ld"}).addClass("col-lg-8 col-md-12 bgcw__ryu teduri__ryu").append(
                     		 $('<div />').attr({style:"margin:10px 0px 10px 20px; width:550px",id:"smm_v_l_t"}).addClass("text-center col-md-12 bgcw__ryu pa0__ryu"),
                              $('<div />').attr({style:"border:1px solid ;",id:"smm_v_l"}).addClass("col-md-12 bgcw__ryu pa0__ryu borderG__ryu")
                      ),
                      $('<div />').addClass("col-lg-4 col-sm-12 pr0__ryu ml15__ryu ").append(
                                   $('<div />').addClass("col-md-12 pr0__ryu ").append(
-                                	  $('<div />').attr({style:" display:flex",id:"smm_np_h"}).addClass("col-md-12 bgcw__ryu pa0__ryu "),
-	                                  $('<div />').attr({style:"border:1px solid;" , id:"smm_np_c"}).addClass("col-md-12 bgcw__ryu pa0__ryu borderG__ryu"),
-	                                  $('<div />').attr({style:"margin-bottom:15px ; display:flex",id:"smm_np_f"}).addClass("col-md-12 bgcw__ryu pa0__ryu ")
+                                	  $('<div />').attr({style:" display:flex",id:"smm_np_h"}).addClass("col-md-12 bgcw__ryu pa0__ryu teduri__ryu"),
+	                                  $('<div />').attr({style:"border-left:1px solid gray;" , id:"smm_np_c"}).addClass("col-md-12 bgcw__ryu pa0__ryu "),
+	                                  $('<div />').attr({style:"border-left:1px solid gray; margin-bottom:15px ; display:flex",id:"smm_np_f"}).addClass("col-md-12 bgcw__ryu pa0__ryu ")
                                   ),
                                   $('<div />').attr({id : "smm_nj"}).addClass("col-md-12 pr0__ryu ").append(
-                            		  $('<div />').attr({style:"display:flex",id:"smm_nj_h"}).addClass("col-md-12 bgcw__ryu pa0__ryu "),
-		                              $('<div />').attr({style:"border:1px solid;padding-right:0px; padding-left:0px", id:"smm_nj_c"}).addClass("col-md-12 bgcw__ryu borderG__ryu"),
-		                              $('<div />').attr({style:"border:1px solid ;border-top:0px",id:"smm_nj_f"}).addClass("col-md-12 bgcw__ryu pa0__ryu mb0__ryu borderG__ryu")
+                            		  $('<div />').attr({style:"display:flex",id:"smm_nj_h"}).addClass("col-md-12 bgcw__ryu pa0__ryu #8c8c8c"),
+		                              $('<div />').attr({style:"border:1px solid;padding-right:0px; padding-left:0px", id:"smm_nj_c"}).addClass("col-md-12 bgcw__ryu "),
+		                              $('<div />').attr({style:"border:1px solid ;border-top:0px",id:"smm_nj_f"}).addClass("col-md-12 bgcw__ryu pa0__ryu mb0__ryu ")
 		                              )
                      )
                 );
@@ -397,6 +393,7 @@ jaekyung.chart={
 		            	  onClose: selectedDate=>{
 		            		  $("#smm_v_l_t_date2").datepicker( "option", "minDate", selectedDate );
 		            	  }
+
 		              }).datepicker('setDate', $.datepicker.parseDate('yy년 mm월 dd일', beforeweek));
 		              $('#smm_v_l_t_date2').datepicker({
 		            	  dateFormat: 'yy년 mm월 dd일', 

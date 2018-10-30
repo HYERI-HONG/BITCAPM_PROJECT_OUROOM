@@ -1,240 +1,266 @@
 .margint20__ryu {
-	margin-top : 20px;
+	margin-top: 20px;
 }
+
 .marginside0__ryu {
-	margin-right : 0px;
-	margin-left : 0px;
+	margin-right: 0px;
+	margin-left: 0px;
 }
-.margintb15__ryu{
-	margin-top:15px;
-	margin-bottom:15px;
+
+.margintb15__ryu {
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
-.mb0__ryu{
-	margin-bottom:0px ;
+
+.mb0__ryu {
+	margin-bottom: 0px;
 }
-.mb15__ryu{
-	margin-bottom:15px;
+
+.mb15__ryu {
+	margin-bottom: 15px;
 }
-.ml15__ryu{
-	margin-left:15px;
+
+.ml15__ryu {
+	margin-left: 15px;
 }
+
 .compogap__ryu {
-	padding-top : 90px;
-	padding-bottom : 90px;
+	padding-top: 90px;
+	padding-bottom: 90px;
 }
-.pa0__ryu{
-	padding:0px!important;
+
+.pa0__ryu {
+	padding: 0px !important;
 }
-.pr0__ryu{
-	padding:0px!important;
+
+.pr0__ryu {
+	padding: 0px !important;
 }
-div .bgcw__ryu{
-	background-color:white;
-	
+
+div .bgcw__ryu {
+	background-color: white;
 }
-div .txtcw__ryu{
-	color:white;
+
+div .txtcw__ryu {
+	color: white;
 }
- .txthr10__ryu{
-	max-width: 10rem ;
-	border: none; 
+
+.txthr10__ryu {
+	max-width: 10rem;
+	border: none;
 	border-top: solid .25rem;
 }
 
- .txthr15__ryu{
-	max-width: 15rem ;
-	border: none; 
+.txthr15__ryu {
+	max-width: 15rem;
+	border: none;
 	border-top: solid .25rem;
 }
-.txthr20__ryu{
-	max-width: 20rem ;
-	border: none; 
+
+.txthr20__ryu {
+	max-width: 20rem;
+	border: none;
 	border-top: solid .25rem;
 }
-.txthr25__ryu{
-	max-width: 25rem ;
-	border: none; 
+
+.txthr25__ryu {
+	max-width: 25rem;
+	border: none;
 	border-top: solid .25rem;
 }
-.txthr30__ryu{
-	max-width: 30rem ;
-	border: none; 
+
+.txthr30__ryu {
+	max-width: 30rem;
+	border: none;
 	border-top: solid .25rem;
 	/* 議곗떖�븯�꽭�슂 �삎�떂 ;; */
 }
-.txthr35__ryu{
-	max-width: 35rem ;
-	border: none; 
+
+.txthr35__ryu {
+	max-width: 35rem;
+	border: none;
 	border-top: solid .25rem;
 }
-.txthr40__ryu{
-	max-width: 40rem ;
-	border: none; 
+
+.txthr40__ryu {
+	max-width: 40rem;
+	border: none;
 	border-top: solid .25rem;
 }
-.txthr45__ryu{
-	max-width: 45rem ;
-	border: none; 
+
+.txthr45__ryu {
+	max-width: 45rem;
+	border: none;
 	border-top: solid .25rem;
 }
-.pr0__ryu{
-	padding-right:0px !important;
+
+.pr0__ryu {
+	padding-right: 0px !important;
 }
-.borderG__ryu{
-	border-color:#8c8c8c !important;
-	border-right:0px !important;
-	border-left:0px !important;
+
+.borderG__ryu {
+	border-color: #8c8c8c !important;
+	border-right: 0px !important;
+	border-left: 0px !important;
 }
+
+/*div 테두리 위 왼*/
+.teduri__ryu{
+	border-top : 1px solid #8c8c8c  !important;
+	border-left : 1px solid #8c8c8c!important;
+	
+}
+
 /* 湲��옄 �쓬�쁺 */
-.ganjitxt__ryu{
+.ganjitxt__ryu {
 	text-shadow: 2px 2px 2px gray;
 }
-.ganjitxt_4d4d4d__ryu{
+
+.ganjitxt_4d4d4d__ryu {
 	text-shadow: 2px 2px 2px gray;
-	color:#4d4d4d;
+	color: #4d4d4d;
 }
 
 /* �꽕鍮꾧쾶�씠�뀡 �쁺�뿭 */
 /* �쟾泥댄�  */
-
 .btb1__ryu {
-	border:none;
-	border-top:1px solid ;
-	border-bottom:1px solid ;
+	border: none;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
 }
 
 /*div shadow*/
-#smm_v_ld, #smm_np_h,#smm_np_c, #smm_np_f, #smm_nj, #smm_v_c, #smm_v_d, #smmtable,
-#mbr__pc, #mbr__bc,
-#vbt__wc{
-    box-shadow: 4px 4px gray;
+#smm_v_ld, #smm_np_h, #smm_np_c, #smm_np_f, #smm_nj, #smm_v_c, #smm_v_d,
+	#smmtable, #mbr__pc, #mbr__bc, #vbt__wc {
+	box-shadow: 4px 4px gray;
 }
 /*date*/
 .ui-datepicker {
-    position: relative !important;
-    top: -290px !important;
-    left: 1 !important;
-}
-
-/*�븘�씠肄�*/
-.glyphicon-certificate{
-	position: relative;
-    top: -1.12em;
-    display: inline-block;
-    padding: 0 .25em;
-    content: '\f005';
-    font-weight: 900;
-    font-size: 2em;
-}
-
-.glyalone__ryu{
-	color:rgba(204,82,0,08) !important; 
-    line-height: 0.98 !important;
+	position: absolute !important;
+	top:410px;
+	left:640px;
+	
 } 
+/*�븘�씠肄�*/
+.glyphicon-certificate {
+	position: relative;
+	top: -1.12em;
+	display: inline-block;
+	padding: 0 .25em;
+	content: '\f005';
+	font-weight: 900;
+	font-size: 2em;
+}
+
+.glyalone__ryu {
+	color: rgba(204, 82, 0, 08) !important;
+	line-height: 0.98 !important;
+}
 /*�뒪�겕濡ㅺ컧異붽린*/
 #navc__st {
-	z-index:2;
+	z-index: 2;
 }
-.nav-up{
-	    margin-top: -25px;
-	    transition: margin-top 0.25s ease-in-out;
+
+.nav-up {
+	margin-top: -50px;
+	transition: margin-top 0.25s ease-in-out;
 }
-.nav-down{
-	    margin-top: 0px;
-	    transition: margin-top 0.45s ease-in-out;
+
+.nav-down {
+	margin-top: 0px;
+	transition: margin-top 0.45s ease-in-out;
 }
 
 /*�뒪�겕濡�*/
-#ctnerb__st{
+#ctnerb__st {
 	position: relative;
 }
-.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover{
-	background-color:rgba(204,82,0,0.85) !important;
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover
+	{
+	background-color: rgba(204, 82, 0, 0.85) !important;
 }
 /* The switch - the box around the slider */
-.material-switch > input[type="checkbox"] {
-    display: none;   
+.material-switch>input[type="checkbox"] {
+	display: none;
 }
 
-.material-switch > label {
-    cursor: pointer;
-    height: 0px;
-    position: relative; 
-    width: 40px;  
+.material-switch>label {
+	cursor: pointer;
+	height: 0px;
+	position: relative;
+	width: 40px;
 }
 
-.material-switch > label::before {
-    background: rgb(0, 0, 0);
-    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
-    content: '';
-    height: 16px;
-    margin-top: -8px;
-    position:absolute;
-    opacity: 0.3;
-    transition: all 0.4s ease-in-out;
-    width: 40px;
-}
-.material-switch > label::after {
-    background: rgb(255, 255, 255);
-    border-radius: 16px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-    content: '';
-    height: 24px;
-    left: -4px;
-    margin-top: -8px;
-    position: absolute;
-    top: -4px;
-    transition: all 0.3s ease-in-out;
-    width: 24px;
-}
-.material-switch > input[type="checkbox"]:checked + label::before {
-    background: inherit;
-    opacity: 0.5;
-}
-.material-switch > input[type="checkbox"]:checked + label::after {
-    background: inherit;
-    left: 20px;
+.material-switch>label::before {
+	background: rgb(0, 0, 0);
+	box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+	border-radius: 8px;
+	content: '';
+	height: 16px;
+	margin-top: -8px;
+	position: absolute;
+	opacity: 0.3;
+	transition: all 0.4s ease-in-out;
+	width: 40px;
 }
 
+.material-switch>label::after {
+	background: rgb(255, 255, 255);
+	border-radius: 16px;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+	content: '';
+	height: 24px;
+	left: -4px;
+	margin-top: -8px;
+	position: absolute;
+	top: -4px;
+	transition: all 0.3s ease-in-out;
+	width: 24px;
+}
 
+.material-switch>input[type="checkbox"]:checked+label::before {
+	background: inherit;
+	opacity: 0.5;
+}
 
+.material-switch>input[type="checkbox"]:checked+label::after {
+	background: inherit;
+	left: 20px;
+}
 
-  /*�뀒�씠釉� �뿤�뜑 怨좎젙*/
+/*�뀒�씠釉� �뿤�뜑 怨좎젙*/
 .header-fixed {
-    width: 100% 
+	width: 100%
 }
 
-.header-fixed > thead,
-.header-fixed > tbody,
-.header-fixed > thead > tr,
-.header-fixed > tbody > tr,
-.header-fixed > thead > tr > th,
-.header-fixed > tbody > tr > td {
-    display: block;
+.header-fixed>thead, .header-fixed>tbody, .header-fixed>thead>tr,
+	.header-fixed>tbody>tr, .header-fixed>thead>tr>th, .header-fixed>tbody>tr>td
+	{
+	display: block;
 }
 
-.header-fixed > tbody > tr:after,
-.header-fixed > thead > tr:after {
-    content: ' ';
-    display: block;
-    visibility: hidden;
-    clear: both;
+.header-fixed>tbody>tr:after, .header-fixed>thead>tr:after {
+	content: ' ';
+	display: block;
+	visibility: hidden;
+	clear: both;
 }
 
-.header-fixed > tbody {
-    overflow-y: auto;
-    height: 236px;
+.header-fixed>tbody {
+	overflow-y: auto;
+	height: 236px;
 }
 
-.header-fixed > tbody > tr > td,
-.header-fixed > thead > tr > th {
-    width: 16.6%;
-    float: left;
+.header-fixed>tbody>tr>td, .header-fixed>thead>tr>th {
+	width: 16.6%;
+	float: left;
 }
-/*swap div*/
-#sortWrap div div{
-     cursor: ns-resize;
+
+#kingofcontainer:nth-child(even) {
+	background-color: rgba(204, 82, 0, 0.25)
 }
-#swap__div__ryu div:nth-child(even){background-color:rgba(204, 82, 0, 0.25)}
-#swap__div__ryu div:nth-child(odd){background-color:#FFFFFF}
+
+#kingofcontainer:nth-child(odd) {
+	background-color: #FFFFFF
+}

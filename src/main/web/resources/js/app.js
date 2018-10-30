@@ -60,6 +60,7 @@ app.router = {
 						 });
 						 $('#statics_btn').click(e=>{
 	                        e.preventDefault();
+	                        $('#h_wirte_btn').attr({ style: "visibility: hidden"});
 	                        jaekyung.init();
 	                     });
 				})
