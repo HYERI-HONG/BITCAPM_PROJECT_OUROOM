@@ -13,7 +13,6 @@ jieun=(()=>{
 		var detail=x=>{
 
 			$.getJSON(context+'/BrdDetail/detail/'+x.seq,d=>{
-
 				content.empty();
 				
 				let section =$('<section/>').addClass('je_row').appendTo(content);

@@ -192,9 +192,12 @@ hyeri.page={
 							$('<div/>').addClass('h_com_article_img_wrap').append(
 								$('<img/>').addClass('h_com_article_image').attr({src:$.img()+'/danah/post/'+ j.lastUpdate.replace(/-/gi, '/') + '/' + j.image}).click(e=>{
 									alert("커뮤니티 사진 클릭");
-									$.getScript($.script()+'/danah.js', ()=>{
-										//사진 클릭하면 커뮤니티 디테일 페이지로 넘어가기
-				                    });
+									$.getScript($.script() + '/danah.js', () => { 
+										$('#footer').remove();
+										$('#h_search_btn').attr({ style: "visibility: visible"});
+										$('#h_wirte_btn').attr({ style: "visibility: visible"});
+										danah.s.d(j.seq); 
+									});
 								})
 							),
 							$('<div/>').addClass('h_com_article_content_wrap').append(
@@ -240,7 +243,11 @@ hyeri.page={
 								$('<div/>').addClass('h_menu_item_wrap').append(
 									$('<div/>').addClass('h_menu_item_img_wrap').append(
 										$('<img/>').addClass('h_menu_item_img').attr({src:$.img()+'/jun/'+j.category+'/'+j.photo+'.jpg'}).click(e=>{
-											alert("스토어 사진 클릭");
+											e.preventDefault();
+							                $('#footer').remove();
+											$.getScript($.script()+'/jieun.js',()=>{
+												jieun.detail(j);
+											})
 										})
 									),
 									$('<div/>').addClass('h_menu_item_content_wrap').append(
@@ -267,7 +274,11 @@ hyeri.page={
 						$('<div/>').addClass('h_menu_item_wrap').append(
 							$('<div/>').addClass('h_menu_item_img_wrap').append(
 								$('<img/>').addClass('h_menu_item_img').attr({src:$.img()+'/jun/'+j.category+'/'+j.photo+'.jpg'}).click(e=>{
-									alert("스토어 사진 클릭");
+									e.preventDefault();
+					                $('#footer').remove();
+									$.getScript($.script()+'/jieun.js',()=>{
+										jieun.detail(j);
+									})
 								})
 							),
 							$('<div/>').addClass('h_menu_item_content_wrap').append(
@@ -382,6 +393,7 @@ hyeri.page={
 		).appendTo($('#add_form_middle'));
 		
 		/*이메일, 별명 중복 체크*/
+		var dupck=0;
 		$('<a/>').addClass('h_dupck_btn').html('중복확인<br>').appendTo($('.add_email')).click(e=>{
 			$.ajax({
 				url : $.context()+'/member/dpcheck',
@@ -393,10 +405,14 @@ hyeri.page={
 				}),
 				success : d=>{
 					$('#ec').remove();
-					$('<h7/>').attr({style:'color:blue',id:'ec'}).html(
+					/*$('<h7/>').attr({style:'color:blue',id:'ec'}).html(
 							(d==1)?'이미 사용중인 이메일입니다.'
 									:
-									($('#h_email').val().indexOf('@')<0)?'이메일형식이 올바르지 않습니다.':'사용 가능한 이메일입니다.').appendTo($('.add_email'));
+									($('#h_email').val().indexOf('@')<0)?'이메일형식이 올바르지 않습니다.':'사용 가능한 이메일입니다.').appendTo($('.add_email'));*/
+					let rs;
+					rs=(d==1)?'이미 사용중인 이메일입니다.':($('#h_email').val().indexOf('@')<0)?'이메일형식이 올바르지 않습니다.':'사용 가능한 이메일입니다.';
+					dupck += (rs=='사용 가능한 이메일입니다.')? 1:0;
+					alert(rs);
 				},
 				error : (m1,m2,m3)=>{
 					alert("error발생");
@@ -414,8 +430,12 @@ hyeri.page={
 					val : $('#nickname').val()
 				}),
 				success : d=>{
-					$('#nc').remove();
-					$('<h7/>').attr({style:'color:blue',id:'nc'}).html((d==1)?'이미 사용중인 별명입니다.':'사용 가능한 별명입니다.').appendTo($('.add_nickname'));
+					//$('#nc').remove();
+					/*$('<h7/>').attr({style:'color:blue',id:'nc'}).html((d==1)?'이미 사용중인 별명입니다.':'사용 가능한 별명입니다.').appendTo($('.add_nickname'));*/
+					let rs;
+					rs=(d==1)?'이미 사용중인 별명입니다.':$('#nickname').val()==''?'필수 값을 입력하세요.':'사용 가능한 별명입니다.';
+					dupck += (rs=='사용 가능한 별명입니다.')? 1:0;
+					alert(rs);
 				},
 				error : (m1,m2,m3)=>{
 					alert("error발생");
@@ -423,7 +443,6 @@ hyeri.page={
 			});		
 			
 		});
-		
 		//회원가입버튼 클릭
 		$('#add_submit_btn').click(e=>{
 			e.preventDefault();
@@ -462,9 +481,10 @@ hyeri.page={
 				$('<h7/>').attr({style:'color:red',id:'add_bir'}).html('생년월일을 모두 선택하세요.').appendTo($('#bir_wrap'));
 				ck=false;
 			}
+			
 			//submit
 			let d = new Date();
-			if(ck){
+			if(ck&&dupck==2){
 				$.ajax({
 					url : $.context()+'/member/add/basic',
 					method : 'POST',
@@ -491,6 +511,11 @@ hyeri.page={
 						alert("error발생");
 					}
 				});		
+			}
+			else{
+				if(dupck!=2){
+					alert("이메일과 별명의 중복여부를 확인하세요.");
+				}
 			}
 		});
 		$('#has-account').click(e=>{
@@ -622,7 +647,7 @@ hyeri.page={
       								data : JSON.stringify({
       									email : res.kaccount_email,
       									password : res.uuid,
-      									nickname : 'kakao'+res.id,
+      									nickname : res.properties.nickname,
       									birthday : a.getFullYear()+'-'+(a.getMonth()+1)+'-'+a.getDate(),
       									gender  : ((Math.floor((Math.random() * 2) + 1)==1)? '남자':'여자'),
       									profile : null,
@@ -631,8 +656,13 @@ hyeri.page={
       								}),
       								success : d=>{
       									if(d==1){
-      										alert("가입 기록이 없어 자동 회원가입 후 로그인되었습니다.");
+      										alert("가입 기록이 없어 자동 회원가입되었습니다.로그인하세요.");
+      										/*$.cookie('userid', d.value.seq);
+      		      							$.cookie('nickname', d.value.nickname);
+      		    							$.cookie('profile', d.value.profile);
+      		      							app.router.main();*/
       										hyeri.page.l();
+      								
       									}
       									else{
       										alert("카카오톡 회원 가입이 실패하였습니다.");

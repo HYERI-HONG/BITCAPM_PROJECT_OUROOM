@@ -28,7 +28,7 @@
 	<select id="sList" resultMap="mainResultMap">
 		SELECT I.SEQ, I.TITLE,I.SUM,I.DISCOUNT,I.PHOTO,C.CATEGORY
 		FROM item I
-		JOIN category2 C
+		JOIN CATEGORY2 C
 		ON I.CATEGORY2_SEQ LIKE C.SEQ
 		<where>
 	 		<if test="category!='전체'">

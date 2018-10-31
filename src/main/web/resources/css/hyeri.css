@@ -46,6 +46,12 @@
     margin-left :20px;
     letter-spacing: 0.1em;
 }
+#statics_btn{
+	margin-right: 37%;
+}
+.h_nav_left.active{
+	color: #CC5200;
+}
 .h_nav_right{
     display: inline-block;
     font-size: 15px;
@@ -75,9 +81,6 @@
     vertical-align: bottom;
     margin-left :5px;
 }
-.h_nav_left:hover{
-	color : #cc5200;
-} 
 .h_nav_right:hover{
 	color : #cc5200;
 }
