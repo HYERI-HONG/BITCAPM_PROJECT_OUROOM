@@ -32,9 +32,9 @@
 .pa0__ryu {
 	padding: 0px !important;
 }
-
-.pr0__ryu {
-	padding: 0px !important;
+.pdrl0__ryu{
+	padding-left: 0px !important;
+	padding-right: 0px !important;
 }
 
 div .bgcw__ryu {
@@ -99,25 +99,36 @@ div .txtcw__ryu {
 }
 
 .borderG__ryu {
-	border-color: #8c8c8c !important;
 	border-right: 0px !important;
 	border-left: 0px !important;
 }
 
+
 /*div 테두리 위 왼*/
-.teduri__ryu{
+.teduritl__ryu{
 	border-top : 1px solid #8c8c8c  !important;
+	border-left : 1px solid #8c8c8c!important;
+}
+.teduritl2__ryu{
+	border-top : 2px solid #8c8c8c  !important;
+	border-left : 2px solid #8c8c8c!important;
+	
+}
+.teduril__ryu{
 	border-left : 1px solid #8c8c8c!important;
 	
 }
-
+.teduril2__ryu{
+	border-left : 2px solid #8c8c8c!important;
+	
+}
 /* 湲��옄 �쓬�쁺 */
 .ganjitxt__ryu {
-	text-shadow: 2px 2px 2px gray;
+	text-shadow: 2px 2px 2px #8c8c8c;
 }
 
 .ganjitxt_4d4d4d__ryu {
-	text-shadow: 2px 2px 2px gray;
+	text-shadow: 2px 2px 2px #8c8c8c;
 	color: #4d4d4d;
 }
 
@@ -125,15 +136,29 @@ div .txtcw__ryu {
 /* �쟾泥댄�  */
 .btb1__ryu {
 	border: none;
-	border-top: 1px solid;
-	border-bottom: 1px solid;
+	border-top: 1px solid #8c8c8c8;
+	border-bottom: 1px solid #8c8c8c8;
 }
 
 /*div shadow*/
-#smm_v_ld, #smm_np_h, #smm_np_c, #smm_np_f, #smm_nj, #smm_v_c, #smm_v_d,
-	#smmtable, #mbr__pc, #mbr__bc, #vbt__wc {
-	box-shadow: 4px 4px gray;
+#smm_v_ld, #smm_np_h, #smm_np_c, #smm_np_f, #smm_nj, #smm_v_c, #smm_v_d,#smm_b_c,
+	#smmtable, #mbr__pc, #mbr__bc {
+	box-shadow: 4px 4px #8c8c8c;
 }
+
+#vbt__wc{
+	box-shadow: 6px 6px #8c8c8c;
+}
+
+.bshadow44__ryu{
+	box-shadow: 4px 4px #8c8c8c;
+}
+
+.bshadow66__ryu{
+	box-shadow: 6px 6px #8c8c8c;
+}
+
+
 /*date*/
 .ui-datepicker {
 	position: absolute !important;
@@ -144,12 +169,12 @@ div .txtcw__ryu {
 /*�븘�씠肄�*/
 .glyphicon-certificate {
 	position: relative;
-	top: -1.12em;
+	top: -1.7em;
 	display: inline-block;
 	padding: 0 .25em;
 	content: '\f005';
 	font-weight: 900;
-	font-size: 2em;
+	font-size: 1.2em;
 }
 
 .glyalone__ryu {
@@ -257,10 +282,10 @@ div .txtcw__ryu {
 	float: left;
 }
 
-#kingofcontainer:nth-child(even) {
-	background-color: rgba(204, 82, 0, 0.25)
+#kingofcontainer : nth-child(2n) {
+	background-color: #8c8c8c3b !important;
 }
 
 #kingofcontainer:nth-child(odd) {
-	background-color: #FFFFFF
+	background-color: #FFFFFF;
 }

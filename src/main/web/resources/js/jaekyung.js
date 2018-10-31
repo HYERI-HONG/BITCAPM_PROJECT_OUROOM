@@ -6,8 +6,20 @@ jaekyung =(()=>{
        };
        return {init:init};
 })();
-
-jaekyung.main={// 메인페이지//변경
+/*jaekyung.main = (()=>{
+	var init =()=>{
+		onCreate();
+	};
+	var onCreate =()=>{
+		setContentView();
+	};
+	var setContentView =()=>{
+        //// 자스 Promise 비동기 로직 다루기
+	      app.router.home();
+	};
+	return{init:init};
+})();*/
+jaekyung.main={
               mp:()=>{
                      $('#content').empty();     
                      let ctner__st=$('<div />').attr({id:"ctner__st"});
@@ -47,17 +59,15 @@ jaekyung.main={// 메인페이지//변경
 							// $('<a/>').addClass('navbar-brand').attr({href:"#"}).html($('<img
 							// src="'+$.img()+'/jaekyung/logo.png"/>'))
                      ).appendTo(dd);
-                     u.attr({id:"ididid"}).addClass("nav nav-pills nav-justified ").appendTo(dd);
+                     u.attr({id:"nav__u__ryu"}).addClass("nav nav-pills nav-justified ").appendTo(dd);
                    
                      $(ip).each(function(i){
                            $('<li role="presentation" data-scroll="'+this.id+'"/>').attr({style:"padding-top:7px"}).addClass("scrollS__ryu").append($('<a href="#'+this.id+'"/>').attr({style:"color:#262626"}).html(this.lst)).appendTo(u);
                      });
-                     
                      $(()=>{
-                	    var link = $('li.scrollS__ryu a');
-                	    link.on('click',function(e){ // .click(e=>{}) 의
-														// 비jquery 방식
-                	        var target = $($(this).attr('href')); 
+                	    let link = $('li.scrollS__ryu a');
+                	    link.on('click',function(e){
+                	        let target = $($(this).attr('href')); 
                 	        $('html, body').animate({
                 	            scrollTop: target.offset().top
                 	        },800);
@@ -69,15 +79,14 @@ jaekyung.main={// 메인페이지//변경
                         });
                         function findPosition(){
                             $('div .scrollsd_ryu').each(function(){
-                                if( ($(this).offset().top - $(window).scrollTop() ) <600){
+                                if( ($(this).offset().top - $(window).scrollTop())<600){
                                     $('li.scrollS__ryu').removeClass('active');
-                                    $('#ididid').find('[data-scroll="'+ $(this).attr('id') +'"]').addClass('active');
+                                    $('#nav__u__ryu').find('[data-scroll="'+ $(this).attr('id') +'"]').addClass('active');
                                 }
                             });
                         }
                         findPosition();
                      });
-                     
                      let didScroll,lastScrollTop = 0,delta = 5;
                      let navbarHeight = $('body').outerHeight();
                      $(window).scroll(e=>{
@@ -126,46 +135,56 @@ jaekyung.main={// 메인페이지//변경
                 smm;
                 $('<div />').attr({id:"smmryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu").appendTo(smm);
                 smma.addClass("container compogap__ryu").appendTo(smm);
-                smmh.attr({id:"smmryu"}).addClass("txtcw_ryu text-center txtcw__ryu").append(
-                             $('<h1 />').append($('<strong>').addClass("ganjitxt__ryu").html("요약")),
-                             $('<hr />').addClass('txthr10__ryu'),
+                smmh.attr({id:"smmryu"}).addClass("txtcw_ryu text-center txtcw__ryu")
+                	.append(
+                             $('<h1 />')
+                             	.append(
+                             		$('<strong>').addClass("ganjitxt_4d4d4d__ryu").html("요약")
+                             	),
+                             $('<hr />').attr({style:'color:#8c8c8c'}).addClass('txthr10__ryu'),
                              $('<span aria-hidden="true" />').attr({style:"height:40px; width:40px"}).addClass('glyphicon glyphicon-certificate glyalone__ryu')
-                ).appendTo(smma);
+                	).appendTo(smma);
                 smmc.attr({style:"margin-top:40px;"}).appendTo(smma);
                 smmco.appendTo(smmc);
-                smmco.attr({style:"display:flex"}).addClass("row-fluid").append(
-                     $('<div />').attr({style:"padding:0px",id:"smm_v_ld"}).addClass("col-lg-8 col-md-12 bgcw__ryu teduri__ryu").append(
+                smmco.attr({style:"display:flex"}).addClass("row-fluid")
+                	.append(
+                     $('<div />').attr({style:"padding:0px",id:"smm_v_ld"}).addClass("col-lg-8 col-md-12 bgcw__ryu teduritl__ryu")
+                     	.append(
                     		 $('<div />').attr({style:"margin:10px 0px 10px 20px; width:550px",id:"smm_v_l_t"}).addClass("text-center col-md-12 bgcw__ryu pa0__ryu"),
                              $('<div />').attr({style:"border:1px solid ;",id:"smm_v_l"}).addClass("col-md-12 bgcw__ryu pa0__ryu borderG__ryu")
-                     ),
-                     $('<div />').addClass("col-lg-4 col-sm-12 pr0__ryu ml15__ryu ").append(
-                                  $('<div />').addClass("col-md-12 pr0__ryu ").append(
-                                	  $('<div />').attr({style:" display:flex",id:"smm_np_h"}).addClass("col-md-12 bgcw__ryu pa0__ryu teduri__ryu"),
-	                                  $('<div />').attr({style:"border-left:1px solid gray;" , id:"smm_np_c"}).addClass("col-md-12 bgcw__ryu pa0__ryu "),
-	                                  $('<div />').attr({style:"border-left:1px solid gray; margin-bottom:15px ; display:flex",id:"smm_np_f"}).addClass("col-md-12 bgcw__ryu pa0__ryu ")
-                                  ),
-                                  $('<div />').attr({id : "smm_nj"}).addClass("col-md-12 pr0__ryu ").append(
-                            		  $('<div />').attr({style:"display:flex",id:"smm_nj_h"}).addClass("col-md-12 bgcw__ryu pa0__ryu #8c8c8c"),
-		                              $('<div />').attr({style:"border:1px solid;padding-right:0px; padding-left:0px", id:"smm_nj_c"}).addClass("col-md-12 bgcw__ryu "),
-		                              $('<div />').attr({style:"border:1px solid ;border-top:0px",id:"smm_nj_f"}).addClass("col-md-12 bgcw__ryu pa0__ryu mb0__ryu ")
-		                              )
-                     )
-                );
-                
-              
-                
+                     	),
+                     $('<div />').addClass("col-lg-4 col-sm-12 pr0__ryu ml15__ryu ")
+                     	.append(
+                                  $('<div />').attr({style:"padding-left:0px"}).addClass("col-md-12 pr0__ryu ")
+	                                  	.append(
+	                                	   $('<div />').attr({style:" display:flex",id:"smm_np_h"}).addClass("col-md-12 bgcw__ryu pa0__ryu teduritl__ryu"),
+		                                   $('<div />').attr({style:"border-left:1px solid gray;" , id:"smm_np_c"}).addClass("col-md-12 bgcw__ryu pa0__ryu "),
+		                                   $('<div />').attr({style:"border-left:1px solid gray; margin-bottom:15px ; display:flex",id:"smm_np_f"}).addClass("col-md-12 bgcw__ryu pa0__ryu ")
+	                                  	),
+                                  $('<div />').attr({id : "smm_nj",style:"padding-left:0px"}).addClass("col-md-12 pr0__ryu ")
+                                  		.append(
+	                            		   $('<div />').attr({style:"display:flex",id:"smm_nj_h"}).addClass("col-md-12 bgcw__ryu pa0__ryu teduritl__ryu"),
+			                               $('<div />').attr({style:"padding-right:0px; padding-left:0px", id:"smm_nj_c"}).addClass("col-md-12 bgcw__ryu teduril__ryu"),
+			                               $('<div />').attr({id:"smm_nj_f"}).addClass("col-md-12 bgcw__ryu pa0__ryu mb0__ryu teduril__ryu ")
+	                                  	)
+                     	)
+                	);
                 smmct.appendTo(smmc);
-                smmct.attr({style:"display:flex"}).addClass("row-fluid margint20__ryu").append(
-                     $('<div />').attr({style:"margin-right:15px",id:"smm_v_c"}).addClass("col-md-5 bgcw__ryu")
-                     ,
-                     $('<div />').addClass("col-md-4").attr({style:"padding-left:0px"}).append(
-                    		 $('<div />').attr({id:"smmtable"}).addClass("col-md-12 bgcw__ryu text-center ").html("<h4><strong>오늘 상위 매출 카테고리</strong></h4>")
-                     ),
-                     $('<div />').attr({style:"display:flex"}).addClass("col-md-3 pr0__ryu borderG__ryu").append(
-                                  $('<div />').attr({id:"smm_v_d"}).addClass("col-md-12 bgcw__ryu")
-                                  
-                     )
-                );
+                smmct.attr({style:"display:flex"}).addClass("row-fluid margint20__ryu")
+                	.append(
+	                     $('<div />').attr({style:"margin-right:15px",id:"smm_v_c"}).addClass("col-md-5 bgcw__ryu teduritl__ryu")
+	                     ,
+	                     $('<div />').addClass("col-md-4").attr({style:"padding-left:0px"})
+	                     	.append(
+	                    		 $('<div />').attr({id:"smmtable"}).addClass("col-md-12 bgcw__ryu text-center teduritl__ryu ")
+	                    		 	.html("<h4><strong>오늘 상위 매출 카테고리</strong></h4>")
+	                     	),
+	                     $('<div />').attr({style:"display:flex",id:"smm_b_c"}).addClass("col-md-3 pr0__ryu borderG__ryu teduritl__ryu")
+	                     	.append(
+	                                  $('<div />').attr({id:"smm_v_d"}).addClass("col-md-12 bgcw__ryu")
+	                                  
+	                     	)
+                	);
                 return smm;
               },
               vst:()=>{
@@ -176,27 +195,31 @@ jaekyung.main={// 메인페이지//변경
                 let vstco = $('<div />');
                 let vstct = $('<div />');
                 vst.attr({style:"background-color: #FFFFFF"});
-                $('<div />').attr({id:"vstryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu").appendTo(vst);
+                $('<div />').attr({id:"vstryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu")
+                	.appendTo(vst);
                 vsta.addClass("container compogap__ryu").appendTo(vst);
-                $('<div />').append(
-                             vsth.addClass("txtcw_ryu text-center").append(
-                                    $('<h1 />').append($('<strong>').addClass("ganjitxt_4d4d4d__ryu").html("방문자통계")),
+                $('<div />')
+                	.append(
+                           vsth.addClass("text-center").append(
+                                    $('<h1 />')
+                                    	.append(
+                                    		$('<strong>').addClass("ganjitxt_4d4d4d__ryu").html("방문자통계")
+                                    	),
                                     $('<hr />').addClass('txthr20__ryu'),
                                     $('<span aria-hidden="true" />').attr({style:"color:#4d4d4d;"}).addClass('glyphicon glyphicon-certificate glyalone__ryu')
-                       )
-                ).appendTo(vsta);
+	                       )
+	                ).appendTo(vsta);
                 vstc.attr({style:"margin-top:40px"}).appendTo(vsta);
                 vstco.appendTo(vstc);
-                vstco.addClass("row-fluid").append(
-                             $('<div />').addClass("col-md-12 btb1__ryu borderG__ryu").attr({id:'vst_c_a', style:'height:450px'})                     
-                );
+                vstco.addClass("row-fluid")
+                	.append(
+                             $('<div />').attr({id:'vst_c_a', style:'height:450px;box-shadow: 6px 0px #8c8c8c;'}).addClass("col-md-12  teduritl2__ryu ")                     
+                	);
                 vstct.addClass("margint20__ryu").appendTo(vstc);
-              
-                vstct.addClass("row-fluid").append(
-                             $('<div />').attr({style:" padding: 20px 40px 20px 40px ;border-top:0px" , id:"vst_t"}).addClass("col-md-12  btb1__ryu borderG__ryu")
-                );
-                
-                
+                vstct.addClass("row-fluid")
+                	.append(
+                             $('<div />').attr({style:" padding: 20px 40px 20px 40px ;" , id:"vst_t"}).addClass("col-md-12 teduril2__ryu bshadow66__ryu ")
+                	);
                 return vst;
               },
               sba:()=>{
@@ -206,29 +229,36 @@ jaekyung.main={// 메인페이지//변경
                 let sbac = $('<div />');
                 let sbaco = $('<div />');
                 let sbact = $('<div />');
-                sba.attr({style:"background-color: rgba(204, 82, 0, 0.25);"});
-                $('<div />').attr({id:"sbaryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu").appendTo(sba);
+                sba.attr({style:"background-color: #8c8c8c3b;"});
+                $('<div />').attr({id:"sbaryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu")
+                	.appendTo(sba);
                 sbaa.addClass("container compogap__ryu").appendTo(sba);
-                $('<div />').append(
-                              sbah.attr({id:"sbaryu"}).addClass(" text-center txtcw__ryu").append(
-                                    $('<h1 />').append($('<strong>').addClass("ganjitxt__ryu").html("연령 별 매출 통계")),
-                                    $('<hr />').addClass('txthr30__ryu'),
-                                    $('<span aria-hidden="true" />').addClass('glyphicon glyphicon-certificate glyalone__ryu')
-                       )
-                ).appendTo(sbaa);
+                $('<div />')
+                	.append(
+                          sbah.attr({id:"sbaryu"}).addClass(" text-center")
+                          	.append(
+                                $('<h1 />')
+                                	.append(
+                                		$('<strong>').addClass("ganjitxt__ryu").html("연령 별 매출 통계")
+                                	),
+                                $('<hr />').addClass('txthr30__ryu'),
+                                $('<span aria-hidden="true" />').addClass('glyphicon glyphicon-certificate glyalone__ryu')
+                          	)
+	                ).appendTo(sbaa);
                 sbac.attr({style:"margin-top:40px"}).appendTo(sbaa);
                 sbaco.appendTo(sbac);
-                sbaco.addClass("row-fluid").append(
-                             $('<div />').addClass("col-md-12 btb1__ryu borderG__ryu").append(
-                                           $('<div />').attr({style:'height:450px',id:"sba__cc"}).addClass("col-md-12")
-                                                 
-                             )                         
-                );
+                sbaco.addClass("row-fluid")
+                	.append(
+                         $('<div />').addClass("col-md-12  borderG__ryu pdrl0__ryu")
+                         	.append(
+                               $('<div />').attr({style:'height:450px; background-color:white; ',id:"sba__cc"}).addClass("col-md-12  teduritl__ryu bshadow66__ryu")
+                         	)                         
+                	);
                 sbact.addClass("margint20__ryu").appendTo(sbac);
-    
-                sbact.addClass("row-fluid").append(
-                             $('<div />').attr({style:" padding: 20px 40px 20px 40px ;border-top:0px ",id:"sba_t"}).addClass("col-md-12  btb1__ryu borderG__ryu")
-                );
+                sbact.addClass("row-fluid")
+                	.append(
+                        $('<div />').attr({style:" padding: 20px 40px 20px 40px ;background-color:white;",id:"sba_t"}).addClass("col-md-12  btb1__ryu teduritl__ryu bshadow66__ryu")
+                	);
                 return sba;
               },
               ctgr1:()=>{
@@ -237,22 +267,28 @@ jaekyung.main={// 메인페이지//변경
                 let ctgr1h = $('<div />');
                 let ctgr1c = $('<div />');
                 let ctgr1co = $('<div />');
-                ctgr1.attr({style:"background-color: #FFFFFF"});
-                $('<div />').attr({id:"ctgr1ryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu").appendTo(ctgr1);
+                ctgr1.attr({style:"background-color: #8c8c8c3b;"});
+                $('<div />').attr({id:"ctgr1ryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu")
+                	.appendTo(ctgr1);
                 ctgr1a.addClass("container compogap__ryu").appendTo(ctgr1);
-                $('<div />').append(
-                             ctgr1h.attr({id:"ctgr1ryu"}).addClass("text-center").append(
-                                    $('<h1 />').append($('<strong>').addClass("ganjitxt_4d4d4d__ryu").html("카테고리  통계")),
-                                    $('<hr />').addClass('txthr45__ryu'),
-                                    $('<span aria-hidden="true" />').attr({style:"color:#4d4d4d;"}).addClass('glyphicon glyphicon-certificate glyalone__ryu')
-                       ).appendTo(ctgr1a)
-                            
-                ).appendTo(ctgr1a);
+                $('<div />')
+                	.append(
+                      ctgr1h.attr({id:"ctgr1ryu"}).addClass("text-center")
+                      	.append(
+                             $('<h1 />')
+                             	.append(
+                             		$('<strong>').addClass("ganjitxt_4d4d4d__ryu").html("카테고리  통계")
+                     			),
+                             $('<hr />').addClass('txthr45__ryu'),
+                             $('<span aria-hidden="true" />').attr({style:"color:#4d4d4d;"}).addClass('glyphicon glyphicon-certificate glyalone__ryu')
+                     	).appendTo(ctgr1a)
+                	).appendTo(ctgr1a);
                 ctgr1c.attr({style:"margin-top:40px"}).appendTo(ctgr1a);
                 ctgr1co.appendTo(ctgr1c);
-                ctgr1co.addClass("row-fluid").append(
-                             $('<div />').attr({id:"ctgr1__tc",style:"width:1100px ; height:500px"}).addClass("col-md-12 btb1__ryu borderG__ryu")
-                );
+                ctgr1co.addClass("row-fluid")
+                	.append(
+                             $('<div />').attr({id:"ctgr1__tc",style:"width:1130px ; height:560px; background-color:white; padding:20px ;"}).addClass("col-md-12 btb1__ryu teduritl__ryu bshadow66__ryu")
+                	);
                 return ctgr1;
               },
               mbr:()=>{
@@ -262,24 +298,33 @@ jaekyung.main={// 메인페이지//변경
                 let mbrc = $('<div />');
                 let mbrco = $('<div />');
                 let mbrct = $('<div />');
-                mbr.attr({style:"background-color:rgba(204, 82, 0, 0.25)"});
-                $('<div />').attr({id:"mbrryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu").appendTo(mbr);
+                mbr.attr({style:"background-color: #8c8c8c3b;"});
+                $('<div />').attr({id:"mbrryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu")
+                	.appendTo(mbr);
                 mbra.addClass('container compogap__ryu').appendTo(mbr);
-                $('<div />').append(     
-                             mbrh.attr({id:"mbrryu"}).addClass("txtcw__ryu text-center").append(
-                                           $('<h1 />').append($('<strong>').addClass("ganjitxt__ryu").html("가입자 통계")),
-                                           $('<hr />').addClass('txthr20__ryu'),
-                                           $('<span aria-hidden="true" />').addClass('glyphicon glyphicon-certificate glyalone__ryu')
-                             )
-                ).appendTo(mbra)
+                $('<div />')
+                	.append(     
+                         mbrh.attr({id:"mbrryuh",style:"margin-bottom:40px"}).addClass(" text-center")
+                         	.append(
+                                   $('<h1 />')
+                                   	 .append(
+                                   		$('<strong>').addClass("ganjitxt__ryu").html("가입자 통계")
+                                   	 ),
+                                   $('<hr />').addClass('txthr20__ryu'),
+                                   $('<span aria-hidden="true" />').addClass('glyphicon glyphicon-certificate glyalone__ryu')
+                         	)
+                	).appendTo(mbra)
                 mbrc.appendTo(mbra);
-                mbrco.attr({style:"display:flex"}).addClass("row-fluid ").appendTo(mbrc);
-                $('<div />').addClass('col-md-6').append(
-                             $('<div />').attr({style:" height:480px",id:"mbr__pc"}).addClass('col-md-12 bgcw__ryu')
-                ).appendTo(mbrco);
-                $('<div />').addClass('col-md-6').append(
-                             $('<div />').attr({style:" height:480px",id:"mbr__bc"}).addClass('col-md-12 bgcw__ryu')
-                ).appendTo(mbrco);
+                mbrco.attr({style:"display:flex"}).addClass("row-fluid ")
+                	.appendTo(mbrc);
+                $('<div />').addClass('col-md-6')
+                	.append(
+                         $('<div />').attr({style:" height:480px",id:"mbr__pc"}).addClass('col-md-12 bgcw__ryu teduritl__ryu')
+                	).appendTo(mbrco);
+                $('<div />').addClass('col-md-6')
+                	.append(
+                         $('<div />').attr({style:" height:480px",id:"mbr__bc"}).addClass('col-md-12 bgcw__ryu teduritl__ryu')
+                	).appendTo(mbrco);
                 mbrct.appendTo(mbrc);
                 mbrct.addClass('row-fluid');
                 mbrct.addClass("margint20__ryu").appendTo(mbrc);
@@ -294,18 +339,21 @@ jaekyung.main={// 메인페이지//변경
                 abba.attr({style:"background-color: #FFFFFF"});
                 $('<div />').attr({id:"abbaryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu").appendTo(abba);
                 abbaa.addClass("container compogap__ryu").appendTo(abba);
-                $('<div />').append(
-                             abbah.attr({id:"abbaryu"}).addClass("text-center").append(
-                                    $('<h1 />').append($('<strong>').addClass("ganjitxt_4d4d4d__ryu").html("연령 대비 평균 구매액 통계")),
-                                    $('<hr />').addClass('txthr45__ryu'),
-                                    $('<span aria-hidden="true" />').attr({style:"color:#4d4d4d;"}).addClass('glyphicon glyphicon-certificate glyalone__ryu')
-                       )
-                ).appendTo(abbaa);
+                $('<div />')
+                	.append(
+		                 abbah.attr({id:"abbaryu"}).addClass("text-center")
+		                 	.append(
+		                        $('<h1 />').append($('<strong>').addClass("ganjitxt_4d4d4d__ryu").html("연령 대비 평균 구매액 통계")),
+		                        $('<hr />').addClass('txthr45__ryu'),
+		                        $('<span aria-hidden="true" />').attr({style:"color:#4d4d4d;"}).addClass('glyphicon glyphicon-certificate glyalone__ryu')
+		                    )
+                	).appendTo(abbaa);
                 abbac.attr({style:"margin-top:40px"}).appendTo(abbaa);
                 abbaco.appendTo(abbac);
-                abbaco.addClass("row-fluid").append(
-                             $('<div />').attr({id:"abba__sc",style:"height:500px"}).addClass("col-md-12 btb1__ryu borderG__ryu")                   
-                );
+                abbaco.addClass("row-fluid")
+                	.append(
+                         $('<div />').attr({id:"abba__sc",style:"height:500px"}).addClass("col-md-12 btb1__ryu teduritl2__ryu  bshadow66__ryu")                   
+                	);
                 return abba;
               },
               vbt:()=>{
@@ -315,19 +363,20 @@ jaekyung.main={// 메인페이지//변경
                 let vbtc = $('<div />');
                 let vbtco = $('<div />');
                 let vbtct = $('<div />');
-                vbt.attr({style:"background-color:rgba(204, 82, 0, 0.25)"});
                 $('<div />').attr({id:"vbtryu",style:" position:relative; top:-50px"}).addClass("scrollsd_ryu").appendTo(vbt);
                 vbta.addClass('container compogap__ryu').appendTo(vbt);
-                $('<div />').append(     
-                             vbth.addClass("txtcw__ryu text-center").append(
-                                           $('<h1 />').append($('<strong>').addClass("ganjitxt__ryu").html("해시태그 워드클라우드")),
-                                           $('<hr />').addClass('txthr35__ryu'),
-                                           $('<span aria-hidden="true" />').addClass('glyphicon glyphicon-certificate glyalone__ryu glyalone__ryu')
-                             )
-                ).appendTo(vbta)
+                $('<div />')
+                	.append(     
+                         vbth.attr({style:"color: #4d4d4d;"}).addClass(" text-center")
+                         	.append(
+                               $('<h1 />').append($('<strong>').addClass("ganjitxt__ryu").html("해시태그 워드클라우드")),
+                               $('<hr />').addClass('txthr35__ryu'),
+                               $('<span aria-hidden="true" />').addClass('glyphicon glyphicon-certificate glyalone__ryu glyalone__ryu')
+                         	)
+                	).appendTo(vbta)
                 vbtc.appendTo(vbta);
                 vbtco.addClass("row-fluid").appendTo(vbtc);
-                       $('<div />').attr({id:"vbt__wc"}).addClass('col-md-12 bgcw__ryu').appendTo(vbtco);
+                       $('<div />').attr({id:"vbt__wc"}).addClass('col-md-12 bgcw__ryu teduritl2__ryu').appendTo(vbtco);
                 vbtct.appendTo(vbtc);
                 vbtct.addClass("margint20__ryu").appendTo(vbtc);
                 return vbt;
@@ -346,11 +395,17 @@ jaekyung.chart={
 		    	  );
 		      });
 		      let options = {
-		    	title: '일일 방문자 통계',
-		    	legend:{position:'none'},	  
-		        hAxis: {title: ''},
-		        vAxis: {title: '방문자 수',viewWindow: {min:500}},
-		        backgroundColor: '#FFFFFF'
+		    	legend:{
+		    		position:'none'
+		    	},
+		        vAxis: {
+		        	title: '방문자 수'
+		        	,viewWindow: {min:0}
+		    	},
+		        backgroundColor: '#FFFFFF',
+		        chartArea:{
+		        	top:30,width:"70%"
+		        }
 		      };
 		      var chart = new google.visualization.LineChart(document.getElementById('smm_v_l'));
 		      chart.draw(data, options);
@@ -380,10 +435,14 @@ jaekyung.chart={
 			$.getJSON($.context()+'/stats/smmChart/'+today+"/"+beforeweek,r=>{
 				// smm line
 				jaekyung.chart.reLc(r);
-				$('<input />').attr({type:"text",id:"smm_v_l_t_date",style:"width:160px; font-size:15px; margin-right:6px; text-align:center"}).appendTo($('#smm_v_l_t'));
-				$('<span />').attr({style:'font-size:20px'}).html('<b> ~ </b>').appendTo($('#smm_v_l_t'));
-				$('<input />').attr({type:"text",id:"smm_v_l_t_date2",style:"width:160px; font-size:15px; margin-right:6px;  text-align:center"}).appendTo($('#smm_v_l_t'));
-				$('<span />').attr({style:'font-size:20px'}).html('<b> 의 방문자 통계 </b>').appendTo($('#smm_v_l_t'));
+				$('<input />').attr({type:"text",id:"smm_v_l_t_date",style:"width:160px; font-size:15px; margin-right:6px; text-align:center"})
+					.appendTo($('#smm_v_l_t'));
+				$('<span />').attr({style:'font-size:20px'}).html('<b> ~ </b>')
+					.appendTo($('#smm_v_l_t'));
+				$('<input />').attr({type:"text",id:"smm_v_l_t_date2",style:"width:160px; font-size:15px; margin-right:6px;  text-align:center"})
+					.appendTo($('#smm_v_l_t'));
+				$('<span />').attr({style:'font-size:20px'}).html('<b> 의 방문자 통계 </b>')
+					.appendTo($('#smm_v_l_t'));
 				$(()=> {
 		              $.datepicker.setDefaults($.datepicker.regional['ko']); 
 		              $('#smm_v_l_t_date').datepicker({
@@ -406,9 +465,9 @@ jaekyung.chart={
 		        });
 				$('#smm_v_l_t_date2').val(new Date(today));
 				$('#smm_v_l_t_date').change(e=>{
-						$.getJSON($.context()+'/stats/smmvstlc/'+$('#smm_v_l_t_date').val()+'/'+$('#smm_v_l_t_date2').val(),rr=>{
-							jaekyung.chart.reLc(rr);
-						});
+					$.getJSON($.context()+'/stats/smmvstlc/'+$('#smm_v_l_t_date').val()+'/'+$('#smm_v_l_t_date2').val(),rr=>{
+						jaekyung.chart.reLc(rr);
+					});
 				});
 				$('#smm_v_l_t_date2').change(e=>{
 					$.getJSON($.context()+'/stats/smmvstlc/'+$('#smm_v_l_t_date').val()+'/'+$('#smm_v_l_t_date2').val(),rr=>{
@@ -425,26 +484,19 @@ jaekyung.chart={
 				    	  data.addRow([j.smmDate.split('-')[1]+'월 '+j.smmDate.split('-')[2]+'일', j.smmSale]);
 				      });
 				      var options = {
-				        title: '일일 매출 통계',
-				        legend:{position:'none'},
-				        hAxis: {
-				          title: '',
-				          format: 'h:mm a'
-				        	 /*
-								 * , viewWindow: { min: [7, 30, 0], max: [17,
-								 * 30, 0] }
-								 */
+				        title: '지난 7일 매출 통계',
+				        legend:{
+				        	position:'none'
 				        },
 				        vAxis: {
 				          title: '매출액(단위: 원)',
-				          viewWindow: {min:50000000, max: 110000000}
-				        	  
+				          viewWindow: {min:50000000},
+				          chartArea:{top:30,width:"90%"}
 				        }
 				      };
-
 				      var chart = new google.visualization.ColumnChart(
-				        document.getElementById('smm_v_c'));
-
+				        document.getElementById('smm_v_c')
+				      );
 				      chart.draw(data, options);
 				    });
 				// smm donut
@@ -454,21 +506,26 @@ jaekyung.chart={
 				          ['gender', '가입자수'],
 				          ['남자',     11],
 				          ['여자',      22]
-				        ]);
+			        ]);
 
 			        var options = {
-			          title: '가입자 성비 현황',
-			          titleTextStyle:{fontSize: 15, bold:true},
-			          legend:{position:'bottom'},
-			          chartArea:{width:'70%',height:'70%'},
-			          pieHole: 0.4,
+			          title: '가입자 성비',
+			          titleTextStyle:{
+			        	  fontSize: 15,
+			        	  bold:true
+			          },
+			          legend:{
+			        	  position:'bottom'
+			          },
+			          chartArea:{
+			        	  width:'70%',
+			        	  height:'70%'
+			          },
+			          pieHole: 0.4
 			        };
-
 			        var chart = new google.visualization.PieChart(document.getElementById('smm_v_d'));
 			        chart.draw(data, options);
 			    });
-			    
-			    
 			    let smmtd = $('<div />');
 				let t = $('<table />');
 				let th = $('<thead />');
@@ -484,7 +541,8 @@ jaekyung.chart={
 				$('<th />').attr({style:'width:15%'}).html("<b>판매수</b>").appendTo(tr); 
 				$('<th />').attr({style:'width:15% pon'}).html("<b>전체대비비율</b>").appendTo(tr);
 		        $(r.bestSellerPerDay).each(function(i){
-		               $('<tr />').attr({style:'font-size:12px'}).addClass("text-center").append(
+		               $('<tr />').attr({style:'font-size:12px'}).addClass("text-center")
+		               		.append(
 		                            $('<td />').attr({style:'width:10%'})
 		                            	.html(i+1),
 		                            $('<td />').attr('width','20%')
@@ -493,25 +551,29 @@ jaekyung.chart={
 		                            	.html(this.sumOfBestSeller+" 개"),
 		                            $('<td />').attr('width','20%')
 		                            	.html((this.sumOfBestSeller/r.totalSalePerDay[0].totalSalePerDay*100).toFixed(1)+"%")
-		               ).appendTo(tb);
+		               		).appendTo(tb);
 		        });
 		        smmtd.appendTo($('#smmtable'));
 		        let smmtnpd = $('<div />');
 				let tnp = $('<table />');
 				let tbnp = $('<tbody />');
 				let trnp = $('<tr />');
-				tnp.attr({style:"border-top:1px solid;  margin-bottom:0px!important;"}).addClass("table table-striped table-hover borderG__ryu").appendTo(smmtnpd);
+				tnp.attr({style:"border-top:1px solid;  margin-bottom:0px!important;"}).addClass("table table-striped table-hover borderG__ryu")
+					.appendTo(smmtnpd);
 				tbnp.appendTo(tnp);
 				trnp.append(
 						 $('<td />').attr({style:'font-size:35px ; width:60%; text-align:right',id:"smm_totalPostPerDay"}).html("<b>"+r.totalPostPerDay[0].postCount+"</b>"),
 						 $('<td />').attr({style:'font-size:25px; width:40%; padding-left:0px; padding-top:20px; padding-bottom:0px'}).html("회")
 				).appendTo(tbnp);
 				smmtnpd.appendTo($('#smm_np_c'));
-				$('<table />').attr({id:'smm_np_h_table',style:" margin:6px 6px 6px 6px ; margin-left:40px;"}).appendTo($('#smm_np_h'));
+				$('<table />').attr({id:'smm_np_h_table',style:" margin:6px 6px 6px 6px ; margin-left:40px;"})
+					.appendTo($('#smm_np_h'));
 				$('<tr />').attr({id:'smm_np_h_tr'}).appendTo($('#smm_np_h_table'));
 				$('<td />').attr({id:'smm_np_h_tr_td'}).prependTo($('#smm_np_h_tr'));
-				$('<input />').attr({type:"text",id:"smm_np_date",style:"width:160px; font-size:20px; margin-right:6px"}).appendTo($('#smm_np_h_tr_td'));
-				$('<td />').attr({style:"font-size:16px"}).html('<b>의 총 조회수</b>').appendTo($('#smm_np_h_tr'));
+				$('<input />').attr({type:"text",id:"smm_np_date",style:"width:160px; font-size:20px; margin-right:6px"})
+					.appendTo($('#smm_np_h_tr_td'));
+				$('<td />').attr({style:"font-size:16px"}).html('<b>의 총 조회수</b>')
+					.appendTo($('#smm_np_h_tr'));
 				$(function() {
 		              $.datepicker.setDefaults($.datepicker.regional['ko']); 
 		              $('#smm_np_date').datepicker({
@@ -529,7 +591,8 @@ jaekyung.chart={
 		        });
 				$('#smm_np_date').change(e=>{
 						$.getJSON($.context()+'/stats/smmPost/'+$('#smm_np_date').val(),rr=>{
-							$('#smm_totalPostPerDay').html("<b>"+rr.totalPostPerDay[0].postCount+"</b>");
+							$('#smm_totalPostPerDay')
+								.html("<b>"+rr.totalPostPerDay[0].postCount+"</b>");
 							$('#smm_np_f_input')
 								.html("<b>"+rr.totalPostPerDayBefore[0].postBeforeCount+' ('+((rr.totalPostPerDay[0].postCount-rr.totalPostPerDayBefore[0].postBeforeCount)/rr.totalPostPerDay[0].postCount*100).toFixed(1)+"%"+')'+"</b>");
 						});
@@ -538,11 +601,15 @@ jaekyung.chart={
 					.appendTo($('#smm_np_f'));
 				$('<tr />').attr({id:'smm_np_f_tr'}).appendTo($('#smm_np_f_table'));
 				$('<td />').attr({style:"font-size:16px; "})
-					.append($('<span  aria-hidden="true" />').addClass("glyphicon glyphicon-pencil")).appendTo($('#smm_np_f_tr'));
+					.append(
+						$('<span  aria-hidden="true" />').addClass("glyphicon glyphicon-pencil")
+					).appendTo($('#smm_np_f_tr'));
 				$('<td />').attr({style:"font-size:16px; padding-left:13px"})
 					.html(' <b>전날 대비 증감</b>').appendTo($('#smm_np_f_tr'));
 				$('<td />').attr({style:"font-size:16px; padding-left:13px; padding-left:25px"})
-					.append($('<span />').attr({id:"smm_np_f_input",style:"color:red"})).appendTo($('#smm_np_f_tr'));
+					.append(
+						$('<span />').attr({id:"smm_np_f_input",style:"color:red"})
+					).appendTo($('#smm_np_f_tr'));
 				$('#smm_np_f_input')
 					.html("<b>"+r.totalPostPerDayBefore[0].postBeforeCount+' ('+((r.totalPostPerDay[0].postCount-r.totalPostPerDayBefore[0].postBeforeCount)/r.totalPostPerDay[0].postCount*100).toFixed(1)+"%"+')'+"</b>");
 				let smmtnjd = $('<div />');
@@ -552,17 +619,23 @@ jaekyung.chart={
 				tnj.attr({style:"border-top:1px solid; margin-bottom:0px!important;"})
 					.addClass("table table-striped table-hover borderG__ryu").appendTo(smmtnjd);
 				tbnj.appendTo(tnj);
-				trnj.append(
-						 $('<td />').attr({style:'font-size:35px ; width:60%; text-align:right',id:"smm_totalJoinPerDay"}).html("<b>"+r.totalJoinPerDay[0].joinCount+"</b>"),
-						 $('<td />').attr({style:'font-size:25px; width:40%; padding-left:0px; padding-top:20px; padding-bottom:0px'}).html("명")
-				).appendTo(tbnj);
+				trnj
+					.append(
+						 $('<td />').attr({style:'font-size:35px ; width:60%; text-align:right',id:"smm_totalJoinPerDay"})
+						 	.html("<b>"+r.totalJoinPerDay[0].joinCount+"</b>"),
+						 $('<td />').attr({style:'font-size:25px; width:40%; padding-left:0px; padding-top:20px; padding-bottom:0px'})
+						 	.html("명")
+					).appendTo(tbnj);
 				smmtnjd.appendTo($('#smm_nj_c'));
-				$('<table />').attr({id:'smm_nj_h_table',style:" margin:6px 6px 6px 6px ; margin-left:40px;"}).appendTo($('#smm_nj_h'));
+				$('<table />').attr({id:'smm_nj_h_table',style:" margin:6px 6px 6px 6px ; margin-left:40px;"})
+					.appendTo($('#smm_nj_h'));
 				$('<tr />').attr({id:'smm_nj_h_tr'}).appendTo($('#smm_nj_h_table'));
 				$('<td />').attr({id:'smm_nj_h_tr_td'}).prependTo($('#smm_nj_h_tr'));
-				$('<input />').attr({type:"text",id:"smm_nj_date",style:"width:160px; font-size:20px; margin-right:6px"}).appendTo($('#smm_nj_h_tr_td'));
-				$('<td />').attr({style:"font-size:16px"}).html('<b>의 신규 가입자 수</b>').appendTo($('#smm_nj_h_tr'));
-				$(function() {
+				$('<input />').attr({type:"text",id:"smm_nj_date",style:"width:160px; font-size:20px; margin-right:6px"})
+					.appendTo($('#smm_nj_h_tr_td'));
+				$('<td />').attr({style:"font-size:16px"}).html('<b>의 신규 가입자 수</b>')
+					.appendTo($('#smm_nj_h_tr'));
+				$(()=>{
 					$.datepicker.setDefaults($.datepicker.regional['ko']); 
 					$('#smm_nj_date').datepicker({
 						dateFormat: 'yy년 mm월 dd일',
@@ -571,7 +644,6 @@ jaekyung.chart={
 					});
 					$('#smm_nj_date').datepicker('setDate', $.datepicker.parseDate('yy년 mm월 dd일', today));
 				});
-				
 				$('#smm_nj_date').change(e=>{
 					$.getJSON($.context()+'/stats/smmJoin/'+$('#smm_nj_date').val(),rr=>{
 						$('#smm_totalJoinPerDay')
@@ -580,16 +652,21 @@ jaekyung.chart={
 							.html("<b>"+rr.totalJoinPerDayBefore[0].joinBeforeCount+' ('+((rr.totalJoinPerDay[0].joinCount-rr.totalJoinPerDayBefore[0].joinBeforeCount)/rr.totalJoinPerDay[0].joinCount*100).toFixed(1)+"%"+')'+"</b>");
 					});
 				});
-				$('<table />').attr({id:'smm_nj_f_table',style:" margin:6px 6px 6px 6px ; margin-left:40px;"}).appendTo($('#smm_nj_f'));
+				$('<table />').attr({id:'smm_nj_f_table',style:" margin:6px 6px 6px 6px ; margin-left:40px;"})
+					.appendTo($('#smm_nj_f'));
 				$('<tr />').attr({id:'smm_nj_f_tr'}).appendTo($('#smm_nj_f_table'));
 				$('<td />').attr({style:"font-size:16px; "})
-					.append($('<span  aria-hidden="true" />').addClass("glyphicon glyphicon-user")).appendTo($('#smm_nj_f_tr'));
-				$('<td />').attr({style:"font-size:16px; padding-left:13px"}).html(' <b>전날 대비 증감</b>').appendTo($('#smm_nj_f_tr'));
+					.append(
+						$('<span  aria-hidden="true" />').addClass("glyphicon glyphicon-user")
+					).appendTo($('#smm_nj_f_tr'));
+				$('<td />').attr({style:"font-size:16px; padding-left:13px"}).html(' <b>전날 대비 증감</b>')
+					.appendTo($('#smm_nj_f_tr'));
 				$('<td />').attr({style:"font-size:16px; padding-left:13px; padding-left:25px"})
-					.append($('<span />').attr({id:"smm_nj_f_input",style:"color:red"})).appendTo($('#smm_nj_f_tr'));
+					.append(
+						$('<span />').attr({id:"smm_nj_f_input",style:"color:red"})
+					).appendTo($('#smm_nj_f_tr'));
 				$('#smm_nj_f_input')
 					.html("<b>"+r.totalJoinPerDayBefore[0].joinBeforeCount+' ('+((r.totalJoinPerDay[0].joinCount-r.totalJoinPerDayBefore[0].joinBeforeCount)/r.totalJoinPerDay[0].joinCount*100).toFixed(1)+"%"+')'+"</b>");
-				
 			});
 		},
 		vst:()=>{
@@ -605,18 +682,25 @@ jaekyung.chart={
 			        		v.visitDate.split('-')[1]+'/ '+v.visitDate.split('-')[2],
 			        		v.memberVisitor,
 			        		v.totalVisitor
-			        		]);
+			        	]);
 			        });
 			        var options = {
-			          title: '방문자 통계',
-			          titleTextStyle:{fontSize: 20, bold:true},
-			          hAxis: {title: '',  titleTextStyle: {color: '#333'}},
-			          vAxis: {minValue: 0}
-			          // ,colors: ['#e0440e','#ec8f6e']
+			          legend:{
+			        	  position: 'top',
+			        	  alignment: 'end',
+			        	  textStyle: {fontSize: 14}
+			          },
+			          vAxis: {
+			        	  minValue: 0
+			          },
+			          chartArea:{
+			        	  width:'80%',
+			        	  height:'80%'
+			          }
 			        };
 			        var chart = new google.visualization.AreaChart(document.getElementById('vst_c_a'));
 			        chart.draw(data, options);
-		      });
+			    });
                 $('<p />').attr({id:'vst_tp'}).appendTo($('#vst_t')); 
                 $('<label />').appendTo($('#vst_tp'));
                 $('#vst_tp label').html('<strong>상세데이터 열기 &nbsp;&nbsp;</strong>'
@@ -629,7 +713,7 @@ jaekyung.chart={
 			    		.addClass("table table-striped table-hover borderG__ryu")
 			    			.appendTo($('#vst_t'));
 	            let thead = $('<thead />').attr('id','vst_thead').appendTo($('#vst_table'));
-	            let tbody =$('<tbody />').attr('id','vst_tbody').appendTo($('#vst_table'));
+	            let tbody = $('<tbody />').attr('id','vst_tbody').appendTo($('#vst_table'));
                 $('#vst_tp label').change (e=>{
                 	if($('#vstDtSwitch').val()==="1"){
                 		$('#vst_table').empty();
@@ -645,13 +729,14 @@ jaekyung.chart={
                 $.each(tablehead.list,(i,v)=>{
                       $('<th />').addClass("text-center").html(v).appendTo($('#vst__tr'))
                 });
-                $.each(r.vstac,function(i,j){ // 여기 쿼리짜고 값 넣는 거 부터 해야함..
-                    $('<tr />').attr({style:"text-align:center", id:"trr_"+i}).append(
-	                     $('<td />').attr('width','10%').html(j.visitDate),
-	                     $('<td />').attr('width','20%').html(j.totalVisitor+" 명"),
-	                     $('<td />').attr('width','15%').html(j.memberVisitor+" 명"),
-	                     $('<td />').attr('width','15%').html(j.totalVisitor-j.memberVisitor+" 명")
-                    ).appendTo($('#vst_tbody'));
+                $.each(r.vstac,function(i,j){
+                    $('<tr />').attr({style:"text-align:center", id:"trr_"+i})
+                    	.append(
+		                     $('<td />').attr('width','10%').html(j.visitDate),
+		                     $('<td />').attr('width','20%').html(j.totalVisitor+" 명"),
+		                     $('<td />').attr('width','15%').html(j.memberVisitor+" 명"),
+		                     $('<td />').attr('width','15%').html(j.totalVisitor-j.memberVisitor+" 명")
+	                    ).appendTo($('#vst_tbody'));
                 });
                 $.each(r.vstt,function(i,j){
                         $('<td />').attr('width','15%')
@@ -679,12 +764,11 @@ jaekyung.chart={
 			            	]);
 			            });
 			            var options = {
-			              title: 'Company Performance',
 			              curveType: 'function',
-			              legend: { position: 'right' },
-			            vAxis: {title: '판매량',viewWindow: {min:0,max:130}},
-			            hAxis:{viewWindow: {min:0}},
-			            interpolateNulls: true
+			              legend: { position: 'right' , textStyle:{fontSize:13}},
+				          vAxis: {title: '판매량(단위: 개))',viewWindow: {min:0,max:130}},
+				          hAxis:{viewWindow: {min:0}},
+				          interpolateNulls: true
 			            };
 			            var chart = new google.visualization.LineChart(document.getElementById('sba__cc'));
 			            chart.draw(data, options);
@@ -718,14 +802,15 @@ jaekyung.chart={
                       $('<th scope="col"/>').addClass("text-center").html(v).appendTo($('#sba__tr'))
                 });
                 $.each(r.sbalc,function(i,j){ 
-                    $('<tr />').attr({style:"text-align:center", id:"trr_"+i}).append(
-	                     $('<td scope="row"/>').attr('width','10%').html(j.sum+" 원"),
-	                     $('<td />').attr('width','20%').html(j.teen+" 개"),
-	                     $('<td />').attr('width','15%').html(j.twen+" 개"),
-	                     $('<td />').attr('width','15%').html(j.thir+" 개"),
-	                     $('<td />').attr('width','15%').html(j.fort+" 개"),
-	                     $('<td />').attr('width','15%').html(j.fift+" 개")
-                    ).appendTo($('#sba_tbody'));
+                    $('<tr />').attr({style:"text-align:center", id:"trr_"+i})
+                    	.append(
+		                     $('<td scope="row"/>').attr('width','10%').html(j.sum+" 원"),
+		                     $('<td />').attr('width','20%').html(j.teen+" 개"),
+		                     $('<td />').attr('width','15%').html(j.twen+" 개"),
+		                     $('<td />').attr('width','15%').html(j.thir+" 개"),
+		                     $('<td />').attr('width','15%').html(j.fort+" 개"),
+		                     $('<td />').attr('width','15%').html(j.fift+" 개")
+	                    ).appendTo($('#sba_tbody'));
                 });
 			});
 		},
@@ -767,25 +852,8 @@ jaekyung.chart={
 			          hintOpacity:0.9,
 			          maxPostDepth:2
 			        });
-			   /*
-				 * google.visualization.events.addListener(tree, 'select',
-				 * selectHandler); function selectHandler(e) { var selection =
-				 * tree.getSelection(); var message = '';
-				 * 
-				 * for (var i = 0; i < selection.length; i++) { var item =
-				 * selection[i]; if (item.row != null && item.column != null) {
-				 * message += '{row:' + item.row + ',column:' + item.column +
-				 * '}'; } else if (item.row != null) { message += '{row:' +
-				 * item.row +item.column + '}'; } else if (item.column != null) {
-				 * message += '{column:' + item.column + '}'; } } if (message ==
-				 * '') { message = 'nothing'; } alert('You selected ' +
-				 * message); }
-				 */
-			        
-			        
-			      });
+			     });
 			});
-  
 		},
 		mbr:()=>{
 			$.getJSON($.context()+"/stats/mbrChart",r=>{
@@ -796,13 +864,14 @@ jaekyung.chart={
 			    	  data.addColumn('number','비율');
 			    	  let tmp=0;
 			    	  $.each(r.mbrpc,(i,v)=>{
-			    		       	data.addRow([
-				        		v.ages+" 대"
-				        		,v.gendercount
+		    		       	data.addRow([
+			        		v.ages+" 대"
+			        		,v.gendercount
 				        	]);
 				      });
 			          var options = {
-			              title: 'My Daily Activities',
+			              title: '연령대 별 가입자 비율',
+			              titleTextStyle:{fontSize: 20, bold:true},
 			              pieSliceText: 'label',
 			              is3D: true,
 			              legend:'bottom',
@@ -823,16 +892,14 @@ jaekyung.chart={
 				        	]);
 			    	  });
 		    	      var options = {
-		    	          title: 'Population of Largest U.S. Cities',
 		    	          chartArea: {width: '65%'},
 		    	          isStacked: true,
 		    	          hAxis: {
 		    	            title: '가입자 수',
 		    	            viewWindow: {
 			    	        	  min:0, max: 2000
-			    	        	  }
+			    	        }
 		    	          },
-		    	          
 		    	          vAxis: {
 		    	            title: '연령'
 		    	          }
@@ -856,18 +923,19 @@ jaekyung.chart={
 			        	]);
 			        });
 			          var options = {
-			            title: 'Age vs. Weight comparison',
-			            hAxis: {title: '', minValue: 0, maxValue: 15, viewWindow: {
+			            hAxis: {
+			            	title: '물품 당 평균 구매액',
+			            	viewWindow: {
 		    	        	  min:0, max: 350000
-	    	        	  }},
-			            vAxis: {title: 'Weight', minValue: 0, maxValue: 15},
+		    	        	}
+				         },
+			            vAxis: {
+			            	title: '연령'
+			            },
 			            legend: 'none',
 			            pointSize:2
-			            
 			          };
-
 			          var chart = new google.visualization.ScatterChart(document.getElementById('abba__sc'));
-
 			          chart.draw(data, options);
 			        });
 			});
@@ -884,10 +952,6 @@ jaekyung.chart={
 	                 showCloud(r.wrdcld);
 	            },2000); 
 	        });
-	        // scale.linear: 선형적인 스케일로 표준화를 시킨다.
-	        // domain: 데이터의 범위, 입력 크기
-	        // range: 표시할 범위, 출력 크기
-	        // clamp: domain의 범위를 넘어간 값에 대하여 domain의 최대값으로 고정시킨다.
 	        var wordScale = d3.scale.linear().domain([0, 10]).range([0, 160]).clamp(true);
 	        var keywords = ["눈물", "원룸", "수납","사랑","반려견","인테리어","나혼자"];
 	        var svg = d3.select("svg")
@@ -896,16 +960,13 @@ jaekyung.chart={
 	
 	        function showCloud(data) {
 	            d3.layout.cloud().size([width, height])
-	                // 클라우드 레이아웃에 데이터 전달
 	                .words(data)
 	                .rotate(function (data) {
 	                    return data.countwc > 4 ? 0 : data.countwc > 3 ? 40 : -90;
 	                })
-	                // 스케일로 각 단어의 크기를 설정
 	                .fontSize(function (data) {
 	                    return wordScale(data.countwc);
 	                })
-	                // 클라우드 레이아웃을 초기화 > end이벤트 발생 > 연결된 함수 작동
 	                .on("end", draw(data))
 	                .start();
 	
@@ -933,18 +994,9 @@ jaekyung.chart={
 	                        return r.x && r.y? "translate(" + [r.x, r.y] + ")rotate(" + r.rotate + ")" : "translate(0,0)";
 	                    })
 	                    .style("fill-opacity", 1); 
-	                
 	            }
 	        }
-					
-
-
-	        
-	        
-	        
 		}
-		
-		
 }
 jaekyung.router={
               init:()=>{
