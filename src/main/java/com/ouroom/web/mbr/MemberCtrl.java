@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-
-
 @RestController
 @RequestMapping("/member")
 public class MemberCtrl {
@@ -37,7 +35,6 @@ public class MemberCtrl {
 	
 	@PostMapping(value="/add/{from}")
 	public @ResponseBody int add(@RequestBody Member p, @PathVariable String from) throws IOException{
-		logger.info("======== MemberController ::: add() =======");
 		if(from.equals("kakao")) {
 			System.out.println("getEmail : "+p.getEmail());
 			System.out.println("getPassword : "+p.getPassword());
@@ -58,19 +55,16 @@ public class MemberCtrl {
 	}
 	@PostMapping(value="/upload")
 	public @ResponseBody String upload(@RequestBody MultipartFile file) throws IOException{
-		logger.info("======== MemberController ::: upload() =======");
 		filedata = file.getBytes();
 		//files.transferTo(new File(path+fileName));
 		return "";
 	}
 	@PostMapping(value="/dpcheck")
 	public @ResponseBody int dpcheck(@RequestBody Map<String, String> p){
-		logger.info("======== MemberController ::: dpcheck() =======");
 		return mbrmapper.dpck(p);
 	}
 	@PostMapping(value="/login")
 	public @ResponseBody Map<String, Object> login(@RequestBody Member p){
-		logger.info("======== MemberController ::: login() =======");
 		String pwValid="WRONG";
 		String idValid="WRONG";
 		
