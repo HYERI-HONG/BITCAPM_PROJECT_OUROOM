@@ -46,14 +46,14 @@ jun.main = {
 					$('.kj_category_1').removeClass('kj_active');
 					$('#kj_category_'+j.seq).addClass('kj_active');
 					
-					$('#kj_category_2').remove();
-					$('<div/>').attr({id:"kj_category_2"}).appendTo($('#kj_test2'));
+					$('#kj_category_21').remove();
+					$('<div/>').attr({id:"kj_category_21"}).appendTo($('#kj_test2'));
 					$.getJSON($.context()+'/itemsC/'+j.seq,dd2=>{
-						$('<span/>').attr({id:"kj_category_p"}).html("품목").appendTo($('#kj_category_2'));
+						$('<span/>').attr({id:"kj_category_p"}).html("품목").appendTo($('#kj_category_21'));
 						
 						$.each(dd2.c2,(x,j)=>{
 							var c_k = j.category_kr.split("(")
-							$('<span/>').attr({class:"kj_category_c",id:"kj_c_2_"+x}).html(c_k[0]).appendTo($('#kj_category_2')).click(e=>{
+							$('<span/>').attr({class:"kj_category_c",id:"kj_c_2_"+x}).html(c_k[0]).appendTo($('#kj_category_21')).click(e=>{
 								$('.kj_category_12').removeClass('kj_active');
 								$('#kj_c_3_'+0).addClass('kj_active');
 								$('.kj_category_c').removeClass('kj_active');
@@ -85,7 +85,7 @@ jun.main = {
 		
 		$('<div/>').attr({id:"kj_array"}).appendTo($('#content'));
 		
-		let array=[{t:"최신순",v:'SEQ DESC'},{t:"인기순",v:"SALE_CNT DESC"},{t:"높은가격순",v:"sum DESC"},{t:"낮은가격순",v:"sum"}]
+		let array=[{t:"최신순",v:'SEQ DESC'},{t:"인기순",v:"SALE_CNT DESC"},{t:"높은가격순",v:"SUM DESC"},{t:"낮은가격순",v:"SUM"}]
 		
 		$.each(array,(x,j)=>{
 			
@@ -365,7 +365,7 @@ jun.main = {
 			$('#total_p').html((t_p+"").replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원");
 			$('#total_dis').html("-"+(t_p-t_s+"").replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원");
 			$('#total_d').html((t_d+"").replace(/\B(?=(\d{3})+(?!\d))/g, ',')+"원");
-		}, 100) ; 
+		}, 400) ; 
 
 
 
