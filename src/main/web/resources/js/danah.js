@@ -912,7 +912,7 @@ danah.u = {
                             temp.appendTo($('body')).val($('#d_url').text()).select();
                             document.execCommand('copy');
                             temp.remove();
-                            $.getJSON($ctx + '/share/' + d, n => {
+                            $.getJSON($.context() + '/share/' + d, n => {
                                 $.toast($('<p/>').text('URL을 클립보드에 복사하였습니다.'), { duration: 2000, type: 'success' });
                                 $('#d_footer_shareCnt').html('').append('공유', n);
                                 $('#d_btn_shareCnt').html('').append(danah.c.span({ c: 'd_icon_common_action', s: 'vertical-align: middle; margin-right: 6px; background-position: -200px -280px; width: 24px; height: 24px;' }), n);
