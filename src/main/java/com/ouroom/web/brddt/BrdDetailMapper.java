@@ -8,6 +8,7 @@ public interface BrdDetailMapper {
 	public Item item_seq(String seq);
 	public List<Item> item_opt(String seq);
 	public List<Review> review();
-	public List<Review> rev_insert(Review rev);
+	public void rev_insert(Review rev);
+	public void rev_delete(String id);
  }
  
