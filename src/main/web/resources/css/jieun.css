@@ -106,9 +106,6 @@
 	margin-top:50px;
 	width: 50%;
 }
-/*1015 변경*/
-
-
 
 .je_col0 {
 	width:45%;
@@ -245,6 +242,7 @@
  .je_sticky{
 	position: fixed;
  	top: 75px; 
+ 	z-index: 1;
 }  
 .je_row{
 	width: 100%;

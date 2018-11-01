@@ -3,10 +3,13 @@ var jieun = jieun || {};
 
 jieun=(()=>{
 
-		var detail=x=>{		
+		var detail=x=>{
+			
 			jieun.detail2.d(x);
+
 		}
-		return{detail:detail};		
+		return{detail:detail};
+			
 })();
 
 jieun.detail2={
@@ -72,32 +75,21 @@ jieun.detail2={
 			$('<img/>').attr({src:$.img()+'/jun/'+x.category+'/'+x.photo+'.jpg',id:'je_view1'}).appendTo(je_div_cover).appendTo($('.je_col0'));
 			
 			let p = $('<p style="margin-top: 50px; color:#8080805c"/>').addClass('je_info1').appendTo(je_div_cover_info1);
-			let a1=$('<a id="gray_a"/>').attr({href:"https://ohou.se/store"}).text('오늘의 집 스토어');
+			let a1=$('<a id="gray_a"/>').html('니방내방');
 			let span1 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
-			let span2 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
-			let span3 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
-			let span4 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
-			let a2 = $('<a id="gray_a"/>').attr({href:"https://ohou.se/store/category?category=0&order=popular"}).text('가구');
-			let a3 = $('<a id="gray_a"/>').attr({href:"https://ohou.se/store/category?category=0&order=popular"}).text('침실 가구');
-			let a4 = $('<a id="gray_a"/>').attr({href:"https://ohou.se/store/category?category=0&order=popular"}).text('매트리스');
-			let a5 = $('<a id="gray_a"/>').attr({href:"https://ohou.se/store/category?category=0&order=popular"}).text('스프링매트리스');
+			let a2 = $('<a id="gray_a"/>').html('스토어');
 			
 			a1.appendTo(p); 
 			span1.appendTo(p);
 			a2.appendTo(p); 
-			span2.appendTo(p);
-			a3.appendTo(p); 
-			span3.appendTo(p);
-			a4.appendTo(p); 
-			span4.appendTo(p);
-			a5.appendTo(p);
+			
 			p.appendTo(je_div_cover_info1);
 			
 			let p1=$('<p/>').addClass('je_cover_title');
 			p1.text(d.title).appendTo(je_div_cover_info1);
 			$('.je_cover_title').html();
 			
-			let a6 = $('<a style="color:#cc5200"/>').addClass('je_review').attr({href:"https://ohou.se/productions/54844/selling#product-review"});
+			let a6 = $('<a style="color:#cc5200"/>').addClass('je_review');
 			let review = $('<span/>').addClass('je_star_review').attr({id:'je_line'});
 			let star = $('<span/>').attr({class:'glyphicon glyphicon-star','aria-hidden':true});
 				star.appendTo(a6);star.appendTo(a6);star.appendTo(a6);
@@ -117,24 +109,7 @@ jieun.detail2={
 			
 			origin.appendTo(p_price);
 			ins.appendTo(p_price);
-			p_price.appendTo(je_div_cover_info1);
-			
-			
-			$('<button/>').attr({id:'je_sharebtn',class:'btn btn-primary btn-lg'}).appendTo(je_div_cover_info1);
-			$('#je_sharebtn').append(
-					$('<span/>').addClass('glyphicon glyphicon-share').attr("aria-hidden","true"),
-					$('<span style="font-size: 13px; margin-right:6px; margin-left:6px"/>').addClass('je_action__btn').text('공유'),
-					$('<span style="font-size: 13px; margin-right:3px"/>').addClass('je_action__btn1').text('1.03K')
-					
-			);				
-
-			$('<span/>').append($('<a/>').addClass('kakao_share').attr({href:"https://accounts.kakao.com/login/kakaostory?continue=https%3A%2F%2Fstory.kakao.com%2Fs%2Fshare%3Furl%3Dhttps%253A%252F%252Fohou.se%252Fproductions%252F54844%252Fselling%26text%3D%25EC%2598%25A4%25EB%258A%2598%25EC%259D%2598%25EC%25A7%2591%25EC%2597%2590%25EC%2584%259C%2520%25EC%259C%25A0%25EC%25A0%2580%25EB%2593%25A4%25EC%259D%2598%2520%25EB%25A6%25AC%25EB%25B7%25B0%25EC%2599%2580%2520%25EC%258A%25A4%25ED%2583%2580%25EC%259D%25BC%25EB%25A7%2581%25EC%2583%25B7%25EC%259D%2584%2520%25ED%2599%2595%25EC%259D%25B8%25ED%2595%2598%25EC%2584%25B8%25EC%259A%2594!%26kakao_agent%3Dsdk%252F1.16.0%2520os%252Fjavascript%2520lang%252Fko-KR%2520device%252FWin32%2520origin%252Fhttps%25253A%25252F%25252Fohou.se%26app_key%3D3019c756ec77dd7e0a24e56d9d784f77",target:'_blank'})
-					.append($('<img/>').attr({src:$.img()+'/jieun/kakao.png',style:'width="100px" height="100px"'})
-					),
-					$('<a/>').addClass('naver_share').attr({href:"http://share.naver.com/web/shareView.nhn?url=https://ohou.se/productions/54844/selling&title=[%EB%A0%88%EC%9D%B4%EB%94%94%EA%B0%80%EA%B5%AC][%EC%B5%9C%EC%A0%80%EA%B0%80]%20%EA%B3%A0%EB%B0%80%EB%8F%84%20%ED%95%84%EB%A1%9C%EC%9A%B0%ED%83%91%20%ED%95%98%EC%9D%B4%EB%B8%8C%EB%A6%AC%EB%93%9C%20%EB%A7%A4%ED%8A%B8%EB%A6%AC%EC%8A%A4(S/SS/Q/K)",target:'_blank'})
-								.append($('<img/>').attr({src:$.img()+'/jieun/naver.png',style:'width="100px" height="100px"'})
-					)).appendTo(je_div_cover_info1);
-			
+			p_price.appendTo(je_div_cover_info1);		
 
 	    	$('<select id="je_selectbtn" name="je_opt" style="font-size: 12px;"/>').appendTo(je_div_cover_info1);
 	    	$('<option selected disabled hidden />').attr({"value":""}).html('옵션').appendTo($('#je_selectbtn'));
@@ -206,8 +181,6 @@ jieun.detail2={
 				
 				divv.append(br);
 			
-				
-				alert('t2 :: '+ t2);
 				$(this).click(e=>{
 					e.preventDefault();						
 					je_item.show();
@@ -267,30 +240,37 @@ jieun.detail2={
 			$('<button id="je_get_basket"/>').html('장바구니 담기')
 			.appendTo(buttons)
 			.click(()=>{
-				let i_c="";
-				let name="";
-				for(let i=1;i<t;i++){
-					name+=$('#je_num_val_'+i).val()+"/";
-					i_c+=$('#je_num_val'+i).val()+"/";
-				}	
-				alert('name'+name);
-				alert('i_c'+i_c);
-				$.ajax({
-					url:$.context()+"/cart/add",
-					method:'POST',
-					contentType : 'application/json',
-					data:JSON.stringify({userid:$.cookie("userid"),seq:x.seq,name:name,count:i_c}),
-					success:c_d=>{
-						if(confirm("장바구니로 가시겠습니까 ?")){
-							jun.main.cart();
-						
-						}else{
-						
+				if($.type($.cookie("userid")) === 'undefined'){
+					$.getScript($.script()+'/hyeri.js', ()=>{
+						hyeri.page.l();
+		            });
+					
+				}else{
+					let i_c="";
+					let name="";
+					for(let i=1;i<t;i++){
+						name+=$('#je_num_val_'+i).val()+"/";
+						i_c+=$('#je_num_val'+i).val()+"/";
+					}	
+
+					$.ajax({
+						url:$.context()+"/cart/add",
+						method:'POST',
+						contentType : 'application/json',
+						data:JSON.stringify({userid:$.cookie("userid"),seq:x.seq,name:name,count:i_c}),
+						success:c_d=>{
+							if(confirm("장바구니로 가시겠습니까 ?")){
+								jun.main.cart();
+							
+							}else{
+							
+							}
+							
+							
 						}
-						
-						
-					}
-				})
+					})
+				}
+
 				
 			});
 			$('<button id="je_buy"/>').text('구매하기').appendTo(buttons);
@@ -491,7 +471,7 @@ jieun.detail2={
 										$('#rev_box').val('리뷰를 입력해주세요.');
 										jieun.detail2.b(x.sec4);
 									},error:(m1,m2,m3)=>{
-										alert('오류.');
+										
 									}
 								})	
 								
