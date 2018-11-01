@@ -3,6 +3,7 @@ package com.ouroom.web.post;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,33 +35,29 @@ public class PostController {
 	private String uploadPath;
 	
 	@PostMapping("/posts/write")
-	public @ResponseBody String postWrite(@RequestBody Map<String, Object> p) {
-		m.clear();
-		Util.log.accept("등록하기");
-		///// 로그인 구현되면 지우기!!
-		p.put("memSeq", 48);
-        p.put("regiDate", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        p.put("lastUpdate", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        p.put("image", s);
-        Util.log.accept(p.toString());
+	public String postWrite(@RequestBody Map<String, Object> p) {
+		m = new HashMap<>();
+		p.put("regiDate", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		p.put("lastUpdate", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		p.put("image", s);
 		m.put("seq", tx.postInseart(p));
 		u.upload.apply(uploadPath+File.separator+"danah"+File.separator+"post");
 		s = "";
-		return (String) m.get("seq");
-	} //로그인 기능 구현후 수정
+		return Util.cs.apply(m.get("seq"));
+	}
 	
 	@GetMapping("/posts/list/{pageNo}")
-	public @ResponseBody Map<String, Object> postList(@PathVariable String pageNo) {
+	public Map<?, ?> postList(@PathVariable("pageNo") String pageNo) {
+		m = new HashMap<>();
 		PageProxy pxy = new PageProxy();
-		m.clear();
-		m.put("pageNo", pageNo.equals("undefined") ? 1 : Integer.parseInt(pageNo));
+		m.put("pageNo", Util.ci.apply(pageNo));
 		m.put("totalRecode", pm.postCount(m));
 		m.put("recodeSize", 12);
 		pxy.carraryOut(m);
 		page = pxy.getPagination();
 		m.clear();
-		m.put("beginRow", String.valueOf(page.getBeginRow()));
-		m.put("endRow", String.valueOf(page.getEndRow()));
+		m.put("beginRow", page.getBeginRow());
+		m.put("endRow", page.getEndRow());
 		m.put("list", pm.postList(m));
 		m.put("page", page.getTotalPage());
 		m.remove("beginRow");
@@ -69,40 +65,64 @@ public class PostController {
 		return m;
 	}
 	
-	@GetMapping("/posts/search/{query}/{pageNo}")
-	public @ResponseBody Map<String, Object> postSearch(@PathVariable List<String> query, @PathVariable String pageNo){
+	@GetMapping("/posts/hashTagSearch/{query}/{pageNo}")
+	public  Map<?, ?> posthashTagSearch(@PathVariable("query") String query, @PathVariable("pageNo") String pageNo){
 		PageProxy pxy = new PageProxy();
-		Util.log.accept("체크:::"+query);
-		
-		m.clear();
-		m.put("pageNo", pageNo.equals("undefined") ? 1 : Integer.parseInt(pageNo));
-		m.put("totalRecode", pm.postCount(m));
+		m = new HashMap<>();
+		m.put("pageNo", Util.cv.test(pageNo,"undefined") ? 1 : Util.ci.apply(pageNo));
+		m.put("keyword", query);
+		m.put("totalRecode", pm.postHashTagSearch(m).size());
 		m.put("recodeSize", 12);
 		pxy.carraryOut(m);
 		page = pxy.getPagination();
 		m.clear();
-		m.put("beginRow", String.valueOf(page.getBeginRow()));
-		m.put("endRow", String.valueOf(page.getEndRow()));
-		//m.put("list", pm.postSearch(query));
+		m.put("beginRow", page.getBeginRow());
+		m.put("endRow", page.getEndRow());
+		m.put("keyword", query);
+		m.put("list", pm.postHashTagSearch(m));
 		m.put("page", page.getTotalPage());
 		m.remove("beginRow");
 		m.remove("endRow");
 		return m;
 	}
 	
+	@GetMapping("/posts/search/{query}/{pageNo}")
+	public  Map<?, ?> postSearch(@PathVariable("query") List<String> query, @PathVariable("pageNo") String pageNo){
+		PageProxy pxy = new PageProxy();
+		m = new HashMap<>();
+		Map<String, Object> a = new HashMap<>();
+		a.put("order", Util.cv.test(query.get(0),"최신순") ? "SEQ" : Util.cv.test(query.get(0),"인기순") ? "VIEW_CNT" : "LIKE_CNT");
+		a.put("roomType", Util.cv.test(query.get(1),"모든공간")? "" : query.get(1));
+		a.put("roomSize", Util.cv.test(query.get(2),"모든평수")? "" : query.get(2));
+		a.put("imageTagCnt", Util.cv.test(query.get(3),"모두")? "" : query.get(3));
+		a.put("pageNo", Util.cv.test(pageNo,"undefined") ? 1 : Util.ci.apply(pageNo));
+		a.put("totalRecode", pm.postSearch(a).size());
+		a.put("recodeSize", 12);
+		pxy.carraryOut(a);
+		page = pxy.getPagination();
+		a.put("beginRow", page.getBeginRow());
+		a.put("endRow", page.getEndRow());
+		m.put("list", pm.postSearch(a));
+		m.put("page", page.getTotalPage());
+		return m;
+	}
+	
 	@GetMapping("/posts/{seq}")
-	public @ResponseBody Map<?,?> postDetail(@PathVariable String seq) {
+	public  Map<?,?> postDetail(@PathVariable String seq) {
 		return tx.postDetail(seq);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping ("/posts/{seq}/edit")
-	public @ResponseBody String postEdit(@PathVariable String seq, @RequestBody Map<String, Object> p) {
-        tx.postUpdate(p);
-		if(p.get("image").equals(s)) {
-			Map<String, Object> a = (Map<String, Object>) pm.postRetrieve(p);
-			u.delete.accept(uploadPath+File.separator+"danah"+File.separator+"post"+File.separator
-					+Util.rpb.apply((String) a.get("regiDate"))+File.separator+a.get("image"));
+	public  String postEdit(@PathVariable("seq") String seq, @RequestBody Map<String, Object> p) {
+		m = new HashMap<>();
+		m = (Map<String, Object>) pm.postRetrieve(p);
+		p.put("seq",seq);
+		p.put("lastUpdate", Util.cv.test(Util.cs.apply(p.get("lastUpdate")), "")? LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) : p.get("lastUpdate"));
+		p.put("image", Util.cv.test(Util.cs.apply(p.get("image")), "")? s : p.get("image"));
+		tx.postUpdate(p);
+		if(Util.cv.test(Util.cs.apply(p.get("image")),s)) {
+			u.delete.accept(uploadPath+File.separator+"danah"+File.separator+"post"+File.separator +Util.rpv.apply(Util.cs.apply(m.get("lastUpdate")))+File.separator+m.get("image"));
 			u.upload.apply(uploadPath+File.separator+"danah"+File.separator+"post");
 		}
 		s = "";
@@ -110,44 +130,41 @@ public class PostController {
 	}
 	
 	@RequestMapping("/posts/{seq}/delete")
-	public @ResponseBody String postDelete(@PathVariable String seq, @RequestBody Map<String, String> p) {
+	public  String postDelete(@PathVariable("seq") String seq, @RequestBody Map<String, String> p) {
+		m = new HashMap<>();
 		pm.postDelete(seq);
-		u.delete.accept(uploadPath+File.separator+"danah"+File.separator+"post"+File.separator
-			+Util.rpb.apply(p.get("lastUpdate"))+File.separator+p.get("image"));
-		return "1";
+		pm.likeDelete(seq);
+		u.delete.accept(uploadPath+File.separator+"danah"+File.separator+"post"+File.separator+Util.rpv.apply(p.get("lastUpdate"))+File.separator+p.get("image"));
+		m.put("seq", Util.ci.apply(seq));
+		return Util.cn.test(pm.postCount(m),0) ? "1" : "";
 	}
 	
 	@PostMapping("/posts/upload")
-	public @ResponseBody void postUplaod(@RequestBody MultipartFile file) throws Exception {
-		Util.log.accept(file.getOriginalFilename());
+	public String postUplaod(@RequestBody MultipartFile file) throws Exception {
 		s = u.file.apply(file, file.getBytes());
-		System.out.println(file.getBytes());
+		return s!=null ? "SUCCESS" : "FAIL" ;
 	}
 	
 	@PostMapping("/comments/write")
-	public @ResponseBody Map<String, Object> commentWrite(@RequestBody Map<String, Object> p) {
-		Util.log.accept("등록하기");
-		///// 로그인 구현되면 지우기!!
-		p.put("memSeq", 48);
-		Util.log.accept(p.toString());
-		pm.commentInseart(p);
-		return commentList(String.valueOf(p.get("seq")), "1");
-	} //로그인 기능 구현후 수정
+	public  Map<?, ?> commentWrite(@RequestBody Map<String, Object> p) {
+		pm.commentInsert(p);
+		return commentList(Util.cs.apply(p.get("seq")), "1");
+	}
 	
 	@GetMapping("/comments/list/{seq}/{pageNo}")
-	public @ResponseBody Map<String, Object> commentList(@PathVariable String seq, @PathVariable String pageNo) {
+	public  Map<?, ?> commentList(@PathVariable("seq") String seq, @PathVariable("pageNo") String pageNo) {
 		PageProxy pxy = new PageProxy();
-		m.clear();
-		m.put("pageNo", Integer.parseInt(pageNo));
-		m.put("seq", Integer.parseInt(seq));
+		m = new HashMap<>();
+		m.put("pageNo", Util.ci.apply(pageNo));
+		m.put("seq", Util.ci.apply(seq));
 		m.put("totalRecode", pm.commentCount(m));
 		m.put("recodeSize", 3);
 		pxy.carraryOut(m);
 		page = pxy.getPagination();
 		m.clear();
-		m.put("beginRow", String.valueOf(page.getBeginRow()));
-		m.put("endRow", String.valueOf(page.getEndRow()));
-		m.put("seq", Integer.parseInt(seq));
+		m.put("beginRow", page.getBeginRow());
+		m.put("endRow", page.getEndRow());
+		m.put("seq", Util.ci.apply(seq));
 		m.put("comment", pm.commentList(m));
 		m.remove("beginRow");
 		m.remove("endRow");
@@ -156,43 +173,50 @@ public class PostController {
 	}
 	
 	@GetMapping("/comments/delete/{pSeq}/{cSeq}")
-	public @ResponseBody Map<String, Object> commentDelete(@PathVariable String pSeq, @PathVariable String cSeq) {
+	public  Map<?, ?> commentDelete(@PathVariable("pSeq") String pSeq, @PathVariable("cSeq") String cSeq) {
 		pm.commentDelete(cSeq);
 		return commentList(pSeq, "1");
 	}
 	
 	@GetMapping("/hashTags")
-	public @ResponseBody List<?> hashTagList() {
+	public  List<?> hashTagList() {
 		return pm.hashTagSearch();
 	}
 	
 	@PostMapping("/imageTags")
-	public @ResponseBody String imageTag(@RequestBody Map<String, Object> p) {
-		Util.log.accept("생성하기");
-		Util.log.accept(p.toString());
-		((TransactionService) tx).imageTag(p);
-		return (String) p.get("seq");
-	}//수정중
+	public  String imageTag(@RequestBody Map<?, ?> p) {
+		m = new HashMap<>();
+		tx.imageTag(p);
+		return Util.cs.apply(p.get("seq"));
+	}
 	
 	@GetMapping("/imageTags/search")
-	public @ResponseBody List<?> imageTagSearch() {
-		Util.log.accept("아이템");
-		Util.log.accept("확인"+pm.imgTagSearch());
+	public  List<?> imageTagSearch() {
 		return pm.imgTagSearch();
-	}//수정중
+	}
 	
-	@PostMapping("/likes/write")
-	public @ResponseBody void likeWrite(@RequestBody Map<String, String> p) {
-		Util.log.accept("등록하기");
-		Util.log.accept(p.toString());
-		pm.likeInseart(p);
-	}//수정중
-	
-	@PostMapping("/likes/remove")
-	public @ResponseBody void likeRemove(@RequestBody Map<String, String> p) {
-		Util.log.accept("삭제하기");
-		Util.log.accept(p.toString());
-		pm.likeDelete(p);
-	}//수정중
+	@GetMapping("/likes/{memSeq}/{seq}")
+	public  Map<?, ?> like(@PathVariable("memSeq") String memSeq, @PathVariable("seq") String seq) {
+		m = new HashMap<>();
+		m.put("seq", Util.ci.apply(seq));
+		m.put("memSeq", Util.ci.apply(memSeq));
+		return tx.like(m);
+	}
 
+	@GetMapping("/likes/{memSeq}")
+	public  List<?> likeList(@PathVariable("memSeq") String p){
+		return pm.likeList(p);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@GetMapping ("/share/{seq}")
+	public  String share(@PathVariable("seq") String seq) {
+		m = new HashMap<>();
+		m.put("seq", seq);
+		m = (Map<String, Object>) pm.postRetrieve(m);
+		m.put("shareCnt", (int)m.get("shareCnt")+1);
+		pm.postUpdate(m);
+		m = (Map<String, Object>) pm.postRetrieve(m);
+		return Util.cs.apply(m.get("shareCnt"));
+	}
 }

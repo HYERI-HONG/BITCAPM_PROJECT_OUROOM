@@ -382,7 +382,7 @@ jieun=(()=>{
 				or_pri1.appendTo(cart_tp);
 				in_span1.appendTo(cart_tp);
 				cart_tp.appendTo($('#t_order_cart'));
-				in_span=in_span1;S
+				in_span=in_span1;
 				
 				
 				/////
