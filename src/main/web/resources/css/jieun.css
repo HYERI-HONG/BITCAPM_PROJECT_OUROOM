@@ -264,11 +264,16 @@ input[type="number"]::-webkit-inner-spin-button {
    margin: 0;
   
 }
-.nr_btn{
+.newrev_btn{
 	float: right;
     background-color: white;
     width: 200px;
     height: 40px;
     border: 0.5px solid #e8e8e8;
     
+}
+.is-active{
+	background-color: #cc5200;
+    border-radius: 100%;
+    color: #fff;
 }

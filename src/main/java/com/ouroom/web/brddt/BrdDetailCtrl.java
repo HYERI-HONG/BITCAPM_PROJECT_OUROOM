@@ -69,7 +69,7 @@ public class BrdDetailCtrl {
 		return rmap;
 	}
 	@PostMapping(value="/write")
-	public @ResponseBody Map<String, Object> write(@RequestBody Review rev){
+	public @ResponseBody void write(@RequestBody Review rev){
 		logger.info("======== BrdDetailCtrl ::: write() =======");						
 		Map<String, Object> wmap = new HashMap<>();
 		System.out.println("write :: " + rev);
@@ -77,8 +77,13 @@ public class BrdDetailCtrl {
 		wmap.put("regi",rev.getRegi_date());
 		wmap.put("img",rev.getImage());
 		wmap.put("nickname",rev.getNickname());
-		
-		return wmap;
+		brddtmapper.rev_insert(rev);
+
 	}
-	
+	@GetMapping(value="/delete/{seq}")
+	public @ResponseBody void delete(@PathVariable String seq) {
+		logger.info("======== BrdDetailCtrl ::: delete() =======");						
+		System.out.println("delete :: " + seq);
+		brddtmapper.rev_delete(seq);
+	}
 }
