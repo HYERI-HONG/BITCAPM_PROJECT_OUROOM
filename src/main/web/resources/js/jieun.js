@@ -9,7 +9,6 @@ jieun=(()=>{
 
 		}
 		return{detail:detail};
-			
 })();
 
 jieun.detail2={
