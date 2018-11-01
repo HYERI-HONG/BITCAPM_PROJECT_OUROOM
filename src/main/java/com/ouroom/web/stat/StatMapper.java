@@ -16,6 +16,7 @@ public interface StatMapper {
 	public List<HashMap<?,?>> totalJoinPerDayBefore(Map<?, ?> m); 
 	public List<HashMap<?,?>> totalSalePerDay(Map<?, ?> m); 
 	public List<HashMap<?,?>> bestSellerPerDay(Map<?, ?> m); 
+	public List<HashMap<?,?>> getGenderratio(); 
 	
 	public List<HashMap<?,?>> drawvstac(Map<?, ?> m);
 	public List<HashMap<?,?>> extrvstt(Map<?, ?> m); 

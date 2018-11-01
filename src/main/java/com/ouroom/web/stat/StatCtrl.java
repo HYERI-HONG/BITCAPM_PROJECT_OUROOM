@@ -1,8 +1,10 @@
 package com.ouroom.web.stat;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,34 +20,30 @@ public class StatCtrl {
 	@RequestMapping("/stats/smmChart/{today}/{beforeweek}")
 	@Transactional
 	public Map<?, ?> smmChart(@PathVariable String today, @PathVariable String beforeweek) {
-	/*	mm.put("stDSmm", today);
-		mm.put("enDSmm", nextweek);*/
-		
-		mm.put("selectDSmm","2018-11-15" );
+		mm.put("메인stDSmm", beforeweek);
+		mm.put("메인enDSmm", today);
+		mm.put("selectDSmm", today.substring(0, today.indexOf("년"))+"-"+today.substring(today.indexOf(" ")+1,today.indexOf("월"))+"-"+today.substring(today.lastIndexOf(" ")+1,today.indexOf("일")));
 		smmvstlc(beforeweek, today);
-		smmPost("2018년 10월 02일");
+		smmPost(today);
 		smmJoin(today);
-		//mm.put("smmvstlc", sm.drawsvlc(mm));
+		mm.put("smmvstlc", sm.drawsvlc(mm));
 		mm.put("smmvstcc", sm.drawsvcc(mm));
 		mm.put("totalSalePerDay", sm.totalSalePerDay(mm));
 		mm.put("bestSellerPerDay", sm.bestSellerPerDay(mm));
-		
+		mm.put("genderRatio", sm.getGenderratio());
 		return mm;
 	}
 	@RequestMapping("/stats/smmvstlc/{stDate}/{enDate}")
 	@Transactional
 	public Map<?, ?> smmvstlc(@PathVariable String stDate,@PathVariable String enDate) {
-		System.out.println("시작:: "+stDate);
-		System.out.println("끝:: "+enDate);
 		mm.put("stDSmm",stDate.substring(0, stDate.indexOf("년"))+"-"+stDate.substring(stDate.indexOf(" ")+1,stDate.indexOf("월"))+"-"+stDate.substring(stDate.lastIndexOf(" ")+1,stDate.indexOf("일")));
-		mm.put("enDSmm",enDate.substring(0, enDate.indexOf("년"))+"-"+enDate.substring(enDate.indexOf(" ")+1,enDate.indexOf("월"))+"-"+Integer.parseInt(enDate.substring(enDate.lastIndexOf(" ")+1,enDate.indexOf("일"))));
+		mm.put("enDSmm",enDate.substring(0, enDate.indexOf("년"))+"-"+enDate.substring(enDate.indexOf(" ")+1,enDate.indexOf("월"))+"-"+enDate.substring(enDate.lastIndexOf(" ")+1,enDate.indexOf("일")));
 		mm.put("smmvstlc", sm.drawsvlc(mm));
-		return mm;
+		return mm; 
 	}
 	@RequestMapping("/stats/smmPost/{postSelectDate}")
 	@Transactional
 	public Map<?, ?> smmPost(@PathVariable String postSelectDate) {
-		System.out.println("여기인가"+postSelectDate);
 		mm.put("postStartDate",postSelectDate.substring(0, postSelectDate.indexOf("년"))+"-"+postSelectDate.substring(postSelectDate.indexOf(" ")+1,postSelectDate.indexOf("월"))+"-"+postSelectDate.substring(postSelectDate.lastIndexOf(" ")+1,postSelectDate.indexOf("일")));
 		int ryu =Integer.parseInt((postSelectDate.substring(postSelectDate.indexOf(" ")+1,postSelectDate.indexOf("월"))));
 		int jae =Integer.parseInt(postSelectDate.substring(postSelectDate.lastIndexOf(" ")+1,postSelectDate.indexOf("일")))-1;
@@ -55,17 +53,14 @@ public class StatCtrl {
 			ryu=ryu-1; jae=30;
 		}else if(ryu==3&&jae==0){ryu=ryu-1; jae=28;}
 		mm.put("postStartDateBefore",postSelectDate.substring(0, postSelectDate.indexOf("년"))+"-"+String.format("%02d", ryu)+"-"+String.format("%02d", jae));
-		System.out.println(mm.get("postStartDateBefore"));
 		mm.put("totalPostPerDay", sm.totalPostPerDay(mm));
+
 		mm.put("totalPostPerDayBefore", sm.totalPostPerDayBefore(mm));
-		System.out.println(sm.totalPostPerDay(mm).get(0).get("postCount"));
-		System.out.println(sm.totalPostPerDayBefore(mm).get(0).get("postBeforeCount"));
 		return mm;
 	}
 	@RequestMapping("/stats/smmJoin/{joinSelectDate}")
 	@Transactional
 	public Map<?, ?> smmJoin(@PathVariable String joinSelectDate) {
-		System.out.println(joinSelectDate);
 		mm.put("joinStartDate",joinSelectDate.substring(0, joinSelectDate.indexOf("년"))+"-"+joinSelectDate.substring(joinSelectDate.indexOf(" ")+1,joinSelectDate.indexOf("월"))+"-"+joinSelectDate.substring(joinSelectDate.lastIndexOf(" ")+1,joinSelectDate.indexOf("일")));
 		int ryu =Integer.parseInt((joinSelectDate.substring(joinSelectDate.indexOf(" ")+1,joinSelectDate.indexOf("월"))));
 		int jae =Integer.parseInt(joinSelectDate.substring(joinSelectDate.lastIndexOf(" ")+1,joinSelectDate.indexOf("일")))-1;
@@ -74,12 +69,9 @@ public class StatCtrl {
 		}else if(ryu==5&&jae==0||ryu==7&&jae==0||ryu==10&&jae==0||ryu==12&& jae==0){
 			ryu=ryu-1; jae=30;
 		}else if(ryu==3&&jae==0){ryu=ryu-1; jae=28;}
-		System.out.println(ryu);
 		mm.put("joinStartDateBefore",joinSelectDate.substring(0, joinSelectDate.indexOf("년"))+"-"+String.format("%02d", ryu)+"-"+String.format("%02d", jae));
 		mm.put("totalJoinPerDay", sm.totalJoinPerDay(mm));
 		mm.put("totalJoinPerDayBefore", sm.totalJoinPerDayBefore(mm));
-		System.out.println(sm.totalJoinPerDay(mm).get(0).get("joinCount"));
-		System.out.println(sm.totalJoinPerDayBefore(mm).get(0).get("joinBeforeCount"));
 		return mm;
 	}
 	@GetMapping("/stats/vstChart")
@@ -129,7 +121,4 @@ public class StatCtrl {
 		mm.put("wrdcld", sm.drawwrdcld());
 		return mm;
 	}
-	
-	
-	
 }
