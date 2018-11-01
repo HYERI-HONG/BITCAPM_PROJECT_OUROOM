@@ -21,6 +21,8 @@
 		<result column="memberVisitor" property="memberVisitor" javaType="int" />
 		<result column="maleC" property="maleC" javaType="int" />
 		<result column="femaleC" property="femaleC" javaType="int" />
+		<result column="genderRatioG" property="genderRatioG" javaType="string" />
+		<result column="genderRatioC" property="genderRatioC" javaType="int" />
 		
 		<result column="sum" property="sum" javaType="int" />
 		<result column="teen" property="teen" javaType="int" />
@@ -115,6 +117,11 @@
 			GROUP BY d.SEQ
 			ORDER BY summ desc
 			LIMIT 5
+	</select>
+	<select id="getGenderratio" resultMap="statbigbean">
+			  SELECT gender genderRatioG ,count(*) genderRatioC 
+				FROM member
+     			 group by GENDER;
 	</select>
 	
 	<!-- <select id="drawsvcc"  statementType="CALLABLE" resultMap="statbigbean" >

@@ -6,7 +6,7 @@ jaekyung =(()=>{
        };
        return {init:init};
 })();
-/*jaekyung.main = (()=>{
+jaekyung.main = (()=>{
 	var init =()=>{
 		onCreate();
 	};
@@ -14,26 +14,15 @@ jaekyung =(()=>{
 		setContentView();
 	};
 	var setContentView =()=>{
-        //// 자스 Promise 비동기 로직 다루기
-	      app.router.home();
+	      jaekyung.service.mp();
 	};
 	return{init:init};
-})();*/
-jaekyung.main={
+})();
+jaekyung.service={
               mp:()=>{
                      $('#content').empty();     
-                     let ctner__st=$('<div />').attr({id:"ctner__st"});
-                     let ctnerh__st=$('<div />').attr({id:"ctnerh__st"});
-                     let ctnerb__st=$('<div />').attr({id:"ctnerb__st"});
-                     let ctnerf__st=$('<div />').attr({id:"ctnerf__st"});
-                     ctner__st.appendTo('#content').append(
-                    		ctnerh__st,
-                            ctnerb__st,
-                            ctnerf__st
-                     );
-                     (jaekyung.main.nav()).appendTo(ctnerh__st);
-                     (jaekyung.main.ctner()).appendTo(ctnerb__st);
-                     (jaekyung.main.ftr()).appendTo(ctnerf__st);
+                     (jaekyung.service.nav()).appendTo($('#content'));
+                     (jaekyung.service.ctner()).appendTo($('#content'));
                      jaekyung.chart.smm(); 
                      jaekyung.chart.sba(); 
                      jaekyung.chart.wrdcld();
@@ -43,50 +32,45 @@ jaekyung.main={
                      jaekyung.chart.abba();
               },
               nav:()=>{
-            	  	 let d=$('<div />');
-                     let navc =$('<nav />');
-                     let dd=$('<div />');
-                     let u = $('<ul />');
-                     let ip = [{lst:'요약',id:'smmryu'},{lst:'연령별',id:'sbaryu'},{lst:'시간별방문자',id:'vbtryu'},{lst:'카테고리별',id:'ctgr1ryu'},{lst:'방문자',id:'vstryu'},{lst:'가입자',id:'mbrryu'},{lst:'구매액',id:'abbaryu'}];
+            	  	 let d=$('<article />');
+                     let u=$('<ul />');
+                     let ip=[{lst:'요약',id:'smmryu'},{lst:'연령별',id:'sbaryu'},{lst:'시간별방문자',id:'vbtryu'},{lst:'카테고리별',id:'ctgr1ryu'},{lst:'방문자',id:'vstryu'},{lst:'가입자',id:'mbrryu'},{lst:'구매액',id:'abbaryu'}];
                      d.addClass("container");
-                     navc.attr({id:"navc__st",style:"position: fixed; max-width:1140px"})
-                           .addClass("navbar navbar-default").appendTo(d);
-                     dd.appendTo(navc);
-                     // active 추가할거
-                     $('<div />').addClass('navbar-header').append(
-                            $('<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" />')
-                           // ,
-							// $('<a/>').addClass('navbar-brand').attr({href:"#"}).html($('<img
-							// src="'+$.img()+'/jaekyung/logo.png"/>'))
-                     ).appendTo(dd);
-                     u.attr({id:"nav__u__ryu"}).addClass("nav nav-pills nav-justified ").appendTo(dd);
-                   
+                     $('<nav />').attr({id:"navc__st",style:"position: fixed; max-width:1140px"})
+                     	.append(
+                     			$('<div />').addClass('navbar-header')
+                     				.append(
+                                        $('<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" />')
+                     				),
+                                 u.attr({id:"nav__u__ryu"}).addClass("nav nav-pills nav-justified ")
+                     	).addClass("navbar navbar-default").appendTo(d);
                      $(ip).each(function(i){
-                           $('<li role="presentation" data-scroll="'+this.id+'"/>').attr({style:"padding-top:7px"}).addClass("scrollS__ryu").append($('<a href="#'+this.id+'"/>').attr({style:"color:#262626"}).html(this.lst)).appendTo(u);
+                           $('<li role="presentation" data-scroll="'+this.id+'"/>').attr({style:"padding-top:7px"}).addClass("scrollS__ryu")
+                           	.append(
+                           		$('<a href="#'+this.id+'"/>').attr({style:"color:#262626"}).html(this.lst)
+                           	).appendTo(u);
                      });
-                     $(()=>{
-                	    let link = $('li.scrollS__ryu a');
-                	    link.on('click',function(e){
-                	        let target = $($(this).attr('href')); 
-                	        $('html, body').animate({
-                	            scrollTop: target.offset().top
-                	        },800);
-                	        $(this).addClass('active');
-                	        e.preventDefault();
-                	    });
-                	    $(window).scroll(()=>{
-                            findPosition();
-                        });
-                        function findPosition(){
-                            $('div .scrollsd_ryu').each(function(){
-                                if( ($(this).offset().top - $(window).scrollTop())<600){
-                                    $('li.scrollS__ryu').removeClass('active');
-                                    $('#nav__u__ryu').find('[data-scroll="'+ $(this).attr('id') +'"]').addClass('active');
-                                }
-                            });
-                        }
-                        findPosition();
+                     let link = $('li.scrollS__ryu a');
+            	     link.click(e=>{
+            	         let target = $($(this).attr('href')); 
+            	         $('html, body').animate({
+            	             scrollTop: target.offset().top
+            	         },800);
+            	         $(this).addClass('active');
+            	         e.preventDefault();
+            	     });
+            	     $(window).scroll(()=>{
+                         findPosition();
                      });
+                     function findPosition(){
+                         $('div .scrollsd_ryu').each(function(){
+                             if( ($(this).offset().top - $(window).scrollTop())<600){
+                                 $('li.scrollS__ryu').removeClass('active');
+                                 $('#nav__u__ryu').find('[data-scroll="'+ $(this).attr('id') +'"]').addClass('active');
+                             }
+                         });
+                     }
+                     findPosition();
                      let didScroll,lastScrollTop = 0,delta = 5;
                      let navbarHeight = $('body').outerHeight();
                      $(window).scroll(e=>{
@@ -110,23 +94,18 @@ jaekyung.main={
                      return d;
               },
               ctner:()=>{
-                     let d = $('<div>').attr({id:'kingofcontainer'});
-                     (jaekyung.main.smm()).appendTo(d);
-                     (jaekyung.main.sba()).appendTo(d);
-                     (jaekyung.main.vbt()).appendTo(d);
-                     (jaekyung.main.ctgr1()).appendTo(d);
-                     (jaekyung.main.vst()).appendTo(d);
-                     (jaekyung.main.mbr()).appendTo(d);
-                     (jaekyung.main.abba()).appendTo(d);
-                     return d;
-              },
-              ftr:()=>{
-                     let d = $('<div>').attr("id","ftr__st");
-                     d.html('푸우우우터');
+                     let d = $('<article />');
+                     (jaekyung.service.smm()).appendTo(d);
+                     (jaekyung.service.sba()).appendTo(d);
+                     (jaekyung.service.vbt()).appendTo(d);
+                     (jaekyung.service.ctgr1()).appendTo(d);
+                     (jaekyung.service.vst()).appendTo(d);
+                     (jaekyung.service.mbr()).appendTo(d);
+                     (jaekyung.service.abba()).appendTo(d);
                      return d;
               },
               smm:()=>{
-                let smm = $('<div />');
+                let smm = $('<section />');
                 let smma = $('<div />');
                 let smmh = $('<div />');
                 let smmc = $('<div />');
@@ -145,7 +124,6 @@ jaekyung.main={
                              $('<span aria-hidden="true" />').attr({style:"height:40px; width:40px"}).addClass('glyphicon glyphicon-certificate glyalone__ryu')
                 	).appendTo(smma);
                 smmc.attr({style:"margin-top:40px;"}).appendTo(smma);
-                smmco.appendTo(smmc);
                 smmco.attr({style:"display:flex"}).addClass("row-fluid")
                 	.append(
                      $('<div />').attr({style:"padding:0px",id:"smm_v_ld"}).addClass("col-lg-8 col-md-12 bgcw__ryu teduritl__ryu")
@@ -168,7 +146,7 @@ jaekyung.main={
 			                               $('<div />').attr({id:"smm_nj_f"}).addClass("col-md-12 bgcw__ryu pa0__ryu mb0__ryu teduril__ryu ")
 	                                  	)
                      	)
-                	);
+                	).appendTo(smmc);;
                 smmct.appendTo(smmc);
                 smmct.attr({style:"display:flex"}).addClass("row-fluid margint20__ryu")
                 	.append(
@@ -177,7 +155,6 @@ jaekyung.main={
 	                     $('<div />').addClass("col-md-4").attr({style:"padding-left:0px"})
 	                     	.append(
 	                    		 $('<div />').attr({id:"smmtable"}).addClass("col-md-12 bgcw__ryu text-center teduritl__ryu ")
-	                    		 	.html("<h4><strong>오늘 상위 매출 카테고리</strong></h4>")
 	                     	),
 	                     $('<div />').attr({style:"display:flex",id:"smm_b_c"}).addClass("col-md-3 pr0__ryu borderG__ryu teduritl__ryu")
 	                     	.append(
@@ -188,7 +165,7 @@ jaekyung.main={
                 return smm;
               },
               vst:()=>{
-                let vst = $('<div />');
+                let vst = $('<section />');
                 let vsta = $('<div />');
                 let vsth = $('<div />');
                 let vstc = $('<div />');
@@ -223,7 +200,7 @@ jaekyung.main={
                 return vst;
               },
               sba:()=>{
-                let sba = $('<div />');
+                let sba = $('<section />');
                 let sbaa = $('<div />');
                 let sbah = $('<div />');
                 let sbac = $('<div />');
@@ -262,7 +239,7 @@ jaekyung.main={
                 return sba;
               },
               ctgr1:()=>{
-                let ctgr1 = $('<div />');
+                let ctgr1 = $('<section />');
                 let ctgr1a = $('<div />');
                 let ctgr1h = $('<div />');
                 let ctgr1c = $('<div />');
@@ -292,7 +269,7 @@ jaekyung.main={
                 return ctgr1;
               },
               mbr:()=>{
-                let mbr = $('<div />');
+                let mbr = $('<section />');
                 let mbra = $('<div />');
                 let mbrh = $('<div />');
                 let mbrc = $('<div />');
@@ -331,7 +308,7 @@ jaekyung.main={
                 return mbr;
               },
               abba:()=>{
-                let abba = $('<div />');
+                let abba = $('<section />');
                 let abbaa = $('<div />');
                 let abbah = $('<div />');
                 let abbac = $('<div />');
@@ -357,7 +334,7 @@ jaekyung.main={
                 return abba;
               },
               vbt:()=>{
-                let vbt = $('<div />');
+                let vbt = $('<section />');
                 let vbta = $('<div />');
                 let vbth = $('<div />');
                 let vbtc = $('<div />');
@@ -414,22 +391,22 @@ jaekyung.chart={
 		},
 		smm : () =>{
 			let today = new Date();
-			let dd = today.getDay()+10;
+			let dd = today.getDate()+1;
 			let ddn = dd-7;
-			let mm = today.getMonth()+2; // 10월이라 +1인데 11월 가상 설정
+			let mm = today.getMonth()+1; // 10월이라 +1인데 11월 가상 설정
 			let mmn = mm;
 			let yyyy = today.getFullYear();
-			
-			if(dd<10)dd='0'+dd;
-			if(ddn<10&&ddn>0)ddn='0'+ddn;
+			dd<10?dd='0'+dd:dd;
+			(ddn<10&&ddn>0)?ddn='0'+ddn:ddn;
 			if(ddn<0){
 				if(mm===11){
-					ddn= ddn+31;
 					mmn=10;
 				}
+				ddn= ddn+32;
 			}
-			if(mm<10)mm='0'+mm; 
-			if(mmn<10)mmn='0'+mmn; 
+			
+			mm<10?mm='0'+mm:mm; 
+			mmn<10?mmn='0'+mmn:mmn; 
 			today = yyyy+'년 '+mm+'월 '+dd+"일";
 			let beforeweek = yyyy+'년 '+mmn+'월 '+ddn+"일";
 			$.getJSON($.context()+'/stats/smmChart/'+today+"/"+beforeweek,r=>{
@@ -448,7 +425,7 @@ jaekyung.chart={
 		              $('#smm_v_l_t_date').datepicker({
 		            	  dateFormat: 'yy년 mm월 dd일',
 		            	  minDate: new Date('2018-11-01'),
-		            	  maxDate: new Date('2018-11-15'),
+		            	  maxDate: new Date(),
 		            	  onClose: selectedDate=>{
 		            		  $("#smm_v_l_t_date2").datepicker( "option", "minDate", selectedDate );
 		            	  }
@@ -457,7 +434,7 @@ jaekyung.chart={
 		              $('#smm_v_l_t_date2').datepicker({
 		            	  dateFormat: 'yy년 mm월 dd일', 
 		            	  minDate: $('#smm_v_l_t_date').val(),
-            		      maxDate: new Date('2018-11-15'),
+            		      maxDate: new Date(),
             		      onClose: selectedDate=>{
 		            		  $("#smm_v_l_t_date").datepicker( "option", "maxDate", selectedDate );
 		            	  }
@@ -502,12 +479,13 @@ jaekyung.chart={
 				// smm donut
 				google.charts.load("current", {packages:["corechart"]});
 			    google.charts.setOnLoadCallback(()=>{
-			        var data = google.visualization.arrayToDataTable([
-				          ['gender', '가입자수'],
-				          ['남자',     11],
-				          ['여자',      22]
-			        ]);
-
+			        var data = new google.visualization.DataTable();
+			        data.addColumn('string','성별');
+			        data.addColumn('number','가입자수');
+			        $.each(r.genderRatio,(i,j)=>{
+				    	  data.addRow([j.genderRatioG, j.genderRatioC]);
+				      });
+			        
 			        var options = {
 			          title: '가입자 성비',
 			          titleTextStyle:{
@@ -531,6 +509,7 @@ jaekyung.chart={
 				let th = $('<thead />');
 				let tb = $('<tbody />');
 				let tr = $('<tr />');
+				smmtd.html("<h4><strong>오늘 상위 매출 카테고리</strong></h4>").appendTo($('#smmtable'));
 				t.attr({style:"border-top:1px solid; border-bottom:1px solid", id:"smmt"})
 					.addClass("table table-striped table-hover borderG__ryu").appendTo(smmtd);
 				th.appendTo(t);
@@ -553,19 +532,20 @@ jaekyung.chart={
 		                            	.html((this.sumOfBestSeller/r.totalSalePerDay[0].totalSalePerDay*100).toFixed(1)+"%")
 		               		).appendTo(tb);
 		        });
-		        smmtd.appendTo($('#smmtable'));
 		        let smmtnpd = $('<div />');
 				let tnp = $('<table />');
 				let tbnp = $('<tbody />');
 				let trnp = $('<tr />');
-				tnp.attr({style:"border-top:1px solid;  margin-bottom:0px!important;"}).addClass("table table-striped table-hover borderG__ryu")
+				smmtnpd.appendTo($('#smm_np_c'));
+				tnp.attr({style:"border-top:1px solid; margin-bottom:0px!important;"}).addClass("table table-striped table-hover borderG__ryu")
 					.appendTo(smmtnpd);
 				tbnp.appendTo(tnp);
 				trnp.append(
-						 $('<td />').attr({style:'font-size:35px ; width:60%; text-align:right',id:"smm_totalPostPerDay"}).html("<b>"+r.totalPostPerDay[0].postCount+"</b>"),
+						 $('<td />').attr({style:'font-size:35px ; width:60%; text-align:right',id:"smm_totalPostPerDay"})
+						 	.html("<b>"+r.totalPostPerDay[0].postCount+"</b>"),
 						 $('<td />').attr({style:'font-size:25px; width:40%; padding-left:0px; padding-top:20px; padding-bottom:0px'}).html("회")
 				).appendTo(tbnp);
-				smmtnpd.appendTo($('#smm_np_c'));
+				
 				$('<table />').attr({id:'smm_np_h_table',style:" margin:6px 6px 6px 6px ; margin-left:40px;"})
 					.appendTo($('#smm_np_h'));
 				$('<tr />').attr({id:'smm_np_h_tr'}).appendTo($('#smm_np_h_table'));
@@ -574,25 +554,21 @@ jaekyung.chart={
 					.appendTo($('#smm_np_h_tr_td'));
 				$('<td />').attr({style:"font-size:16px"}).html('<b>의 총 조회수</b>')
 					.appendTo($('#smm_np_h_tr'));
-				$(function() {
-		              $.datepicker.setDefaults($.datepicker.regional['ko']); 
-		              $('#smm_np_date').datepicker({
-		            	  dateFormat: 'yy년 mm월 dd일',
-		            	  minDate: new Date('2018-10-01'),
-		            	  maxDate: new Date('2018-10-24')
-		              });
-		              $('#smm_np_date').datepicker('setDate', $.datepicker.parseDate('yy년 mm월 dd일', '2018년 10월 2일')); // $('#smm_np_date').datepicker('setDate',
-																														// '+0');//현재날짜.
-																														// 지금은
-																														// 현재날짜를
-																														// 쓰면
-																														// 안되서
-																														// 블럭.
-		        });
+			
+	            $.datepicker.setDefaults($.datepicker.regional['ko']); 
+	            $('#smm_np_date').datepicker({
+	          	  dateFormat: 'yy년 mm월 dd일',
+	          	  minDate: new Date('2018-11-01'),
+	          	  maxDate: new Date()
+	            });
+	            $('#smm_np_date').datepicker('setDate', $.datepicker.parseDate('yy년 mm월 dd일', today)); //여기 확인 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
 				$('#smm_np_date').change(e=>{
 						$.getJSON($.context()+'/stats/smmPost/'+$('#smm_np_date').val(),rr=>{
 							$('#smm_totalPostPerDay')
 								.html("<b>"+rr.totalPostPerDay[0].postCount+"</b>");
+							if(rr.totalPostPerDayBefore[0].postBeforeCount===null||undefined){
+								rr.totalPostPerDayBefore[0].postBeforeCount=0;
+							}
 							$('#smm_np_f_input')
 								.html("<b>"+rr.totalPostPerDayBefore[0].postBeforeCount+' ('+((rr.totalPostPerDay[0].postCount-rr.totalPostPerDayBefore[0].postBeforeCount)/rr.totalPostPerDay[0].postCount*100).toFixed(1)+"%"+')'+"</b>");
 						});
@@ -636,11 +612,10 @@ jaekyung.chart={
 				$('<td />').attr({style:"font-size:16px"}).html('<b>의 신규 가입자 수</b>')
 					.appendTo($('#smm_nj_h_tr'));
 				$(()=>{
-					$.datepicker.setDefaults($.datepicker.regional['ko']); 
 					$('#smm_nj_date').datepicker({
 						dateFormat: 'yy년 mm월 dd일',
 						minDate: new Date('2018-11-01'),
-		            	maxDate: new Date('2018-11-15')
+		            	maxDate: new Date()
 					});
 					$('#smm_nj_date').datepicker('setDate', $.datepicker.parseDate('yy년 mm월 dd일', today));
 				});
@@ -750,28 +725,28 @@ jaekyung.chart={
 			$.getJSON($.context()+"/stats/sbaChart",r=>{
 				google.charts.load('current', {'packages':['corechart']});
 			    google.charts.setOnLoadCallback(()=>{
-			            var data = new google.visualization.DataTable();
-			            data.addColumn('number','판매가');
-			            data.addColumn('number','20~29세 판매량');
-			            data.addColumn('number','30~39세 판매량');
-			            data.addColumn('number','40~49세 판매량');
-			            $.each(r.sbalc,(i,v)=>{
-			            	data.addRow([
-			            		v.sum,
-			            		v.twen,
-			            		v.fort,
-			            		v.fift
-			            	]);
-			            });
-			            var options = {
-			              curveType: 'function',
-			              legend: { position: 'right' , textStyle:{fontSize:13}},
-				          vAxis: {title: '판매량(단위: 개))',viewWindow: {min:0,max:130}},
-				          hAxis:{viewWindow: {min:0}},
-				          interpolateNulls: true
-			            };
-			            var chart = new google.visualization.LineChart(document.getElementById('sba__cc'));
-			            chart.draw(data, options);
+		            var data = new google.visualization.DataTable();
+		            data.addColumn('number','판매가');
+		            data.addColumn('number','20~29세 판매량');
+		            data.addColumn('number','30~39세 판매량');
+		            data.addColumn('number','40~49세 판매량');
+		            $.each(r.sbalc,(i,v)=>{
+		            	data.addRow([
+		            		v.sum,
+		            		v.twen,
+		            		v.fort,
+		            		v.fift
+		            	]);
+		            });
+		            var options = {
+		              curveType: 'function',
+		              legend: { position: 'right' , textStyle:{fontSize:13}},
+			          vAxis: {title: '판매량(단위: 개))',viewWindow: {min:0,max:130}},
+			          hAxis:{viewWindow: {min:0}},
+			          interpolateNulls: true
+		            };
+		            var chart = new google.visualization.LineChart(document.getElementById('sba__cc'));
+		            chart.draw(data, options);
 			    });
 			    $('<p />').attr({id:'sba_tp'}).appendTo($('#sba_t')); 
                 $('<label />').appendTo($('#sba_tp'));
@@ -969,7 +944,6 @@ jaekyung.chart={
 	                })
 	                .on("end", draw(data))
 	                .start();
-	
 	            function draw(words) { 
 	                var cloud = svg.selectAll("text").data(words);
 	                cloud.enter()
@@ -1000,9 +974,6 @@ jaekyung.chart={
 }
 jaekyung.router={
               init:()=>{
-                     jaekyung.router.main();
-              },
-              main:()=>{
-                     jaekyung.main.mp();
+                     jaekyung.main.init();
               }
 }
