@@ -31,60 +31,42 @@ public class ItemController {
 	public @ResponseBody Map<String,Object> list(@PathVariable int page,@PathVariable String category,
 			@PathVariable String ag,@PathVariable String search){
 		Map<String,Object> m = new HashMap<>();
-		
 		int sp = (page*4)+1;
 		int ep = sp+3;
-		System.out.println("페이지"+page+"///카테고리"+category);
-		System.out.println("sp:"+sp+"///"+"ep:"+ep);
-		System.out.println("검색: "+search+"////정렬:  "+ag);
 		m.put("sp", sp);
 		m.put("ep", ep);
-		//List<Item> l = 
 				
 		if(search.equals("0")) {
-			
 		if(category.equals("0")) {
 		m.put("ag",ag);
 		m.put("list",itmp.list(m));
-		
 		}else {
 			m.put("ag", ag);
 			m.put("category",category);
 			m.put("list",itmp.listSelect(m));
-			
 		}
-			
 			}else { 
 				m.put("ag", ag);
 				m.put("search", search);
 				m.put("list",itmp.listsearch(m));
-				
 			}
 		
 		return m;
 	}
 	@RequestMapping("/itemOption/{seq}")
 	public @ResponseBody List<Item> option(@PathVariable String seq){
-		List<Item> l =itmp.read(seq); 
-		
-		return l; 
+		return itmp.read(seq); 
 	}
-	///itemsC
 	@RequestMapping("/itemsC")
 	public @ResponseBody Map<String,Object> category(){
 		Map<String,Object> m = new HashMap<>();
-		
-		
 		m.put("c1",itmp.c1());
-		
 		return m; 
 	}
 	@RequestMapping("/itemsC/{seq}")
 	public @ResponseBody Map<String,Object> category2(@PathVariable String seq){
 		Map<String,Object> m = new HashMap<>();
-		
 		m.put("c2",itmp.c2(seq));
-		
 		return m; 
 	}
 	@Transactional
@@ -95,8 +77,6 @@ public class ItemController {
 		int pri = Integer.parseInt(seq.get("price"));
 		int sum = pri-(pri*(dis))/100;
 		seq.put("sum",sum+"");
-		System.out.println("uploadpath:::"+uploadPath);
-		System.out.println("category:::"+seq.get("categoryPath"));
 		String path = uploadPath+File.separator+"jun"+File.separator+seq.get("categoryPath")+File.separator;
 		
 		File target = new File(path, seq.get("photo"));
@@ -128,42 +108,25 @@ public class ItemController {
 			itmp.cartAdd(m);
 		}
 		
-		
-		
-		System.out.println(m.get("userid")+"///"+m.get("name")+"///"+m.get("seq")+"///"+m.get("count"));
-		
-		
-		
 	}
 	@RequestMapping("/cart/list/{userid}")
 	public @ResponseBody List<Item> cartList(@PathVariable String userid){
-		System.out.println("카트리스트"+userid);
-		
-		
-		
 		return itmp.cartList(userid); 
 	}
 
 	@RequestMapping("/cart/selectOne/{item_seq}")
 	public @ResponseBody Item cartList2(@PathVariable String item_seq){
-		System.out.println("들어옴");
-		
 		return itmp.selectOne(item_seq);
-		
 	}
 	@RequestMapping("/cartlist/option/{item_seq}/{userid}")
 	public @ResponseBody List<Item> cartOption(@PathVariable String userid,@PathVariable String item_seq){
-		System.out.println("리스트"+userid+"// "+item_seq);
 		Map<String,Object> m = new HashMap<>();
 		m.put("userid",userid);
 		m.put("item_seq",item_seq);
-		
-		
 		return itmp.cartOption(m); 
 	}
 	@RequestMapping("/cart/delete/{item_seq}/{userid}")
 	public @ResponseBody void cartDelete(@PathVariable String item_seq,@PathVariable String userid){
-		System.out.println("딜리트 들어옴");
 		Map<String,Object> m = new HashMap<>();
 		m.put("item_seq", item_seq);
 		m.put("mem_seq", userid);
@@ -174,24 +137,25 @@ public class ItemController {
 	public @ResponseBody void cartBuy(@RequestBody Map<String,List<Item>> m){
 		Map<String,Object> m2 = new HashMap<>();
 		for(int i =0; i<((List) m.get("cop")).size();i++) {
-
 			itmp.purC( m.get("cop").get(i));
 			m2.put("mem_seq",m.get("cop").get(i).getMem_seq());
 			m2.put("item_seq",m.get("cop").get(i).getItem_seq());
+			m2.put("cnt",m.get("cop").get(i).getCnt());
+			itmp.updateItem(m2);
 			itmp.cartDelete(m2);
 		}
 		
 	}
 	@RequestMapping("/cart/allbuy/{mem_seq}")
 	public @ResponseBody void allBuy(@PathVariable String mem_seq){
-		System.out.println("전체구매");
 		List<Item> list = itmp.cartAll(mem_seq);
-		System.out.println(list);
 		Map<String,Object> m = new HashMap<>();
 		for(int i =0; i<list.size();i++) {
 			itmp.purC(list.get(i));
 			m.put("mem_seq", list.get(i).getMem_seq());
 			m.put("item_seq", list.get(i).getItem_seq());
+			m.put("cnt",list.get(i).getCnt());
+			itmp.updateItem(m);
 			itmp.cartDelete(m);
 		}
 		
@@ -200,7 +164,6 @@ public class ItemController {
 	@PostMapping(value="/item/upload")
 	public void upload(@RequestBody MultipartFile file) throws IOException{
 		filedata = file.getBytes();
-		System.out.println("file upload :::"+filedata);
 	}
 
 

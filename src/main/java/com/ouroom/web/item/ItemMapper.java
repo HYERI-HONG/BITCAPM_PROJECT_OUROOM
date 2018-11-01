@@ -25,5 +25,6 @@ public interface ItemMapper {
 	public String ItemPk(String s);
 	public void insertOption(Map<?,?> m);
 	public void insertItemPost(Map<?,?> m);
+	public void updateItem(Map<?,?>m);
 	
 }
