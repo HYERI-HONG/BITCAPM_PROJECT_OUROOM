@@ -211,12 +211,13 @@ SELECT P.SEQ,P.IMAGE,P.LAST_UPDATE,M.NICKNAME,M.PROFILE
 FROM post P
 JOIN MEMBER M
 ON P.MEM_SEQ LIKE M.SEQ
-ORDER BY P.LIKE_CNT DESC
+ORDER BY P.seq 
 LIMIT 8;
 
+select * from post;
 #profile이 null인경우 처리해주기
 #danah.s.d(this.seq);
-
+select * from post order by seq asc;
 #-------------------------------------------------------------------
 
 #메인화면 스토어 list불러오는 쿼리
@@ -225,12 +226,13 @@ LIMIT 8;
 #주방 = 4
 #학생 = 6
 #서재 = 7
-SELECT I.SEQ, I.TITLE,I.SUM,I.DISCOUNT,I.PHOTO,I.CATEGORY2_SEQ,C.CATEGORY FROM item I JOIN category2 C
+SELECT I.SEQ, I.TITLE,I.SUM,I.DISCOUNT,I.PHOTO,I.CATEGORY2_SEQ,C.CATEGORY FROM item I 
+JOIN category2 C
 ON I.CATEGORY2_SEQ LIKE C.SEQ
 ORDER BY SALE_CNT DESC LIMIT 6;
 
 #카테고리 눌렀을때 나오는 쿼리
-SELECT DISTINCT I.SEQ, I.TITLE,I.SUM,I.DISCOUNT,I.PHOTO,I.CATEGORY2_SEQ,C.CATEGORY FROM ITEM I
+SELECT I.SEQ, I.TITLE,I.SUM,I.DISCOUNT,I.PHOTO,I.CATEGORY2_SEQ,C.CATEGORY FROM ITEM I
 JOIN category2 C
 ON I.CATEGORY2_SEQ LIKE C.SEQ
 WHERE C.CATEGORY1_SEQ LIKE (SELECT SEQ FROM category1 WHERE CATEGORY LIKE '침실')
@@ -240,6 +242,7 @@ ORDER BY SALE_CNT DESC LIMIT 6;
 #category_2 -> category
 
 #이미지 경로 : $.img()+jun/ category2 category속성/item테이블의 photo.jpg
+commit;
 #---------------------------INSERT----------------------------
 
 INSERT INTO BOARD(ARTICLE) VALUES ('post');

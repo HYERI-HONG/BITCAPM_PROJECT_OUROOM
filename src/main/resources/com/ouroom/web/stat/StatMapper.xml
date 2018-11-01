@@ -21,6 +21,8 @@
 		<result column="memberVisitor" property="memberVisitor" javaType="int" />
 		<result column="maleC" property="maleC" javaType="int" />
 		<result column="femaleC" property="femaleC" javaType="int" />
+		<result column="genderRatioG" property="genderRatioG" javaType="string" />
+		<result column="genderRatioC" property="genderRatioC" javaType="int" />
 		
 		<result column="sum" property="sum" javaType="int" />
 		<result column="teen" property="teen" javaType="int" />
@@ -116,15 +118,12 @@
 			ORDER BY summ desc
 			LIMIT 5
 	</select>
+	<select id="getGenderratio" resultMap="statbigbean">
+			  SELECT gender genderRatioG ,count(*) genderRatioC 
+				FROM member
+     			 group by GENDER;
+	</select>
 	
-	<!-- <select id="drawsvcc"  statementType="CALLABLE" resultMap="statbigbean" >
-		 {?=call sp_select_totalsale[(#{stD, mode=IN, jdbcType=VARCHAR, javaType=string},
-				 #{enD, mode=IN, jdbcType=VARCHAR, javaType=string}
-		 )]}
-	</select>-->
-	
-	
-	<!-- 밑 둘은 프로시져로 하면 하나로 줄일 수 있을 거 같은데, -->
 	<select id="drawvstac" resultMap="statbigbean">
 			select  b.cc AS totalVisitor, c.cc AS memberVisitor, a.VISIT_DATE AS visitDate
 			FROM visitor a

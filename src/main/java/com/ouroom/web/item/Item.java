@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @Lazy
 public class Item {
-	String seq,title,price,delivery,discount,photo,sale_cnt,
-	stroe_cnt,category2_seq,category,options,sum,category_kr,seqo,item_seq,cnt,
-	mem_seq,option_seq,content;
+	private String seq,title,price,delivery,discount,photo,sale_cnt,
+			stroe_cnt,category2_seq,category,options,sum,category_kr,seqo,item_seq,cnt,
+			mem_seq,option_seq,content;
 }

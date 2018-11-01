@@ -10,9 +10,9 @@
        FROM (
            SELECT
                ROW_NUMBER() OVER(ORDER BY A.${ag}) AS NUM,
-               A.*,c.category
+               A.*,c.CATEGORY
            FROM
-               item A join category2 c WHERE A.category2_seq=c.seq
+               ITEM A join CATEGORY2 c WHERE A.CATEGORY2_SEQ=c.SEQ
        )B
        WHERE B.NUM BETWEEN  #{sp} AND #{ep}
        ORDER BY B.NUM;
@@ -20,18 +20,18 @@
 	</select>
 	
 	<select id="count" resultType="int">
-	select count(*) from item where seq>82 order by seq desc;
+	select count(*) from ITEM where SEQ>82 order by SEQ desc;
 	</select>
 	
 	<select id="read" resultType="com.ouroom.web.item.Item">
-	select *,io.seq seqo from item i join item_option io where i.seq = io.ITEM_SEQ and i.seq = #{seq};
+	select *,io.SEQ seqo from ITEM i join ITEM_OPTION io where i.SEQ = io.ITEM_SEQ and i.SEQ = #{seq};
 	</select>
 	
 	<select id="c1" resultType="com.ouroom.web.item.Item">
-	select * from category1;
+	select * from CATEGORY1;
 	</select>
 	<select id="c2" resultType="com.ouroom.web.item.Item">
-	select * from category2 where CATEGORY1_SEQ=#{seq};
+	select * from CATEGORY2 where CATEGORY1_SEQ=#{seq};
 	</select>
 	
 	<select id="listSelect" resultType="com.ouroom.web.item.Item">
@@ -40,9 +40,9 @@
        FROM (
            SELECT
                ROW_NUMBER() OVER(ORDER BY A.${ag}) AS NUM,
-               A.*,c.category
+               A.*,c.CATEGORY
            FROM
-               item A join category2 c WHERE A.category2_seq=c.seq and A.CATEGORY2_SEQ= #{category}
+               item A join CATEGORY2 c WHERE A.CATEGORY2_SEQ=c.SEQ and A.CATEGORY2_SEQ= #{category}
        )B
        WHERE B.NUM BETWEEN  #{sp} AND #{ep}
        ORDER BY B.NUM;
@@ -54,58 +54,63 @@
        FROM (
            SELECT
                ROW_NUMBER() OVER(ORDER BY A.${ag}) AS NUM,
-               A.*,c.category
+               A.*,c.CATEGORY
            FROM
-               item A join category2 c WHERE A.category2_seq=c.seq and A.title like '%${search}%'
+               ITEM A join CATEGORY2 c WHERE A.CATEGORY2_SEQ=c.SEQ and A.TITLE like '%${search}%'
        )B
        WHERE B.NUM BETWEEN  #{sp} AND #{ep}
        ORDER BY B.NUM;
        
 	</select>
 	<insert id="cartAdd" >
-	insert into cart(MEM_SEQ,item_seq,cnt,option_seq) values(#{userid},#{seq},#{itemCount},#{itemSeq});
+	insert into CART(MEM_SEQ,ITEM_SEQ,CNT,OPTION_SEQ) values(#{userid},#{seq},#{itemCount},#{itemSeq});
        
 	</insert>
 	
 	<select id="cartList" resultType="com.ouroom.web.item.Item">
-	select distinct item_seq from cart where MEM_SEQ =#{userid};
+	select distinct ITEM_SEQ from CART where MEM_SEQ =#{userid};
 	</select>
 	
 	<select id="selectOne" resultType="com.ouroom.web.item.Item">
-	select * from item i join category2 c on i.CATEGORY2_SEQ = c.seq where i.seq=#{item_seq};
+	select * from ITEM i join CATEGORY2 c on i.CATEGORY2_SEQ = c.SEQ where i.SEQ=#{item_seq};
 	</select>
 	
 	<select id="cartOption" resultType="com.ouroom.web.item.Item">
-	select * from cart c join item_option io on c.option_seq = io.seq  join item i on i.seq = c.item_seq where c.item_seq = ${item_seq} and c.mem_seq= #{userid};
+	select * from CART c join ITEM_OPTION io on c.OPTION_SEQ = io.SEQ  join ITEM i on i.SEQ = c.ITEM_SEQ where c.ITEM_SEQ = ${item_seq} and c.MEM_SEQ= #{userid};
 	</select>
 	
 	<delete id="cartDelete">
-	delete from cart where mem_seq = #{mem_seq} and item_seq=#{item_seq};
+	delete from CART where MEM_SEQ = #{mem_seq} and ITEM_SEQ=#{item_seq};
 	</delete>
 	
 	<insert id="purC" >
-	insert into purchase(MEM_SEQ,item_seq,cnt,option_seq) values(#{mem_seq},#{item_seq},#{cnt},#{option_seq});
+	insert into PURCHASE(MEM_SEQ,ITEM_SEQ,CNT,OPTION_SEQ) values(#{mem_seq},#{item_seq},#{cnt},#{option_seq});
 	</insert>
 	
 	<select id="cartAll" resultType="com.ouroom.web.item.Item">
-	select * from cart where mem_seq = #{mem_seq}
+	select * from CART where MEM_SEQ = #{mem_seq}
 	</select>
 	
 	<insert id="itemAdd" >
-	insert into item(title,price,delivery,discount,photo,category2_seq,sum,sale_cnt,store_cnt) values(#{title},#{price},#{delivery},#{discount},#{photo},#{category2},#{sum},0,#{store_cnt});
+	insert into ITEM(TITLE,PRICE,DELIVERY,DISCOUNT,PHOTO,CATEGORY2_SEQ,SUM,SALE_CNT,STORE_CNT) values(#{title},#{price},#{delivery},#{discount},#{photo},#{category2},#{sum},0,#{store_cnt});
 	</insert>
 	
 	<select id="ItemPk" resultType="java.lang.String">
-	select seq from item where title like #{title}
+	select SEQ from ITEM where TITLE like #{title}
 	</select>
 	
 	<insert id="insertOption" >
-	insert into item_option(options,item_seq) values(#{options},#{seq})
+	insert into ITEM_OPTION(OPTIONS,ITEM_SEQ) values(#{options},#{seq})
 	</insert>
 	
 	<insert id="insertItemPost" >
-	insert into item_post(view_cnt,like_cnt,share_cnt,board_seq,item_seq,image,content) values(0,0,0,2,#{seq},#{img},#{content})
+	insert into ITEM_POST(VIEW_CNT,LIKE_CNT,SHARE_CNT,BOARD_SEQ,ITEM_SEQ,IMAGE,CONTENT) values(0,0,0,2,#{seq},#{img},#{content})
 	</insert>
+	
+	
+	<update id="updateItem">
+	update item set sale_cnt=#{cnt}+sale_cnt where seq =#{item_seq};
+	</update>
 	
 	
 	

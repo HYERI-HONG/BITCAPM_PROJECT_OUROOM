@@ -26,21 +26,20 @@ public class FileUtil {
 			if(!dp.exists()){ dp.mkdir(); }
 		}
 	};
-	
 	public Function<String, String> calcPath = p -> {
 		String y,m,d;
 		LocalDateTime ldt = LocalDateTime.now();
-	    y = File.separator+ldt.format(DateTimeFormatter.ofPattern("yyyy"));
-	    m = y + File.separator+ldt.format(DateTimeFormatter.ofPattern("MM"));
-	    d = m + File.separator+ldt.format(DateTimeFormatter.ofPattern("dd"));
-	    String[] a = {y,m,d};
-	    makeDir.accept(p, a);
+		y = File.separator+ldt.format(DateTimeFormatter.ofPattern("yyyy"));
+		m = y + File.separator+ldt.format(DateTimeFormatter.ofPattern("MM"));
+		d = m + File.separator+ldt.format(DateTimeFormatter.ofPattern("dd"));
+		String[] a = {y,m,d};
+		makeDir.accept(p, a);
 		return d;
 	};
 	
 	public BiFunction<MultipartFile, byte[], String> file = (f, b) -> { 
 		this.f = f; sf = b; 
-		sn = UUID.randomUUID().toString() + "_" + f.getOriginalFilename();
+		sn = UUID.randomUUID().toString();
 		return sn;
 	};	
 	
@@ -49,7 +48,6 @@ public class FileUtil {
 		try { FileCopyUtils.copy(sf, new File(p + sp, sn)); } 
 		catch (Exception e) { e.printStackTrace(); }
 		return sn;
-		//f.transferTo(new File(p + sp, sn));
 	};
 	
 	public Consumer<String> delete = p -> new File(p).delete();

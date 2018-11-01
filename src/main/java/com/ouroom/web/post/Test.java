@@ -1,13 +1,12 @@
 package com.ouroom.web.post;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.UUID;
 
 public class Test {
 public void test() {
-	HashMap<String, String> m = new HashMap<String, String>();
-	System.out.println(Util.rpb.apply("2018-10-20"));
-	System.out.println();
+	for(int i=1; i<60; i++) {
+		System.out.println(UUID.randomUUID().toString() + "_post_"+(48+i)+ ".jpg");
+	}
 }
 
     public static void main(String[] args) {

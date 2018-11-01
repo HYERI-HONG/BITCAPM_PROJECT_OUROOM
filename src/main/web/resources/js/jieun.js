@@ -9,7 +9,6 @@ jieun=(()=>{
 
 		}
 		return{detail:detail};
-			
 })();
 
 jieun.detail2={
@@ -75,8 +74,13 @@ jieun.detail2={
 			$('<img/>').attr({src:$.img()+'/jun/'+x.category+'/'+x.photo+'.jpg',id:'je_view1'}).appendTo(je_div_cover).appendTo($('.je_col0'));
 			
 			let p = $('<p style="margin-top: 50px; color:#8080805c"/>').addClass('je_info1').appendTo(je_div_cover_info1);
+<<<<<<< HEAD
 			let a1=$('<a id="gray_a"/>').html('오늘의 집 스토어');
+=======
+			let a1=$('<a id="gray_a"/>').html('니방내방');
+>>>>>>> refs/remotes/origin/master
 			let span1 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
+<<<<<<< HEAD
 			let span2 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
 			let span3 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
 			let span4 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
@@ -84,16 +88,14 @@ jieun.detail2={
 			let a3 = $('<a id="gray_a"/>').html('침실 가구');
 			let a4 = $('<a id="gray_a"/>').html('매트리스');
 			let a5 = $('<a id="gray_a"/>').html('스프링매트리스');
+=======
+			let a2 = $('<a id="gray_a"/>').html('스토어');
+>>>>>>> refs/remotes/origin/master
 			
 			a1.appendTo(p); 
 			span1.appendTo(p);
 			a2.appendTo(p); 
-			span2.appendTo(p);
-			a3.appendTo(p); 
-			span3.appendTo(p);
-			a4.appendTo(p); 
-			span4.appendTo(p);
-			a5.appendTo(p);
+			
 			p.appendTo(je_div_cover_info1);
 			
 			let p1=$('<p/>').addClass('je_cover_title');
@@ -115,8 +117,9 @@ jieun.detail2={
 
 			$('<b style="margin-top: 10px; margin-right :10px"/>').html(d.disc+'%').attr({id:'je_line',class:'je_discount'}).appendTo(p_price);
 			
-			let origin = $('<h6/>').addClass('je_origin_cost').text(d.price);
-			let ins = $('<ins/>').addClass('je_dis_cost').text(d.sum+'원');
+			let origin = $('<h6/>').addClass('je_origin_cost').text(d.price.replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+			let sum_p=(Math.round(d.sum/100))*100;
+			let ins = $('<ins/>').addClass('je_dis_cost').text((sum_p+"").replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원');
 			
 			origin.appendTo(p_price);
 			ins.appendTo(p_price);
@@ -146,7 +149,7 @@ jieun.detail2={
 			let t=1;
 			
 			let sum=0;	
-			let y=parseInt(d.sum);
+			let y=sum_p;
 			
 			$('#je_selectbtn').change(function(){
 					
@@ -156,7 +159,7 @@ jieun.detail2={
 				let x = $("#je_selectbtn option:selected").text();				
 
 				sum=sum+y;
-				$('#je_won').html(sum);	
+				$('#je_won').html((sum+"").replace(/\B(?=(\d{3})+(?!\d))/g, ','));	
 				
 				
 /////
@@ -170,7 +173,7 @@ jieun.detail2={
 				let bold_p=$('<p class="bold col-md-12" style="font-weight:bold; left: 400px; width: 20%;  bottom: 20px;">');
 				let span_left=$('<span id="span_l" style="float:left">').html(x);
 				let no_wrap_p=$('<p style="font-size: 12px; white-space: nowrap; margin-bottom: 10px; height: 10px;">');
-				let span_am=$('<span class="amount" style="float:right"/>').html(y+'원');
+				let span_am=$('<span class="amount" style="float:right"/>').html((y+"").replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원');
 				let remove = $('<span class="remove glyphicon glyphicon-remove" role="button" aria-hidden="false" style="float: right; right: 10px;">');
 				let br=$('<br>');
 
@@ -195,7 +198,7 @@ jieun.detail2={
 				$(this).click(e=>{
 					e.preventDefault();						
 					je_item.show();
-					$('#je_won').html(sum);	
+					$('#je_won').html((sum+"").replace(/\B(?=(\d{3})+(?!\d))/g, ','));	
 					});
 				
 				
@@ -207,7 +210,7 @@ jieun.detail2={
 						count--;
 						$('#je_num_val'+t2).val(count);							
 						sum=sum-y;
-						$('#je_won').html(sum);	
+						$('#je_won').html((sum+"").replace(/\B(?=(\d{3})+(?!\d))/g, ','));	
 						}
 					
 				});
@@ -217,7 +220,7 @@ jieun.detail2={
 						count++;
 						$('#je_num_val'+t2).val(count);
 						sum=sum+y;
-						$('#je_won').html(sum);	
+						$('#je_won').html((sum+"").replace(/\B(?=(\d{3})+(?!\d))/g, ','));	
 						
 						
 				});

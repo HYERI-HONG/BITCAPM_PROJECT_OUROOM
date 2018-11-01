@@ -28,9 +28,7 @@ public class Pagination implements Proxy{
 		this.startPage = 1 + (int) (Math.ceil((pageNo-1)/pageSize)) * pageSize;
 		this.endPage = (totalPage < startPage + pageSize  - 1) ? totalPage : (startPage + pageSize -1);
 		this.beginRow = 1 + ((pageNo-1) * recodeSize);
-		this.endRow = (totalRecode < beginRow + recodeSize - 1) 
-										? totalRecode 
-										: pageNo*(recodeSize);
+		this.endRow = (totalRecode < beginRow + recodeSize - 1) ? totalRecode : pageNo*(recodeSize);
 		this.existPrev = pageNo != 1;
 		this.existNext = pageNo != totalPage;
 		this.prev = startPage!=1 ? pageNo-1 : 0;
