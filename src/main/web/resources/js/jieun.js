@@ -104,8 +104,9 @@ jieun.detail2={
 
 			$('<b style="margin-top: 10px; margin-right :10px"/>').html(d.disc+'%').attr({id:'je_line',class:'je_discount'}).appendTo(p_price);
 			
-			let origin = $('<h6/>').addClass('je_origin_cost').text(d.price);
-			let ins = $('<ins/>').addClass('je_dis_cost').text(d.sum+'원');
+			let origin = $('<h6/>').addClass('je_origin_cost').text(d.price.replace(/\B(?=(\d{3})+(?!\d))/g, ','));
+			let sum_p=(Math.round(d.sum/100))*100;
+			let ins = $('<ins/>').addClass('je_dis_cost').text((sum_p+"").replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원');
 			
 			origin.appendTo(p_price);
 			ins.appendTo(p_price);
@@ -135,7 +136,7 @@ jieun.detail2={
 			let t=1;
 			
 			let sum=0;	
-			let y=parseInt(d.sum);
+			let y=sum_p;
 			
 			$('#je_selectbtn').change(function(){
 					
@@ -145,7 +146,7 @@ jieun.detail2={
 				let x = $("#je_selectbtn option:selected").text();				
 
 				sum=sum+y;
-				$('#je_won').html(sum);	
+				$('#je_won').html((sum+"").replace(/\B(?=(\d{3})+(?!\d))/g, ','));	
 				
 				
 /////
@@ -159,7 +160,7 @@ jieun.detail2={
 				let bold_p=$('<p class="bold col-md-12" style="font-weight:bold; left: 400px; width: 20%;  bottom: 20px;">');
 				let span_left=$('<span id="span_l" style="float:left">').html(x);
 				let no_wrap_p=$('<p style="font-size: 12px; white-space: nowrap; margin-bottom: 10px; height: 10px;">');
-				let span_am=$('<span class="amount" style="float:right"/>').html(y+'원');
+				let span_am=$('<span class="amount" style="float:right"/>').html((y+"").replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원');
 				let remove = $('<span class="remove glyphicon glyphicon-remove" role="button" aria-hidden="false" style="float: right; right: 10px;">');
 				let br=$('<br>');
 
@@ -184,7 +185,7 @@ jieun.detail2={
 				$(this).click(e=>{
 					e.preventDefault();						
 					je_item.show();
-					$('#je_won').html(sum);	
+					$('#je_won').html((sum+"").replace(/\B(?=(\d{3})+(?!\d))/g, ','));	
 					});
 				
 				
@@ -196,7 +197,7 @@ jieun.detail2={
 						count--;
 						$('#je_num_val'+t2).val(count);							
 						sum=sum-y;
-						$('#je_won').html(sum);	
+						$('#je_won').html((sum+"").replace(/\B(?=(\d{3})+(?!\d))/g, ','));	
 						}
 					
 				});
@@ -206,7 +207,7 @@ jieun.detail2={
 						count++;
 						$('#je_num_val'+t2).val(count);
 						sum=sum+y;
-						$('#je_won').html(sum);	
+						$('#je_won').html((sum+"").replace(/\B(?=(\d{3})+(?!\d))/g, ','));	
 						
 						
 				});
