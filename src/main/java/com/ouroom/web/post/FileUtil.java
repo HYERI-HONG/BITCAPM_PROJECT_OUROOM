@@ -26,7 +26,6 @@ public class FileUtil {
 			if(!dp.exists()){ dp.mkdir(); }
 		}
 	};
-	
 	public Function<String, String> calcPath = p -> {
 		String y,m,d;
 		LocalDateTime ldt = LocalDateTime.now();
