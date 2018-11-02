@@ -60,6 +60,7 @@ public class PostController {
 		m.put("endRow", page.getEndRow());
 		m.put("list", pm.postList(m));
 		m.put("page", page.getTotalPage());
+		m.put("pageNo", page.getPageNo()+1);
 		m.remove("beginRow");
 		m.remove("endRow");
 		return m;
@@ -183,15 +184,14 @@ public class PostController {
 		return pm.hashTagSearch();
 	}
 	
-	@PostMapping("/imageTags")
-	public  String imageTag(@RequestBody Map<?, ?> p) {
-		m = new HashMap<>();
-		tx.imageTag(p);
+	@PostMapping("/imgTags")
+	public  String imgTag(@RequestBody Map<?, ?> p) {
+		tx.imgTag(p);
 		return Util.cs.apply(p.get("seq"));
 	}
 	
-	@GetMapping("/imageTags/search")
-	public  List<?> imageTagSearch() {
+	@GetMapping("/imgTags/search")
+	public  List<?> imgTagSearch() {
 		return pm.imgTagSearch();
 	}
 	

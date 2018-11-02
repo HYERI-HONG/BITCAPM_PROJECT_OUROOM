@@ -144,7 +144,7 @@
 		WHERE SEQ=#{seq}
 	</update>
 	<delete id="imgTagDelete" parameterType= "map">
-		DELETE FROM IMGTAG SEQ LIKE #{seq}
+		DELETE FROM IMGTAG WHERE SEQ LIKE #{seq}
 	</delete>
 	
 	<insert id="commentInsert" parameterType= "map">

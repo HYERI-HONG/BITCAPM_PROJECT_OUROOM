@@ -18,7 +18,7 @@ public class TransactionService {
 	@Transactional
 	public String postInseart(Map<?, ?> p) {
 		int i;
-		m.clear();
+		m = new HashMap<>();
 		pm.postInsert(p);
 		m = (Map<String, Object>) pm.postRetrieve(p);
 		i = (int) m.get("seq");
@@ -35,7 +35,7 @@ public class TransactionService {
 	@Transactional
 	public Map<?, ?> postDetail(String seq){
 		PageProxy pxy = new PageProxy();
-		m.clear();
+		m = new HashMap<>();
 		m.put("seq", Util.ci.apply(seq));
 		Map<String, Object> a = (Map<String, Object>) pm.postRetrieve(m);
 		a.put("viewCnt", (int) a.get("viewCnt")+1);
@@ -63,7 +63,7 @@ public class TransactionService {
 	
 	@Transactional
 	public void postUpdate(Map<?, ?> p){
-		m.clear();
+		m = new HashMap<>();
 		pm.postUpdate(p);
 		pm.hashTagDelete(p);
 		if(p.get("keyword")!=null && !Util.cv.test(Util.cs.apply(p.get("keyword")), "")) {
@@ -77,8 +77,8 @@ public class TransactionService {
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public void imageTag(Map<?, ?> p) {
-		m.clear();
+	public void imgTag(Map<?, ?> p) {
+		m = new HashMap<>();
 		m.put("seq", p.get("seq"));
 		for(String s : (List<String>) p.get("item")) {
 			m.put("itemTitle", s.split(",")[0]);
@@ -100,7 +100,7 @@ public class TransactionService {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public Map<?,?> like(Map<?, ?> p) {
-		m.clear();
+		m = new HashMap<>();
 		Map<String, Object> a = new HashMap<>();
 		a.put("seq", p.get("seq"));
 		String s = Util.cs.apply(p.get("seq"));
