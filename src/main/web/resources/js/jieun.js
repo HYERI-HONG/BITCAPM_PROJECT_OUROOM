@@ -148,7 +148,7 @@ jieun.detail2={
 				$('#je_won').html((sum+"").replace(/\B(?=(\d{3})+(?!\d))/g, ','));	
 				
 				
-/////
+
 				let minus=$('<span id="je_minus'+t2+ '" class="minus glyphicon glyphicon-minus" role="button" style="margin-right: 3px;"/>');
 				let amount=$('<div class="amount"/>');
 				let plus=$('<span id="je_plus'+t2+ '" class="plus glyphicon glyphicon-plus" role="button" style="margin-left: 10px;"/>');
