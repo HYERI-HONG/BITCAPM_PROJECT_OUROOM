@@ -248,7 +248,11 @@ hyeri.page={
 								$('<div/>').addClass('h_menu_item_wrap').append(
 									$('<div/>').addClass('h_menu_item_img_wrap').append(
 										$('<img/>').addClass('h_menu_item_img').attr({src:$.img()+'/jun/'+j.category+'/'+j.photo+'.jpg'}).click(e=>{
-											alert("스토어 사진 클릭");
+											e.preventDefault();
+							                $('#footer').remove();
+											$.getScript($.script()+'/jieun.js',()=>{
+												jieun.detail(j);
+											})
 										})
 									),
 									$('<div/>').addClass('h_menu_item_content_wrap').append(
@@ -277,7 +281,11 @@ hyeri.page={
 						$('<div/>').addClass('h_menu_item_wrap').append(
 							$('<div/>').addClass('h_menu_item_img_wrap').append(
 								$('<img/>').addClass('h_menu_item_img').attr({src:$.img()+'/jun/'+j.category+'/'+j.photo+'.jpg'}).click(e=>{
-									alert("스토어 사진 클릭");
+									e.preventDefault();
+					                $('#footer').remove();
+									$.getScript($.script()+'/jieun.js',()=>{
+										jieun.detail(j);
+									})
 								})
 							),
 							
