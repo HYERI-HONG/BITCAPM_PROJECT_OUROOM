@@ -42,7 +42,7 @@
                ROW_NUMBER() OVER(ORDER BY A.${ag}) AS NUM,
                A.*,c.CATEGORY
            FROM
-               item A join CATEGORY2 c WHERE A.CATEGORY2_SEQ=c.SEQ and A.CATEGORY2_SEQ= #{category}
+               ITEM A join CATEGORY2 c WHERE A.CATEGORY2_SEQ=c.SEQ and A.CATEGORY2_SEQ= #{category}
        )B
        WHERE B.NUM BETWEEN  #{sp} AND #{ep}
        ORDER BY B.NUM;
@@ -109,7 +109,7 @@
 	
 	
 	<update id="updateItem">
-	update item set sale_cnt=#{cnt}+sale_cnt where seq =#{item_seq};
+	update ITEM set SALE_CNT=#{cnt}+SALE_CNT where SEQ =#{item_seq};
 	</update>
 	
 	

@@ -30,14 +30,12 @@ public class HomeCtrl {
 	}
 	@GetMapping(value="/home/clist")
 	public @ResponseBody Map<String, Object> clist(){
-		logger.info("======== HomeController ::: clist() =======");
 		m.clear();
 		m.put("list", hmapper.cList());
 		return m;
 	}
 	@GetMapping(value="/home/slist/{category}")
 	public @ResponseBody Map<String, Object> slist(@PathVariable String category){
-		logger.info("======== HomeController ::: slist() =======");
 		m.clear();
 		m.put("category", category);
 		m.put("list", hmapper.sList(m));

@@ -83,7 +83,7 @@ public class ItemController {
 		FileCopyUtils.copy(filedata, target);
 		
 		seq.put("photo",seq.get("photo").split("\\.")[0]);
-		seq.put("store_cnt", ((int)Math.random()*10+1)+"");
+		seq.put("store_cnt", ((int)(Math.random()*10+1))+"");
 		
 		itmp.itemAdd(seq);
 		seq.put("seq",itmp.ItemPk(seq.get("title")));
@@ -92,7 +92,7 @@ public class ItemController {
 			seq.put("options",option[i]);
 			itmp.insertOption(seq);
 		}
-		seq.put("img", ((int)Math.random()*5+1)+"_1");
+		seq.put("img", ((int)(Math.random()*5))+"_1");
 		itmp.insertItemPost(seq);
 	}
 	@RequestMapping("/cart/add")

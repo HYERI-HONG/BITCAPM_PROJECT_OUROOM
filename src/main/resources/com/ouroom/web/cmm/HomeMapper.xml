@@ -19,20 +19,20 @@
 
 	<select id="cList" resultMap="mainResultMap">
 		SELECT P.SEQ,P.IMAGE,P.LAST_UPDATE,M.NICKNAME,M.PROFILE
-		FROM post P
+		FROM POST P
 		JOIN MEMBER M
 		ON P.MEM_SEQ LIKE M.SEQ
-		ORDER BY P.SEQ
+		ORDER BY P.LIKE_CNT DESC
 		LIMIT 8;
 	</select>
 	<select id="sList" resultMap="mainResultMap">
 		SELECT I.SEQ, I.TITLE,I.SUM,I.DISCOUNT,I.PHOTO,C.CATEGORY
-		FROM item I
+		FROM ITEM I
 		JOIN CATEGORY2 C
 		ON I.CATEGORY2_SEQ LIKE C.SEQ
 		<where>
 	 		<if test="category!='전체'">
-	 		C.CATEGORY1_SEQ LIKE (SELECT SEQ FROM category1 WHERE CATEGORY LIKE #{category})
+	 		C.CATEGORY1_SEQ LIKE (SELECT SEQ FROM CATEGORY1 WHERE CATEGORY LIKE #{category})
 	 		</if>
 	 	</where>
 		ORDER BY SALE_CNT DESC LIMIT 6;

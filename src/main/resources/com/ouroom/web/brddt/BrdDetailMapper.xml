@@ -12,7 +12,7 @@
 </select>
 
 <select id="item_opt" resultType="com.ouroom.web.item.Item">
-	SELECT * FROM item_option
+	SELECT * FROM ITEM_OPTION
 	WHERE ITEM_SEQ LIKE #{seq};
 </select>
 <select id="review" resultType="com.ouroom.web.brddt.Review">
@@ -20,10 +20,10 @@
 	  SELECT *
        FROM (
            SELECT
-               ROW_NUMBER() OVER(ORDER BY A.seq desc) AS NUM,
+               ROW_NUMBER() OVER(ORDER BY A.SEQ DESC) AS NUM,
                A.*
            FROM
-               review A
+               REVIEW A
        )B
        WHERE B.NUM BETWEEN  #{beginRow} AND #{endRow}
        ORDER BY B.NUM;

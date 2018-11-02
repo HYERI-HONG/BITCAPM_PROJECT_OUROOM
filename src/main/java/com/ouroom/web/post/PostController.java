@@ -58,8 +58,9 @@ public class PostController {
 		m.clear();
 		m.put("beginRow", page.getBeginRow());
 		m.put("endRow", page.getEndRow());
-		m.put("list", pm.postList(m));
 		m.put("page", page.getTotalPage());
+		m.put("pageNo", page.getPageNo()+1);
+		m.put("list", pm.postList(m));
 		m.remove("beginRow");
 		m.remove("endRow");
 		return m;
@@ -79,8 +80,9 @@ public class PostController {
 		m.put("beginRow", page.getBeginRow());
 		m.put("endRow", page.getEndRow());
 		m.put("keyword", query);
-		m.put("list", pm.postHashTagSearch(m));
 		m.put("page", page.getTotalPage());
+		m.put("pageNo", page.getPageNo()+1);
+		m.put("list", pm.postHashTagSearch(m));
 		m.remove("beginRow");
 		m.remove("endRow");
 		return m;
@@ -102,8 +104,11 @@ public class PostController {
 		page = pxy.getPagination();
 		a.put("beginRow", page.getBeginRow());
 		a.put("endRow", page.getEndRow());
-		m.put("list", pm.postSearch(a));
 		m.put("page", page.getTotalPage());
+		m.put("pageNo", page.getPageNo()+1);
+		m.put("list", pm.postSearch(a));
+		m.remove("beginRow");
+		m.remove("endRow");
 		return m;
 	}
 	
@@ -183,15 +188,14 @@ public class PostController {
 		return pm.hashTagSearch();
 	}
 	
-	@PostMapping("/imageTags")
-	public  String imageTag(@RequestBody Map<?, ?> p) {
-		m = new HashMap<>();
-		tx.imageTag(p);
+	@PostMapping("/imgTags")
+	public  String imgTag(@RequestBody Map<?, ?> p) {
+		tx.imgTag(p);
 		return Util.cs.apply(p.get("seq"));
 	}
 	
-	@GetMapping("/imageTags/search")
-	public  List<?> imageTagSearch() {
+	@GetMapping("/imgTags/search")
+	public  List<?> imgTagSearch() {
 		return pm.imgTagSearch();
 	}
 	

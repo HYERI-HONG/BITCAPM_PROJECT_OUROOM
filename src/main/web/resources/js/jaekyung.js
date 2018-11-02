@@ -34,7 +34,7 @@ jaekyung.service={
               nav:()=>{
             	  	 let d=$('<article />');
                      let u=$('<ul />');
-                     let ip=[{lst:'요약',id:'smmryu'},{lst:'연령별',id:'sbaryu'},{lst:'시간별방문자',id:'vbtryu'},{lst:'카테고리별',id:'ctgr1ryu'},{lst:'방문자',id:'vstryu'},{lst:'가입자',id:'mbrryu'},{lst:'구매액',id:'abbaryu'}];
+                     let ip=[{lst:'요약',id:'smmryu'},{lst:'연령별',id:'sbaryu'},{lst:'해시태그',id:'vbtryu'},{lst:'카테고리별',id:'ctgr1ryu'},{lst:'방문자',id:'vstryu'},{lst:'가입자',id:'mbrryu'},{lst:'구매액',id:'abbaryu'}];
                      d.addClass("container");
                      $('<nav />').attr({id:"navc__st",style:"position: fixed; max-width:1140px"})
                      	.append(
@@ -52,12 +52,12 @@ jaekyung.service={
                      });
                      let link = $('li.scrollS__ryu a');
             	     link.click(e=>{
+            	         e.preventDefault();
             	         let target = $($(this).attr('href')); 
             	         $('html, body').animate({
             	             scrollTop: target.offset().top
             	         },800);
             	         $(this).addClass('active');
-            	         e.preventDefault();
             	     });
             	     $(window).scroll(()=>{
                          findPosition();
@@ -81,7 +81,7 @@ jaekyung.service={
                     		 hasScrolled(); 
                     		 didScroll = false; 
                     		 } 
-                     }, 100);
+                     }, 200);
                      function hasScrolled(){
 		            	 var st = $(document).scrollTop(); 
 		                 if(Math.abs(lastScrollTop - st) <= delta) return;
@@ -391,7 +391,7 @@ jaekyung.chart={
 		},
 		smm : () =>{
 			let today = new Date();
-			let dd = today.getDate()+1;
+			let dd = today.getDate();
 			let ddn = dd-7;
 			let mm = today.getMonth()+1; // 10월이라 +1인데 11월 가상 설정
 			let mmn = mm;
