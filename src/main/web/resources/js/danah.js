@@ -176,6 +176,7 @@ danah.s = (() => {
                 u = a.page,
                 k = a.list;
             $ctt.html(p);
+            $('html, body').scrollTop(0);
             p.append(danah.c.article({ c: 'd_row' })
                 .append(danah.c.section({ c: 'd_col_12 d_col_lg_8' })
                     .append($('<header/>')
@@ -463,8 +464,8 @@ danah.s = (() => {
                             danah.c.button({ c: 'd_comment_feed_item_footer_delete_btn' }).text('삭제')
                             .click(a => {
                                 if (confirm('삭제하시겠습니까?')) {
-                                    $.toast($('<h4/>').text('삭제하였습니다.'), { type: 'success',duration: 2000 });
                                     $.getJSON($ctx + '/comments/delete/' + this.postSeq + '/' + this.seq, n => {
+                                    	$.toast($('<h4/>').text('삭제하였습니다.'), { type: 'success',duration: 2000 });
                                         $('#d_comment_feed_list').remove();
                                         $('#d_list_paginator').remove();
                                         $('#d_comment_feed').append(c(n.comment), cp({ j: n.seq, e: n.page }));
@@ -566,7 +567,7 @@ danah.lt = (() => {
             danah.c.div({ c: 'd_container', i: 'd_post_list' }).append(danah.c.div({ c: 'd_row', i: 'd_row', s: 'margin-top:20px' })).appendTo(p);
             $.cookie('userid') == undefined ? ui({ j: a }) : ll(a);
             $(window).off().scroll(function(e) {
-                if ($('#d_post_list').length > 0 && $(this).scrollTop() >= $(document).height() - $(this).height()) {
+                if (a.page > g && $('#d_post_list').length > 0 && $(this).scrollTop() >= $(document).height() - $(this).height()) {
                     j++;
                     $('#d_row').append($.getJSON($ctx + '/posts/list/' + j, n => { $.cookie('userid') == undefined ? ui({ j: n }) : ll(n); }));
                 }
@@ -582,7 +583,7 @@ danah.lt = (() => {
             $.cookie('userid') == undefined ? ui({ j: a }) : ll(a);
             $('figcaption').remove();
             $(window).off().scroll(function() {
-                if (a.page > j && $('#d_post_search').length > 0 && $(this).scrollTop() >= $(document).height() - $(this).height()) {
+                if (a.page > g && $('#d_post_search').length > 0 && $(this).scrollTop() >= $(document).height() - $(this).height()) {
                     j++;
                     $('#d_row').append($.getJSON($ctx + '/posts/hashTagSearch/' + d + '/' + j, n => {
                         $.cookie('userid') == undefined ? ui({ j: n }) : ll(n);
@@ -594,8 +595,7 @@ danah.lt = (() => {
         });
     };
     let f = d => {
-        let p = danah.c.div({ c: 'd_filter_wrap' }),
-            j = 1;
+        let p = danah.c.div({ c: 'd_filter_wrap' });
         p.append(danah.c.nav({ c: 'd_filter d_filter_depth_1', u: 'd_container' }), danah.c.nav({ c: 'd_filter d_filter_depth_2 d_filter_hidden', u: 'd_container' }));
         $.each([{ k: '정렬', v: '최신순' }, { k: '공간', v: '모든공간' }, { k: '평수', v: '모든평수' }, { k: '제품정보', v: '모두' }], (i, v) => {
             danah.c.li({ c: 'd_filter_item' })
@@ -609,42 +609,43 @@ danah.lt = (() => {
                 .appendTo(p.find('.d_container:first'))
                 .click(d => {
                     d.preventDefault();
-                    let e = $('.d_filter_item'),
-                        o = $('.d_filter_item_btn_search_icon'),
-                        g = p.children(':last');
-                    if (e.eq(i).hasClass('d_filter_item_active')) {
-                        e.removeClass('d_filter_item_active')
-                        o.attr('style', 'margin-left:7px;transform-origin:center 7px;transition:transform .2s linear;transform:rotate(0deg);background-position-x:-40px;background-position-y:-0px;width:12px;height:12px');
-                        g.addClass('d_filter_hidden');
+                    let j = $('.d_filter_item'),
+                        e = $('.d_filter_item_btn_search_icon'),
+                        o = p.children(':last');
+                    if (j.eq(i).hasClass('d_filter_item_active')) {
+                        j.removeClass('d_filter_item_active')
+                        e.attr('style', 'margin-left:7px;transform-origin:center 7px;transition:transform .2s linear;transform:rotate(0deg);background-position-x:-40px;background-position-y:-0px;width:12px;height:12px');
+                        o.addClass('d_filter_hidden');
                     } else {
-                        e.removeClass('d_filter_item_active')
-                        e.eq(i).addClass('d_filter_item_active');
-                        o.attr('style', 'margin-left:7px;transform-origin:center 7px;transition:transform .2s linear;transform:rotate(0deg);background-position-x:-40px;background-position-y:-0px;width:12px;height:12px');
-                        o.eq(i).attr('style', 'margin-left: 7px; transform-origin: center 7px 0px; transition: transform 0.2s linear 0s; transform: rotate(-180deg); background-position: -40px 0px; width: 12px; height: 12px;');
-                        g.removeClass('d_filter_hidden');
+                        j.removeClass('d_filter_item_active')
+                        j.eq(i).addClass('d_filter_item_active');
+                        e.attr('style', 'margin-left:7px;transform-origin:center 7px;transition:transform .2s linear;transform:rotate(0deg);background-position-x:-40px;background-position-y:-0px;width:12px;height:12px');
+                        e.eq(i).attr('style', 'margin-left: 7px; transform-origin: center 7px 0px; transition: transform 0.2s linear 0s; transform: rotate(-180deg); background-position: -40px 0px; width: 12px; height: 12px;');
+                        o.removeClass('d_filter_hidden');
                         p.find('.d_container:last').html('');
                         $.each((i == 0 ? ['최신순', '인기순', '베스트'] : i == 1 ? ['모든공간', '원룸', '거실', '침실', '주방', '욕실', '베란다'] : i == 2 ? ['모든평수', '10평 미만', '10평대', '20평대', '30평대', '40평대 이상'] : ['모두', '정보있는사진만']), function() {
                             danah.c.li({ c: 'd_filter_item' })
-                                .addClass(e.eq(i).find('.d_filter_item_btn_search_val').text() === this ? 'd_filter_item_active' : '')
+                                .addClass(j.eq(i).find('.d_filter_item_btn_search_val').text() === this ? 'd_filter_item_active' : '')
                                 .append(danah.c.a({ c: 'd_filter_item_btn', t: this }))
                                 .appendTo(p.find('.d_container:last'))
                                 .click(function() {
-                                    let u = [];
-                                    e.eq(i).find('.d_filter_item_btn_search_val').text($(this).text());
-                                    e.removeClass('d_filter_item_active')
-                                    o.attr('style', 'margin-left:7px;transform-origin:center 7px;transition:transform .2s linear;transform:rotate(0deg);background-position-x:-40px;background-position-y:-0px;width:12px;height:12px');
-                                    g.addClass('d_filter_hidden');
+                                	let g = 1, u = [];
+                                    j.eq(i).find('.d_filter_item_btn_search_val').text($(this).text());
+                                    j.removeClass('d_filter_item_active')
+                                    e.attr('style', 'margin-left:7px;transform-origin:center 7px;transition:transform .2s linear;transform:rotate(0deg);background-position-x:-40px;background-position-y:-0px;width:12px;height:12px');
+                                    o.addClass('d_filter_hidden');
                                     $.each($('.d_filter_item_btn_search_val'), function() { u.push($(this).text()); });
-                                    $.getJSON($ctx + '/posts/search/' + u + '/' + j, a => {
-                                        if (a != null || a.list.length != 0) {
+                                    $.getJSON($ctx + '/posts/search/' + u + '/' + g, a => {
+                                        if (a.list.length != 0 && a != null) {
                                             $('#d_row').html('');
                                             $.cookie('userid') == undefined ? ui({ j: a }) : ll(a);
                                             $(window).off().scroll(function() {
-                                                if (a.page > u && $('#d_post_list').length > 0 && $(this).scrollTop() >= $(document).height() - $(this).height()) {
-                                                    u++;
-                                                    $('#d_row').append($.getJSON($ctx + '/posts/search/' + u + '/' + j, n => { $.cookie('userid') == undefined ? ui({ j: n }) : ll(n); }));
+                                                if (a.page > g && $(this).scrollTop() >= $(document).height() - $(this).height()) {
+                                                    g++;
+                                                    $('#d_row').append($.getJSON($ctx + '/posts/search/' + u + '/' + g, n => { $.cookie('userid') == undefined ? ui({ j: n }) : ll(n); }));
                                                 }
                                             });
+                                            danah.u.tb();
                                         } else {
                                             $.toast($('<h4/>').text('검색 결과가 없습니다.'), { type: 'info', duration: 2000 });
                                             danah.lt.l();

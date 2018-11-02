@@ -53,7 +53,7 @@
 			WHERE h.KEYWORD like #{keyword}
 			GROUP BY p.SEQ
 		) A
-		LEFT JOIN comment c ON A.SEQ LIKE c.POST_SEQ
+		LEFT JOIN COMMENT c ON A.SEQ LIKE c.POST_SEQ
 		<where><if test=" beginRow != null and beginRow != '' ">A.No BETWEEN #{beginRow} AND #{endRow}</if></where>
 		GROUP BY A.seq
 		ORDER BY A.No
