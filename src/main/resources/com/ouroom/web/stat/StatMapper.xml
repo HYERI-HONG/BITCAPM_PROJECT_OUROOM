@@ -51,181 +51,183 @@
 	</resultMap>
 
 	<select id="drawsvlc" resultMap="statbigbean">
-		 SELECT visit_date AS visitDate , COUNT(*) AS count FROM visitor 
-		 WHERE visit_date BETWEEN #{stDSmm} AND  #{enDSmm}
-		 GROUP BY visit_date ;
+		 SELECT VISIT_DATE AS visitDate , COUNT(*) AS count FROM VISITOR 
+		 WHERE VISIT_DATE BETWEEN #{stDSmm} AND  #{enDSmm}
+		 GROUP BY VISIT_DATE
 	</select>
 	<select id="drawsvcc" resultMap="statbigbean">
-		 SELECT a.purchase_date AS smmDate, sum(b.sum * a.cnt) AS smmSale
-				FROM item b
-					JOIN (SELECT item_seq , SUM(cnt) cnt, purchase_date
-						FROM purchase
-						WHERE purchase_date between #{stDSmm} and #{enDSmm}
-						GROUP BY item_seq, purchase_date) a
-					ON b.seq = a.item_seq
-				GROUP BY a.purchase_date;
+		 SELECT a.PURCHASE_DATE AS smmDate, SUM(b.SUM * a.CNT) AS smmSale
+				FROM ITEM b
+					JOIN (SELECT ITEM_SEQ , SUM(CNT) CNT, PURCHASE_DATE
+						FROM PURCHASE
+						WHERE PURCHASE_DATE between #{stDSmm} and #{enDSmm}
+						GROUP BY ITEM_SEQ, PURCHASE_DATE) a
+					ON b.SEQ = a.ITEM_SEQ
+				GROUP BY a.PURCHASE_DATE
 	</select>
 	<select id="totalPostPerDay" resultMap="statbigbean">
-		    SELECT SUM(view_cnt) AS postCount 
-		    FROM post  
-		    WHERE regi_date LIKE #{postStartDate} 
-			GROUP BY regi_date ;
+		     SELECT SUM(VIEW_CNT) AS postCount 
+		    FROM POST  
+		    WHERE REGI_DATE LIKE #{postStartDate} 
+			GROUP BY REGI_DATE
 	</select>
 	<select id="totalPostPerDayBefore" resultMap="statbigbean">
-		    SELECT SUM(view_cnt) AS postBeforeCount 
-		    FROM post  
-		    WHERE regi_date LIKE #{postStartDateBefore} 
-			GROUP BY regi_date ;
+		    SELECT SUM(VIEW_CNT) AS postBeforeCount 
+		    FROM POST  
+		    WHERE REGI_DATE LIKE #{postStartDateBefore} 
+			GROUP BY REGI_DATE ;
 	</select>
 	<select id="totalJoinPerDay" resultMap="statbigbean">
-		    SELECT COUNT(join_date) AS joinCount 
-		    FROM member 
-		    WHERE join_date LIKE #{joinStartDate} 
-		    GROUP BY join_date;
+		     SELECT COUNT(JOIN_DATE) AS joinCount 
+		    FROM MEMBER 
+		    WHERE JOIN_DATE LIKE #{joinStartDate} 
+		    GROUP BY JOIN_DATE;
 	</select>
 	<select id="totalJoinPerDayBefore" resultMap="statbigbean">
-		    SELECT COUNT(join_date) AS joinBeforeCount 
-		    FROM member 
-		    WHERE join_date LIKE #{joinStartDateBefore} 
-		    GROUP BY join_date;
+		    SELECT COUNT(JOIN_DATE) AS joinBeforeCount 
+		    FROM MEMBER 
+		    WHERE JOIN_DATE LIKE #{joinStartDateBefore} 
+		    GROUP BY JOIN_DATE;
 	</select>
 	<select id="totalSalePerDay" resultMap="statbigbean">
-			SELECT sum(cnt) totalSalePerDay 
-			FROM purchase 
-			WHERE purchase_date LIKE #{selectDSmm} 
+			SELECT SUM(CNT) totalSalePerDay 
+			FROM PURCHASE 
+			WHERE PURCHASE_DATE LIKE #{selectDSmm} 
 	</select>
 	<select id="bestSellerPerDay" resultMap="statbigbean">
-			SELECT d.CATEGORY_KR AS categorysOfBestSeller, SUM(c.summ) AS sumOfBestSeller
-			FROM category2 d
+			SELECT d.CATEGORY_KR AS categorysOfBestSeller, SUM(c.SUMM) AS sumOfBestSeller
+			FROM CATEGORY2 d
 				join (
 						SELECT a.ITEM_SEQ ITEM_SEQ
 							, b.CATEGORY2_SEQ CATEGORY2_SEQ
-							, a.purchase_date purchase_date
-							, a.summ summ
-		    			FROM item b
+							, a.PURCHASE_DATE PURCHASE_DATE
+							, a.SUMM SUMM
+		    			FROM ITEM b
 		    			join (
 		    					SELECT ITEM_SEQ
-		    						, sum(cnt) summ
+		    						, SUM(CNT) SUMM
 		    						, PURCHASE_DATE
-			          			FROM purchase 
-			          			WHERE purchase_date like #{selectDSmm} 
-			          			GROUP BY item_seq, purchase_date
+			          			FROM PURCHASE 
+			          			WHERE PURCHASE_DATE like '2018-11-03' 
+			          			GROUP BY ITEM_SEQ
 		          			) a
-			          	on a.ITEM_SEQ = b.seq
+			          	on a.ITEM_SEQ = b.SEQ
 			          	) c
 			     on d.SEQ LIKE c.CATEGORY2_SEQ
 			GROUP BY d.SEQ
-			ORDER BY summ desc
+			ORDER BY sumOfBestSeller desc
 			LIMIT 5
 	</select>
 	<select id="getGenderratio" resultMap="statbigbean">
-			  SELECT gender genderRatioG ,count(*) genderRatioC 
-				FROM member
+			  SELECT GENDER genderRatioG ,COUNT(*) genderRatioC 
+				FROM MEMBER
      			 group by GENDER;
 	</select>
 	
 	<select id="drawvstac" resultMap="statbigbean">
-			select  b.cc AS totalVisitor, c.cc AS memberVisitor, a.VISIT_DATE AS visitDate
-			FROM visitor a
-			  JOIN (SELECT count(*) AS cc, VISIT_DATE
-			        FROM visitor
-			        WHERE VISIT_DATE BETWEEN #{stDVst} AND #{enDVst} group by VISIT_DATE)b
-			    ON a.VISIT_DATE LIKE b.VISIT_DATE
-			  JOIN (SELECT count(*) AS cc, VISIT_DATE
-			        FROM visitor
+			SELECT  b.CC AS totalVisitor, c.CC AS memberVisitor, a.VISIT_DATE AS visitDate
+			FROM VISITOR a
+			  JOIN (SELECT COUNT(*) AS CC, VISIT_DATE
+			        FROM VISITOR
 			        WHERE VISIT_DATE BETWEEN #{stDVst} AND #{enDVst}
-			        	 AND MEM_VALI LIKE 1 group by VISIT_DATE)c
+              GROUP BY VISIT_DATE)b
+			    ON a.VISIT_DATE LIKE b.VISIT_DATE
+			  JOIN (SELECT COUNT(*) AS CC, VISIT_DATE
+			        FROM VISITOR
+			        WHERE VISIT_DATE BETWEEN #{stDVst} AND #{enDVst}
+			        	 AND MEM_VALI LIKE 1 GROUP BY VISIT_DATE)c
 			    ON a.VISIT_DATE LIKE c.VISIT_DATE
-			group by a.VISIT_DATE
+			GROUP BY a.VISIT_DATE
 	</select>
 	<select id="extrvstt" resultMap="statbigbean">
-		select * from v_totalvisitorcount where date between #{stDVst} and #{enDVst}
+		SELECT * FROM V_TOTALVISITORCOUNT 
+		WHERE DATE BETWEEN #{stDVst} AND #{enDVst}
 	</select>
 	
 	
 	<select id="drawsbalc" resultMap="statbigbean">
-			select  sum
-					,10sc AS teen
-					,20sc AS twen
-					,30sc AS thir
-					,40sc AS fort
-					,50sc AS fift 	
-			 from v_gazuaAll_ryu
-			 WHERE 20sc IS NOT NULL;
+			SELECT  SUM sum
+					,10SC AS teen
+					,20SC AS twen
+					,30SC AS thir
+					,40SC AS fort
+					,50SC AS fift 	
+			 FROM V_GAZUAALL_RYU
+			 WHERE 20SC IS NOT NULL;
 	</select>
 
 
 	<select id="drawctgrtco" resultMap="statbigbean">
-		SELECT e.title title
-		      ,e.ctgr2Kor ctgr2Kor
-		      ,e.sales sales
-		FROM (SELECT c.title title 
-		            ,d.CATEGORY_KR ctgr2Kor
-		            ,(c.price *c.count) sales 
+		SELECT e.TITLE title
+		      ,e.CTGR2KOR ctgr2Kor
+		      ,e.SALES sales
+		FROM (SELECT c.TITLE TITLE 
+		            ,d.CATEGORY_KR CTGR2KOR
+		            ,(c.PRICE *c.COUNT) SALES 
 		            ,d.CATEGORY1_SEQ ctgr1 
-		      FROM (SELECT b.seq seq
-		                  ,b.title title
-		                  ,b.CATEGORY2_SEQ ctgr2 
-		                  ,a.sum count
-		                  ,a.pd pd 
-		                  ,b.PRICE price
-		            FROM item b
+		      FROM (SELECT b.SEQ SEQ
+		                  ,b.TITLE TITLE
+		                  ,b.CATEGORY2_SEQ CTGR2 
+		                  ,a.SUM COUNT
+		                  ,a.PD PD 
+		                  ,b.PRICE PRICE
+		            FROM ITEM b
 		              JOIN (
-		                    SELECT item_seq 
-		                          ,sum(cnt) sum 
-		                          ,purchase_date pd
-		                    FROM purchase
-		                    WHERE purchase_date BETWEEN #{stDCtgr} AND #{enDCtgr}
+		                    SELECT ITEM_SEQ 
+		                          ,SUM(CNT) SUM 
+		                          ,PURCHASE_DATE PD
+		                    FROM PURCHASE
+		                    WHERE PURCHASE_DATE BETWEEN #{stDCtgr} AND #{enDCtgr}
 		                    GROUP BY ITEM_SEQ
 		                    ) a
 		                ON b.SEQ LIKE a.ITEM_SEQ
 		             ) c
-		        LEFT JOIN category2 d
-		           ON c.ctgr2 LIKE d.SEQ
+		        LEFT JOIN CATEGORY2 d
+		           ON c.CTGR2 LIKE d.SEQ
 		      )e
-		  LEFT JOIN category1 f
-		    ON e.ctgr1 LIKE f.SEQ
+		  LEFT JOIN CATEGORY1 f
+		    ON e.CTGR1 LIKE f.SEQ
 	</select>
 	<select id="drawctgrtct" resultMap="statbigbean">
-		SELECT category2.CATEGORY_KR  ctgr2
-		      ,category1.CATEGORY ctgr1
-		FROM category2 
-		RIGHT JOIN category1 
-		  ON category1.SEQ = category2.CATEGORY1_SEQ
-		GROUP BY category2.CATEGORY_KR 
-		ORDER BY category2.CATEGORY1_SEQ
+		SELECT CATEGORY2.CATEGORY_KR  ctgr2
+		      ,CATEGORY1.CATEGORY ctgr1
+		FROM CATEGORY2 
+		RIGHT JOIN CATEGORY1 
+		  ON CATEGORY1.SEQ = CATEGORY2.CATEGORY1_SEQ
+		GROUP BY CATEGORY2.CATEGORY_KR 
+		ORDER BY CATEGORY2.CATEGORY1_SEQ
 	</select>
 	
 	
 	<select id="drawmbrpc" resultMap="statbigbean">
-		SELECT ages ages
-				,gendercount gendercount
-		FROM v_mbr_total
+		SELECT AGES ages
+				,GENDERCOUNT gendercount
+		FROM V_MBR_TOTAL
 	</select>
 	<select id="drawmbrbc" resultMap="statbigbean">
-		SELECT ages ages
-				,mancount mancount
-				,womancount womancount
-		FROM v_mbr_manwoman_ryu
+		SELECT AGES ages
+				,MANCOUNT mancount
+				,WOMANCOUNT womancount
+		FROM V_MBR_MANWOMAN_RYU
 	</select>
 	
 	
 	
 	<select id="drawabbasc" resultMap="statbigbean">
-		select age ageabba
-			, av_sales av_salesabba
-		from member b 
-			join(
-				select b.mem_seq mem_seq 
-					,round(sum(a.sum)/sum(b.CNT)) av_sales 
-				from purchase b 
-				left join item a 
-					on a.SEQ like b.ITEM_SEQ 
-				group by b.mem_seq) a 
-			on a.MEM_SEQ like b.SEQ
+		SELECT AGE ageabba
+			, AV_SALES av_salesabba
+		FROM MEMBER b 
+			JOIN(
+				SELECT b.MEM_SEQ MEM_SEQ 
+					,ROUND(SUM(a.SUM)/SUM(b.CNT)) AV_SALES 
+				FROM PURCHASE b 
+				LEFT JOIN ITEM a 
+					ON a.SEQ like b.ITEM_SEQ 
+				GROUP BY b.MEM_SEQ) a 
+			ON a.MEM_SEQ LIKE b.SEQ
 	</select>
 	
 	<select id="drawwrdcld" resultMap="statbigbean">
-		select keyword keywc,count(*) countwc from hashtag group by KEYWORD order by count(KEYWORD)
+		SELECT KEYWORD keywc,COUNT(*) countwc FROM HASHTAG GROUP BY KEYWORD ORDER BY COUNT(KEYWORD)
 	</select>
 </mapper>

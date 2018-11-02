@@ -391,7 +391,7 @@ jaekyung.chart={
 		},
 		smm : () =>{
 			let today = new Date();
-			let dd = today.getDate()+1;
+			let dd = today.getDate();
 			let ddn = dd-7;
 			let mm = today.getMonth()+1; // 10월이라 +1인데 11월 가상 설정
 			let mmn = mm;
