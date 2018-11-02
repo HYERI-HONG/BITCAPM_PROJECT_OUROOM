@@ -13,6 +13,7 @@ jun.main = {
 		var category_seq='0';
 		var ag= 'SEQ DESC'
 		var search= '0';
+		var p_c=3;
 		$('#content').empty();
 		$('<div/>').attr({id:'kj_div'}).addClass('container').appendTo($('#content'));
 		$('<div/>').attr({id:"kj_test_div1"}).appendTo($('#kj_div'))
@@ -25,18 +26,22 @@ jun.main = {
 		})
 		$("#kj_select").keypress(e=>{ 
 			if (e.keyCode == 13){
+				 $('html, body').animate({
+	 	             scrollTop: $('#kj_select').offset().top
+	 	         },200);
 			$('#kj_item_list').empty();
 			search=	$('#kj_select').val();
 			$('.kj_category_12').removeClass('kj_active');
 			$('#kj_c_3_'+0).addClass('kj_active');
 			
-			for(let i=0; i<2; i++){
+			for(let i=0; i<3; i++){
 				jun.main.itemList({page:i,category:category_seq,agv:'SEQ DESC',searchv:search});	
 			}
 			$('#kj_category_div').empty();
 			$('#kj_test2').empty();
 			$('<label/>').html("검색결과  :  " + search).appendTo($('#kj_category_div'))
-		    }    
+		    }
+			p_c=3;
 		});
 
 		$.getJSON($.context()+'/itemsC',dd=>{
@@ -54,6 +59,9 @@ jun.main = {
 						$.each(dd2.c2,(x,j)=>{
 							var c_k = j.category_kr.split("(")
 							$('<span/>').attr({class:"kj_category_c",id:"kj_c_2_"+x}).html(c_k[0]).appendTo($('#kj_category_21')).click(e=>{
+								 $('html, body').animate({
+					 	             scrollTop: $('#kj_select').offset().top
+					 	         },200);
 								$('.kj_category_12').removeClass('kj_active');
 								$('#kj_c_3_'+0).addClass('kj_active');
 								$('.kj_category_c').removeClass('kj_active');
@@ -61,9 +69,10 @@ jun.main = {
 								$('#kj_item_list').empty();
 								category_seq=j.seq
 								
-								for(let i=0; i<2; i++){
+								for(let i=0; i<3; i++){
 									jun.main.itemList({page:i,category:category_seq,agv:'SEQ DESC',searchv:"0"});	
 								}
+								p_c=3;
 							})
 						});
 					})
@@ -90,13 +99,17 @@ jun.main = {
 		$.each(array,(x,j)=>{
 			
 			$('<span/>').attr({class:"kj_category_12",id:"kj_c_3_"+x}).addClass((j.t==="최신순")?'kj_active':'').html(j.t).appendTo($('#kj_array')).click(e=>{
+				 $('html, body').animate({
+	 	             scrollTop: $('#kj_select').offset().top
+	 	         },200);
 				$('.kj_category_12').removeClass('kj_active');
 				$('#kj_c_3_'+x).addClass('kj_active');
 				$('#kj_item_list').empty();
 				ag=j.v;
-				for(let i =0; i<2; i++){
+				for(let i =0; i<3; i++){
 				jun.main.itemList({page:i,category:category_seq,agv:ag,searchv:search});	
 				}
+				p_c=3;
 			});
 		})
 		
@@ -105,7 +118,8 @@ jun.main = {
 		for(let i=0; i<3; i++){
 			jun.main.itemList({page:i,category:category_seq,agv:ag,searchv:"0"});
 		}
-		let p_c=3;
+		setTimeout(function(){
+		
 		$(window).scroll(function(){
             if ($('#kj_div').length>0 && $(this).scrollTop() >= $(document).height() - $(this).height()) {
             	jun.main.itemList({page:p_c,category:category_seq,agv:ag,searchv:search});
@@ -115,6 +129,7 @@ jun.main = {
             	$(window).unbind('scroll');
             }
         });
+		}, 200) ; 
 	},
 	add: ()=>{
 		$.magnificPopup.open({
@@ -150,7 +165,7 @@ jun.main = {
 			removalDelay:'0',
 			type:'inline'});
 			var count = 1;
-			var profile;
+			var profile='';
 			jQuery($('#kj_userimg')).change(function(){ 
 			if (this.files[0]) { // input 의 this
 		        var fileReader = new FileReader();
@@ -206,7 +221,7 @@ jun.main = {
 				let result=false;
 				
 				let emp=[$('#kj_t_i').val(),$('#kj_p_i').val(),$('#kj_add_option2').val(),$('#kj_d_i').val()
-					,$('#kj_de_i').val(),$('#kj_item_option_input_1').val()]
+					,$('#kj_de_i').val(),$('#kj_item_option_input_1').val(),profile]
 						$.each(emp,(i,j)=>{
 							if(j===''){
 								result=true;
@@ -351,7 +366,7 @@ jun.main = {
 			})
 		});
 		setTimeout(function(){
-
+		
 			var t_s=0;
 			var t_p=0;
 			var t_d=0;
@@ -562,6 +577,7 @@ jun.main = {
 		
 	},
 	itemList:n=>{
+		
     	let div_row = $('<div/>').addClass('row').appendTo($('#kj_item_list'))
     	$.getJSON($.context()+'/Items/'+n.page+'/'+n.category+'/'+n.agv+'/'+n.searchv,jund=>{
 			

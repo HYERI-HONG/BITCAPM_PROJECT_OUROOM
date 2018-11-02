@@ -286,10 +286,11 @@ hyeri.page={
 									})
 								})
 							),
+							
 							$('<div/>').addClass('h_menu_item_content_wrap').append(
 								$('<p/>').addClass('h_menu_item_content_title').text(j.title),
 								$('<p/>').addClass('h_menu_item_content_percent').text(j.discount+'%'),
-								$('<p/>').addClass('h_menu_item_content_price').text(j.sum+'원')
+								$('<p/>').addClass('h_menu_item_content_price').text(((Math.round(j.sum/100)*100)+"").replace(/\B(?=(\d{3})+(?!\d))/g, ',')+'원')
 							)
 						)
 				).appendTo($('#h_menu_item_list'));

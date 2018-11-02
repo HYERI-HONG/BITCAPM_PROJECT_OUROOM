@@ -563,13 +563,12 @@ danah.lt = (() => {
     let l = d => {
         let p = $ctt.html(f),
             j = 1;
-        $.getJSON($ctx + '/posts/list/' + 1, a => {
+        $.getJSON($ctx + '/posts/list/' + j, a => {
             danah.c.div({ c: 'd_container', i: 'd_post_list' }).append(danah.c.div({ c: 'd_row', i: 'd_row', s: 'margin-top:20px' })).appendTo(p);
             $.cookie('userid') == undefined ? ui({ j: a }) : ll(a);
             $(window).off().scroll(function(e) {
-                if (a.page > g && $('#d_post_list').length > 0 && $(this).scrollTop() >= $(document).height() - $(this).height()) {
-                    j++;
-                    $('#d_row').append($.getJSON($ctx + '/posts/list/' + j, n => { $.cookie('userid') == undefined ? ui({ j: n }) : ll(n); }));
+                if (a.page > j && $('#d_post_list').length > 0 && $(this).scrollTop() >= $(document).height() - $(this).height()) {
+                    $('#d_row').append($.getJSON($ctx + '/posts/list/' + ++j, n => { $.cookie('userid') == undefined ? ui({ j: n }) : ll(n); }));
                 }
             });
             danah.u.tb();
@@ -583,9 +582,8 @@ danah.lt = (() => {
             $.cookie('userid') == undefined ? ui({ j: a }) : ll(a);
             $('figcaption').remove();
             $(window).off().scroll(function() {
-                if (a.page > g && $('#d_post_search').length > 0 && $(this).scrollTop() >= $(document).height() - $(this).height()) {
-                    j++;
-                    $('#d_row').append($.getJSON($ctx + '/posts/hashTagSearch/' + d + '/' + j, n => {
+                if (a.page > j && $('#d_post_search').length > 0 && $(this).scrollTop() >= $(document).height() - $(this).height()) {
+                    $('#d_row').append($.getJSON($ctx + '/posts/hashTagSearch/' + d + '/' + ++j, n => {
                         $.cookie('userid') == undefined ? ui({ j: n }) : ll(n);
                         $('figcaption').remove();
                     }));
@@ -641,13 +639,12 @@ danah.lt = (() => {
                                             $.cookie('userid') == undefined ? ui({ j: a }) : ll(a);
                                             $(window).off().scroll(function() {
                                                 if (a.page > g && $(this).scrollTop() >= $(document).height() - $(this).height()) {
-                                                    g++;
-                                                    $('#d_row').append($.getJSON($ctx + '/posts/search/' + u + '/' + g, n => { $.cookie('userid') == undefined ? ui({ j: n }) : ll(n); }));
+                                                    $('#d_row').append($.getJSON($ctx + '/posts/search/' + u + '/' + ++g, n => { $.cookie('userid') == undefined ? ui({ j: n }) : ll(n); }));
                                                 }
                                             });
                                             danah.u.tb();
                                         } else {
-                                            $.toast($('<h4/>').text('검색 결과가 없습니다.'), { type: 'info', duration: 2000 });
+                                            $.toast($('<h3/>').text('검색 결과가 없습니다.'), { type: 'info', duration: 2000 });
                                             danah.lt.l();
                                         }
                                     });
