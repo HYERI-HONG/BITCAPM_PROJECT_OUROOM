@@ -168,7 +168,8 @@ jieun.detail2={
 				remove.appendTo(no_wrap_p);
 				no_wrap_p.append(br);
 				
-				input.appendTo(amount);
+				minus.appendTo(amount);	
+				input.appendTo(amount);							
 				plus.appendTo(amount);					
 				amount.appendTo(detail);					
 				span_am.appendTo(bold_p);
@@ -273,6 +274,9 @@ jieun.detail2={
 				
 			});
 			$('<button id="je_buy"/>').text('구매하기').appendTo(buttons);
+			$('#je_buy').click(e=>{
+				alert('구매 완료 되었습니다.');
+			});
 
 			let total_wrap = $('<div id="je_total_wrap" />').appendTo($('#je_total_1'));
 			
