@@ -25,7 +25,7 @@
            FROM
                review A
        )B
-       WHERE B.NUM BETWEEN  1 AND 5
+       WHERE B.NUM BETWEEN  #{beginRow} AND #{endRow}
        ORDER BY B.NUM;
 </select>
 <insert id="rev_insert">
@@ -35,4 +35,7 @@
 <delete id="rev_delete">
 	DELETE FROM REVIEW WHERE SEQ LIKE #{seq};
 </delete>
+<select id="rev_cnt" resultType="int" >
+	SELECT COUNT(*) FROM REVIEW;
+</select>
 </mapper>

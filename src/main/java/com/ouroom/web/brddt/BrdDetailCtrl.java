@@ -1,5 +1,6 @@
 package com.ouroom.web.brddt;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,15 +27,13 @@ public class BrdDetailCtrl {
 	@Autowired BrdDetailMapper brddtmapper;
 	@Autowired Item item;
 	@Autowired Review review;
+	@Autowired Pagination1 page;
 	
 	@GetMapping(value="/detail/{seq}")
 	public  @ResponseBody Map<String, Object> detail(@PathVariable String seq){
-		logger.info("======== BrdDetailCtrl ::: detail() =======");
 		item=brddtmapper.item_seq(seq);
 		List<Item> item2=brddtmapper.item_opt(seq);
-		System.out.println("결과  :: "+seq);
 		Map<String, Object> imap = new HashMap<>();
-		System.out.println("넘어온 값 :: "+ item.getTitle());
 		imap.put("title", item.getTitle());
 		imap.put("price", item.getPrice());
 		imap.put("deli", item.getDelivery());
@@ -44,35 +43,29 @@ public class BrdDetailCtrl {
 		imap.put("store", item.getStroe_cnt());
 		imap.put("sum", item.getSum());
 		imap.put("options", item2);
-/*		System.out.println("options :: "+ item2);*/
 		
 		return imap;
 	}
-	@GetMapping(value="/review")
-	public @ResponseBody Map<String, Object> review(){
-		logger.info("======== BrdDetailCtrl ::: detail_rev() =======");
-						
+	@GetMapping(value="/review/{pageNo}")
+	public @ResponseBody Map<String, Object> review(@PathVariable String pageNo){
 		Map<String, Object> rmap = new HashMap<>();
-		System.out.println("review :: "+review);
-		rmap.put("review", brddtmapper.review());
-		/*if(Integer.parseInt(review.seq)>51) {
-			System.out.println("review가 존재하지 않음");
-			review.setContents("NONE");
-			rmap.put("review", review);
-		}else {
-			System.out.println("review 성공");
-			rmap.put("contents",review.getContents());
-			rmap.put("regi",review.getRegi_date());
-			rmap.put("img",review.getImage());
-			rmap.put("nick",review.getNickname());
-		}*/
+		rmap.put("pageNumber", pageNo);
+		rmap.put("rowCount", brddtmapper.rev_cnt());
+		PageProxy1 pxy = new PageProxy1();
+		pxy.carryOut(rmap);
+		Pagination1 page = pxy.getPagination();
+		rmap.clear(); 
+		rmap.put("page", page);		
+		rmap.put("beginRow", page.beginRow);
+		rmap.put("endRow", page.endRow);
+		
+		rmap.put("list", brddtmapper.review(rmap));
+		
 		return rmap;
 	}
 	@PostMapping(value="/write")
-	public @ResponseBody void write(@RequestBody Review rev){
-		logger.info("======== BrdDetailCtrl ::: write() =======");						
+	public void write(@RequestBody Review rev){
 		Map<String, Object> wmap = new HashMap<>();
-		System.out.println("write :: " + rev);
 		wmap.put("contents",rev.getContents());
 		wmap.put("regi",rev.getRegi_date());
 		wmap.put("img",rev.getImage());
@@ -81,9 +74,10 @@ public class BrdDetailCtrl {
 
 	}
 	@GetMapping(value="/delete/{seq}")
-	public @ResponseBody void delete(@PathVariable String seq) {
-		logger.info("======== BrdDetailCtrl ::: delete() =======");						
-		System.out.println("delete :: " + seq);
+	public void delete(@PathVariable String seq) {
 		brddtmapper.rev_delete(seq);
 	}
+	
+	
+	
 }

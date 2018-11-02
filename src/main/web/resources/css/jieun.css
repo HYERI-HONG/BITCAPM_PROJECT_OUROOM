@@ -270,8 +270,15 @@ input[type="number"]::-webkit-inner-spin-button {
     border: 0.5px solid #e8e8e8;
     
 }
-.is-active{
-	background-color: #cc5200;
-    border-radius: 100%;
-    color: #fff;
+li.page-item.active a.page-link{
+   background-color: #cc5200;
+   border-color: #cc5200;
+   color : #fff!important;
+}
+.page-link{
+	color: #cc5200!important;
+}
+.pagination>li>a{
+	border:none;
+	border-radius: 100%
 }

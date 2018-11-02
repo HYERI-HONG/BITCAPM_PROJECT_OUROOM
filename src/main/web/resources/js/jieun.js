@@ -71,26 +71,12 @@ jieun.detail2={
 				$('.je_col1').append(je_div_cover_info1);					
 				$('.je_col2').append(je_div_cover_info2);					
 			});
-			$('<img/>').attr({src:$.img()+'/jun/'+x.category+'/'+x.photo+'.jpg',id:'je_view1'}).appendTo(je_div_cover).appendTo($('.je_col0'));
-			
+			$('<img/>').attr({src:$.img()+'/jun/'+x.category+'/'+x.photo+'.jpg',id:'je_view1'}).appendTo(je_div_cover).appendTo($('.je_col0'));			
 			let p = $('<p style="margin-top: 50px; color:#8080805c"/>').addClass('je_info1').appendTo(je_div_cover_info1);
-<<<<<<< HEAD
-			let a1=$('<a id="gray_a"/>').html('오늘의 집 스토어');
-=======
 			let a1=$('<a id="gray_a"/>').html('니방내방');
->>>>>>> refs/remotes/origin/master
 			let span1 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
-<<<<<<< HEAD
-			let span2 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
-			let span3 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
-			let span4 = $('<span/>').addClass('glyphicon glyphicon-chevron-right').attr({"aria-hidden":"true",id : 'je_icon'});
-			let a2 = $('<a id="gray_a"/>').html('가구');
-			let a3 = $('<a id="gray_a"/>').html('침실 가구');
-			let a4 = $('<a id="gray_a"/>').html('매트리스');
-			let a5 = $('<a id="gray_a"/>').html('스프링매트리스');
-=======
 			let a2 = $('<a id="gray_a"/>').html('스토어');
->>>>>>> refs/remotes/origin/master
+
 			
 			a1.appendTo(p); 
 			span1.appendTo(p);
@@ -141,7 +127,7 @@ jieun.detail2={
 
 	    	$('<hr style="	color: gray; size: 0.5em; noshade;"/>').appendTo(je_div_cover_info2);
 			
-			$('<p style="font-size: 13px" class="je_total_price"/>').appendTo(je_div_cover_info2);
+			$('<p style="font-size: 13px; margin-bottom:30px;" class="je_total_price" />').appendTo(je_div_cover_info2);
 			$('<span id="je_temp"/>').appendTo($('.je_total_price'));
 			
 			
@@ -182,7 +168,6 @@ jieun.detail2={
 				remove.appendTo(no_wrap_p);
 				no_wrap_p.append(br);
 				
-				minus.appendTo(amount);
 				input.appendTo(amount);
 				plus.appendTo(amount);					
 				amount.appendTo(detail);					
@@ -336,6 +321,7 @@ jieun.detail2={
 	},
 	a:()=>{		
 			let t_order_cart=$('<section class="col-md-10" id="t_order_cart" style="left: 18%; width: 330px; top: 150px; position:sticky;"/>');
+			$('<img class="je_img"/>').attr({src:$.img()+'/jieun/nbnb.PNG'}).appendTo(t_order_cart);
 			t_order_cart.append($('<div id="je_order_cart"/>'));
 			t_order_cart.appendTo($('#je_total_2'));
 	},
@@ -377,12 +363,14 @@ jieun.detail2={
 		
 	},
 	l:x=>{
+		if(x.i==undefined)x.i=1;
 		
-		
-		$.getJSON($.context()+'/BrdDetail/review',d=>{						
-			let rev_container2=$('<div class="review_container2">');
-			$.each(d.review,(i,j)=>{
-				
+		$.getJSON($.context()+'/BrdDetail/review/'+x.i,d=>{	
+			
+
+			$('#review_con2').remove();
+			let rev_container2=$('<div id="review_con2" class="review_container2">');
+			$.each(d.list,(i,j)=>{
 				let rev_caption=$('<p class="caption1" style="color:gray">');
 				let rev_container=$('<div class="review_container" style=" margin-top: 80px;">');
 				
@@ -394,13 +382,11 @@ jieun.detail2={
 				let rev_photo=$('<a class="review_img" style="width:70px" >');		
 				let del_btn= $('<button id="del_btn1" style="float:right; background-color:#cc5200; color:white; border-radius:4px; border:0px solid #cc5200; margin-top:50%px">').html('삭제');
 
-																	
-				
 				je_user.appendTo(rev_caption);
 				je_date.appendTo(rev_caption);
 				je_source.appendTo(rev_caption);
 				je_text.appendTo(rev_caption);
-				rev_container.appendTo(rev_container2);
+				
 				if($.cookie("nickname") === j.nickname){
 					del_btn.appendTo(je_text)
 					.click(()=>{
@@ -409,57 +395,70 @@ jieun.detail2={
 							$.getJSON($.context()+'/BrdDetail/delete/'+j.seq,d=>{
 								
 							});
-							rev_container2.empty();
+							rev_container2.empty();							
 							jieun.detail2.l(x);
-						}
-						
+							
+						}						
 					});
-				}
-				
+				}			
 				
 				je_comm.appendTo(je_text);						
-				rev_caption.appendTo(rev_container);				
-				rev_container2.appendTo(x.pro);
+				rev_caption.appendTo(rev_container);		
+				rev_container.appendTo(rev_container2);
 				
+				rev_container2.appendTo(x.pro);		
 				
-				
-			});					
-			let p_c=$('<div class="p_container">');
-			let ul =$('<ul style="list-style-type: none;">');
+			});		
+			$('#p_con').remove();
+			let p_c=$('<div id="p_con" class="p_container" style="padding: 20px 0 20px 0;">');
+			let ul =$('<ul style="list-style: none; padding-left: 320px; " class="pagination justify-content-center">');
 			let p_1=$('<div class="p_p_1">');
-			let a = $('<a class="is-active" href="#">');
-			ul.appendTo(p_1);
 			p_1.appendTo(p_c);
-			a.html('<li><</li>').appendTo(ul);
-			let arrr=[1,2,3,4,5];
-			$.each(arrr,(i,j)=>{
-				a.html('<li>'+j+'</li>').appendTo(ul);
-			});
+			ul.appendTo(p_1);
 			
-			a.html('<li>></li>').appendTo(ul);
+
+			for(let i=d.page.beginPage ; i<=d.page.endPage ; i++){
+				let ac=(i==d.page.pageNumber)? "active" : ""; // 함수 안에 있기 때문에 cc를 쓰던 말던 성능 차이가 거의 없다.
+				$('<li />').addClass("page-item "+ac).append($('<a />').addClass("page-link").html(i)).appendTo(ul).click(e=>{
+					e.preventDefault();
+					jieun.detail2.l({"i":i,pro:x.pro});
+				});
+			}
+			let disp = (d.page.existPrev)? "": "hidden" ;
+			let disn = (d.page.existNext)? "": "hidden" ;
+			$('<li id="epo" />').addClass("page-item "+disp).append($('<span style="color: #cc5200; border:none; border-radius:100%"/>').addClass("page-link").html("<"))
+			.click(e=>{
+				jieun.detail2.l({"i":d.page.beginPage-1,pro:x.pro});
+			}).prependTo(ul);
+			$('<li id="eno" />').addClass("page-item "+disn).append($('<span style="color: #cc5200; border:none; border-radius:100%"/>').addClass("page-link").html(">"))
+			.click(e=>{
+				jieun.detail2.l({"i":d.page.endPage+1,pro:x.pro});
+			})
+			.appendTo(ul);
+			
 			p_c.appendTo(x.pro);
 			
 			});
-	
-
 		
 	},
 
-	w:x=>{
-		
-		// review
-		
 
+	w:x=>{	
+		$('<hr style="color: gray; size: 0.5em; noshade; id="j_line""/>').appendTo(x.pro);
+		$('#t_div').remove();
 		let t_div=$('<div id="t_div" style="margin-bottom: 60px; border-bottom-color: gray;">');
-		let rev_title=$('<p class="bold review_head" style="font-weight:bold; font-size:20px; ">').html(x.t.title);
-		let rev=$('<div id="rev">');
 		
-		rev_title.appendTo(t_div);
+		let rev_title=$('<div class="bold review_head" style="font-weight:bold; font-size:20px; display: inline; ">').html(x.t.title);
+		let rev=$('<div id="rev" style=" margin-top: 50px;">');
+		
 		t_div.appendTo(x.pro);
-		rev.appendTo(x.pro);
+		rev_title.appendTo(t_div);
+		$('<button id="newrev_btn" class="newrev_btn" ><p id="w_rev" style="font-size:13px; top:4px; margin:0 0 3px" ><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color:#cc5200; margin-right:10px; "></span>리뷰쓰기</p></button>')
+		.appendTo(t_div);
 		
-		$('<button class="newrev_btn" ><p id="w_rev" style="font-size:13px; top:4px; margin:0 0 3px" ><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color:#cc5200; margin-right:10px; "></span>리뷰쓰기</p></button>')
-		.appendTo(rev_title)
+		rev.appendTo(t_div);
+		
+		$('#newrev_btn')
 		.click(()=>{
 			if($.type($.cookie("userid")) === 'undefined'){
 				$.getScript($.script()+'/hyeri.js', ()=>{
@@ -502,27 +501,21 @@ jieun.detail2={
 									},error:(m1,m2,m3)=>{
 										
 									}
-								})	
-								
+								})							
 								
 							});
 				/*	in_div.empty();*/
 					$('#rev_box').appendTo(in_div);
 					$('#save_btn').appendTo(in_div);
 					in_div.appendTo(rev);
-					
-
-
-				
+								
 			}
-
 						
 		});
 		
 
 /*		t_div.appendTo($('#rev'));
 		$('#rev').appendTo(x.pro);*/
-		rev_title.appendTo(t_div);
 		jieun.review;
 		
 		
