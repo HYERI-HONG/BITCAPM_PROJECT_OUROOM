@@ -91,7 +91,7 @@
 	</select>
 	<select id="totalSalePerDay" resultMap="statbigbean">
 			SELECT SUM(CNT) totalSalePerDay 
-			FROM PURCHASE 
+			FROM PURCHASE  
 			WHERE PURCHASE_DATE LIKE #{selectDSmm} 
 	</select>
 	<select id="bestSellerPerDay" resultMap="statbigbean">
