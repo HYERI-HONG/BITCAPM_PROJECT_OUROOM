@@ -19,7 +19,7 @@
 
 	<select id="cList" resultMap="mainResultMap">
 		SELECT P.SEQ,P.IMAGE,P.LAST_UPDATE,M.NICKNAME,M.PROFILE
-		FROM post P
+		FROM POST P
 		JOIN MEMBER M
 		ON P.MEM_SEQ LIKE M.SEQ
 		ORDER BY P.SEQ
@@ -27,7 +27,7 @@
 	</select>
 	<select id="sList" resultMap="mainResultMap">
 		SELECT I.SEQ, I.TITLE,I.SUM,I.DISCOUNT,I.PHOTO,C.CATEGORY
-		FROM item I
+		FROM ITEM I
 		JOIN CATEGORY2 C
 		ON I.CATEGORY2_SEQ LIKE C.SEQ
 		<where>
