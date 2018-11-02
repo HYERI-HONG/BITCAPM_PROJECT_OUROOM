@@ -195,19 +195,14 @@ hyeri.page={
 						$('<div/>').addClass('h_com_article_wrap').append(
 							$('<div/>').addClass('h_com_article_img_wrap').append(
 								$('<img/>').addClass('h_com_article_image').attr({src:$.img()+'/danah/post/'+ j.lastUpdate.replace(/-/gi, '/') + '/' + j.image}).click(e=>{
-<<<<<<< HEAD
-									alert("커뮤니티 사진 클릭");
-									$.getScript($.script()+'/danah.js', ()=>{
-										//사진 클릭하면 커뮤니티 디테일 페이지로 넘어가기
-				                    });
-=======
+
 									$.getScript($.script() + '/danah.js', () => { 
 										$('#footer').remove();
 										$('#h_search_btn').attr({ style: "visibility: visible"});
 										$('#h_wirte_btn').attr({ style: "visibility: visible"});
 										danah.s.d(j.seq); 
 									});
->>>>>>> refs/remotes/origin/master
+
 								})
 							),
 							$('<div/>').addClass('h_com_article_content_wrap').append(

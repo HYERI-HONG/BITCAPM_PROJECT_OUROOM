@@ -381,12 +381,7 @@ jieun.detail2={
 				let je_comm=$('<div class="review_comm" style="color:black; width:600px; margin-bottom: 30px; word-break: break-word; ">').html(j.contents);
 				let rev_photo=$('<a class="review_img" style="width:70px" >');		
 				let del_btn= $('<button id="del_btn1" style="float:right; background-color:#cc5200; color:white; border-radius:4px; border:0px solid #cc5200; margin-top:50%px">').html('삭제');
-<<<<<<< HEAD
 
-=======
-														
-				
->>>>>>> refs/remotes/origin/master
 				je_user.appendTo(rev_caption);
 				je_date.appendTo(rev_caption);
 				je_source.appendTo(rev_caption);
