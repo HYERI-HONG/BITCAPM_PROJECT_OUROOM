@@ -101,7 +101,7 @@ hyeri.page={
 							$('<img/>').addClass('h_icon_image_image').attr({src:$.img()+'/hyeri/join.svg'})
 					),
 					$('<div/>').addClass('h_icon_title').html('니방내방 시작하기'),	
-					$('<div/>').addClass('h_icon_caption').html('로그인 바로가기')
+					$('<div/>').addClass('h_icon_caption').html('회원가입 바로가기')
 				)
 		).appendTo($('#h_icon_list'));
 		$('<li/>').addClass('col-4 col-md-2 h_icon').append(
@@ -136,19 +136,23 @@ hyeri.page={
 		//icon클릭시 페이지 이동
 		$('#h_gologin').click(e=>{
 			$('#footer').remove();
-			hyeri.page.l();
+			hyeri.page.a();
 		});
 		$('#h_gowrite').click(e=>{
+			//단아 글쓰기 바로가기
 			$('#d_top_btn').hide();
 			$.getScript($.script()+'/danah.js', ()=>{
-				 danah.s.w();
+				danah.u.wb();
+				$('#h_wirte_btn').trigger('click');
             });	
 		});
 		$('#h_gocom').click(e=>{
+			//단아 커뮤니티 바로가기
 			$('#footer').remove();
+			$('#h_search_btn').attr({ style: "visibility: visible"});
+			$('#h_wirte_btn').attr({ style: "visibility: visible"});
 			$.getScript($.script()+'/danah.js', ()=>{
-				 danah.s.m();
-			     danah.s.l();
+				 danah.init($.context());
             });
 		});
 		$('#h_gostore').click(e=>{
@@ -168,7 +172,7 @@ hyeri.page={
 		$('<div/>').addClass('h_section').attr({id:"section_community"}).appendTo($('#h_main'));
 		
 		$('<div/>').addClass('h_menu_header').append(
-				$('<h4/>').addClass('h_menu_title').text('오늘의 커뮤니티 사진'),
+				$('<h4/>').addClass('h_menu_title').text('오늘의 인기 사진'),
 				$('<a/>').addClass('h_menu_move').attr({id:'h_com_dirbtn'}).text('더보기')
 				.click(e=>{
 					//커뮤니티 더보기 버튼, 커뮤니티로 이동
@@ -191,7 +195,6 @@ hyeri.page={
 						$('<div/>').addClass('h_com_article_wrap').append(
 							$('<div/>').addClass('h_com_article_img_wrap').append(
 								$('<img/>').addClass('h_com_article_image').attr({src:$.img()+'/danah/post/'+ j.lastUpdate.replace(/-/gi, '/') + '/' + j.image}).click(e=>{
-									alert("커뮤니티 사진 클릭");
 									$.getScript($.script() + '/danah.js', () => { 
 										$('#footer').remove();
 										$('#h_search_btn').attr({ style: "visibility: visible"});
@@ -201,7 +204,7 @@ hyeri.page={
 								})
 							),
 							$('<div/>').addClass('h_com_article_content_wrap').append(
-								$('<span/>').attr({style:'background-image:url('+$.img()+((j.profile === '' || j.profile === undefined) ? '/danah/profile.jpeg' : '/hyeri/profile/' + j.profile)+')'}).addClass('h_com_article_content_profile'),
+								$('<span/>').attr({style:'background-image:url('+$.img()+((j.profile === '' || j.profile === undefined) ? '/hyeri/profile/p0.png' : '/hyeri/profile/' + j.profile)+')'}).addClass('h_com_article_content_profile'),
 								$('<span/>').addClass('h_com_article_content_nickname').text(j.nickname)
 							)
 						)
@@ -269,6 +272,8 @@ hyeri.page={
 		).appendTo($('#section_store'));
 		
 		$.getJSON($.context()+'/home/slist/전체',d=>{
+		/*	setTimeout(function(){
+			}, 400) ; */
 			$.each(d.list,(i,j)=>{
 				$('<li/>').addClass('col-5 col-md-3 col-xl-2 h_menu_item').append(
 						$('<div/>').addClass('h_menu_item_wrap').append(
@@ -534,9 +539,9 @@ hyeri.page={
 				+ '/jieun/logo1.jpg ></img></span>'
 				+ '</a>    </h1>'
 				+ '<form class="je_sign-in-form__form" id="new_user">'
-				+ '<input placeholder="이메일" autofocus="autofocus" class="je_sign-in-form__form__input form-control sign-in-form__form__email" type="text" name="user[email]" id="user_email">'
+				+ '<input placeholder="관리자 이메일 : admin" autofocus="autofocus" class="je_sign-in-form__form__input form-control sign-in-form__form__email" type="text" name="user[email]" id="user_email">'
 				+ '<div id="h_rs" class="je_sign-in-form__form__input-wrap je_sign-in-form__form__password">'
-				+ '<input placeholder="비밀번호" autocomplete="off" class="je_sign-in-form__form__input form-control" type="password" name="user[password]" id="user_password">'
+				+ '<input placeholder="관리자 비밀번호 : admin" autocomplete="off" class="je_sign-in-form__form__input form-control" type="password" name="user[password]" id="user_password">'
 				+ '</div>'
 				+ '<input type="hidden" name="remember_me" id="remember_me" value="checked">'
 				+ '<input type="hidden" name="is_pro" id="is_pro" value="false">'

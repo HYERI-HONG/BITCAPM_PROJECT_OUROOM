@@ -22,7 +22,7 @@
 		FROM POST P
 		JOIN MEMBER M
 		ON P.MEM_SEQ LIKE M.SEQ
-		ORDER BY P.SEQ
+		ORDER BY P.LIKE_CNT DESC
 		LIMIT 8;
 	</select>
 	<select id="sList" resultMap="mainResultMap">
