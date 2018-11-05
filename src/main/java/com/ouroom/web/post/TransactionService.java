@@ -80,6 +80,7 @@ public class TransactionService {
 	public void imageTag(Map<?, ?> p) {
 		m.clear();
 		m.put("seq", p.get("seq"));
+		System.out.println(((List<String>) p.get("item")).get(0).toString());
 		for(String s : (List<String>) p.get("item")) {
 			m.put("itemTitle", s.split(",")[0]);
 			m.put("position", s.split(",")[1]+","+s.split(",")[2]);
