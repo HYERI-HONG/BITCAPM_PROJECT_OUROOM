@@ -4,9 +4,9 @@ var jieun = jieun || {};
 jieun=(()=>{
 
 		var detail=x=>{
-			
 			jieun.detail2.d(x);
-
+			$('#wrapper').append(footer());
+			$('#footer').attr({style:"margin-top:7600px"});
 		}
 		return{detail:detail};
 })();
@@ -20,8 +20,6 @@ jieun.detail2={
 			
 			let section =$('<section/>').addClass('je_row').appendTo($('#content'));
 			
-			// --------------------------------------------nav ::
-			// 변경---------------------------------------//
 			$('<div id="je_selling_helper_wrap" class="col-md-9"/>').append($('<div id="je_selling_helper"/>').addClass('navbar navbar-default')).appendTo($('#content'));
 			
 			$('<ul/>').addClass("nav nav-tabs nav-justified").append(
@@ -54,8 +52,7 @@ jieun.detail2={
 			}
 			$('.je_sticky').appendTo($('#h_navigation'));
 		
-			// --------------------------------------------nav ::
-			// 변경---------------------------------------//
+
 
 			let section2 =$('<section "/>').addClass('je_row1').appendTo($('#content'));
 			
@@ -302,7 +299,7 @@ jieun.detail2={
 			});
 
 			
-			let total_wrap = $('<div id="je_total_wrap" />').appendTo($('#je_total_1'));
+			let total_wrap = $('<div id="je_total_wrap" style="height:7600px"/>').appendTo($('#je_total_1'));
 			
 			
 			
@@ -349,7 +346,7 @@ jieun.detail2={
 	},
 	a:()=>{		
 			let t_order_cart=$('<section class="col-md-10" id="t_order_cart" style="left: 18%; width: 330px; top: 150px; position:sticky;"/>');
-			$('<img class="je_img"/>').attr({src:$.img()+'/jieun/nbnb.PNG'}).appendTo(t_order_cart);
+			$('<img class="je_img"/>').attr({src:$.img()+'/jieun/ad.png',style:'height:475px'}).appendTo(t_order_cart);
 			t_order_cart.append($('<div id="je_order_cart"/>'));
 			t_order_cart.appendTo($('#je_total_2'));
 	},
