@@ -5,6 +5,7 @@
 <head>
 	<title>니방내방</title>
 	
+
 	<!-- 외부라이브러리 -->
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -38,8 +39,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/i18n/datepicker-ko.js"></script>
     <link rel="stylesheet" href="${context}/resources/css/jieun.css" />
  	<link rel="stylesheet" href="${context}/resources/css/jun.css" />
-  
-</head>
+ 
 <body>
     <div id="wrapper"></div>
     <script>
