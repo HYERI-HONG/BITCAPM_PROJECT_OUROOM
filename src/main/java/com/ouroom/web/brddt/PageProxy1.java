@@ -2,7 +2,7 @@ package com.ouroom.web.brddt;
 
 import java.util.Map;
 import lombok.Data;
-//
+
 @Data
 public class PageProxy1 implements Proxy1{
 	private Pagination1 pagination;
