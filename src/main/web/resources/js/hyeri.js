@@ -485,7 +485,7 @@ hyeri.page={
 			let d = new Date();
 			if(ck){
 				$.ajax({
-					url : $.context()+'/member/add/basic',
+					url : $.context()+'/member/add1',
 					method : 'POST',
 					contentType : 'application/json',
 					data : JSON.stringify({
@@ -498,7 +498,7 @@ hyeri.page={
 						join_date : d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()
 					}),
 					success : d=>{
-						if(d==1){
+						if(d=='SUCCESS'){
 							alert("회원가입 성공");
 							hyeri.page.l();
 						}
@@ -635,7 +635,7 @@ hyeri.page={
       							//기존에 가입된 정보가 없으면 자동 회원가입
       							let a = new Date();
       							$.ajax({
-      								url : $.context()+'/member/add/kakao',
+      								url : $.context()+'/member/add2',
       								method : 'POST',
       								contentType : 'application/json',
       								data : JSON.stringify({
@@ -649,7 +649,7 @@ hyeri.page={
       									age : (Math.floor((Math.random() * 55) + 1)+10)
       								}),
       								success : d=>{
-      									if(d==1){
+      									if(d=='SUCCESS'){
       										alert("가입 기록이 없어 자동 회원가입 후 로그인되었습니다.");
       										hyeri.page.l();
       									}

@@ -33,37 +33,32 @@ public class MemberCtrl {
 	private byte[] filedata;
 	//--------------------------------------
 	
-	@PostMapping(value="/add/{from}")
-	public @ResponseBody int add(@RequestBody Member p, @PathVariable String from) throws IOException{
-		if(from.equals("kakao")) {
-			System.out.println("getEmail : "+p.getEmail());
-			System.out.println("getPassword : "+p.getPassword());
-			System.out.println("getAge : "+p.getAge());
-			System.out.println("getBirthday : "+p.getBirthday());
-			System.out.println("getGender : "+p.getGender());
-			System.out.println("getJoin_date : "+p.getJoin_date());
-			System.out.println("getNickname : "+p.getNickname());
-			System.out.println("getProfile : "+p.getProfile());
-		}else {
-			p.setAge(calc.calcAge(p.getBirthday()));
-			String path = uploadPath+File.separator+"hyeri"+File.separator+"profile"+File.separator;
-			/*String savedName = UUID.randomUUID().toString() + "_" + p.getProfile();*/
-			File target = new File(path, p.getProfile());
-			FileCopyUtils.copy(filedata, target);
-		}
-		return mbrmapper.insert(p);
+	@PostMapping("/add1")
+	public @ResponseBody String add1(@RequestBody Member p) throws Exception{
+		System.out.println("add1진입");
+		p.setAge(calc.calcAge(p.getBirthday()));
+		String path = uploadPath + "/hyeri/profile/";
+		/* String savedName = UUID.randomUUID().toString() + "_" + p.getProfile(); */
+		File target = new File(path, p.getProfile());
+		FileCopyUtils.copy(filedata, target);
+		return (mbrmapper.insert(p)==1?"SUCCESS":"FAIL");
 	}
-	@PostMapping(value="/upload")
-	public @ResponseBody String upload(@RequestBody MultipartFile file) throws IOException{
+	@PostMapping("/add2")
+	public @ResponseBody String add2(@RequestBody Member p) throws Exception{
+		System.out.println("add2진입");
+		return (mbrmapper.insert(p)==1?"SUCCESS":"FAIL");
+	}
+	@PostMapping("/upload")
+	public @ResponseBody String upload(@RequestBody MultipartFile file) throws Exception{
 		filedata = file.getBytes();
 		//files.transferTo(new File(path+fileName));
 		return "";
 	}
-	@PostMapping(value="/dpcheck")
+	@PostMapping("/dpcheck")
 	public @ResponseBody int dpcheck(@RequestBody Map<String, String> p){
 		return mbrmapper.dpck(p);
 	}
-	@PostMapping(value="/login")
+	@PostMapping("/login")
 	public @ResponseBody Map<String, Object> login(@RequestBody Member p){
 		String pwValid="WRONG";
 		String idValid="WRONG";
