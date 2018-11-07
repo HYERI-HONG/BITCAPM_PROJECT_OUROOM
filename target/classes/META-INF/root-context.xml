@@ -60,7 +60,8 @@
  	</bean>
 
     <bean id="uploadPath" class="java.lang.String">
-	    <constructor-arg value="C:\Users\1027\ouroom\ouroom\src\main\web\resources\img"/>
+	  <!--   <constructor-arg value="C:\Users\1027\ouroom\ouroom\src\main\web\resources\img"/> -->
+  		<constructor-arg value="//usr//local//tomcat9//webapps//ROOT//resources//img"/> 
     </bean> 
    	<tx:annotation-driven/>
 	<mybatis-spring:scan base-package="com.ouroom.web"/>

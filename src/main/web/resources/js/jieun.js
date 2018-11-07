@@ -5,8 +5,8 @@ jieun=(()=>{
 
 		var detail=x=>{
 			jieun.detail2.d(x);
-			$('#wrapper').append(footer());
-			$('#footer').attr({style:"margin-top:7600px"});
+/*			$('#wrapper').append(footer());
+			$('#footer').attr({style:"margin-top:7600px"});*/
 		}
 		return{detail:detail};
 })();
@@ -386,6 +386,8 @@ jieun.detail2={
 		$('<br/>');
 		$('<br/>');
 		
+
+		
 	},
 	l:x=>{
 		if(x.i==undefined)x.i=1;
@@ -523,6 +525,7 @@ jieun.detail2={
 										jieun.detail2.w(x);
 										$('#rev_box').val('리뷰를 입력해주세요.');
 										jieun.detail2.b(x.sec4);
+									
 									},error:(m1,m2,m3)=>{
 										
 									}

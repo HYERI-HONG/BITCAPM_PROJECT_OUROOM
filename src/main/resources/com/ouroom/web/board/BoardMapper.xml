@@ -4,11 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ouroom.web.board.BoardMapper">
 <select id="list" resultType="com.ouroom.web.item.Item">
-		select * from item where seq>82 order by seq desc;
+		SELECT * FROM ITEM WHERE SEQ>82 ORDER BY SEQ DESC;
 	</select>
 	
 	<select id="count" resultType="int">
-	select count(*) from item i join  item_post ip where i.seq= ip.item_seq and i.seq >82 order by i.seq desc;
+	SELECT COUNT(*) FROM ITEM I JOIN ITEM_POST IP WHERE I.SEQ = IP.ITEM_SEQ AND I.SEQ >82 ORDER BY I.SEQ DESC;
 	</select>
 
 </mapper>

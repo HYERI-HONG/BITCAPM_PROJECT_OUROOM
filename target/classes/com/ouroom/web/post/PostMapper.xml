@@ -35,8 +35,8 @@
    </resultMap>
 	
 	<insert id="postInsert" parameterType="map">
-		INSERT INTO post (TITLE, CONTENT, REGI_DATE, VIEW_CNT, LIKE_CNT, SHARE_CNT, ROOM_TYPE, ROOM_SIZE, MEM_SEQ, BOARD_SEQ, IMAGE, LAST_UPDATE)
-		VALUES (#{title}, #{content}, #{regiDate}, 0, 0, 0, #{roomType}, #{roomSize}, #{memSeq}, 1, #{image}, #{regiDate})
+		INSERT INTO POST (TITLE, CONTENT, REGI_DATE, VIEW_CNT, LIKE_CNT, SHARE_CNT, ROOM_TYPE, ROOM_SIZE, MEM_SEQ, BOARD_SEQ, IMAGE, LAST_UPDATE)
+		VALUES (#{title}, #{content}, #{regiDate}, 0, 0, 0, #{roomType}, #{roomSize}, #{memSeq}, 1, #{image}, #{lastUpdate})
 	</insert>
 	<select id="postList" parameterType="map" resultMap="postResultMap">
 		SELECT *
@@ -104,7 +104,7 @@
 			<if test=" likeCnt != null and likeCnt != '' ">LIKE_CNT = #{likeCnt},</if>
 			<if test=" shareCnt != null and shareCnt != '' ">SHARE_CNT = #{shareCnt}</if>
 		</set>
-		WHERE SEQ LIKE #{seq}
+		WHERE SEQ = #{seq}
 	</update>
 	<delete id="postDelete">
 		DELETE FROM POST WHERE SEQ LIKE #{seq}

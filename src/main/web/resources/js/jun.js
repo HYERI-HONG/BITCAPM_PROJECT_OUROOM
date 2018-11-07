@@ -209,13 +209,13 @@ jun.main = {
 				$.getJSON($.context()+'/itemsC/'+$('#kj_add_option1').val(),jun4=>{
 					$.each(jun4.c2,(i,j)=>{
 						let c_p= j.category_kr.split("(")
-						$('<option/>').val(j.seq).html(c_p[0]).appendTo($('#kj_add_option2'));
-						$('<input/>').attr({type:"hidden",id:"category_path"}).val(j.category).appendTo($('#kj_add_option2'));
+						$('<option/>').val(j.seq+"/"+j.category).html(c_p[0]).appendTo($('#kj_add_option2'));
 					})
 					
 				})
 			})
-		
+			
+			
 			
 			$('#kj_item_sub_btn').click(e=>{
 				let result=false;
@@ -228,12 +228,14 @@ jun.main = {
 							}
 						});
 				if(result)
-					{ alert("빈칸을 채워주세요");
+					{
+					alert("빈칸을 채워주세요");
 					}else{
 						let option="";
 						for(let i=1; i<=count; i++){
 							option+=$('#kj_item_option_input_'+i).val()+'/';
 						}
+						
 						$.ajax({
 							url:$.context()+'/item/add',
 							method:'POST',
@@ -243,11 +245,11 @@ jun.main = {
 								price:$('#kj_p_i').val(),
 								discount:$('#kj_d_i').val(),
 								delivery:$('#kj_de_i').val(),
-								category2:$('#kj_add_option2').val(),
+								category2:$('#kj_add_option2').val().split("/")[0],
 								option:option,
 								content:$('#kj_item_ta').val(),
 								photo:profile,
-								categoryPath:$('#category_path').val()
+								categoryPath:$('#kj_add_option2').val().split("/")[1]
 								}),
 							success:jd=>{
 								$.magnificPopup.close();

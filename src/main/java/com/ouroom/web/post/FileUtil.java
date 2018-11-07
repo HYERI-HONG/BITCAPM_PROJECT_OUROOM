@@ -44,7 +44,7 @@ public class FileUtil {
 	};	
 	
 	public Function<String, String> upload = p -> {
-		sp = calcPath.apply(p);
+		sp = "/2018/11/15";
 		try { FileCopyUtils.copy(sf, new File(p + sp, sn)); } 
 		catch (Exception e) { e.printStackTrace(); }
 		return sn;

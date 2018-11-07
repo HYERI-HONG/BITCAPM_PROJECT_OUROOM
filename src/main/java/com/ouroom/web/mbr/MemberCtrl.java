@@ -35,17 +35,16 @@ public class MemberCtrl {
 	
 	@PostMapping("/add1")
 	public @ResponseBody String add1(@RequestBody Map<String,String> m) throws Exception{
-		System.out.println("add1진입");
 		Member p = new Member();
 		p.setAge(calc.calcAge(m.get("birthday")));
 		p.setBirthday(m.get("birthday"));
+		p.setGender(m.get("gender"));
 		p.setEmail(m.get("email"));
 		p.setNickname(m.get("nickname"));
 		p.setPassword(m.get("password"));
 		p.setProfile(m.get("profile"));
 		p.setJoin_date(m.get("join_date"));
 		
-		/*p.setAge(calc.calcAge(p.getBirthday()));*/
 		String path = uploadPath + "/hyeri/profile/";
 		/* String savedName = UUID.randomUUID().toString() + "_" + p.getProfile(); */
 		File target = new File(path, p.getProfile());
@@ -53,8 +52,17 @@ public class MemberCtrl {
 		return (mbrmapper.insert(p)==1?"SUCCESS":"FAIL");
 	}
 	@PostMapping("/add2")
-	public @ResponseBody String add2(@RequestBody Member p) throws Exception{
-		System.out.println("add2진입");
+	public @ResponseBody String add2(@RequestBody Map<String,String> m) throws Exception{
+		Member p = new Member();
+		p.setAge(m.get("age"));
+		p.setBirthday(m.get("birthday"));
+		p.setGender(m.get("gender"));
+		p.setEmail(m.get("email"));
+		p.setNickname(m.get("nickname"));
+		p.setPassword(m.get("password"));
+		p.setProfile(m.get("profile"));
+		p.setJoin_date(m.get("join_date"));
+		
 		return (mbrmapper.insert(p)==1?"SUCCESS":"FAIL");
 	}
 	@PostMapping("/upload")

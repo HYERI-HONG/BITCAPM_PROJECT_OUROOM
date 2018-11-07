@@ -70,14 +70,14 @@ public class ItemController {
 		return m; 
 	}
 	@Transactional
-	@RequestMapping("/item/add")
-	public @ResponseBody void add(@RequestBody Map<String,String> seq)throws IOException{
-		
+	@PostMapping("/item/add")
+	public @ResponseBody void add(@RequestBody Map<String,String> seq)throws Exception{
 		int dis = Integer.parseInt(seq.get("discount"));
 		int pri = Integer.parseInt(seq.get("price"));
 		int sum = pri-(pri*(dis))/100;
 		seq.put("sum",sum+"");
-		String path = uploadPath+File.separator+"jun"+File.separator+seq.get("categoryPath")+File.separator;
+		
+		String path = uploadPath+"/jun/"+seq.get("categoryPath")+"/";
 		
 		File target = new File(path, seq.get("photo"));
 		FileCopyUtils.copy(filedata, target);
@@ -95,7 +95,7 @@ public class ItemController {
 		seq.put("img", ((int)(Math.random()*5))+"_1");
 		itmp.insertItemPost(seq);
 	}
-	@RequestMapping("/cart/add")
+	@PostMapping("/cart/add")
 	public @ResponseBody void cartAdd(@RequestBody Map<String,String> m){
 		
 		String[] is=m.get("name").split("/");
@@ -133,7 +133,7 @@ public class ItemController {
 		itmp.cartDelete(m);
 		
 	}
-	@RequestMapping("/cart/buy")
+	@PostMapping("/cart/buy")
 	public @ResponseBody void cartBuy(@RequestBody Map<String,List<Item>> m){
 		Map<String,Object> m2 = new HashMap<>();
 		for(int i =0; i<((List) m.get("cop")).size();i++) {
@@ -161,8 +161,8 @@ public class ItemController {
 		
 		
 	}
-	@PostMapping(value="/item/upload")
-	public void upload(@RequestBody MultipartFile file) throws IOException{
+	@PostMapping("/item/upload")
+	public void upload(@RequestBody MultipartFile file) throws Exception{
 		filedata = file.getBytes();
 	}
 

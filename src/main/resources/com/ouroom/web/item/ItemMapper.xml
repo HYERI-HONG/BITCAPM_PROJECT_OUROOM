@@ -64,7 +64,6 @@
 	</select>
 	<insert id="cartAdd" >
 	insert into CART(MEM_SEQ,ITEM_SEQ,CNT,OPTION_SEQ) values(#{userid},#{seq},#{itemCount},#{itemSeq});
-       
 	</insert>
 	
 	<select id="cartList" resultType="com.ouroom.web.item.Item">
