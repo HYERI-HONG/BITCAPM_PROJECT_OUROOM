@@ -141,15 +141,13 @@ jieun.detail2={
 				let count=1;
 				let x = $("#je_selectbtn option:selected").text();				
 
-				sum=sum+y;
-				$('#je_won').html((sum+"").replace(/\B(?=(\d{3})+(?!\d))/g, ','));	
+				
 				
 				
 
 				let minus=$('<span id="je_minus'+t2+ '" class="minus glyphicon glyphicon-minus" role="button" style="margin-right: 3px;"/>');
 				let amount=$('<div class="amount"/>');
 				let plus=$('<span id="je_plus'+t2+ '" class="plus glyphicon glyphicon-plus" role="button" style="margin-left: 10px;"/>');
-				$('<input/>').attr({type:'hidden',id:"je_num_val_"+t2}).val($('#je_selectbtn option:selected').val()).appendTo(je_item);
 				let input=$('<input id="je_num_val'+t2+'" type="number" value="1"  style=" border: 0px solid; width:30px;   text-align:center;"/>');
 				let divv=$('<div id="item'+t2+'" class="divv_c" data-index="1" style="border-bottom: solid 1px #ededed; margin:10px; font-size: 12px;">');
 				let detail=$('<div class="detail" style="margin-top:20px">');
@@ -160,23 +158,36 @@ jieun.detail2={
 				let remove = $('<span class="remove glyphicon glyphicon-remove" role="button" aria-hidden="false" style="float: right; right: 10px;">');
 				let br=$('<br>');
 
+				let res = true;
+				for(let i =1; i<=t; i++){
+					if($.cookie("opt"+i)===$("#je_selectbtn option:selected").val()){
+						res= false; 
+					}
+				}
+				if(res){
+					
 				
-				span_left.appendTo(no_wrap_p);
-				remove.appendTo(no_wrap_p);
-				no_wrap_p.append(br);
+					$.cookie("opt"+t,$("#je_selectbtn option:selected").val())
+					span_left.appendTo(no_wrap_p);
+					remove.appendTo(no_wrap_p);
+					no_wrap_p.append(br);
+					
+					minus.appendTo(amount);	
+					input.appendTo(amount);							
+					plus.appendTo(amount);					
+					amount.appendTo(detail);					
+					span_am.appendTo(bold_p);
+					bold_p.appendTo(detail);
+					
+					no_wrap_p.appendTo(divv);
+					detail.appendTo(divv);
+					divv.appendTo(je_item);
+					
+					divv.append(br);
+					sum=sum+y;
+					$('#je_won').html((sum+"").replace(/\B(?=(\d{3})+(?!\d))/g, ','));	
+				}
 				
-				minus.appendTo(amount);	
-				input.appendTo(amount);							
-				plus.appendTo(amount);					
-				amount.appendTo(detail);					
-				span_am.appendTo(bold_p);
-				bold_p.appendTo(detail);
-				
-				no_wrap_p.appendTo(divv);
-				detail.appendTo(divv);
-				divv.appendTo(je_item);
-				
-				divv.append(br);
 			
 				$(this).click(e=>{
 					e.preventDefault();						

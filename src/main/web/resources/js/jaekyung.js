@@ -425,7 +425,7 @@ jaekyung.chart={
 		              $('#smm_v_l_t_date').datepicker({
 		            	  dateFormat: 'yy년 mm월 dd일',
 		            	  minDate: new Date('2018-11-01'),
-		            	  maxDate: new Date(),
+		            	  maxDate: new Date('2018-11-15'),
 		            	  onClose: selectedDate=>{
 		            		  $("#smm_v_l_t_date2").datepicker( "option", "minDate", selectedDate );
 		            	  }
@@ -434,7 +434,7 @@ jaekyung.chart={
 		              $('#smm_v_l_t_date2').datepicker({
 		            	  dateFormat: 'yy년 mm월 dd일', 
 		            	  minDate: $('#smm_v_l_t_date').val(),
-            		      maxDate: new Date(),
+            		      maxDate: new Date('2018-11-15'),
             		      onClose: selectedDate=>{
 		            		  $("#smm_v_l_t_date").datepicker( "option", "maxDate", selectedDate );
 		            	  }
@@ -559,7 +559,7 @@ jaekyung.chart={
 	            $('#smm_np_date').datepicker({
 	          	  dateFormat: 'yy년 mm월 dd일',
 	          	  minDate: new Date('2018-11-01'),
-	          	  maxDate: new Date()
+	          	  maxDate: new Date('2018-11-15')
 	            });
 	            $('#smm_np_date').datepicker('setDate', $.datepicker.parseDate('yy년 mm월 dd일', today)); //여기 확인 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
 				$('#smm_np_date').change(e=>{
@@ -615,7 +615,7 @@ jaekyung.chart={
 					$('#smm_nj_date').datepicker({
 						dateFormat: 'yy년 mm월 dd일',
 						minDate: new Date('2018-11-01'),
-		            	maxDate: new Date()
+						maxDate: new Date('2018-11-15'),
 					});
 					$('#smm_nj_date').datepicker('setDate', $.datepicker.parseDate('yy년 mm월 dd일', today));
 				});
